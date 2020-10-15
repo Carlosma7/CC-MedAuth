@@ -8,6 +8,12 @@
 
 **Universidad:** Universidad de Granada (UGR)
 
+## Configuración inicial del repositorio
+
+---
+
+La configuración del entorno de Git y Github en mi máquina local se puede visualizar [aquí](https://github.com/Carlosma7/CC-MedAuth/blob/main/doc/config_entorno.md).
+
 ## Descripción del problema
 
 ---
