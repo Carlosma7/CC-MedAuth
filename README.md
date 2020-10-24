@@ -42,11 +42,11 @@ Al emplear esta arquitectura contaremos con ventajas como pueden ser la *escalab
 La arquitectura propuesta estará compuesta de los siguientes microservicios:
 
 *  **Microservicio de autorizaciones médicas**: Se encargará de toda la funcionalidad asociada a las autorizaciones de intervenciones, operaciones o pruebas de diagnóstico.
-*  **Microservicio de citas médicas**: Se encargará de la visualización de citas concertadas para los pacientes.
+*  **Microservicio de citas médicas**: Se encargará de la visualización y notificación de citas concertadas para los pacientes.
 
 A continuación se muestra el esquema de nuestra arquitectura: 
 
-[Arquitectura de microservicios](./doc/img/arquitectura.png "Arquitectura de microservicios")
+![Arquitectura de microservicios](./doc/img/arquitectura.png "Arquitectura de microservicios")
 
 ### Herramientas
 
@@ -85,6 +85,6 @@ El objetivo de esta cola será comunicar ambos microservicios de forma que:
 * El microservicio de **Autorizaciones** será monitorizado de forma que si se recibe una solicitud de autorización aprobada, esta envíe un mensaje al microservicio de **Citas**.
 * El microservicio de **Citas** a su vez enviará notificaciones de cuando se concierta una cita al paciente.
 
-## Gestor de tareas
+##### Gestor de tareas
 
 Tras valorar las [diferencias](https://github.com/kipyin/pokemaster/issues/8) entre *Makefile* e [Invoke](http://www.pyinvoke.org/), se ha optado por *Invoke* ya que este se encuentra integrado de forma natural con *Python* y su posibilidad de utilizarse junto al debugger propio del lenguaje.
