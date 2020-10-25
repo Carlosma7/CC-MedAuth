@@ -31,7 +31,7 @@ La idea propuesta consiste en crear un sistema que actúe de plataforma en la qu
 
 De esta forma, la gestión de una autorización médica podría ser realizada de forma no presencial y en periodo más breve, no siendo necesario que el paciente dedique tiempo a ir a la oficina, y a la vez el empleado encargado pueda realizar su labor de forma más eficiente e incluso de forma telemática.
 
-# Arquitectura
+## Arquitectura
 
 ---
 
@@ -48,7 +48,9 @@ A continuación se muestra el esquema de nuestra arquitectura:
 
 ![Arquitectura de microservicios](./doc/img/arquitectura.png "Arquitectura de microservicios")
 
-### Herramientas
+## Herramientas
+
+---
 
 ##### Lenguaje de programación
 
@@ -85,3 +87,7 @@ El objetivo de esta cola será comunicar ambos microservicios de forma que:
 ##### Gestor de tareas
 
 Tras valorar las [diferencias](https://github.com/kipyin/pokemaster/issues/8) entre *Makefile* e [Invoke](http://www.pyinvoke.org/), se ha optado por *Invoke* ya que este se encuentra integrado de forma natural con *Python* y su posibilidad de utilizarse junto al debugger propio del lenguaje.
+
+##### Gestor de versiones
+
+Al trabajar con *Python* se ha decidido utilizar [venv](https://docs.python.org/3/library/venv.html) como gestor de las distintas versiones en las que desarrollar, ya que en versiones superiores a *Python3.3* *virtualenv* presenta problemas con los archivos binarios. Esta herramientas nos será muy útil para poder adaptar nuestro proyecto a distintas versiones y no limitarnos a la que existe por defecto en nuestro sistema operativo.
