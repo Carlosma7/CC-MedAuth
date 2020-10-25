@@ -67,10 +67,7 @@ Se empleará como framework [Flask](https://flask.palletsprojects.com/en/1.1.x/)
 
 ##### Almacenamiento
 
-El almacenamiento se compondrá de dos bases de datos diferenciadas, ya que la información a almacenar en dichas bases de datos poseen distintas características. Por lo tanto se usará:
-
-* [MySQL](https://www.mysql.com/) para la parte de citas médicas, ya que se trata de información perfectamente definida y estructurada.
-* [MongoDB](https://www.mongodb.com/es) para la parte de autorizaciones médicas, ya que se desconocen en un principio todos los distintos formatos de autorizaciones y se prioriza la flexibilidad de almacenamiento de dicha información.
+El almacenamiento de datos se realizará con [MongoDB](https://www.mongodb.com/es), ya que requerirá un sistema de estructuras no fijas que permitan una gran escalabilidad. Se utilizará frente a competidores como *CouchDB* o *Redis* ya que permite que cada documento tenga su propio esquema y por su facilidad de integración con *Python* con herramientas como [PyMongo](https://pymongo.readthedocs.io/en/stable/).
 
 ##### Descubrimiento de servicios
 
