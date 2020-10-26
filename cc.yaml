@@ -1,0 +1,6 @@
+usuario:
+ - citas/User.py
+ - citas/UserManager.py
+entidad:
+ - citas/Logger.py
+
