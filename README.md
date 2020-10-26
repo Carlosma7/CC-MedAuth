@@ -83,9 +83,11 @@ La justificación de la elección de las herramientas propuestas se puede ver [a
     * [Corrección detalles visuales documentación](https://github.com/Carlosma7/CC-MedAuth/issues/18)
     * [Extraer descripción problema](https://github.com/Carlosma7/CC-MedAuth/issues/19)
     * [Extraer justificación herramientas escogidas](https://github.com/Carlosma7/CC-MedAuth/issues/25)
+    * [Documentación de estructuración del proyecto según milestones e issues resueltos](https://github.com/Carlosma7/CC-MedAuth/issues/26)
     * [Añadir badges a la documentación](https://github.com/Carlosma7/CC-MedAuth/issues/27)
-    * [Documentar milestones, issues e historias de usuario](https://github.com/Carlosma7/CC-MedAuth/issues/28)
+    * [Documentación de historias de usuario del proyecto](https://github.com/Carlosma7/CC-MedAuth/issues/28)
     * [Fix enlaces de badges](https://github.com/Carlosma7/CC-MedAuth/issues/29)
+    * [Corrección de milestones en la documentación](https://github.com/Carlosma7/CC-MedAuth/issues/31)
     
 ## Historias de usuario planteadas
 
