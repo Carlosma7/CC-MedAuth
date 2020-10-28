@@ -54,6 +54,8 @@ La justificación de la elección de las herramientas propuestas se puede ver [a
 En una primera fase del desarrollo el *producto mínimo viable* inicial constará de la administración del sistema, que incluye la gestión de pólizas del sistema siendo las operaciones consultar póliza y modificar póliza de un asegurado las funciones básicas y minimales del sistema. La historia de este desarrollo puede seguirse tal y como indicamos a continuación:
 
 * [Administración de pólizas](https://github.com/Carlosma7/CC-MedAuth/milestone/10)
+    - [Como usuario anónimo quiero crear un usuario administrativo en el sistema para gestionar el sistema.](https://github.com/Carlosma7/CC-MedAuth/issues/43)
+    - [Como administrativo quiero crear un usuario para un asegurado en el sistema para usar el sistema.](https://github.com/Carlosma7/CC-MedAuth/issues/44)
     - [Como administrativo quiero consultar la póliza de un asegurado para poder ver el tipo de póliza y la información asociada.](https://github.com/Carlosma7/CC-MedAuth/issues/34)
     - [Como administrativo quiero modificar la póliza de un asegurado para cambiar las condiciones o el tipo de póliza.](https://github.com/Carlosma7/CC-MedAuth/issues/35)
     
