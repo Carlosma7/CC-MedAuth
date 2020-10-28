@@ -79,8 +79,25 @@ En una fase final del desarrollo, y por tanto, un producto final incluirá la ge
     - [Como asegurado quiero ser notificado para asistir a una cita médica.](https://github.com/Carlosma7/CC-MedAuth/issues/42)
 
 
+## Modelos
+
+---
 
 
+Se han creado los modelos *Usuario* y *Póliza* de acuerdo a las historias de usuario mencionadas en la primera fase [Administración de pólizas](https://github.com/Carlosma7/CC-MedAuth/milestone/10):
 
+* [Usuario](https://github.com/Carlosma7/MedAuth/blob/main/src/models/usuario.py)
+* [Póliza](https://github.com/Carlosma7/MedAuth/blob/main/src/models/poliza.py)
 
+Se puede comprobar que son sintácticamente correctas ejecutando:
 
+```bash
+python -m py_compile src/models/usuario.py
+python -m py_compile src/models/poliza.py
+```
+
+Y se puede comprobar la correcta integración de los modelos, y por tanto, asegurarnos de la corrección sintáctica de los archivos ejecutando:
+
+```bash
+python src/main.py
+```
