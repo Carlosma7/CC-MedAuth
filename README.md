@@ -10,12 +10,6 @@
 
 **Universidad:** Universidad de Granada (UGR)
 
-## Configuración inicial del repositorio
-
----
-
-La configuración del entorno de Git y Github en mi máquina local se puede visualizar [aquí](https://github.com/Carlosma7/CC-MedAuth/blob/main/doc/config_entorno.md).
-
 ## Descripción de problema y solución del proyecto
 
 ---
@@ -26,18 +20,20 @@ La descripción detallada del problema y la solución propuesta se puede leer [a
 
 ---
 
-La arquitectura propuesta se trata de una arquitectura basada en [microservicios](https://decidesoluciones.es/arquitectura-de-microservicios), frente a una arquitectura monolítica, tras valorar las distintas características y ver [comparativas](https://www.chakray.com/es/devops-arquitectura-monolitica-vs-microservicios/). De este modo podemos realizar un despliegue en la nube ofreciendo la posibilidad de obtener un servicio compuesto de un conjunto de microservicios que funcionan de forma aislada pero a su vez se puedan comunicar entre ellos.
+Existen diversos tipos de arquitectura que podrían solucionar el problema propuesto, pero a continuación se van a detallar las ventajas que presenta la arquitectura basada en [microservicios](https://decidesoluciones.es/arquitectura-de-microservicios), frente una arquitectura monolítica o por capas.
 
-Al emplear esta arquitectura contaremos con ventajas como pueden ser la *escalabilidad*, *versatilidad*, *autonomía*, *mantenimiento simple* y *aislamiento de errores*. Por todos estos motivos he decidido emplear esta arquitectura frente a otras opciones.
+* El código se simplifica y añadir funcionalidad en las diferentes etapas, y por lo tanto en los *productos mínimos viables* futuros, hacer un cambio en un producto es más sencillo que en las arquitecturas monolíticas.
+* Ante un problema puntual de un microservicio, el funcionamiento del resto de componentes (tanto de la misma aplicación, como de otros servicios que consuman, externos a la aplicación) no se vería afectado.
+* Escalar a un mayor número de clientes es tan sencillo como crear nuevas instancias de un microservicio.
+* Además, el uso de microservicios aporta una naturaleza cultural **DevOps**, obligándonos a desarrollar, implementar, testear, desplegar y monitorizar en un proceso completo frente a la metodología tradicional del administrador del sistema.
 
-La arquitectura propuesta estará compuesta de los siguientes microservicios:
+En este problema, cada uno de los procesos de gestión de citas médicas, pólizas de asegurados y autorizaciones de intervenciones se gestionan como servicios independientes, que a su vez se comunican permitiendo la interoperabilidad y obteniendo un sistema general con una funcionalidad completa.
 
-*  **Microservicio de autorizaciones médicas**: Se encargará de toda la funcionalidad asociada a las autorizaciones de intervenciones, operaciones o pruebas de diagnóstico.
-*  **Microservicio de citas médicas**: Se encargará de la visualización y notificación de citas concertadas para los pacientes.
+Por lo tanto, la arquitectura propuesta estará compuesta de los siguientes microservicios:
 
-A continuación se muestra el esquema de nuestra arquitectura: 
-
-![Arquitectura de microservicios](./doc/img/arquitectura.png "Arquitectura de microservicios")
+* **Gestión de pólizas de asegurados**.
+* **Gestión de autorizaciones y solicitudes**.
+* **Consulta de citas médicas y notificaciones**.
 
 ## Herramientas
 
@@ -46,10 +42,8 @@ A continuación se muestra el esquema de nuestra arquitectura:
 * Lenguaje de programación: [Python](https://www.python.org/), concretamente la versión mínima será la [Python 3.6](https://www.python.org/downloads/release/python-360/).
 * Framework REST-API: [Flask](https://flask.palletsprojects.com/en/1.1.x/).
 * Almacenamiento: [MongoDB](https://www.mongodb.com/es) con la herramienta [PyMongo](https://pymongo.readthedocs.io/en/stable/).
-* Descubrimiento de servicios: [Consul](https://www.consul.io/).
-* Gestor de eventos: [Celery](https://docs.celeryproject.org/en/stable/).
 * Gestor de tareas: [Invoke](http://www.pyinvoke.org/).
-* Gestor de versiones: [venv](https://docs.python.org/3/library/venv.html).
+* Entorno virtual de desarrollo: [venv](https://docs.python.org/3/library/venv.html).
 
 La justificación de la elección de las herramientas propuestas se puede ver [aquí](https://github.com/Carlosma7/CC-MedAuth/blob/main/doc/justificacion_herramientas.md).
 
