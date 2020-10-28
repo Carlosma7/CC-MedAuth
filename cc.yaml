@@ -1,5 +1,4 @@
 ---
 entidad:
- - citas/User.py
- - citas/UserManager.py
- - citas/Logger.py
+ - src/models/poliza.py
+ - src/models/usuario.py
