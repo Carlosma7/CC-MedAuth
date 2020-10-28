@@ -47,47 +47,38 @@ Por lo tanto, la arquitectura propuesta estará compuesta de los siguientes micr
 
 La justificación de la elección de las herramientas propuestas se puede ver [aquí](https://github.com/Carlosma7/CC-MedAuth/blob/main/doc/justificacion_herramientas.md).
 
-## Milestones e issues resueltos
+## Roadmap
 
-* [Configuración inicial repositorio](https://github.com/Carlosma7/CC-MedAuth/milestone/1)
-    * [Crear .README.md](https://github.com/Carlosma7/CC-MedAuth/issues/1)
-    * [Crear .gitignore](https://github.com/Carlosma7/CC-MedAuth/issues/2)
-    * [Añadir licencia GPLv3](https://github.com/Carlosma7/CC-MedAuth/issues/3)
-    * [Crear directorio de documentación y subida de imágenes](https://github.com/Carlosma7/CC-MedAuth/issues/4)
-    * [Subir documento de configuración del entorno](https://github.com/Carlosma7/CC-MedAuth/issues/5)
-    * [Crear fichero travis.yml](https://github.com/Carlosma7/CC-MedAuth/issues/6)
-    * [Enlazar la configuración inicial de Github al README](https://github.com/Carlosma7/CC-MedAuth/issues/7)
+---
 
-* [Arquitectura](https://github.com/Carlosma7/CC-MedAuth/milestone/5)
-    * [Escoger arquitectura y herramientas](https://github.com/Carlosma7/CC-MedAuth/issues/8)
-    * [Reestructuración arquitectura de la aplicación](https://github.com/Carlosma7/CC-MedAuth/issues/16)
+En una primera fase del desarrollo el *producto mínimo viable* inicial constará de la administración del sistema, que incluye la gestión de pólizas del sistema siendo las operaciones consultar póliza y modificar póliza de un asegurado las funciones básicas y minimales del sistema. La historia de este desarrollo puede seguirse tal y como indicamos a continuación:
 
-* [Configuración entorno](https://github.com/Carlosma7/CC-MedAuth/milestone/4)
-    * [Configuración Travis](https://github.com/Carlosma7/CC-MedAuth/issues/10)
-    * [Corregir fichero requirements.txt](https://github.com/Carlosma7/CC-MedAuth/issues/11)
-    * [Corrección .travis.yml](https://github.com/Carlosma7/CC-MedAuth/issues/12)
-    * [Configurar tareas de Invoke](https://github.com/Carlosma7/CC-MedAuth/issues/13)
-    * [Configuración .gitignore para entorno python](https://github.com/Carlosma7/CC-MedAuth/issues/14)
-    * [Configuración cc.yaml](https://github.com/Carlosma7/CC-MedAuth/issues/24)
-    * [Fix cc.yaml](https://github.com/Carlosma7/CC-MedAuth/issues/30)
-
-* [Documentación](https://github.com/Carlosma7/CC-MedAuth/milestone/3)
-    * [Corrección documentación de arquitectura](https://github.com/Carlosma7/CC-MedAuth/issues/9)
-    * [Documentación sobre gestión de versiones](https://github.com/Carlosma7/CC-MedAuth/issues/17)
-    * [Corrección detalles visuales documentación](https://github.com/Carlosma7/CC-MedAuth/issues/18)
-    * [Extraer descripción problema](https://github.com/Carlosma7/CC-MedAuth/issues/19)
-    * [Extraer justificación herramientas escogidas](https://github.com/Carlosma7/CC-MedAuth/issues/25)
-    * [Documentación de estructuración del proyecto según milestones e issues resueltos](https://github.com/Carlosma7/CC-MedAuth/issues/26)
-    * [Añadir badges a la documentación](https://github.com/Carlosma7/CC-MedAuth/issues/27)
-    * [Documentación de historias de usuario del proyecto](https://github.com/Carlosma7/CC-MedAuth/issues/28)
-    * [Fix enlaces de badges](https://github.com/Carlosma7/CC-MedAuth/issues/29)
-    * [Corrección de milestones en la documentación](https://github.com/Carlosma7/CC-MedAuth/issues/31)
+* [Administración de pólizas](https://github.com/Carlosma7/CC-MedAuth/milestone/10)
+    - [Como administrativo quiero consultar la póliza de un asegurado para poder ver el tipo de póliza y la información asociada.](https://github.com/Carlosma7/CC-MedAuth/issues/34)
+    - [Como administrativo quiero modificar la póliza de un asegurado para cambiar las condiciones o el tipo de póliza.](https://github.com/Carlosma7/CC-MedAuth/issues/35)
     
-## Historias de usuario planteadas
+En una segunda fase del desarrollo con objetivo de obtener el siguiente *producto mínimo viable* del desarrollo, se realizará la gestión de autorizaciones por parte del asegurado siendo las operaciones añadir una prescripción médica, solicitar una autorización médica y consultar una autorización médica. La historia de este desarrollo se organiza de la siguiente forma:
 
-* [Usuario](https://github.com/Carlosma7/CC-MedAuth/milestone/6)
-    * [[HU1] Registro de email para notificaciones de autorizaciones](https://github.com/Carlosma7/CC-MedAuth/issues/15)
-    * [[HU2] Solicitud autorización médica](https://github.com/Carlosma7/CC-MedAuth/issues/20)
-    * [[HU3] Comprobar estado de autorizaciones](https://github.com/Carlosma7/CC-MedAuth/issues/21)
-    * [[HU4] Notificar usuario de procesamiento de autorización](https://github.com/Carlosma7/CC-MedAuth/issues/22)
-    * [[HU5] Visualizar citas médicas](https://github.com/Carlosma7/CC-MedAuth/issues/23)
+* [Gestión de autorizaciones](https://github.com/Carlosma7/CC-MedAuth/milestone/7)
+    - [Como asegurado quiero añadir una prescripción médica para poder solicitar una autorización de una prueba médica.](https://github.com/Carlosma7/CC-MedAuth/issues/36)
+    - [Como asegurado quiero solicitar una autorización médica para poder obtener un servicio médico.](https://github.com/Carlosma7/CC-MedAuth/issues/37)
+    - [Como asegurado quiero consultar una autorización médica para ver el estado de la autorización.](https://github.com/Carlosma7/CC-MedAuth/issues/38)
+
+En una tercera entrega del desarrollo de un *producto mínimo viable*, se realizará la administración de autorizaciones por parte del administrativo, siendo las operaciones de administración de autorizaciones médicas y aprobación/denegación de autorizaciones médicas. El esquema a seguir en este desarrollo se indica a continuación:
+
+* [Administración de autorizaciones](https://github.com/Carlosma7/CC-MedAuth/milestone/9)
+    - [Como administrativo quiero administrar una autorización médica de un asegurado para ver o modifcar una autorización.](https://github.com/Carlosma7/CC-MedAuth/issues/39)
+    - [Como administrativo quiero cambiar la aprobación o denegación de una autorización para tratar un caso excepcional.](https://github.com/Carlosma7/CC-MedAuth/issues/40)
+
+En una fase final del desarrollo, y por tanto, un producto final incluirá la gestión de citas médicas a lo anteriormente conseguido, siendo las operaciones de consultar citas médicas y obtener notificaciones previas a una cita médica. La historia del desarrollo se especifica de la forma:
+
+* [Gestión de citas médicas](https://github.com/Carlosma7/CC-MedAuth/milestone/8)
+    - [Como asegurado quiero consultar una cita médica fijada para ver la información asociada.](https://github.com/Carlosma7/CC-MedAuth/issues/41)
+    - [Como asegurado quiero ser notificado para asistir a una cita médica.](https://github.com/Carlosma7/CC-MedAuth/issues/42)
+
+
+
+
+
+
+
