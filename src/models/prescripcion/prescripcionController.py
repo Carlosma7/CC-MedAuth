@@ -5,5 +5,5 @@ class PrescripcionController:
 
 	self.prescripciones: List[Prescripcion]
 	
-	def upload_prescripcion():
+	def upload_prescripcion(self):
 		return
