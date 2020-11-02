@@ -17,14 +17,10 @@ Por lo tanto, las herramientas que se escogan a continuación buscarán obtener 
 
 Se empleará como framework [Flask](https://flask.palletsprojects.com/en/1.1.x/), frente a *Django* y otros competidores, el cual nos permitirá realizar el proceso de construcción de nuestra web. Se ha escogido *Flask* debido a que se trata un framework más sencillo de desarrollar frente a *Django*, tras analizar las distintas [ventajas y desventajas](https://openwebinars.net/blog/django-vs-flask/) que ofrecen ambos.
 
-##### Almacenamiento
+##### Configuración distribuida
 
-El almacenamiento de datos se realizará con [MongoDB](https://www.mongodb.com/es), ya que requerirá un sistema de estructuras no fijas que permitan una gran escalabilidad. Se utilizará frente a competidores como *CouchDB* o *Redis* ya que permite que cada documento tenga su propio esquema y por su facilidad de integración con *Python* con herramientas como [PyMongo](https://pymongo.readthedocs.io/en/stable/).
+Se utilizará Consul como sistema de descubrimiento de servicios ya que permite un registro de los servicios, es compatible con APIs basadas en HTML y JSON, utiliza un sistema de almacenamiento por pares clave-valor, y posee una documentación detallada y sencilla.
 
-##### Gestor de tareas
+##### Log
 
-Tras valorar las [diferencias](https://github.com/kipyin/pokemaster/issues/8) entre *Makefile* e [Invoke](http://www.pyinvoke.org/), se ha optado por *Invoke* ya que este se encuentra integrado de forma natural con *Python* y su posibilidad de utilizarse junto al debugger propio del lenguaje.
-
-##### Entorno virtual de desarrollo
-
-Al trabajar con *Python* se ha decidido utilizar [venv](https://docs.python.org/3/library/venv.html) como gestor de las distintas versiones en las que desarrollar, ya que en versiones superiores a *Python3.3* *virtualenv* presenta problemas con los archivos binarios. Esta herramientas nos será muy útil para poder adaptar nuestro proyecto a distintas versiones y no limitarnos a la que existe por defecto en nuestro sistema operativo.
+Para realizar una configuración con loggers se utilizará un propio módulo de *Python*, que es la librería [Logging](https://www.ionos.es/digitalguide/paginas-web/desarrollo-web/logging-de-python/). Este módulo permite realizar una gestión y análisis de errores, seguimiento de acciones y depuración del sistema bastante sencilla y de forma natural con el lenguaje propuesto.
