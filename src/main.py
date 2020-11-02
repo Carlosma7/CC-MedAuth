@@ -11,5 +11,5 @@ if __name__ == '__main__':
     c = Cita
     r = Prescripcion
 
-    print('Todos los elementos se han creado. Sin sintácticamente correctos.')
+    print('Todos los elementos se han creado. Son sintácticamente correctos.')
 
