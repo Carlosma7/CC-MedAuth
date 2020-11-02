@@ -5,5 +5,5 @@ class UsuarioController:
 
 	self.usuarios: List[Usuario]
 	
-	def crear_usuario(nombre: str, email: str):
+	def crear_usuario(self, nombre: str, email: str):
 		return
