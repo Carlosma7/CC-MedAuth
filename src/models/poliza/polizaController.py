@@ -6,8 +6,8 @@ class PolizaController:
 	self.polizas: List[Poliza]
 	
 	
-	def get_poliza(nombre: str):
+	def get_poliza(self, nombre: str):
 		return
 
-	def set_poliza(nombre: str):
+	def set_poliza(self, nombre: str):
 		return
