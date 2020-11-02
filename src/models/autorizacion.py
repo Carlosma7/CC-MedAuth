@@ -3,7 +3,7 @@ from typing import List
 import datetime
 
 
-class Poliza:
+class Autorizacion:
 
     def __init__(self):
         self.id_autorizacion: str
