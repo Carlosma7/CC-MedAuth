@@ -1,4 +1,4 @@
-from .usuario import Usuario
+from models.usuario.usuario import Usuario
 from typing import List
 import datetime
 
