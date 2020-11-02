@@ -1,4 +1,12 @@
 ---
 entidad:
- - src/models/poliza.py
- - src/models/usuario.py
+ - src/models/usuario/usuario.py
+ - src/models/usuario/usuarioController.py
+ - src/models/poliza/poliza.py
+ - src/models/poliza/polizaController.py
+ - src/models/prescripcion/prescripcion.py
+ - src/models/prescripcion/prescripcionController.py
+ - src/models/autorizacion/autorizacion.py
+ - src/models/autorizacion/autorizacionController.py
+ - src/models/cita/cita.py
+ - src/models/cita/citaController.py
