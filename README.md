@@ -39,12 +39,6 @@ Por lo tanto, la arquitectura propuesta estará compuesta de los siguientes micr
 
 ---
 
-* Lenguaje de programación: [Python](https://www.python.org/), concretamente la versión mínima será la [Python 3.6](https://www.python.org/downloads/release/python-360/).
-* Framework REST-API: [Flask](https://flask.palletsprojects.com/en/1.1.x/).
-* Almacenamiento: [MongoDB](https://www.mongodb.com/es) con la herramienta [PyMongo](https://pymongo.readthedocs.io/en/stable/).
-* Gestor de tareas: [Invoke](http://www.pyinvoke.org/).
-* Entorno virtual de desarrollo: [venv](https://docs.python.org/3/library/venv.html).
-
 La justificación de la elección de las herramientas propuestas se puede ver [aquí](https://github.com/Carlosma7/CC-MedAuth/blob/main/doc/justificacion_herramientas.md).
 
 ## Roadmap
