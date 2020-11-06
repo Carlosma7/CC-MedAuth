@@ -4,15 +4,15 @@
 
 ---
 
+![Logo MedAuth](./doc/img/logo_medauth.png "Logo MedAuth")
+
+---
+
 **Autor:** Carlos Morales Aguilera
 
 **Asignatura:** Cloud Computing
 
 **Universidad:** Universidad de Granada (UGR)
-
----
-
-![Logo MedAuth](./doc/img/logo_medauth.png "Logo MedAuth")
 
 ## Información del proyecto
 
