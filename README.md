@@ -10,6 +10,10 @@
 
 **Universidad:** Universidad de Granada (UGR)
 
+---
+
+![Logo MedAuth](./doc/img/logo_medauth.png "Logo MedAuth")
+
 ## Información del proyecto
 
 ---
