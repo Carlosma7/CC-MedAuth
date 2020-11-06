@@ -10,33 +10,36 @@
 
 **Universidad:** Universidad de Granada (UGR)
 
-## Descripción de problema y solución del proyecto
+## Información del proyecto
 
 ---
 
-La descripción detallada del problema y la solución propuesta se puede leer [aquí](https://github.com/Carlosma7/CC-MedAuth/blob/main/doc/descripcion_problema.md).
+:hospital: La descripción del problema y la solución propuesta se puede leer en el [Planteamiento del problema](https://github.com/Carlosma7/CC-MedAuth/blob/main/doc/descripcion_problema.md).
 
-## Arquitectura
+:triangular_ruler: Elección y justificación de la [Arquitectura](https://github.com/Carlosma7/CC-MedAuth/blob/main/doc/arquitectura.md).
 
----
+:hammer: La justificación de las [Herramientas](https://github.com/Carlosma7/CC-MedAuth/blob/main/doc/justificacion_herramientas.md).
 
-La elección y justificación de la arquitectura planteada se puede leer [aquí](https://github.com/Carlosma7/CC-MedAuth/blob/main/doc/arquitectura.md).
+:round_pushpin: Planificación del proyecto y [Roadmap](https://github.com/Carlosma7/CC-MedAuth/blob/main/doc/roadmap.md).
 
-## Herramientas
+:package: Comprobación de sintaxis y [Modelo inicial](https://github.com/Carlosma7/CC-MedAuth/blob/main/doc/modelo_inicial.md).
 
----
-
-La justificación de la elección de las herramientas propuestas se puede ver [aquí](https://github.com/Carlosma7/CC-MedAuth/blob/main/doc/justificacion_herramientas.md).
-
-## Roadmap
+## Gestor de tareas
 
 ---
 
-El Roadmap y la planificación del proyecto se pueden ver [aquí](https://github.com/Carlosma7/CC-MedAuth/blob/main/doc/roadmap.md).
-
-
-## Modelos
+## Librería de aserciones
 
 ---
 
-El modelado inicial y comprobación de sintaxis se pueden ver [aquí](https://github.com/Carlosma7/CC-MedAuth/blob/main/doc/modelo_inicial.md).
+## Marco de pruebas
+
+---
+
+## Avance código
+
+---
+
+## Tests implementados
+
+---
