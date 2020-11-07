@@ -23,6 +23,9 @@ class TestPoliza:
 
     def get_periodo_carencia(self):
     	return self.__periodo_carencia
+    
+    def set_periodo_carencia(self, periodo_carencia):
+    	self.__periodo_carencia == periodo_carencia
 
     def get_tipo(self):
     	return self.__tipo
