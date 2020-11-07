@@ -31,6 +31,11 @@ class TestUsuarioAdmin(TestUsuario):
 		self.__email_empresarial = email_empresarial
 	
 	def __eq__(self, otra):
+		assert self.__nombre == otra.get_nombre()
+		assert self.__email == otra.get_email()
+		assert self.__dni == otra.get_dni()
+		assert self.__email_empresarial == otra.get_email_empresarial()
+		
 		return (self.__nombre == otra.get_nombre() ) and (self.__email == otra.get_email()) and (self.__dni == otra.get_dni()) and (self.__email_empresarial == otra.get_email_empresarial())
 
 def test_compare_usuario_admin():
