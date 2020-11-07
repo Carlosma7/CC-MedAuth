@@ -1,11 +1,14 @@
 from modelos import *
 from typing import List
 import pytest
+from random import randint
+import datetime
 
 
 class TestController:
 
 	usuarios: List[TestUsuario] = []
+	polizas: List[TestPoliza] = []
 	
 	# [HU1] Creación usuario administrativo
 	def crear_admin(self, nombre: str, email: str, dni: str):
@@ -66,6 +69,63 @@ class TestController:
 		usuario = [c for c in self.usuarios if c.get_dni() == dni][0]
 		self.usuarios.remove(usuario)
 		assert len(self.usuarios) < len_antes
+	
+	# [HU4] Administrar póliza: Crear una póliza
+	def crear_poliza(self, dni: str, periodo_carencia: datetime, tipo: str, copagos: float, mensualidad: str, servicios_excluidos: List[str], modulos_extra: List[str]):
+		cliente = [c for c in self.usuarios if c.get_dni() == dni][0]
+		id_poliza = "MA" + str(randint(1000, 9999))
+		cliente.set_id_poliza(id_poliza)
+		
+		p = TestPoliza(cliente, id_poliza, periodo_carencia, tipo, copagos, mensualidad, servicios_excluidos, modulos_extra)
+		len_antes = len(self.polizas)
+		self.polizas.append(p)
+		assert len(self.polizas) > len_antes
+
+		poliza = [p for p in self.polizas if p.get_id_poliza() == id_poliza][0]
+		assert poliza.get_id_poliza() == id_poliza
+		assert poliza.get_periodo_carencia() == periodo_carencia
+		assert poliza.get_tipo() == tipo
+		assert poliza.get_copagos() == copagos
+		assert poliza.get_mensualidad() == mensualidad
+		assert poliza.get_servicios_excluidos() == servicios_excluidos
+		assert poliza.get_modulos_extra() == modulos_extra
+		
+	# [HU4] Administrar póliza: Modificar una póliza
+	def modificar_poliza(self, dni: str, periodo_carencia: datetime, tipo: str, copagos: float, mensualidad: float, servicios_excluidos: List[str], modulos_extra: List[str]):
+		cliente = [c for c in self.usuarios if c.get_dni() == dni][0]
+		id_poliza = cliente.get_id_poliza()
+		assert cliente.get_dni() == dni
+		
+		poliza = [p for p in self.polizas if p.get_id_poliza() == id_poliza][0]
+		assert poliza.get_id_poliza() == id_poliza
+		
+		poliza.set_periodo_carencia(periodo_carencia)
+		poliza.set_tipo(tipo)
+		poliza.set_copagos(copagos)
+		poliza.set_mensualidad(mensualidad)
+		poliza.set_servicios_excluidos(servicios_excluidos)
+		poliza.set_modulos_extra(modulos_extra)
+		
+		assert poliza.get_periodo_carencia() == periodo_carencia
+		assert poliza.get_tipo() == tipo
+		assert poliza.get_copagos() == copagos
+		assert poliza.get_mensualidad() == mensualidad
+		assert poliza.get_servicios_excluidos() == servicios_excluidos
+		assert poliza.get_modulos_extra() == modulos_extra
+	
+	# [HU4] Administrar póliza: Eliminar una póliza
+	def eliminar_poliza(self, dni: str):
+		cliente = [c for c in self.usuarios if c.get_dni() == dni][0]
+		id_poliza = cliente.get_id_poliza()
+		poliza = [p for p in self.polizas if p.get_id_poliza() == id_poliza][0]
+		assert poliza.get_id_poliza() == cliente.get_id_poliza()
+		
+		cliente.set_id_poliza("")
+		assert cliente.get_id_poliza() == ""
+		
+		len_antes = len(self.polizas)
+		self.polizas.remove(poliza)
+		assert len(self.polizas) < len_antes
 		
 def test_crear_admin():
 	t = TestController()
@@ -86,3 +146,17 @@ def test_modificar_cliente():
 def test_eliminar_usuario():
 	t = TestController()
 	t.eliminar_usuario("75925767-F")
+
+def test_crear_poliza():
+	t = TestController()
+	fecha = datetime.datetime(2020, 5, 17)
+	t.crear_poliza("77925767-Z", fecha, "Total", 5.99, 50.99, ["TAC", "Apendicitis"], ["Dental"])
+
+def test_modificar_poliza():
+	t = TestController()
+	fecha = datetime.datetime(2020, 5, 17)
+	t.modificar_poliza("77925767-Z", fecha, "Básica", 5.99, 50.99, ["TAC", "Apendicitis"], ["Dental"])
+
+def test_eliminar_poliza():
+	t = TestController()
+	t.eliminar_poliza("77925767-Z")
