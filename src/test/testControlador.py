@@ -215,6 +215,13 @@ class TestController:
 		assert autorizacion.get_facultativo_realizador() == facultativo_realizador
 		assert autorizacion.get_consulta() == consulta
 
+	# [HU9] Consultar autorización médica
+	def consultar_autorizacion(self, id_autorizacion: str):
+		autorizacion = [a for a in self.autorizaciones if a.get_id_autorizacion() == id_autorizacion][0]
+		assert autorizacion.get_id_autorizacion() == id_autorizacion
+		
+		return autorizacion
+
 		
 def test_crear_admin():
 	t = TestController()
@@ -263,3 +270,7 @@ def test_modificar_autorizacion():
 	t = TestController()
 	fecha = datetime.datetime(2020, 5, 17)
 	t.modificar_autorizacion("AU-77925767-1", "", fecha, ["Radiografía", "Ortopedia"], "D. Fernando", "Centro médico capital, Sala 2")
+
+def test_consultar_autorizacion():
+	t = TestController()
+	t.consultar_autorizacion("AU-77925767-1")
