@@ -34,6 +34,9 @@ class TestUsuarioCliente(TestUsuario):
 	def get_id_poliza(self):
 		return self.__id_poliza
 	
+	def set_id_poliza(self, id_poliza):
+		self.__id_poliza = id_poliza
+	
 	def __eq__(self, otra):
 		assert self.__nombre == otra.get_nombre()
 		assert self.__email == otra.get_email()
