@@ -3,12 +3,14 @@ from typing import List
 import pytest
 from random import randint
 import datetime
+import json
 
 
 class TestController:
 
 	usuarios: List[TestUsuario] = []
 	polizas: List[TestPoliza] = []
+	prescripciones: List[TestPrescripcion] = []
 	
 	# [HU1] Creación usuario administrativo
 	def crear_admin(self, nombre: str, email: str, dni: str):
@@ -149,6 +151,10 @@ class TestController:
 		assert poliza.get_id_poliza() == id_poliza
 		
 		return poliza
+
+	# [HU6] Añadir prescripción médica
+	def subir_prescripcion(self, archivo: json):
+		return
 		
 def test_crear_admin():
 	t = TestController()
