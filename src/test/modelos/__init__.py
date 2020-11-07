@@ -5,3 +5,6 @@ from .testPoliza import TestPoliza
 from .testPrescripcion import TestPrescripcion
 from .testAutorizacion import TestAutorizacion
 from .testCita import TestCita
+from .tipoPoliza import tipoPoliza
+from .especialidad import especialidad
+from .moduloExtra import ModuloExtra
