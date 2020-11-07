@@ -35,6 +35,12 @@ class TestUsuarioCliente(TestUsuario):
 		return self.__id_poliza
 	
 	def __eq__(self, otra):
+		assert self.__nombre == otra.get_nombre()
+		assert self.__email == otra.get_email()
+		assert self.__dni == otra.get_dni()
+		assert self.__cuenta_bancaria == otra.get_cuenta_bancaria()
+		assert self.__id_poliza == otra.get_id_poliza()
+		
 		return (self.__nombre == otra.get_nombre() ) and (self.__email == otra.get_email()) and (self.__dni == otra.get_dni()) and (self.__cuenta_bancaria == otra.get_cuenta_bancaria() and (self.__id_poliza == otra.get_id_poliza()))
 
 def test_compare_usuario_cliente():
