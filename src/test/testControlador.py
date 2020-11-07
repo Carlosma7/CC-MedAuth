@@ -83,6 +83,8 @@ class TestController:
 		polizas_previas = [p for p in self.polizas if p.get_id_poliza()[:12] == id_poliza]
 		if len(polizas_previas) > 0:
 			id_poliza = id_poliza + str(int(polizas_previas[-1][-1]) + 1)
+		else:
+			id_poliza = id_poliza + "1"
 
 		polizas = [p for p in self.polizas if p.get_id_poliza() == id_poliza]
 		assert len(polizas) == 0
@@ -96,6 +98,7 @@ class TestController:
 		assert len(self.polizas) > len_antes
 
 		poliza = [p for p in self.polizas if p.get_id_poliza() == id_poliza][0]
+		assert poliza.get_titular() == cliente
 		assert poliza.get_id_poliza() == id_poliza
 		assert poliza.get_periodo_carencia() == periodo_carencia
 		assert poliza.get_tipo() == tipo
