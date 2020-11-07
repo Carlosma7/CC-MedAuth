@@ -268,6 +268,13 @@ class TestController:
 		assert cita.get_facultativo_realizador() == facultativo_realizador
 		assert cita.get_consulta() == consulta
 
+	# [HU12] Consultar cita médica
+	def consultar_cita(self, id_autorizacion: str):
+		cita = [c for c in self.citas if c.get_id_autorizacion() == id_autorizacion][0]
+		assert cita.get_id_autorizacion() == id_autorizacion
+		
+		return cita
+
 
 		
 def test_crear_admin():
@@ -337,3 +344,7 @@ def test_modificar_cita():
 	fecha = datetime.datetime(2020, 5, 17)
 	hora = datetime.time(3, 45, 12)
 	t.modificar_cita("AU-77925767-1", fecha, hora, "D. Fernando", "Centro médico capital, Sala 2")
+
+def test_consultar_cita():
+	t = TestController()
+	t.consultar_cita("AU-77925767-1")
