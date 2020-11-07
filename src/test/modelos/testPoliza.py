@@ -20,6 +20,9 @@ class TestPoliza:
     
     def get_id_poliza(self):
     	return self.__id_poliza
+    
+    def set_id_poliza(self, id_poliza):
+    	self.__id_poliza = id_poliza
 
     def get_periodo_carencia(self):
     	return self.__periodo_carencia
