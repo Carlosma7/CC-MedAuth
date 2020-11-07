@@ -11,6 +11,7 @@ class TestController:
 	usuarios: List[TestUsuario] = []
 	polizas: List[TestPoliza] = []
 	prescripciones: List[TestPrescripcion] = []
+	autorizaciones: List[TestAutorizacion] = []
 	
 	# [HU1] Creación usuario administrativo
 	def crear_admin(self, nombre: str, email: str, dni: str):
@@ -163,6 +164,57 @@ class TestController:
 	def solicitar_autorizacion(self, id_prescripcion: str, asegurado: TestUsuarioCliente):
 		return
 
+	# [HU8] Administrar autorización médica: Crear autorización
+	def crear_autorizacion(self, dni: str, id_prescripcion: str, estado: str, motivo_rechazo: str, fecha_realizacion: datetime, servicios_aceptados: List[str], facultativo_realizador: str, consulta: str):
+		cliente = [c for c in self.usuarios if c.get_dni() == dni][0]
+		assert cliente.get_dni() == dni
+
+		id_poliza = cliente.get_id_poliza()
+
+		id_autorizacion = "AU-" + dni[:9]
+		autorizaciones_previas = [a for a in self.autorizaciones if a.get_asegurado().get_dni() == dni]
+		if len(autorizaciones_previas) > 0:
+			id_autorizacion = id_autorizacion + str(int(autorizaciones_previas[-1][-1]) + 1)
+		else:
+			id_autorizacion = id_autorizacion + "1"
+
+		autorizaciones = [a for a in self.autorizaciones if a.get_id_autorizacion() == id_autorizacion]
+		assert len(autorizaciones) == 0
+
+		a = TestAutorizacion(id_autorizacion, cliente, id_prescripcion, id_poliza, estado, motivo_rechazo, fecha_realizacion, servicios_aceptados, facultativo_realizador, consulta)
+		len_antes = len(self.autorizaciones)
+		self.autorizaciones.append(a)
+		assert len(self.autorizaciones) > len_antes
+
+		autorizacion = [a for a in self.autorizaciones if a.get_id_autorizacion() == id_autorizacion][0]
+		assert autorizacion.get_id_autorizacion() == id_autorizacion
+		assert autorizacion.get_asegurado() == cliente
+		assert autorizacion.get_id_prescripcion() == id_prescripcion
+		assert autorizacion.get_id_poliza() == id_poliza
+		assert autorizacion.get_estado() == estado
+		assert autorizacion.get_motivo_rechazo() == motivo_rechazo
+		assert autorizacion.get_fecha_realizacion() == fecha_realizacion
+		assert autorizacion.get_servicios_aceptados() == servicios_aceptados
+		assert autorizacion.get_facultativo_realizador() == facultativo_realizador
+		assert autorizacion.get_consulta() == consulta
+
+	# [HU8] Administrar autorización médica: Modificar autorización
+	def modificar_autorizacion(self, id_autorizacion: str, motivo_rechazo: str, fecha_realizacion: datetime, servicios_aceptados: List[str], facultativo_realizador: str, consulta: str):
+		autorizacion = [a for a in self.autorizaciones if a.get_id_autorizacion() == id_autorizacion][0]
+		assert autorizacion.get_id_autorizacion() == id_autorizacion
+
+		autorizacion.set_motivo_rechazo(motivo_rechazo)
+		autorizacion.set_fecha_realizacion(fecha_realizacion)
+		autorizacion.set_servicios_aceptados(servicios_aceptados)
+		autorizacion.set_facultativo_realizador(facultativo_realizador)
+		autorizacion.set_consulta(consulta)
+		
+		assert autorizacion.get_motivo_rechazo() == motivo_rechazo
+		assert autorizacion.get_fecha_realizacion() == fecha_realizacion
+		assert autorizacion.get_servicios_aceptados() == servicios_aceptados
+		assert autorizacion.get_facultativo_realizador() == facultativo_realizador
+		assert autorizacion.get_consulta() == consulta
+
 		
 def test_crear_admin():
 	t = TestController()
@@ -201,3 +253,13 @@ def test_consultar_poliza():
 def test_desactivar_poliza():
 	t = TestController()
 	t.desactivar_poliza("77925767-Z")
+
+def test_crear_autorizacion():
+	t = TestController()
+	fecha = datetime.datetime(2020, 5, 17)
+	t.crear_autorizacion("77925767-Z", "PR-77925767-1", "Aceptada", "", fecha, ["Radiografía", "Ortopedia"], "D. Miguel", "Centro médico capital, Sala 2")
+
+def test_modificar_autorizacion():
+	t = TestController()
+	fecha = datetime.datetime(2020, 5, 17)
+	t.modificar_autorizacion("AU-77925767-1", "", fecha, ["Radiografía", "Ortopedia"], "D. Fernando", "Centro médico capital, Sala 2")
