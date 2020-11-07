@@ -1,11 +1,15 @@
 from .testUsuarioCliente import TestUsuarioCliente
+from .tipoPoliza import TipoPoliza
+from .moduloExtra import ModuloExtra
 from typing import List
 import datetime
 
 
+
 class TestPoliza:
-    def __init__(self, usuario: TestUsuarioCliente, id_poliza: str, periodo_carencia: datetime, tipo: str, 
-    			copagos: float, mensualidad: str, servicios_excluidos: List[str], modulos_extra: List[str], activa: bool):
+
+    def __init__(self, usuario: TestUsuarioCliente, id_poliza: str, periodo_carencia: datetime, tipo: TipoPoliza, 
+    			copagos: float, mensualidad: str, servicios_excluidos: List[str], modulos_extra: List[ModuloExtra], activa: bool):
         self.__titular = usuario
         self.__id_poliza = id_poliza
         self.__periodo_carencia = periodo_carencia
@@ -15,6 +19,10 @@ class TestPoliza:
         self.__servicios_excluidos = servicios_excluidos[:]
         self.__modulos_extra = modulos_extra[:]
         self.__activa = activa
+
+        assert isinstance(self.__tipo, TipoPoliza)
+        for m in self.__modulos_extra:
+            assert isinstance(m, ModuloExtra)
 
     def get_titular(self):
     	return self.__titular
@@ -86,9 +94,7 @@ def test_compare_poliza():
 	fecha = datetime.datetime(2020, 5, 17)
 	fecha2 = datetime.datetime(2020, 5, 18)
 	
-	t1 = TestPoliza(u, "12345678", fecha, "Total", 35.99, 103.0, ["TAC", "Apendicitis"], ["Dental"], True)
-	t2 = TestPoliza(u2, "12345678", fecha, "Total", 35.99, 103.0, ["TAC", "Apendicitis"], ["Dental"], True)
-	t3 = TestPoliza(u2, "12345678", fecha2, "Básico", 35.99, 103.0, ["TAC", "Apendicitis"], ["Dental"], True)
+	t1 = TestPoliza(u, "12345678", fecha, TipoPoliza.Basica, 35.99, 103.0, ["TAC", "Apendicitis"], [ModuloExtra.Dental], True)
+	t2 = TestPoliza(u2, "12345678", fecha, TipoPoliza.Basica, 35.99, 103.0, ["TAC", "Apendicitis"], [ModuloExtra.Dental], True)
 	assert t1 == t1 # Pasa test
 	assert t1 == t2 # Pasa test
-	assert t2 == t3 # No pasa test
