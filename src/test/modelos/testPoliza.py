@@ -76,8 +76,9 @@ class TestPoliza:
     	assert self.__mensualidad == otra.get_mensualidad()
     	assert self.__servicios_excluidos == otra.get_servicios_excluidos()
     	assert self.__modulos_extra == otra.get_modulos_extra()
+    	assert self.__activa == otra.get_activa()
     	
-    	return (self.__titular == otra.get_titular()) and (self.__id_poliza == otra.get_id_poliza()) and (self.__periodo_carencia == otra.get_periodo_carencia()) and (self.__tipo == otra.get_tipo()) and (self.__copagos == otra.get_copagos()) and (self.__mensualidad == otra.get_mensualidad()) and (self.__servicios_excluidos == otra.get_servicios_excluidos() and (self.__modulos_extra == otra.get_modulos_extra()))
+    	return (self.__titular == otra.get_titular()) and (self.__id_poliza == otra.get_id_poliza()) and (self.__periodo_carencia == otra.get_periodo_carencia()) and (self.__tipo == otra.get_tipo()) and (self.__copagos == otra.get_copagos()) and (self.__mensualidad == otra.get_mensualidad()) and (self.__servicios_excluidos == otra.get_servicios_excluidos() and (self.__modulos_extra == otra.get_modulos_extra()) and (self.__activa == otra.get_activa()))
 
 def test_compare_poliza():
 	u = TestUsuarioCliente("Carlos", "carlos7ma@gmail.com", "75925767-F", "ES12345678", "12345678")
@@ -85,9 +86,9 @@ def test_compare_poliza():
 	fecha = datetime.datetime(2020, 5, 17)
 	fecha2 = datetime.datetime(2020, 5, 18)
 	
-	t1 = TestPoliza(u, "12345678", fecha, "Total", 35.99, 103.0, ["TAC", "Apendicitis"], ["Dental"])
-	t2 = TestPoliza(u2, "12345678", fecha, "Total", 35.99, 103.0, ["TAC", "Apendicitis"], ["Dental"])
-	t3 = TestPoliza(u2, "12345678", fecha2, "Básico", 35.99, 103.0, ["TAC", "Apendicitis"], ["Dental"])
+	t1 = TestPoliza(u, "12345678", fecha, "Total", 35.99, 103.0, ["TAC", "Apendicitis"], ["Dental"], True)
+	t2 = TestPoliza(u2, "12345678", fecha, "Total", 35.99, 103.0, ["TAC", "Apendicitis"], ["Dental"], True)
+	t3 = TestPoliza(u2, "12345678", fecha2, "Básico", 35.99, 103.0, ["TAC", "Apendicitis"], ["Dental"], True)
 	assert t1 == t1 # Pasa test
 	assert t1 == t2 # Pasa test
 	assert t2 == t3 # No pasa test
