@@ -76,7 +76,7 @@ class TestController:
 		id_poliza = "MA" + str(randint(1000, 9999))
 		cliente.set_id_poliza(id_poliza)
 		
-		p = TestPoliza(cliente, id_poliza, periodo_carencia, tipo, copagos, mensualidad, servicios_excluidos, modulos_extra)
+		p = TestPoliza(cliente, id_poliza, periodo_carencia, tipo, copagos, mensualidad, servicios_excluidos, modulos_extra, True)
 		len_antes = len(self.polizas)
 		self.polizas.append(p)
 		assert len(self.polizas) > len_antes
@@ -112,9 +112,10 @@ class TestController:
 		assert poliza.get_mensualidad() == mensualidad
 		assert poliza.get_servicios_excluidos() == servicios_excluidos
 		assert poliza.get_modulos_extra() == modulos_extra
+		assert poliza.get_activa() == True
 	
-	# [HU4] Administrar póliza: Eliminar una póliza
-	def eliminar_poliza(self, dni: str):
+	# [HU4] Administrar póliza: Desactivar una póliza
+	def desactivar_poliza(self, dni: str):
 		cliente = [c for c in self.usuarios if c.get_dni() == dni][0]
 		id_poliza = cliente.get_id_poliza()
 		poliza = [p for p in self.polizas if p.get_id_poliza() == id_poliza][0]
@@ -123,9 +124,8 @@ class TestController:
 		cliente.set_id_poliza("")
 		assert cliente.get_id_poliza() == ""
 		
-		len_antes = len(self.polizas)
-		self.polizas.remove(poliza)
-		assert len(self.polizas) < len_antes
+		poliza.set_activa(False)
+		assert poliza.get_activa() == False
 	
 	# [HU5] Consultar póliza
 	def consultar_poliza(self, dni: str):
@@ -172,6 +172,6 @@ def test_consultar_poliza():
 	t = TestController()
 	t.consultar_poliza("77925767-Z")
 	
-def test_eliminar_poliza():
+def test_desactivar_poliza():
 	t = TestController()
-	t.eliminar_poliza("77925767-Z")
+	t.desactivar_poliza("77925767-Z")
