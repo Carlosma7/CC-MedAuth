@@ -5,7 +5,7 @@ import datetime
 
 class TestPoliza:
     def __init__(self, usuario: TestUsuarioCliente, id_poliza: str, periodo_carencia: datetime, tipo: str, 
-    			copagos: float, mensualidad: str, servicios_excluidos: List[str], modulos_extra: List[str]):
+    			copagos: float, mensualidad: str, servicios_excluidos: List[str], modulos_extra: List[str], activa: bool):
         self.__titular = usuario
         self.__id_poliza = id_poliza
         self.__periodo_carencia = periodo_carencia
@@ -14,6 +14,7 @@ class TestPoliza:
         self.__mensualidad = mensualidad
         self.__servicios_excluidos = servicios_excluidos[:]
         self.__modulos_extra = modulos_extra[:]
+        self.__activa = activa
 
     def get_titular(self):
     	return self.__titular
@@ -59,6 +60,12 @@ class TestPoliza:
 
     def set_modulos_extra(self, modulos_extra):
     	self.__modulos_extra = modulos_extra[:]
+    	
+    def get_activa(self):
+    	return self.__activa
+    	
+    def set_activa(self, activa):
+    	self.__activa = activa
     
     def __eq__(self, otra):
     	assert self.__titular == otra.get_titular()
