@@ -126,6 +126,17 @@ class TestController:
 		len_antes = len(self.polizas)
 		self.polizas.remove(poliza)
 		assert len(self.polizas) < len_antes
+	
+	# [HU5] Consultar póliza
+	def consultar_poliza(self, dni: str):
+		cliente = [c for c in self.usuarios if c.get_dni() == dni][0]
+		assert cliente.get_dni() == dni
+		
+		id_poliza = cliente.get_id_poliza()
+		poliza = [p for p in self.polizas if p.get_id_poliza() == id_poliza][0]
+		assert poliza.get_id_poliza() == id_poliza
+		
+		return poliza
 		
 def test_crear_admin():
 	t = TestController()
@@ -157,6 +168,10 @@ def test_modificar_poliza():
 	fecha = datetime.datetime(2020, 5, 17)
 	t.modificar_poliza("77925767-Z", fecha, "Básica", 5.99, 50.99, ["TAC", "Apendicitis"], ["Dental"])
 
+def test_consultar_poliza():
+	t = TestController()
+	t.consultar_poliza("77925767-Z")
+	
 def test_eliminar_poliza():
 	t = TestController()
 	t.eliminar_poliza("77925767-Z")
