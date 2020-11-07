@@ -1,10 +1,11 @@
 from .testUsuarioCliente import TestUsuarioCliente
+from .especialidad import Especialidad
 from typing import List
 import datetime
 
 
 class TestPrescripcion:
-	def __init__(self, id_prescripcion: str, asegurado: TestUsuarioCliente, id_poliza: str, fecha_realizacion: datetime, especialidad: str, facultativo_prescriptor: str, facultativo_realizador: str, servicios_solicitados: List[str], consulta: str):
+	def __init__(self, id_prescripcion: str, asegurado: TestUsuarioCliente, id_poliza: str, fecha_realizacion: datetime, especialidad: Especialidad, facultativo_prescriptor: str, facultativo_realizador: str, servicios_solicitados: List[str], consulta: str):
 		self.__id_prescripcion = id_prescripcion
 		self.__asegurado = asegurado
 		self.__id_poliza = id_poliza
@@ -14,6 +15,8 @@ class TestPrescripcion:
 		self.__facultativo_realizador = facultativo_realizador
 		self.__servicios_solicitados = servicios_solicitados[:]
 		self.__consulta = consulta
+
+		assert isinstance(self.__especialidad, Especialidad)
 
 	def get_id_prescripcion(self):
 		return self.__id_prescripcion
@@ -59,8 +62,8 @@ def test_compare_prescripcion():
 	u = TestUsuarioCliente("Carlos", "carlos7ma@gmail.com", "75925767-F", "ES12345678", "12345678")
 	fecha = datetime.datetime(2020, 5, 17)
 	
-	t1 = TestPrescripcion("PR-12345678", u, "MA-75925767-1", fecha, "Traumatología", "D. Fernando", "D. Juan", ["Radiografía", "Ortopedia"], "Centro médico capital, Sala 2")
-	t2 = TestPrescripcion("PR-12345678", u, "MA-75925767-1", fecha, "Traumatología", "D. Fernando", "D. Juan", ["Radiografía", "Ortopedia"], "Centro médico capital, Sala 2")
+	t1 = TestPrescripcion("PR-12345678", u, "MA-75925767-1", fecha, Especialidad.Traumatologia, "D. Fernando", "D. Juan", ["Radiografía", "Ortopedia"], "Centro médico capital, Sala 2")
+	t2 = TestPrescripcion("PR-12345678", u, "MA-75925767-1", fecha, Especialidad.Traumatologia, "D. Fernando", "D. Juan", ["Radiografía", "Ortopedia"], "Centro médico capital, Sala 2")
 	
 	assert t1 == t1 # Pasa test
 	assert t1 == t2 # Pasa test
