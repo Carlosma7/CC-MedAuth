@@ -32,7 +32,7 @@ class TestAutorizacion:
 		return self.__estado
 
 	def set_estado(self, estado):
-		self.__estado == estado
+		self.__estado = estado
 
 	def get_motivo_rechazo(self):
 		return self.__motivo_rechazo
