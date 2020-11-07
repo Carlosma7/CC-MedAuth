@@ -52,7 +52,7 @@ class TestAutorizacion:
 	def get_facultativo_realizador(self):
 		return self.__facultativo_realizador
 
-	def set_facultativos_realizador(self, facultativo_realizador):
+	def set_facultativo_realizador(self, facultativo_realizador):
 		self.__facultativo_realizador = facultativo_realizador
 
 	def get_consulta(self):
