@@ -222,6 +222,17 @@ class TestController:
 		
 		return autorizacion
 
+	# [HU10] Aprobar/Denegar una autorización médica
+	def cambiar_estado_autorizacion(self, id_autorizacion: str, estado: str, motivo_rechazo: str):
+		autorizacion = [a for a in self.autorizaciones if a.get_id_autorizacion() == id_autorizacion][0]
+		assert autorizacion.get_id_autorizacion() == id_autorizacion
+
+		autorizacion.set_estado(estado)
+		autorizacion.set_motivo_rechazo(motivo_rechazo)
+
+		assert autorizacion.get_estado() == estado
+		assert autorizacion.get_motivo_rechazo() == motivo_rechazo
+
 		
 def test_crear_admin():
 	t = TestController()
@@ -274,3 +285,7 @@ def test_modificar_autorizacion():
 def test_consultar_autorizacion():
 	t = TestController()
 	t.consultar_autorizacion("AU-77925767-1")
+
+def test_cambiar_estado_autorizacion():
+	t = TestController()
+	t.cambiar_estado_autorizacion("AU-77925767-1", "Rechazado", "La póliza actual no cubre la intervención")
