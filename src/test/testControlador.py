@@ -73,8 +73,20 @@ class TestController:
 	# [HU4] Administrar póliza: Crear una póliza
 	def crear_poliza(self, dni: str, periodo_carencia: datetime, tipo: str, copagos: float, mensualidad: str, servicios_excluidos: List[str], modulos_extra: List[str]):
 		cliente = [c for c in self.usuarios if c.get_dni() == dni][0]
-		id_poliza = "MA" + str(randint(1000, 9999))
+		
+		poliza_activa = [p for p in self.polizas if p.get_id_poliza() == cliente.get_id_poliza() and p.get_activa() == True]
+		assert len(poliza_activa) == 0
+		
+		id_poliza = "MA-" + dni[:9]
+		polizas_previas = [p for p in self.polizas if p.get_id_poliza()[:12] == id_poliza]
+		if len(polizas_previas) > 0:
+			id_poliza = id_poliza + str(int(polizas_previas[-1][-1]) + 1)
+
+		polizas = [p for p in self.polizas if p.get_id_poliza() == id_poliza]
+		assert len(polizas) == 0
+			
 		cliente.set_id_poliza(id_poliza)
+		assert cliente.get_id_poliza() == id_poliza
 		
 		p = TestPoliza(cliente, id_poliza, periodo_carencia, tipo, copagos, mensualidad, servicios_excluidos, modulos_extra, True)
 		len_antes = len(self.polizas)
