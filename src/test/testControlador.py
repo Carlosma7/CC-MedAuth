@@ -12,6 +12,7 @@ class TestController:
 	polizas: List[TestPoliza] = []
 	prescripciones: List[TestPrescripcion] = []
 	autorizaciones: List[TestAutorizacion] = []
+	citas: List[TestCita] = []
 	
 	# [HU1] Creación usuario administrativo
 	def crear_admin(self, nombre: str, email: str, dni: str):
@@ -233,6 +234,41 @@ class TestController:
 		assert autorizacion.get_estado() == estado
 		assert autorizacion.get_motivo_rechazo() == motivo_rechazo
 
+	# [HU11] Administrar cita médica: Crear cita médica
+	def crear_cita(self, dni: str, id_autorizacion: str, id_prescripcion: str, fecha: datetime, hora: datetime, facultativo_realizador: str, consulta: str):
+		cliente = [c for c in self.usuarios if c.get_dni() == dni][0]
+		assert cliente.get_dni() == dni
+
+		c = TestCita(id_autorizacion, cliente, id_prescripcion, fecha, hora, facultativo_realizador, consulta)
+		len_antes = len(self.citas)
+		self.citas.append(c)
+		assert len(self.citas) > len_antes
+		
+		cita = [c for c in self.citas if c.get_id_autorizacion() == id_autorizacion][0]
+		assert cita.get_id_autorizacion() == id_autorizacion
+		assert cita.get_asegurado() == cliente
+		assert cita.get_id_prescripcion() == id_prescripcion
+		assert cita.get_fecha() == fecha
+		assert cita.get_hora() == hora
+		assert cita.get_facultativo_realizador() == facultativo_realizador
+		assert cita.get_consulta() == consulta
+
+	# [HU11] Administrar cita médica: Modificar cita médica
+	def modificar_cita(self, id_autorizacion: str, fecha: datetime, hora: datetime, facultativo_realizador: str, consulta: str):
+		cita = [c for c in self.citas if c.get_id_autorizacion() == id_autorizacion][0]
+		assert cita.get_id_autorizacion() == id_autorizacion
+
+		cita.set_fecha(fecha)
+		cita.set_hora(hora)
+		cita.set_facultativo_realizador(facultativo_realizador)
+		cita.set_consulta(consulta)
+		
+		assert cita.get_fecha() == fecha
+		assert cita.get_hora() == hora
+		assert cita.get_facultativo_realizador() == facultativo_realizador
+		assert cita.get_consulta() == consulta
+
+
 		
 def test_crear_admin():
 	t = TestController()
@@ -289,3 +325,15 @@ def test_consultar_autorizacion():
 def test_cambiar_estado_autorizacion():
 	t = TestController()
 	t.cambiar_estado_autorizacion("AU-77925767-1", "Rechazado", "La póliza actual no cubre la intervención")
+
+def test_crear_cita():
+	t = TestController()
+	fecha = datetime.datetime(2020, 5, 17)
+	hora = datetime.time(3, 45, 12)
+	t.crear_cita("77925767-Z", "AU-77925767-1", "PR-77925767-1", fecha, hora, "D. Fernando", "Centro médico capital, Sala 2")
+
+def test_modificar_cita():
+	t = TestController()
+	fecha = datetime.datetime(2020, 5, 17)
+	hora = datetime.time(3, 45, 12)
+	t.modificar_cita("AU-77925767-1", fecha, hora, "D. Fernando", "Centro médico capital, Sala 2")
