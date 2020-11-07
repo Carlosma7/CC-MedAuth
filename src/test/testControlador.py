@@ -155,6 +155,11 @@ class TestController:
 	# [HU6] Añadir prescripción médica
 	def subir_prescripcion(self, archivo: json):
 		return
+
+	# [HU7] Solicitar autorización médica
+	def solicitar_autorizacion(self, id_prescripcion: str, asegurado: TestUsuarioCliente):
+		return
+
 		
 def test_crear_admin():
 	t = TestController()
