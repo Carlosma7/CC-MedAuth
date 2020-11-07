@@ -75,7 +75,7 @@ class TestController:
 		assert len(self.usuarios) < len_antes
 	
 	# [HU4] Administrar póliza: Crear una póliza
-	def crear_poliza(self, dni: str, periodo_carencia: datetime, tipo: str, copagos: float, mensualidad: str, servicios_excluidos: List[str], modulos_extra: List[str]):
+	def crear_poliza(self, dni: str, periodo_carencia: datetime, tipo: TipoPoliza, copagos: float, mensualidad: str, servicios_excluidos: List[str], modulos_extra: List[ModuloExtra]):
 		cliente = [c for c in self.usuarios if c.get_dni() == dni][0]
 		
 		poliza_activa = [p for p in self.polizas if p.get_id_poliza() == cliente.get_id_poliza() and p.get_activa() == True]
@@ -110,7 +110,7 @@ class TestController:
 		assert poliza.get_modulos_extra() == modulos_extra
 		
 	# [HU4] Administrar póliza: Modificar una póliza
-	def modificar_poliza(self, dni: str, periodo_carencia: datetime, tipo: str, copagos: float, mensualidad: float, servicios_excluidos: List[str], modulos_extra: List[str]):
+	def modificar_poliza(self, dni: str, periodo_carencia: datetime, tipo: TipoPoliza, copagos: float, mensualidad: float, servicios_excluidos: List[str], modulos_extra: List[ModuloExtra]):
 		cliente = [c for c in self.usuarios if c.get_dni() == dni][0]
 		id_poliza = cliente.get_id_poliza()
 		assert cliente.get_dni() == dni
@@ -276,6 +276,7 @@ class TestController:
 		return cita
 
 
+
 		
 def test_crear_admin():
 	t = TestController()
@@ -300,12 +301,12 @@ def test_eliminar_usuario():
 def test_crear_poliza():
 	t = TestController()
 	fecha = datetime.datetime(2020, 5, 17)
-	t.crear_poliza("77925767-Z", fecha, "Total", 5.99, 50.99, ["TAC", "Apendicitis"], ["Dental"])
+	t.crear_poliza("77925767-Z", fecha, TipoPoliza.Total, 5.99, 50.99, ["TAC", "Apendicitis"], [ModuloExtra.Dental])
 
 def test_modificar_poliza():
 	t = TestController()
 	fecha = datetime.datetime(2020, 5, 17)
-	t.modificar_poliza("77925767-Z", fecha, "Básica", 5.99, 50.99, ["TAC", "Apendicitis"], ["Dental"])
+	t.modificar_poliza("77925767-Z", fecha, TipoPoliza.Basica, 5.99, 50.99, ["TAC", "Apendicitis"], [ModuloExtra.Dental])
 
 def test_consultar_poliza():
 	t = TestController()
