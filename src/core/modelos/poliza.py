@@ -8,7 +8,7 @@ import datetime
 # Clase de póliza de asegurado
 class Poliza:
 
-    def __init__(self, usuario: TestUsuarioCliente, id_poliza: str, periodo_carencia: datetime, tipo: TipoPoliza, 
+    def __init__(self, usuario: UsuarioCliente, id_poliza: str, periodo_carencia: datetime, tipo: TipoPoliza, 
     			copagos: float, mensualidad: str, servicios_excluidos: List[str], modulos_extra: List[ModuloExtra], activa: bool):
         self.__titular = usuario
         self.__id_poliza = id_poliza
