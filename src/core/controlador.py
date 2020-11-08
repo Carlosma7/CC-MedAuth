@@ -133,3 +133,7 @@ class Controller:
 		poliza = [p for p in self.polizas if p.get_id_poliza() == id_poliza][0]
 		
 		return poliza
+
+	# [HU6] Añadir prescripción médica
+	def subir_prescripcion(self, archivo: json):
+		return
