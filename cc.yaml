@@ -1,12 +1,28 @@
 ---
 entidad:
- - src/models/usuario/usuario.py
- - src/models/usuario/usuarioController.py
- - src/models/poliza/poliza.py
- - src/models/poliza/polizaController.py
- - src/models/prescripcion/prescripcion.py
- - src/models/prescripcion/prescripcionController.py
- - src/models/autorizacion/autorizacion.py
- - src/models/autorizacion/autorizacionController.py
- - src/models/cita/cita.py
- - src/models/cita/citaController.py
+ - src/core/modelos/usuario.py
+ - src/core/modelos/usuarioAdmin.py
+ - src/core/modelos/usuarioCliente.py
+ - src/core/modelos/poliza.py
+ - src/core/modelos/prescripcion.py
+ - src/core/modelos/autorizacion.py
+ - src/core/modelos/cita.py
+ - src/core/modelos/tipoPoliza.py
+ - src/core/modelos/moduloExtra.py
+ - src/core/modelos/especialidad.py
+ - src/core/controlador.py
+
+lenguaje:
+ - python3.8
+
+test:
+ - src/test/modelos/testUsuarioAdmin.py
+ - src/test/modelos/testUsuarioCliente.py
+ - src/test/modelos/testPoliza.py
+ - src/test/modelos/testPrescripcion.py
+ - src/test/modelos/testAutorizacion.py
+ - src/test/modelos/testCita.py
+ - src/test/testControlador.py
+
+fichero_tareas:
+ - tasks.py
