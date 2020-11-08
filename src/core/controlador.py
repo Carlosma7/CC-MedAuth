@@ -190,3 +190,12 @@ class Controller:
 		autorizacion = [a for a in self.autorizaciones if a.get_id_autorizacion() == id_autorizacion][0]
 		
 		return autorizacion
+
+	# [HU10] Aprobar/Denegar una autorización médica
+	def cambiar_estado_autorizacion(self, id_autorizacion: str, aceptada: bool, motivo_rechazo: str):
+		# Se obtiene la autorización a partir de su identificación
+		autorizacion = [a for a in self.autorizaciones if a.get_id_autorizacion() == id_autorizacion][0]
+
+		# Se cambia el estado y actualiza motivo de rechazo si procede
+		autorizacion.set_aceptada(aceptada)
+		autorizacion.set_motivo_rechazo(motivo_rechazo)
