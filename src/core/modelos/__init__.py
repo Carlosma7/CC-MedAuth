@@ -4,3 +4,4 @@ from .usuarioCliente import UsuarioCliente
 from .poliza import Poliza
 from .prescripcion import Prescripcion
 from .autorizacion import Autorizacion
+from .cita import Cita
