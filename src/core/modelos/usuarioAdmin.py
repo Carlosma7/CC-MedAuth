@@ -1,4 +1,4 @@
-from .Usuario import TestUsuario
+from .Usuario import Usuario
 
 # Clase de usuario administrativo
 class UsuarioAdmin(Usuario):
