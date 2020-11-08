@@ -1,4 +1,4 @@
-from .UsuarioCliente import UsuarioCliente
+from .usuarioCliente import UsuarioCliente
 from .tipoPoliza import TipoPoliza
 from .moduloExtra import ModuloExtra
 from typing import List
