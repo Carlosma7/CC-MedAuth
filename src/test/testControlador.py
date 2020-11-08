@@ -5,9 +5,10 @@ from random import randint
 import datetime
 import json
 
-
+# Clase controladora de lógica de negocio
 class TestController:
 
+	# Listas de entidades
 	usuarios: List[TestUsuario] = []
 	polizas: List[TestPoliza] = []
 	prescripciones: List[TestPrescripcion] = []
@@ -16,12 +17,18 @@ class TestController:
 	
 	# [HU1] Creación usuario administrativo
 	def crear_admin(self, nombre: str, email: str, dni: str):
+		# Patrón correo: email@medauth
 		email_empresarial = email.split('@')[0] + '@medauth.com'
+
+		# Obtengo el usuario administrativo
 		c = TestUsuarioAdmin(nombre, email, dni, email_empresarial)
+
+		# Lo almaceno y compruebo que se realiza correctamente
 		len_antes = len(self.usuarios)
 		self.usuarios.append(c)
 		assert len(self.usuarios) > len_antes
 		
+		# Busco el usuario y compruebo que está correctamente
 		admin = [a for a in self.usuarios if a.get_dni() == dni][0]
 		assert admin.get_nombre() == nombre
 		assert admin.get_email() == email
