@@ -180,3 +180,10 @@ class Controller:
 		autorizacion.set_servicios_aceptados(servicios_aceptados)
 		autorizacion.set_facultativo_realizador(facultativo_realizador)
 		autorizacion.set_consulta(consulta)
+
+	# [HU9] Consultar autorización médica
+	def consultar_autorizacion(self, id_autorizacion: str):
+		# Se obtiene la autorización a partir de su identificación
+		autorizacion = [a for a in self.autorizaciones if a.get_id_autorizacion() == id_autorizacion][0]
+		
+		return autorizacion
