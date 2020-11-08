@@ -30,3 +30,17 @@ Para el uso de Invoke, se requieren los módulos **task** y **run**.
 * **task**: Representa cada tarea y hace que se interpreten como una llamada/ejecución de una tarea con argumentos. Posee además sus propios argumentos que definen su comportamiento.
 
 * **run**: Sirve para poder ejecutar comandos de shell, igual que realizaría Make o Rake. Al igual que task, posee argumentos que especifican el comportamiento de la ejecución.
+
+##### Build & Run
+
+El fichero `task.py` propuesto presenta las siguientes tareas:
+
+* *clean*: Limpieza de caché del proyecto en todos los directorios y subdirectorios.
+
+* *test*: Ejecución de todos los tests.
+
+* *execute*: Ejecución del programa *main* para demostrar corrección sintáctica y funcional. :warning: El sistema es completamente funcional, aunque no muestra información por pantalla. :warning:
+
+Para ejecutar el gestor de tareas se ha de ejecutar:
+
+`invoke <tarea>`
