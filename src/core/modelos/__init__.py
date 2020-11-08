@@ -5,3 +5,6 @@ from .poliza import Poliza
 from .prescripcion import Prescripcion
 from .autorizacion import Autorizacion
 from .cita import Cita
+from .tipoPoliza import TipoPoliza
+from .especialidad import Especialidad
+from .moduloExtra import ModuloExtra
