@@ -7,6 +7,7 @@ El proyecto sigue la siguiente estructura:
 ```
 core
     ├── controlador.py
+    ├── __init__.py
     └── modelos
         ├── autorizacion.py
         ├── cita.py
@@ -26,6 +27,8 @@ Se han creado los modelos y el controlador asociado a la lógica de negocio de l
 * **Core**
 
     * [Controlador](https://github.com/Carlosma7/MedAuth/blob/main/src/core/controlador.py)
+    
+    * [__init__](https://github.com/Carlosma7/MedAuth/blob/main/src/core/__init__.py)
 
     * *Modelos*
     
