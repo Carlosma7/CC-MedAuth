@@ -16,7 +16,7 @@ Se ha escogido *Invoke* frente a *Makefile* por las siguientes razones:
 
 Un ejemplo de una tarea en Invoke sería la siguiente:
 
-```Python
+```python
 # Tarea de ejecución de tests
 @task
 def test(c):
