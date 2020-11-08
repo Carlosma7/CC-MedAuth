@@ -1,4 +1,4 @@
-from .Usuario import Usuario
+from .usuario import Usuario
 
 # Clase de usuario cliente/asegurado
 class UsuarioCliente(Usuario):
