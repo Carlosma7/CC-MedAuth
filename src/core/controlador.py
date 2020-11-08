@@ -120,3 +120,16 @@ class Controller:
 		
 		# Se desactiva la póliza
 		poliza.set_activa(False)
+
+	# [HU5] Consultar póliza
+	def consultar_poliza(self, dni: str):
+		# Se obtiene el usuario cliente/asegurado por su dni
+		cliente = [c for c in self.usuarios if c.get_dni() == dni][0]
+		
+		# Se obtiene el identificador de la póliza activa
+		id_poliza = cliente.get_id_poliza()
+
+		# Se obtiene la póliza
+		poliza = [p for p in self.polizas if p.get_id_poliza() == id_poliza][0]
+		
+		return poliza
