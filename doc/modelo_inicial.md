@@ -53,17 +53,17 @@ Se han creado los modelos y el controlador asociado a la lógica de negocio de l
 Se puede comprobar que son sintácticamente correctas ejecutando:
 
 ```bash
-python -m py_compile <class>
+python3 -m py_compile <class>
 ```
 
 Por ejemplo:
 
 ```bash
-python -m py_compile src/core/modelos/poliza.py
+python3 -m py_compile src/core/modelos/poliza.py
 ```
 
 Y se puede comprobar la correcta integración de los modelos, y por tanto, asegurarnos de la corrección sintáctica de los archivos ejecutando:
 
 ```bash
-python src/main.py
+python3 src/main.py
 ```
