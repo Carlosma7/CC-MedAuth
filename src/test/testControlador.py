@@ -307,14 +307,18 @@ class TestController:
 
 	# [HU11] Administrar cita médica: Crear cita médica
 	def crear_cita(self, dni: str, id_autorizacion: str, id_prescripcion: str, fecha: datetime, hora: datetime, facultativo_realizador: str, consulta: str):
+		# Se obtiene el cliente/asegurado por su dni y se comprueba
 		cliente = [c for c in self.usuarios if c.get_dni() == dni][0]
 		assert cliente.get_dni() == dni
 
+		# Se crea la cita con la información proporcionada
 		c = TestCita(id_autorizacion, cliente, id_prescripcion, fecha, hora, facultativo_realizador, consulta)
 		len_antes = len(self.citas)
+		# Se almacena la cita y se comprueba
 		self.citas.append(c)
 		assert len(self.citas) > len_antes
 		
+		# Se obtiene la cita y se comprueba su estado
 		cita = [c for c in self.citas if c.get_id_autorizacion() == id_autorizacion][0]
 		assert cita.get_id_autorizacion() == id_autorizacion
 		assert cita.get_asegurado() == cliente
@@ -326,14 +330,17 @@ class TestController:
 
 	# [HU11] Administrar cita médica: Modificar cita médica
 	def modificar_cita(self, id_autorizacion: str, fecha: datetime, hora: datetime, facultativo_realizador: str, consulta: str):
+		# Se obtiene la cita por su identificador de autorización y se comprueba
 		cita = [c for c in self.citas if c.get_id_autorizacion() == id_autorizacion][0]
 		assert cita.get_id_autorizacion() == id_autorizacion
 
+		# Modificación de la cita
 		cita.set_fecha(fecha)
 		cita.set_hora(hora)
 		cita.set_facultativo_realizador(facultativo_realizador)
 		cita.set_consulta(consulta)
 		
+		# Se comprueba la modificación de la cita
 		assert cita.get_fecha() == fecha
 		assert cita.get_hora() == hora
 		assert cita.get_facultativo_realizador() == facultativo_realizador
