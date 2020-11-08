@@ -356,75 +356,90 @@ class TestController:
 
 
 
-
+# Test de creación de usuario administrativo
 def test_crear_admin():
 	t = TestController()
 	t.crear_admin("Carlos", "carlos7ma@gmail.com", "75925767-F")
-	
+
+# Test de creación de usuario cliente/asegurado
 def test_crear_cliente():
 	t = TestController()
 	t.crear_cliente("Juan", "juan@gmail.com", "77925767-Z", "ES12345678")
-	
+
+# Test de modificación de usuario administrativo
 def test_modificar_admin():
 	t = TestController()
 	t.modificar_admin("Carlos", "terceto@gmail.com", "75925767-F")
 
+# Test de modificación de usuario cliente
 def test_modificar_cliente():
 	t = TestController()
 	t.modificar_cliente("Juan", "juan@gmail.com", "77925767-Z", "ES11223344")
 
+# Test de eliminación de usuario
 def test_eliminar_usuario():
 	t = TestController()
 	t.eliminar_usuario("75925767-F")
 
+# Test de creación de póliza
 def test_crear_poliza():
 	t = TestController()
 	fecha = datetime.datetime(2020, 5, 17)
 	t.crear_poliza("77925767-Z", fecha, TipoPoliza.Total, 5.99, 50.99, ["TAC", "Apendicitis"], [ModuloExtra.Dental])
 
+# Test de modificación de póliza
 def test_modificar_poliza():
 	t = TestController()
 	fecha = datetime.datetime(2020, 5, 17)
 	t.modificar_poliza("77925767-Z", fecha, TipoPoliza.Basica, 5.99, 50.99, ["TAC", "Apendicitis"], [ModuloExtra.Dental])
 
+# Test de consulta de póliza
 def test_consultar_poliza():
 	t = TestController()
 	t.consultar_poliza("77925767-Z")
-	
+
+# Test de desactivación de póliza
 def test_desactivar_poliza():
 	t = TestController()
 	t.desactivar_poliza("77925767-Z")
 
+# Test de creación de autorización
 def test_crear_autorizacion():
 	t = TestController()
 	fecha = datetime.datetime(2020, 5, 17)
 	t.crear_autorizacion("77925767-Z", "PR-77925767-1", True, "", fecha, Especialidad.Traumatologia, ["Radiografía", "Ortopedia"], "D. Miguel", "Centro médico capital, Sala 2")
 
+# Test de modificación de autorización médica
 def test_modificar_autorizacion():
 	t = TestController()
 	fecha = datetime.datetime(2020, 5, 17)
 	t.modificar_autorizacion("AU-77925767-1", "", fecha, Especialidad.Traumatologia, ["Radiografía", "Ortopedia"], "D. Fernando", "Centro médico capital, Sala 2")
 
+# Test de consulta de autorización médica
 def test_consultar_autorizacion():
 	t = TestController()
 	t.consultar_autorizacion("AU-77925767-1")
 
+# Test de aprobación/denegación de autorización médica
 def test_cambiar_estado_autorizacion():
 	t = TestController()
 	t.cambiar_estado_autorizacion("AU-77925767-1", False, "La póliza actual no cubre la intervención")
 
+# Test de creación de cita médica
 def test_crear_cita():
 	t = TestController()
 	fecha = datetime.datetime(2020, 5, 17)
 	hora = datetime.time(3, 45, 12)
 	t.crear_cita("77925767-Z", "AU-77925767-1", "PR-77925767-1", fecha, hora, "D. Fernando", "Centro médico capital, Sala 2")
 
+# Test de modificación de cita médica
 def test_modificar_cita():
 	t = TestController()
 	fecha = datetime.datetime(2020, 5, 17)
 	hora = datetime.time(3, 45, 12)
 	t.modificar_cita("AU-77925767-1", fecha, hora, "D. Fernando", "Centro médico capital, Sala 2")
 
+# Test de consulta de cita médica
 def test_consultar_cita():
 	t = TestController()
 	t.consultar_cita("AU-77925767-1")
