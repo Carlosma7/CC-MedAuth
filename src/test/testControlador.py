@@ -216,26 +216,38 @@ class TestController:
 
 	# [HU8] Administrar autorización médica: Crear autorización
 	def crear_autorizacion(self, dni: str, id_prescripcion: str, aceptada: bool, motivo_rechazo: str, fecha_realizacion: datetime, especialidad: Especialidad, servicios_aceptados: List[str], facultativo_realizador: str, consulta: str):
+		# Se obtiene el usuario cliente/asegurado por su dni y se comprueba
 		cliente = [c for c in self.usuarios if c.get_dni() == dni][0]
 		assert cliente.get_dni() == dni
 
+		# Se obtiene el identificador de la poliza activa
 		id_poliza = cliente.get_id_poliza()
 
+		# Se compone el identificador de la póliza con el formato AU-DNI-ID_ULTIMA_AUTORIZACION+1
 		id_autorizacion = "AU-" + dni[:9]
+		# Se obtienen las autorizaciones previas del cliente/asegurado
 		autorizaciones_previas = [a for a in self.autorizaciones if a.get_asegurado().get_dni() == dni]
+
 		if len(autorizaciones_previas) > 0:
+			# Si se han realizado autorizaciones previas se obtiene el último identificador y se aumenta en uno
 			id_autorizacion = id_autorizacion + str(int(autorizaciones_previas[-1][-1]) + 1)
 		else:
+			# Si no se han realizado autorizaciones previas se marca como la primera
 			id_autorizacion = id_autorizacion + "1"
 
+		# Se comprueba que no existe la autorización el identificador generado
 		autorizaciones = [a for a in self.autorizaciones if a.get_id_autorizacion() == id_autorizacion]
 		assert len(autorizaciones) == 0
 
+		# Se crea la autorización
 		a = TestAutorizacion(id_autorizacion, cliente, id_prescripcion, id_poliza, aceptada, motivo_rechazo, fecha_realizacion, especialidad, servicios_aceptados, facultativo_realizador, consulta)
 		len_antes = len(self.autorizaciones)
+
+		# Se almacena la autorización y se comprueba
 		self.autorizaciones.append(a)
 		assert len(self.autorizaciones) > len_antes
 
+		# Se busca la autorización y se comprueba su estado
 		autorizacion = [a for a in self.autorizaciones if a.get_id_autorizacion() == id_autorizacion][0]
 		assert autorizacion.get_id_autorizacion() == id_autorizacion
 		assert autorizacion.get_asegurado() == cliente
@@ -251,9 +263,11 @@ class TestController:
 
 	# [HU8] Administrar autorización médica: Modificar autorización
 	def modificar_autorizacion(self, id_autorizacion: str, motivo_rechazo: str, fecha_realizacion: datetime, especialidad: Especialidad, servicios_aceptados: List[str], facultativo_realizador: str, consulta: str):
+		# Se obtiene la autorización a partir de su identificación y se comprueba
 		autorizacion = [a for a in self.autorizaciones if a.get_id_autorizacion() == id_autorizacion][0]
 		assert autorizacion.get_id_autorizacion() == id_autorizacion
 
+		# Modificación de la autorización
 		autorizacion.set_motivo_rechazo(motivo_rechazo)
 		autorizacion.set_fecha_realizacion(fecha_realizacion)
 		autorizacion.set_especialidad(especialidad)
@@ -261,6 +275,7 @@ class TestController:
 		autorizacion.set_facultativo_realizador(facultativo_realizador)
 		autorizacion.set_consulta(consulta)
 		
+		# Comprobación de la modificación
 		assert autorizacion.get_motivo_rechazo() == motivo_rechazo
 		assert autorizacion.get_fecha_realizacion() == fecha_realizacion
 		assert autorizacion.get_especialidad() == especialidad
