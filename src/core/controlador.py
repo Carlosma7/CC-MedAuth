@@ -141,3 +141,42 @@ class Controller:
 	# [HU7] Solicitar autorización médica
 	def solicitar_autorizacion(self, id_prescripcion: str, asegurado: UsuarioCliente):
 		return
+
+	# [HU8] Administrar autorización médica: Crear autorización
+	def crear_autorizacion(self, dni: str, id_prescripcion: str, aceptada: bool, motivo_rechazo: str, fecha_realizacion: datetime, especialidad: Especialidad, servicios_aceptados: List[str], facultativo_realizador: str, consulta: str):
+		# Se obtiene el usuario cliente/asegurado por su dni
+		cliente = [c for c in self.usuarios if c.get_dni() == dni][0]
+
+		# Se obtiene el identificador de la poliza activa
+		id_poliza = cliente.get_id_poliza()
+
+		# Se compone el identificador de la póliza con el formato AU-DNI-ID_ULTIMA_AUTORIZACION+1
+		id_autorizacion = "AU-" + dni[:9]
+		# Se obtienen las autorizaciones previas del cliente/asegurado
+		autorizaciones_previas = [a for a in self.autorizaciones if a.get_asegurado().get_dni() == dni]
+
+		if len(autorizaciones_previas) > 0:
+			# Si se han realizado autorizaciones previas se obtiene el último identificador y se aumenta en uno
+			id_autorizacion = id_autorizacion + str(int(autorizaciones_previas[-1][-1]) + 1)
+		else:
+			# Si no se han realizado autorizaciones previas se marca como la primera
+			id_autorizacion = id_autorizacion + "1"
+
+		# Se crea la autorización
+		a = Autorizacion(id_autorizacion, cliente, id_prescripcion, id_poliza, aceptada, motivo_rechazo, fecha_realizacion, especialidad, servicios_aceptados, facultativo_realizador, consulta)
+
+		# Se almacena la autorización
+		self.autorizaciones.append(a)
+
+	# [HU8] Administrar autorización médica: Modificar autorización
+	def modificar_autorizacion(self, id_autorizacion: str, motivo_rechazo: str, fecha_realizacion: datetime, especialidad: Especialidad, servicios_aceptados: List[str], facultativo_realizador: str, consulta: str):
+		# Se obtiene la autorización a partir de su identificación
+		autorizacion = [a for a in self.autorizaciones if a.get_id_autorizacion() == id_autorizacion][0]
+
+		# Modificación de la autorización
+		autorizacion.set_motivo_rechazo(motivo_rechazo)
+		autorizacion.set_fecha_realizacion(fecha_realizacion)
+		autorizacion.set_especialidad(especialidad)
+		autorizacion.set_servicios_aceptados(servicios_aceptados)
+		autorizacion.set_facultativo_realizador(facultativo_realizador)
+		autorizacion.set_consulta(consulta)
