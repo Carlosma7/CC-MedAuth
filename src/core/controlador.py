@@ -14,7 +14,7 @@ class Controller:
 		email_empresarial = email.split('@')[0] + '@medauth.com'
 
 		# Se crea el usuario administrativo
-		c = TestUsuarioAdmin(nombre, email, dni, email_empresarial)
+		c = UsuarioAdmin(nombre, email, dni, email_empresarial)
 
 		# Se almacena
 		self.usuarios.append(c)
@@ -22,7 +22,7 @@ class Controller:
 	# [HU2] Creación usuario asegurado
 	def crear_cliente(self, nombre: str, email: str, dni: str, cuenta_bancaria: str):
 		# Se crea el usuario cliente/asegurado
-		c = TestUsuarioCliente(nombre, email, dni, cuenta_bancaria, 'a')
+		c = UsuarioCliente(nombre, email, dni, cuenta_bancaria, 'a')
 
 		# Se almacena
 		self.usuarios.append(c)
@@ -78,7 +78,7 @@ class Controller:
 			id_poliza = id_poliza + "1"
 
 		# Se crea la póliza y se almacena
-		p = TestPoliza(cliente, id_poliza, periodo_carencia, tipo, copagos, mensualidad, servicios_excluidos, modulos_extra, True)
+		p = Poliza(cliente, id_poliza, periodo_carencia, tipo, copagos, mensualidad, servicios_excluidos, modulos_extra, True)
 
 		self.polizas.append(p)
 		
