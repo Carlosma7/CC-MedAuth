@@ -33,8 +33,12 @@
 ---
 
 :small_blue_diamond: [Gestor de tareas](https://carlosma7.github.io/MedAuth/doc/gestor_tareas) y justificación.
+
 :small_blue_diamond: [Biblioteca de aserciones](https://carlosma7.github.io/MedAuth/doc/biblioteca_asercion) y justificación.
+
 :small_blue_diamond: [Marco de pruebas](https://carlosma7.github.io/MedAuth/doc/marco_pruebas) y justificación.
+
 :small_blue_diamond: [Avance del código](https://carlosma7.github.io/MedAuth/doc/avance_codigo) y justificación con historias de usuario.
+
 :small_blue_diamond: [Tests y sugerencias](https://carlosma7.github.io/MedAuth/doc/test_sugerencias) previas.
 
