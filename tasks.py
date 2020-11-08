@@ -39,3 +39,10 @@ def test(c):
 	print("\nTest Clase Controlador:")
 	run("pytest -v --disable-pytest-warnings ./src/test/testControlador.py")
 
+# Tarea de ejecución del modelo
+@task
+def execute(c):
+	print("Ejecución del modelo\n")
+	run("python3 ./src/main.py")
+	print("Fin de la ejecución.")
+
