@@ -50,6 +50,12 @@ class TestAutorizacion:
 	def set_fecha_realizacion(self, fecha_realizacion):
 		self.__fecha_realizacion = fecha_realizacion
 
+	def get_especialidad(self):
+		return self.__especialidad
+
+	def set_especialidad(self, especialidad):
+		self.__especialidad = especialidad
+
 	def get_servicios_aceptados(self):
 		return self.__servicios_aceptados
 
@@ -76,11 +82,12 @@ class TestAutorizacion:
 		assert self.__aceptada == otra.get_aceptada()
 		assert self.__motivo_rechazo == otra.get_motivo_rechazo()
 		assert self.__fecha_realizacion == otra.get_fecha_realizacion()
+		assert self.__especialidad == otra.get_especialidad()
 		assert self.__servicios_aceptados == otra.get_servicios_aceptados()
 		assert self.__facultativo_realizador == otra.get_facultativo_realizador()
 		assert self.__consulta == otra.get_consulta()
 
-		return ((self.__id_autorizacion == otra.get_id_autorizacion()) and (self.__asegurado == otra.get_asegurado()) and (self.__id_prescripcion == otra.get_id_prescripcion()) and (self.__id_poliza == otra.get_id_poliza()) and (self.__aceptada == otra.get_aceptada()) and (self.__motivo_rechazo == otra.get_motivo_rechazo()) and (self.__fecha_realizacion == otra.get_fecha_realizacion()) and (self.__servicios_aceptados == otra.get_servicios_aceptados()) and (self.__facultativo_realizador == otra.get_facultativo_realizador()) and (self.__consulta == otra.get_consulta()))
+		return ((self.__id_autorizacion == otra.get_id_autorizacion()) and (self.__asegurado == otra.get_asegurado()) and (self.__id_prescripcion == otra.get_id_prescripcion()) and (self.__id_poliza == otra.get_id_poliza()) and (self.__aceptada == otra.get_aceptada()) and (self.__motivo_rechazo == otra.get_motivo_rechazo()) and (self.__fecha_realizacion == otra.get_fecha_realizacion()) and (self.__especialidad == otra.get_especialidad()) and (self.__servicios_aceptados == otra.get_servicios_aceptados()) and (self.__facultativo_realizador == otra.get_facultativo_realizador()) and (self.__consulta == otra.get_consulta()))
 		
 def test_compare_autorizacion():
 	u = TestUsuarioCliente("Carlos", "carlos7ma@gmail.com", "75925767-F", "ES12345678", "12345678")
