@@ -348,6 +348,7 @@ class TestController:
 
 	# [HU12] Consultar cita médica
 	def consultar_cita(self, id_autorizacion: str):
+		# Se obtiene la cita por su identificador de autorización y se comprueba
 		cita = [c for c in self.citas if c.get_id_autorizacion() == id_autorizacion][0]
 		assert cita.get_id_autorizacion() == id_autorizacion
 		
@@ -355,7 +356,7 @@ class TestController:
 
 
 
-		
+
 def test_crear_admin():
 	t = TestController()
 	t.crear_admin("Carlos", "carlos7ma@gmail.com", "75925767-F")
