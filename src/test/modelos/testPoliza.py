@@ -5,7 +5,7 @@ from typing import List
 import datetime
 
 
-
+# Clase de póliza de asegurado
 class TestPoliza:
 
     def __init__(self, usuario: TestUsuarioCliente, id_poliza: str, periodo_carencia: datetime, tipo: TipoPoliza, 
@@ -20,10 +20,11 @@ class TestPoliza:
         self.__modulos_extra = modulos_extra[:]
         self.__activa = activa
 
-        assert isinstance(self.__tipo, TipoPoliza)
-        for m in self.__modulos_extra:
+        assert isinstance(self.__tipo, TipoPoliza) # Comprobamos que pertenece al enum TipoPoliza
+        for m in self.__modulos_extra: # Comprobamos que cada modulo pertenece al enum ModuloExtra
             assert isinstance(m, ModuloExtra)
 
+    # Métodos get/set
     def get_titular(self):
     	return self.__titular
     
@@ -75,6 +76,7 @@ class TestPoliza:
     def set_activa(self, activa):
     	self.__activa = activa
     
+    # Override método equal
     def __eq__(self, otra):
     	assert self.__titular == otra.get_titular()
     	assert self.__id_poliza == otra.get_id_poliza()
@@ -88,6 +90,7 @@ class TestPoliza:
     	
     	return (self.__titular == otra.get_titular()) and (self.__id_poliza == otra.get_id_poliza()) and (self.__periodo_carencia == otra.get_periodo_carencia()) and (self.__tipo == otra.get_tipo()) and (self.__copagos == otra.get_copagos()) and (self.__mensualidad == otra.get_mensualidad()) and (self.__servicios_excluidos == otra.get_servicios_excluidos() and (self.__modulos_extra == otra.get_modulos_extra()) and (self.__activa == otra.get_activa()))
 
+# Test comparación pólizas
 def test_compare_poliza():
 	u = TestUsuarioCliente("Carlos", "carlos7ma@gmail.com", "75925767-F", "ES12345678", "12345678")
 	u2 = TestUsuarioCliente("Carlos", "carlos7ma@gmail.com", "75925767-F", "ES12345678", "12345678")
