@@ -52,27 +52,33 @@ class TestController:
 		
 	# [HU3] Administrar usuario: Modificación administrador
 	def modificar_admin(self, nombre: str, email: str, dni: str):
+		# Obtengo el usuario administrativo por su dni
 		admin = [c for c in self.usuarios if c.get_dni() == dni][0]
 		assert admin.get_dni() == dni
 		
+		# Modifico la información
 		admin.set_nombre(nombre)
 		admin.set_email(email)
 		email_empresarial = email.split('@')[0] + '@medauth.com'
 		admin.set_email_empresarial(email_empresarial)
 		
+		# Compruebo que la información se ha modificado correctamente
 		assert admin.get_nombre() == nombre
 		assert admin.get_email() == email
 		assert admin.get_email_empresarial() == email_empresarial
 	
 	# [HU3] Administrar usuario: Modificación cliente
 	def modificar_cliente(self, nombre: str, email: str, dni: str, cuenta_bancaria: str):
+		# Obtengo el usuario cliente/asegurado por su dni
 		cliente = [c for c in self.usuarios if c.get_dni() == dni][0]
 		assert cliente.get_dni() == dni
 		
+		# Modifico la información
 		cliente.set_nombre(nombre)
 		cliente.set_email(email)
 		cliente.set_cuenta_bancaria(cuenta_bancaria)
 		
+		# Compruebo que la información se ha modificado correctamente
 		assert cliente.get_nombre() == nombre
 		assert cliente.get_email() == email
 		assert cliente.get_cuenta_bancaria() == cuenta_bancaria
@@ -80,9 +86,14 @@ class TestController:
 	
 	# [HU3] Administrar usuario: Eliminar usuario
 	def eliminar_usuario(self, dni: str):
+		# Obtengo el usuario
 		len_antes = len(self.usuarios)
 		usuario = [c for c in self.usuarios if c.get_dni() == dni][0]
+		
+		# Elimino el usuario
 		self.usuarios.remove(usuario)
+
+		# Compruebo que hay un usuario menos
 		assert len(self.usuarios) < len_antes
 	
 	# [HU4] Administrar póliza: Crear una póliza
