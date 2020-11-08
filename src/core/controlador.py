@@ -137,3 +137,7 @@ class Controller:
 	# [HU6] Añadir prescripción médica
 	def subir_prescripcion(self, archivo: json):
 		return
+
+	# [HU7] Solicitar autorización médica
+	def solicitar_autorizacion(self, id_prescripcion: str, asegurado: UsuarioCliente):
+		return
