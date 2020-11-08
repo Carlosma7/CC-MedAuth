@@ -36,11 +36,15 @@ class TestController:
 	
 	# [HU2] Creación usuario asegurado
 	def crear_cliente(self, nombre: str, email: str, dni: str, cuenta_bancaria: str):
+		# Obtengo el usuario cliente/asegurado
 		c = TestUsuarioCliente(nombre, email, dni, cuenta_bancaria, 'a')
+
+		# Lo almaceno y compruebo que se realiza correctamente
 		len_antes = len(self.usuarios)
 		self.usuarios.append(c)
 		assert len(self.usuarios) > len_antes
 		
+		# Busco el usuario y compruebo que está correctamente
 		cliente = [c for c in self.usuarios if c.get_dni() == dni][0]
 		assert cliente.get_nombre() == nombre
 		assert cliente.get_email() == email
