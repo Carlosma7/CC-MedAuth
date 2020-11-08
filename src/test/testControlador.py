@@ -285,6 +285,7 @@ class TestController:
 
 	# [HU9] Consultar autorización médica
 	def consultar_autorizacion(self, id_autorizacion: str):
+		# Se obtiene la autorización a partir de su identificación y se comprueba
 		autorizacion = [a for a in self.autorizaciones if a.get_id_autorizacion() == id_autorizacion][0]
 		assert autorizacion.get_id_autorizacion() == id_autorizacion
 		
