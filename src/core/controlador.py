@@ -10,6 +10,7 @@ class Controller:
 	polizas: List[Poliza] = []
 	prescripciones: List[Prescripcion] = []
 	autorizaciones: List[Autorizacion] = []
+	citas: List[Cita] = []
 	
 	# [HU1] Creación usuario administrativo
 	def crear_admin(self, nombre: str, email: str, dni: str):
@@ -199,3 +200,25 @@ class Controller:
 		# Se cambia el estado y actualiza motivo de rechazo si procede
 		autorizacion.set_aceptada(aceptada)
 		autorizacion.set_motivo_rechazo(motivo_rechazo)
+
+	# [HU11] Administrar cita médica: Crear cita médica
+	def crear_cita(self, dni: str, id_autorizacion: str, id_prescripcion: str, fecha: datetime, hora: datetime, facultativo_realizador: str, consulta: str):
+		# Se obtiene el cliente/asegurado por su dni
+		cliente = [c for c in self.usuarios if c.get_dni() == dni][0]
+
+		# Se crea la cita con la información proporcionada
+		c = Cita(id_autorizacion, cliente, id_prescripcion, fecha, hora, facultativo_realizador, consulta)
+
+		# Se almacena la cita
+		self.citas.append(c)
+
+	# [HU11] Administrar cita médica: Modificar cita médica
+	def modificar_cita(self, id_autorizacion: str, fecha: datetime, hora: datetime, facultativo_realizador: str, consulta: str):
+		# Se obtiene la cita por su identificador de autorización
+		cita = [c for c in self.citas if c.get_id_autorizacion() == id_autorizacion][0]
+
+		# Modificación de la cita
+		cita.set_fecha(fecha)
+		cita.set_hora(hora)
+		cita.set_facultativo_realizador(facultativo_realizador)
+		cita.set_consulta(consulta)
