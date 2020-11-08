@@ -7,12 +7,6 @@ def clean(c):
 	run("find . -maxdepth 5 -type d -name __pycache__ -exec rm -r {} +")
 	print("Borrando caché de pytest.")
 	run("find . -maxdepth 5 -type d -name .pytest_cache -exec rm -r {} +")
-	
-# Tarea de instalación de dependencias
-@task
-def install(c):
-	run ('pip3 install -r requirements.txt')
-	print ('Instalación completada.')
 
 # Tarea de ejecución de tests
 @task
