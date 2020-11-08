@@ -222,3 +222,10 @@ class Controller:
 		cita.set_hora(hora)
 		cita.set_facultativo_realizador(facultativo_realizador)
 		cita.set_consulta(consulta)
+
+	# [HU12] Consultar cita médica
+	def consultar_cita(self, id_autorizacion: str):
+		# Se obtiene la cita por su identificador de autorización
+		cita = [c for c in self.citas if c.get_id_autorizacion() == id_autorizacion][0]
+		
+		return cita
