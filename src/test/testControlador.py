@@ -194,10 +194,13 @@ class TestController:
 	
 	# [HU5] Consultar póliza
 	def consultar_poliza(self, dni: str):
+		# Se obtiene el usuario cliente/asegurado por su dni y se comprueba
 		cliente = [c for c in self.usuarios if c.get_dni() == dni][0]
 		assert cliente.get_dni() == dni
 		
+		# Se obtiene el identificador de la póliza activa
 		id_poliza = cliente.get_id_poliza()
+		# Se obtiene la póliza y se comprueba
 		poliza = [p for p in self.polizas if p.get_id_poliza() == id_poliza][0]
 		assert poliza.get_id_poliza() == id_poliza
 		
