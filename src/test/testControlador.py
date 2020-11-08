@@ -293,12 +293,15 @@ class TestController:
 
 	# [HU10] Aprobar/Denegar una autorización médica
 	def cambiar_estado_autorizacion(self, id_autorizacion: str, aceptada: bool, motivo_rechazo: str):
+		# Se obtiene la autorización a partir de su identificación y se comprueba
 		autorizacion = [a for a in self.autorizaciones if a.get_id_autorizacion() == id_autorizacion][0]
 		assert autorizacion.get_id_autorizacion() == id_autorizacion
 
+		# Se cambia el estado y actualiza motivo de rechazo si procede
 		autorizacion.set_aceptada(aceptada)
 		autorizacion.set_motivo_rechazo(motivo_rechazo)
 
+		# Se comprueba la modificación
 		assert autorizacion.get_aceptada() == aceptada
 		assert autorizacion.get_motivo_rechazo() == motivo_rechazo
 
