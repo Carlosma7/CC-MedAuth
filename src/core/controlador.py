@@ -7,6 +7,9 @@ class Controller:
 
 	# Lista de entidades
 	usuarios: List[Usuario] = []
+	polizas: List[Poliza] = []
+	prescripciones: List[Prescripcion] = []
+	autorizaciones: List[Autorizacion] = []
 	
 	# [HU1] Creación usuario administrativo
 	def crear_admin(self, nombre: str, email: str, dni: str):
