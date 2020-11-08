@@ -166,7 +166,7 @@ class TestController:
 		return
 
 	# [HU8] Administrar autorización médica: Crear autorización
-	def crear_autorizacion(self, dni: str, id_prescripcion: str, estado: str, motivo_rechazo: str, fecha_realizacion: datetime, servicios_aceptados: List[str], facultativo_realizador: str, consulta: str):
+	def crear_autorizacion(self, dni: str, id_prescripcion: str, aceptada: bool, motivo_rechazo: str, fecha_realizacion: datetime, especialidad: Especialidad, servicios_aceptados: List[str], facultativo_realizador: str, consulta: str):
 		cliente = [c for c in self.usuarios if c.get_dni() == dni][0]
 		assert cliente.get_dni() == dni
 
@@ -182,7 +182,7 @@ class TestController:
 		autorizaciones = [a for a in self.autorizaciones if a.get_id_autorizacion() == id_autorizacion]
 		assert len(autorizaciones) == 0
 
-		a = TestAutorizacion(id_autorizacion, cliente, id_prescripcion, id_poliza, estado, motivo_rechazo, fecha_realizacion, servicios_aceptados, facultativo_realizador, consulta)
+		a = TestAutorizacion(id_autorizacion, cliente, id_prescripcion, id_poliza, aceptada, motivo_rechazo, fecha_realizacion, especialidad, servicios_aceptados, facultativo_realizador, consulta)
 		len_antes = len(self.autorizaciones)
 		self.autorizaciones.append(a)
 		assert len(self.autorizaciones) > len_antes
@@ -192,26 +192,29 @@ class TestController:
 		assert autorizacion.get_asegurado() == cliente
 		assert autorizacion.get_id_prescripcion() == id_prescripcion
 		assert autorizacion.get_id_poliza() == id_poliza
-		assert autorizacion.get_estado() == estado
+		assert autorizacion.get_aceptada() == aceptada
 		assert autorizacion.get_motivo_rechazo() == motivo_rechazo
 		assert autorizacion.get_fecha_realizacion() == fecha_realizacion
+		assert autorizacion.get_especialidad() == especialidad
 		assert autorizacion.get_servicios_aceptados() == servicios_aceptados
 		assert autorizacion.get_facultativo_realizador() == facultativo_realizador
 		assert autorizacion.get_consulta() == consulta
 
 	# [HU8] Administrar autorización médica: Modificar autorización
-	def modificar_autorizacion(self, id_autorizacion: str, motivo_rechazo: str, fecha_realizacion: datetime, servicios_aceptados: List[str], facultativo_realizador: str, consulta: str):
+	def modificar_autorizacion(self, id_autorizacion: str, motivo_rechazo: str, fecha_realizacion: datetime, especialidad: Especialidad, servicios_aceptados: List[str], facultativo_realizador: str, consulta: str):
 		autorizacion = [a for a in self.autorizaciones if a.get_id_autorizacion() == id_autorizacion][0]
 		assert autorizacion.get_id_autorizacion() == id_autorizacion
 
 		autorizacion.set_motivo_rechazo(motivo_rechazo)
 		autorizacion.set_fecha_realizacion(fecha_realizacion)
+		autorizacion.set_especialidad(especialidad)
 		autorizacion.set_servicios_aceptados(servicios_aceptados)
 		autorizacion.set_facultativo_realizador(facultativo_realizador)
 		autorizacion.set_consulta(consulta)
 		
 		assert autorizacion.get_motivo_rechazo() == motivo_rechazo
 		assert autorizacion.get_fecha_realizacion() == fecha_realizacion
+		assert autorizacion.get_especialidad() == especialidad
 		assert autorizacion.get_servicios_aceptados() == servicios_aceptados
 		assert autorizacion.get_facultativo_realizador() == facultativo_realizador
 		assert autorizacion.get_consulta() == consulta
@@ -224,14 +227,14 @@ class TestController:
 		return autorizacion
 
 	# [HU10] Aprobar/Denegar una autorización médica
-	def cambiar_estado_autorizacion(self, id_autorizacion: str, estado: str, motivo_rechazo: str):
+	def cambiar_estado_autorizacion(self, id_autorizacion: str, aceptada: bool, motivo_rechazo: str):
 		autorizacion = [a for a in self.autorizaciones if a.get_id_autorizacion() == id_autorizacion][0]
 		assert autorizacion.get_id_autorizacion() == id_autorizacion
 
-		autorizacion.set_estado(estado)
+		autorizacion.set_aceptada(aceptada)
 		autorizacion.set_motivo_rechazo(motivo_rechazo)
 
-		assert autorizacion.get_estado() == estado
+		assert autorizacion.get_aceptada() == aceptada
 		assert autorizacion.get_motivo_rechazo() == motivo_rechazo
 
 	# [HU11] Administrar cita médica: Crear cita médica
@@ -319,12 +322,12 @@ def test_desactivar_poliza():
 def test_crear_autorizacion():
 	t = TestController()
 	fecha = datetime.datetime(2020, 5, 17)
-	t.crear_autorizacion("77925767-Z", "PR-77925767-1", "Aceptada", "", fecha, ["Radiografía", "Ortopedia"], "D. Miguel", "Centro médico capital, Sala 2")
+	t.crear_autorizacion("77925767-Z", "PR-77925767-1", True, "", fecha, Especialidad.Traumatologia, ["Radiografía", "Ortopedia"], "D. Miguel", "Centro médico capital, Sala 2")
 
 def test_modificar_autorizacion():
 	t = TestController()
 	fecha = datetime.datetime(2020, 5, 17)
-	t.modificar_autorizacion("AU-77925767-1", "", fecha, ["Radiografía", "Ortopedia"], "D. Fernando", "Centro médico capital, Sala 2")
+	t.modificar_autorizacion("AU-77925767-1", "", fecha, Especialidad.Traumatologia, ["Radiografía", "Ortopedia"], "D. Fernando", "Centro médico capital, Sala 2")
 
 def test_consultar_autorizacion():
 	t = TestController()
@@ -332,7 +335,7 @@ def test_consultar_autorizacion():
 
 def test_cambiar_estado_autorizacion():
 	t = TestController()
-	t.cambiar_estado_autorizacion("AU-77925767-1", "Rechazado", "La póliza actual no cubre la intervención")
+	t.cambiar_estado_autorizacion("AU-77925767-1", False, "La póliza actual no cubre la intervención")
 
 def test_crear_cita():
 	t = TestController()
