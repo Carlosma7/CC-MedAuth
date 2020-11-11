@@ -14,11 +14,11 @@ A continuación se adjuntan los distintos ficheros de configuración utilizados:
 
 Finalmente, se ha escogido *Invoke* frente a *Makefile* y *Poetry* por las siguientes razones:
 
-* Invoke es dirigido por código, frente a Makefile e Poetry, que son dirigidos por objetivos.
-* Invoke sigue la sintaxis de Python, frente a Makefile que posee su propia sintaxis, o Poetry, que sigue una sintaxis *TOML*. Invoke favorece la homogeneidad de sintaxis en el desarrollo de nuestro proyecto.
-* Invoke es independiente de la plataforma en la que se ejecute, ya que está basado en Python3. Makefile, por ejemplo, necesita un fichero *.bat* para su ejecución en Windows. La portabilidad de Invoke permite que se despliegue el proyecto con mayor comodidad en cualquier sistema.
-* Al estar codificado en Python3, los errores de Invoke se observan como errores de programación de Python que indican donde está exactamente el error, aunque Poetry en este sentido no se queda atrás, ya que es una herramienta intuitiva en cuanto a errores. Los errores de Makefile pueden resultar más complicados de detectar a simple vista.
-* Invoke posee un enfoque heredado de GNU Make, y añade sus funcionalidades propias.
+* **Invoke es dirigido por código**, frente a Makefile e Poetry, que son dirigidos por objetivos.
+* **Invoke sigue la sintaxis de Python**, frente a Makefile que posee su propia sintaxis, o Poetry, que sigue una sintaxis *TOML*. Invoke favorece la homogeneidad de sintaxis en el desarrollo de nuestro proyecto.
+* **Invoke es independiente de la plataforma en la que se ejecute**, ya que está basado en Python3. Makefile, por ejemplo, necesita un fichero *.bat* para su ejecución en Windows. La portabilidad de Invoke permite que se despliegue el proyecto con mayor comodidad en cualquier sistema.
+* Al estar codificado en Python3, **los errores de Invoke se observan como errores de programación de Python que indican donde está exactamente el error**, aunque Poetry en este sentido no se queda atrás, ya que es una herramienta intuitiva en cuanto a errores. Los errores de Makefile pueden resultar más complicados de detectar a simple vista.
+* **Invoke posee un enfoque heredado de GNU Make**, y añade sus funcionalidades propias.
 * Si bien *Poetry* es a día de hoy la herramienta puntera en este ámbito (en cuanto a Python se refiere), es una herramienta compleja de configurar y posee una gran cantidad de dependencias, por lo que, aunque resulta interesante y probablemente sea la mejor herramienta para un gran proyecto, en nuestro caso con una herramienta más sencilla como *Invoke* es más que suficiente, y no es necesaria toda la potencia y funcionalidad que aporta *Poetry*, además de la carga que supone para el futuro contenedor a utilizar.
 
 Un ejemplo de una tarea en Invoke sería la siguiente:
