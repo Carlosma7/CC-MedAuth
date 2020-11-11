@@ -1,4 +1,13 @@
-from modelos import *
+from usuario import Usuario
+from usuarioAdmin import UsuarioAdmin
+from usuarioCliente import UsuarioCliente
+from prescripcion import Prescripcion
+from poliza import Poliza
+from autorizacion import Autorizacion
+from cita import Cita
+from tipoPoliza import TipoPoliza
+from especialidad import Especialidad
+from moduloExtra import ModuloExtra
 from typing import List
 import datetime
 import json
