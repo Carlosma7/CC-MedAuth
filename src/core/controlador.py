@@ -37,7 +37,7 @@ class Controller:
 	# [HU2] Creación usuario asegurado
 	def crear_cliente(self, nombre: str, email: str, dni: str, cuenta_bancaria: str):
 		# Se crea el usuario cliente/asegurado
-		c = UsuarioCliente(nombre, email, dni, cuenta_bancaria, 'a')
+		c = UsuarioCliente(nombre, email, dni, cuenta_bancaria, '')
 
 		# Se almacena
 		self.usuarios.append(c)
