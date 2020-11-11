@@ -1,5 +1,5 @@
-from .usuarioCliente import UsuarioCliente
-from .especialidad import Especialidad
+from usuarioCliente import UsuarioCliente
+from especialidad import Especialidad
 from typing import List
 import datetime
 

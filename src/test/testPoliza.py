@@ -1,6 +1,6 @@
-from .testUsuarioCliente import TestUsuarioCliente
-from .tipoPoliza import TipoPoliza
-from .moduloExtra import ModuloExtra
+from testUsuarioCliente import TestUsuarioCliente
+from tipoPoliza import TipoPoliza
+from moduloExtra import ModuloExtra
 from typing import List
 import datetime
 

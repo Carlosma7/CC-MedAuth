@@ -1,4 +1,4 @@
-from .usuarioCliente import UsuarioCliente
+from usuarioCliente import UsuarioCliente
 from typing import List
 import datetime
 

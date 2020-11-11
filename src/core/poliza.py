@@ -1,6 +1,6 @@
-from .usuarioCliente import UsuarioCliente
-from .tipoPoliza import TipoPoliza
-from .moduloExtra import ModuloExtra
+from usuarioCliente import UsuarioCliente
+from tipoPoliza import TipoPoliza
+from moduloExtra import ModuloExtra
 from typing import List
 import datetime
 

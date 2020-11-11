@@ -1,4 +1,4 @@
-from .testUsuario import TestUsuario
+from testUsuario import TestUsuario
 import pytest
 
 # Clase de usuario cliente/asegurado
