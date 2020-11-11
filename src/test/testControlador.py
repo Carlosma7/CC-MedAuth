@@ -15,3 +15,12 @@ def test_crear_admin():
 	
 	controlador.crear_admin(admin)
 	assert_that(controlador.usuariosAdmins).contains(admin).does_not_contain(adminOtro)
+	
+# Test de creación de usuario cliente/asegurado
+def test_crear_cliente():
+	controlador = Controller()
+	cliente = UsuarioCliente("Juan", "juan@gmail.com", "7512354-F", "ES12341118")
+	clienteOtro = UsuarioCliente("Victor", "victor7ma@gmail.com", "71855223-F", "ES12345678")
+	
+	controlador.crear_cliente(cliente)
+	assert_that(controlador.usuariosClientes).contains(cliente).does_not_contain(clienteOtro)
