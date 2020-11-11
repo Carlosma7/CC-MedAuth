@@ -1,7 +1,5 @@
-from usuario import Usuario
-
 # Clase de usuario administrativo
-class UsuarioAdmin(Usuario):
+class UsuarioAdmin():
 	def __init__(self, nombre: str, email: str, dni: str, email_empresarial: str):
 		self.__nombre = nombre
 		self.__email = email

@@ -1,7 +1,5 @@
-from usuario import Usuario
-
 # Clase de usuario cliente/asegurado
-class UsuarioCliente(Usuario):
+class UsuarioCliente():
 	def __init__(self, nombre: str, email: str, dni: str, cuenta_bancaria: str):
 		self.__nombre = nombre
 		self.__email = email
