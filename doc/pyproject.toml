@@ -1,0 +1,35 @@
+[tool.poetry]
+name="Med Auth"
+version="1.0"
+description = "MedAuth"
+authors = ["Carlos <carlosma@correo.ugr.es>"]
+readme = "README.md"
+repository = "https://github.com/Carlosma7/MedAuth"
+documentation = "https://carlosma7.github.io/MedAuth/"
+packages = [
+    { include = "src/core" },
+    { include = "src/test" },
+    { include = "src/**/*.py" },
+]
+
+[tool.poe.tasks]
+run="python3 ./src/main.py"
+testAdmin = "pytest -v --disable-pytest-warnings ./src/test/modelos/testUsuarioAdmin.py"
+testUsuarioAdmin = "pytest -v --disable-pytest-warnings ./src/test/modelos/testUsuarioAdmin.py"
+testUsuarioCliente = "pytest -v --disable-pytest-warnings ./src/test/modelos/testUsuarioCliente.py"
+testPoliza = "pytest -v --disable-pytest-warnings ./src/test/modelos/testPoliza.py"
+testPrescripcion = "pytest -v --disable-pytest-warnings ./src/test/modelos/testPrescripcion.py"
+testAutorizacion = "pytest -v --disable-pytest-warnings ./src/test/modelos/testAutorizacion.py"
+testCita = "pytest -v --disable-pytest-warnings ./src/test/modelos/testCita.py"
+testControlador = "pytest -v --disable-pytest-warnings ./src/test/testControlador.py"
+
+[tool.poetry.dependencies]
+python  = "^3.7"
+
+[tool.poetry.dev-dependencies]
+pytest = "^4.5"
+poethepoet = "^0.9.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

@@ -1,4 +1,5 @@
 from invoke import task, run
+from invocations.pytest import test as test_
 
 # Tarea de limpieza de ficheros
 @task 
@@ -10,7 +11,7 @@ def clean(c):
 
 # Tarea de ejecución de tests
 @task
-def test(c):
+def tests(c):
 	print("Ejecución de test.\n")
 	print("Test Clase UsuarioAdmin:")
 	run("pytest -v --disable-pytest-warnings ./src/test/modelos/testUsuarioAdmin.py")
