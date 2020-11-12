@@ -117,3 +117,10 @@ class Controller:
 			pol.set_mensualidad(mensualidad)
 			pol.set_servicios_excluidos(servicios_excluidos)
 			pol.set_modulos_extra(modulos_extra)
+
+	# [HU5] Consultar póliza
+	def consultar_poliza(self, dni: str):
+		# Se obtiene la póliza
+		poliza = [p for p in self.polizas if p.get_titular().get_dni() == dni and p.get_activa() == True][0]
+		
+		return poliza
