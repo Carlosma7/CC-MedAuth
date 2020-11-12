@@ -1,7 +1,11 @@
 from usuarioAdmin import UsuarioAdmin
 from usuarioCliente import UsuarioCliente
+from poliza import Poliza
 
+from tipoPoliza import TipoPoliza
+from moduloExtra import ModuloExtra
 from typing import List
+import datetime
 
 # Clase controladora de lógica de negocio
 class Controller:
@@ -9,6 +13,7 @@ class Controller:
 	# Lista de entidades
 	usuariosAdmins: List[UsuarioAdmin] = []
 	usuariosClientes: List[UsuarioCliente] = []
+	polizas: List[Poliza] = []
 	
 	# [HU1] Creación usuario administrativo
 	def crear_admin(self, admin: UsuarioAdmin):
@@ -72,3 +77,25 @@ class Controller:
 		if len(cliente_buscado) > 0:
 			# Se elimina el usuario
 			self.usuariosClientes.remove(cliente_buscado[0])
+
+	# [HU4] Administrar póliza: Crear una póliza
+	def crear_poliza(self, poliza: Poliza):
+		# Se obtiene el usuario cliente/asegurado por su dni
+		cliente = [c for c in self.usuariosClientes if c.get_dni() == poliza.get_titular().get_dni()][0]
+
+		# Se compone el identificador de la póliza con el formato MA-DNI-ID_ULTIMA_POLIZA+1
+		dni = cliente.get_dni()
+		id_poliza = "MA-" + dni[:9]
+		# Se obtienen las polizas previas
+		polizas_previas = [p for p in self.polizas if p.get_id_poliza()[:12] == id_poliza]
+
+		if len(polizas_previas) > 0:
+			# Si posee polizas previas canceladas, se obtiene el ID de la última que tuvo
+			id_poliza = id_poliza + str(int(polizas_previas[-1][-1]) + 1)
+		else:
+			# Si es la primera se crea como tal
+			id_poliza = id_poliza + "1"
+
+		poliza.set_id_poliza(id_poliza)
+
+		self.polizas.append(poliza)
