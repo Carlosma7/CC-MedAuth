@@ -70,3 +70,16 @@ def test_crear_poliza():
 	assert_that(controlador.polizas).does_not_contain(p)
 	controlador.crear_poliza(p)
 	assert_that(controlador.polizas).contains(p)
+
+# Test de modificación de póliza
+def test_modificar_poliza():
+	controlador = Controller()
+	cliente = UsuarioCliente("Alejandro", "alex@gmail.com", "75125767-F", "ES99345678")
+	controlador.crear_cliente(cliente)
+
+	fecha = datetime.datetime(2020, 5, 17)
+	polizaAntigua = Poliza(cliente, cliente.get_dni(), fecha, TipoPoliza.Basica, 5.99, 50.99, ["TAC", "Apendicitis"], [ModuloExtra.Dental], True)
+	controlador.modificar_poliza(polizaAntigua, fecha, TipoPoliza.Basica, 5.99, 50.99, ["TAC", "Apendicitis"], [ModuloExtra.Dental])
+	polizaNueva = [a for a in controlador.polizas if a.get_id_poliza() == polizaAntigua.get_id_poliza()]
+	if len(polizaNueva) > 0:
+		assert_that(polizaAntigua).is_not_equal_to(polizaNueva[0])
