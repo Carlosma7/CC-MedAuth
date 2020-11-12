@@ -10,7 +10,7 @@ import datetime
 
 # Test comparación de cita médica
 def test_compare_cita():
-	u = UsuarioCliente("Carlos", "carlos7ma@gmail.com", "75925767-F", "ES12345678", "12345678")
+	u = UsuarioCliente("Carlos", "carlos7ma@gmail.com", "75925767-F", "ES12345678")
 	fecha = datetime.datetime(2020, 5, 17)
 	hora = datetime.time(3, 45, 12)
 	
