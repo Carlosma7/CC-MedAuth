@@ -2,11 +2,11 @@
 
 ---
 
-Las bibliotecas de aserciones escogidas son:
+La biblioteca de aserciones escogida es:
 
 * [Assertpy](https://github.com/assertpy/assertpy)
 
-Las herramientas proporcionadas por dicha herramienta se integrarán además con el [marco de pruebas](https://carlosma7.github.io/MedAuth/doc/marco_pruebas) escogido, pero eso se mencionará en este apartado.
+Las herramientas proporcionadas por dicha herramienta se integrarán además con el [marco de pruebas](https://carlosma7.github.io/MedAuth/doc/marco_pruebas) escogido, pero eso se mencionará en este apartado. Además, no se descarta su integración con otra biblioteca de aserciones en el futuro, ya que es compatible con la mayoría de bibliotecas de aserciones.
 
 Inicialmente se valoraron distintas bibliotecas de aserciones dedicadas como [Unittest](https://docs.python.org/3/library/unittest.html), [Grappa](https://github.com/grappa-py/grappa), [Verify](https://github.com/dgilland/verify) o [hypothesis](https://hypothesis.readthedocs.io/en/latest/). Cabe destacar que Python posee una infinidad de bibliotecas destinadas a este fin, por ese motivo, vamos a buscar una biblioteca que nos permita realizar los tests de una forma limpia, sencilla, legible y que se integre con el marco de pruebas sin problema alguno.
 
