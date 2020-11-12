@@ -79,7 +79,9 @@ def test_modificar_poliza():
 
 	fecha = datetime.datetime(2020, 5, 17)
 	polizaAntigua = Poliza(cliente, cliente.get_dni(), fecha, TipoPoliza.Basica, 5.99, 50.99, ["TAC", "Apendicitis"], [ModuloExtra.Dental], True)
-	controlador.modificar_poliza(polizaAntigua, fecha, TipoPoliza.Basica, 5.99, 50.99, ["TAC", "Apendicitis"], [ModuloExtra.Dental])
+	controlador.modificar_poliza(polizaAntigua, fecha, TipoPoliza.Basica, 22.99, 50.99, ["TAC", "Apendicitis"], [ModuloExtra.Dental])
 	polizaNueva = [a for a in controlador.polizas if a.get_id_poliza() == polizaAntigua.get_id_poliza()]
 	if len(polizaNueva) > 0:
 		assert_that(polizaAntigua).is_not_equal_to(polizaNueva[0])
+
+
