@@ -58,3 +58,15 @@ def test_eliminar_cliente():
 	assert_that(controlador.usuariosClientes).contains(cliente)
 	controlador.eliminar_cliente(cliente.get_dni())
 	assert_that(controlador.usuariosClientes).does_not_contain(cliente)
+
+# Test de creación de póliza
+def test_crear_poliza():
+	controlador = Controller()
+	cliente = UsuarioCliente("Alejandro", "alex@gmail.com", "75125767-F", "ES99345678")
+	controlador.crear_cliente(cliente)
+
+	fecha = datetime.datetime(2020, 5, 17)
+	p = Poliza(cliente, cliente.get_dni(), fecha, TipoPoliza.Basica, 5.99, 50.99, ["TAC", "Apendicitis"], [ModuloExtra.Dental], True)
+	assert_that(controlador.polizas).does_not_contain(p)
+	controlador.crear_poliza(p)
+	assert_that(controlador.polizas).contains(p)
