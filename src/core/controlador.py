@@ -1,4 +1,5 @@
 from usuarioAdmin import UsuarioAdmin
+from usuarioCliente import UsuarioCliente
 
 from typing import List
 
@@ -7,6 +8,7 @@ class Controller:
 
 	# Lista de entidades
 	usuariosAdmins: List[UsuarioAdmin] = []
+	usuariosClientes: List[UsuarioCliente] = []
 	
 	# [HU1] Creación usuario administrativo
 	def crear_admin(self, admin: UsuarioAdmin):
@@ -21,3 +23,11 @@ class Controller:
 
 			# Se almacena
 			self.usuariosAdmins.append(admin)
+
+	# [HU2] Creación usuario asegurado
+	def crear_cliente(self, cliente: UsuarioCliente):
+		cli = [c for c in self.usuariosClientes if c.get_dni() == cliente.get_dni()]
+
+		if len(cli) == 0:
+			# Se crea el usuario cliente/asegurado
+			self.usuariosClientes.append(cliente)
