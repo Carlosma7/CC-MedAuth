@@ -109,6 +109,7 @@ class Controller:
 		pol = [p for p in self.polizas if p.get_id_poliza() == id_poliza]
 
 		if len(pol) > 0:
+			pol = pol[0]
 			# Modificación de la póliza
 			pol.set_periodo_carencia(periodo_carencia)
 			pol.set_tipo(tipo)
