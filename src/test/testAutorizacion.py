@@ -14,7 +14,7 @@ import datetime
 
 # Test comparación de autorizaciones	
 def test_compare_autorizacion():
-	u = UsuarioCliente("Carlos", "carlos7ma@gmail.com", "75925767-F", "ES12345678", "12345678")
+	u = UsuarioCliente("Carlos", "carlos7ma@gmail.com", "75925767-F", "ES12345678")
 	fecha = datetime.datetime(2020, 5, 17)
 	
 	t1 = Autorizacion("AU-12345678", u, "MA-75925767-1", "PR-12345678", True, "", fecha, Especialidad.Traumatologia, ["Radiografía", "Ortopedia"], "D. Manuel", "Centro médico capital, Sala 2")
