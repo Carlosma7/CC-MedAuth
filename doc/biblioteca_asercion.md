@@ -4,47 +4,32 @@
 
 Las bibliotecas de aserciones escogidas son:
 
-* [Assert Statement](https://docs.python.org/3/reference/simple_stmts.html#the-assert-statement) nativo de Python.
-* [pytest](https://docs.pytest.org/en/stable/).
+* [Assertpy](https://github.com/assertpy/assertpy)
 
-Inicialmente se valoraron distintas bibliotecas de aserciones dedicadas como [assertpy](https://github.com/ActivisionGameScience/assertpy), [grappa](https://github.com/grappa-py/grappa) o [verify](https://github.com/dgilland/verify), pero como se va a utilizar como framework de pruebas [pytest](https://docs.pytest.org/en/stable/) que aporta funciones de aserciones muy cercanas al lenguaje natural, permite desarrollar una batería de pruebas ágilmente.
+Las herramientas proporcionadas por dicha herramienta se integrarán además con el [marco de pruebas](https://carlosma7.github.io/MedAuth/doc/marco_pruebas) escogido, pero eso se mencionará en este apartado.
 
-Además, se integrará la utilización de **pytest** con la sentencia **assert** nativa del lenguaje, permitiendo por ejemplo la comparación de objetos simplemente sobreescribiendo o implementando el método "\_\_eq\_\_".
+Inicialmente se valoraron distintas bibliotecas de aserciones dedicadas como [Unittest](https://docs.python.org/3/library/unittest.html), [Grappa](https://github.com/grappa-py/grappa), [Verify](https://github.com/dgilland/verify) o [hypothesis](https://hypothesis.readthedocs.io/en/latest/). Cabe destacar que Python posee una infinidad de bibliotecas destinadas a este fin, por ese motivo, vamos a buscar una biblioteca que nos permita realizar los tests de una forma limpia, sencilla, legible y que se integre con el marco de pruebas sin problema alguno.
 
-Se ha optado por esta opción ya que el uso de instrucciones nativas junto a una biblioteca de test avanzada como *pytest* ofrece las siguientes ventajas frente la importación de una biblioteca específica de aserciones:
+Python incluye aserciones por omisión, y además incluye biblioteca como *Unittest* o *Doctest* de forma integrada, por lo que el uso de estas bibliotecas sería una buena aproximación inicial, pero finalmente, tras una primera fase en las que se utilizó la sentencia **assert** nativa del lenguaje, y tras estudiar nuevas herramientas, se ha decidido finalmente utilizar *Assertpy* por los siguientes motivos:
 
-* Uso fácil e intuitivo.
-* Posee herramientas nativas que se combinan de forma natural con herramientas avanzadas de *pytest*.
-* Comparación sencilla de objetos compuestos.
-* La sintaxis combinada de ambas herramientas combina lenguaje de Python con lenguaje aproximado al natural, a diferencia de bibliotecas como *grappa* cuyo lenguaje natural puede llegar a ser confuso.
-* Los resultados de los tests son fácilmente interpretables y carecen de excesiva verborrea.
+* A diferencia de bibliotecas como *Grappa* o *Verify* únicamente importa una función **assert_that**, la cual incluye otras funciones que especifican la comprobación, todo esto desde un lenguaje Python fácilmente interpretable con lenguaje natural. *Grappa* o *Verify* por ejemplo poseen un lenguaje más cercano al natural, pero con excesiva verborrea que dificulta su utilización desde un enfoque de programación.
+* *Assertpy* permite realizar comprobaciones de forma sencilla sobre objetos más complejos como *datetime*, ficheros u objetos compuestos, todo esto sin una codificación excesiva.
+* **Las llamadas son funciones de tipo Python**, lo cual facilita su uso, y no obliga a realizar sentencias complejas de interpretar.
+* Es **compatible** con los principales frameworks de test como *Pytest* o *Nose*, entre otros.
+* Las **aserciones se realizan mediante funciones**, lo cual es una ventaja frente a *Unittest*, que pese a que se encuentra integrada en Python, necesita realizar definición de clases con herencia y métodos para realizar los tests.
+* Frente a utilizar únicamente la aserción nativa de Python, *Assertpy* proporciona una forma más sencilla y legible de realizar comprobaciones más complejas, consistentes en varias operaciones utilizando únicamente la sentencia *assert*.
 
-Un ejemplo de combinación entre *pytest* y la sentencia *assert* es:
+
+
+Un ejemplo de un test diseñado para el proyecto sería:
 
 ```python
-# Método equal
-def __eq__(self, otra):
-	assert self.__titular == otra.get_titular()
-	assert self.__id_poliza == otra.get_id_poliza()
-	assert self.__periodo_carencia == otra.get_periodo_carencia()
-	assert self.__tipo == otra.get_tipo()
-	assert self.__copagos == otra.get_copagos()
-	assert self.__mensualidad == otra.get_mensualidad()
-	assert self.__servicios_excluidos == otra.get_servicios_excluidos()
-	assert self.__modulos_extra == otra.get_modulos_extra()
-	assert self.__activa == otra.get_activa()
-    	
-	return (self.__titular == otra.get_titular()) and (self.__id_poliza == otra.get_id_poliza()) and (self.__periodo_carencia == otra.get_periodo_carencia()) and (self.__tipo == otra.get_tipo()) and (self.__copagos == otra.get_copagos()) and (self.__mensualidad == otra.get_mensualidad()) and (self.__servicios_excluidos == otra.get_servicios_excluidos() and (self.__modulos_extra == otra.get_modulos_extra()) and (self.__activa == otra.get_activa()))
-
-# Test comparación pólizas
-def test_compare_poliza():
-	u = TestUsuarioCliente("Carlos", "carlos7ma@gmail.com", "75925767-F", "ES12345678", "12345678")
-	u2 = TestUsuarioCliente("Carlos", "carlos7ma@gmail.com", "75925767-F", "ES12345678", "12345678")
-	fecha = datetime.datetime(2020, 5, 17)
-	fecha2 = datetime.datetime(2020, 5, 18)
+# Test de creación de usuario administrativo
+def test_crear_admin():
+	controlador = Controller()
+	admin = UsuarioAdmin("Carlos", "carlos7ma@gmail.com", "75925767-F", "")
+	adminOtro = UsuarioAdmin("Fernando", "fer@gmail.com", "12925767-F", "")
 	
-	t1 = TestPoliza(u, "12345678", fecha, TipoPoliza.Basica, 35.99, 103.0, ["TAC", "Apendicitis"], [ModuloExtra.Dental], True)
-	t2 = TestPoliza(u2, "12345678", fecha, TipoPoliza.Basica, 35.99, 103.0, ["TAC", "Apendicitis"], [ModuloExtra.Dental], True)
-	assert t1 == t1 # Pasa test
-	assert t1 == t2 # Pasa test
+	controlador.crear_admin(admin)
+	assert_that(controlador.usuariosAdmins).contains(admin).does_not_contain(adminOtro)
 ```
