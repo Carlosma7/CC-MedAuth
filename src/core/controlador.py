@@ -118,6 +118,13 @@ class Controller:
 			pol.set_servicios_excluidos(servicios_excluidos)
 			pol.set_modulos_extra(modulos_extra)
 
+	# [HU4] Administrar póliza: Desactivar una póliza
+	def desactivar_poliza(self, dni: str):
+		poliza_activa = [p for p in self.polizas if (p.get_titular().get_dni() == dni) and p.get_activa() == True]
+		
+		if len(poliza_activa) > 0:
+			poliza_activa[0].set_activa(False)
+
 	# [HU5] Consultar póliza
 	def consultar_poliza(self, dni: str):
 		# Se obtiene la póliza
