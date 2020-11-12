@@ -81,22 +81,22 @@ def execute(c):
 def tests(c):
 	print("Ejecución de test.\n")
 	print("Test Clase UsuarioAdmin:")
-	run("pytest -v --disable-pytest-warnings ./src/test/modelos/testUsuarioAdmin.py")
+	run("pytest -v --disable-pytest-warnings ./src/test/testUsuarioAdmin.py")
 	
 	print("\nTest Clase UsuarioCliente:")
-	run("pytest -v --disable-pytest-warnings ./src/test/modelos/testUsuarioCliente.py")
+	run("pytest -v --disable-pytest-warnings ./src/test/testUsuarioCliente.py")
 	
 	print("\nTest Clase Poliza:")
-	run("pytest -v --disable-pytest-warnings ./src/test/modelos/testPoliza.py")
+	run("pytest -v --disable-pytest-warnings ./src/test/testPoliza.py")
 	
 	print("\nTest Clase Prescripcion:")
-	run("pytest -v --disable-pytest-warnings ./src/test/modelos/testPrescripcion.py")
+	run("pytest -v --disable-pytest-warnings ./src/test/testPrescripcion.py")
 	
 	print("\nTest Clase Autorizacion:")
-	run("pytest -v --disable-pytest-warnings ./src/test/modelos/testAutorizacion.py")
+	run("pytest -v --disable-pytest-warnings ./src/test/testAutorizacion.py")
 	
 	print("\nTest Clase Cita:")
-	run("pytest -v --disable-pytest-warnings ./src/test/modelos/testCita.py")
+	run("pytest -v --disable-pytest-warnings ./src/test/testCita.py")
 	
 	print("\nTest Clase Controlador:")
 	run("pytest -v --disable-pytest-warnings ./src/test/testControlador.py")
