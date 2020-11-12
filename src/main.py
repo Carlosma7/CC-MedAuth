@@ -38,3 +38,11 @@ if __name__ == '__main__':
 	fecha = datetime.datetime(2020, 5, 17)
 	p = Poliza(cliente, cliente.get_dni(), fecha, TipoPoliza.Basica, 5.99, 50.99, ["TAC", "Apendicitis"], [ModuloExtra.Dental], True)
 	controlador.crear_poliza(p)
+	
+	# [HU4] Administrar póliza: Modificar una póliza
+	cliente = [c for c in controlador.usuariosClientes if c.get_dni() == "75125767-F"]
+	fecha = datetime.datetime(2020, 5, 17)
+	
+	if len(cliente) > 0:
+		polizaAntigua = Poliza(cliente[0], "MA-75125767-1", fecha, TipoPoliza.Basica, 5.99, 50.99, ["TAC", "Apendicitis"], [ModuloExtra.Dental], True)
+		controlador.modificar_poliza(polizaAntigua, fecha, TipoPoliza.Basica, 10.99, 50.99, ["TAC", "Apendicitis"], [ModuloExtra.Dental])
