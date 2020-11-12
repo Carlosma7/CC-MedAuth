@@ -31,3 +31,10 @@ if __name__ == '__main__':
 	# [HU3] Administrar usuario: Eliminar usuario
 	cliente = UsuarioCliente("Juan", "juan@gmail.com", "7512354-F", "ES12987428")
 	controlador.eliminar_cliente(cliente.get_dni())
+	
+	# [HU4] Administrar póliza: Crear una póliza
+	cliente = UsuarioCliente("Alejandro", "alex@gmail.com", "75125767-F", "ES99345678")
+	controlador.crear_cliente(cliente)
+	fecha = datetime.datetime(2020, 5, 17)
+	p = Poliza(cliente, cliente.get_dni(), fecha, TipoPoliza.Basica, 5.99, 50.99, ["TAC", "Apendicitis"], [ModuloExtra.Dental], True)
+	controlador.crear_poliza(p)
