@@ -99,3 +99,20 @@ class Controller:
 		poliza.set_id_poliza(id_poliza)
 
 		self.polizas.append(poliza)
+
+	# [HU4] Administrar póliza: Modificar una póliza
+	def modificar_poliza(self, poliza: Poliza, periodo_carencia: datetime, tipo: TipoPoliza, copagos: float, mensualidad: float, servicios_excluidos: List[str], modulos_extra: List[ModuloExtra]):
+		# Se obtiene su póliza activa
+		id_poliza = poliza.get_id_poliza()
+		
+		# Se obtiene la póliza asociada al identificador
+		pol = [p for p in self.polizas if p.get_id_poliza() == id_poliza]
+
+		if len(pol) > 0:
+			# Modificación de la póliza
+			pol.set_periodo_carencia(periodo_carencia)
+			pol.set_tipo(tipo)
+			pol.set_copagos(copagos)
+			pol.set_mensualidad(mensualidad)
+			pol.set_servicios_excluidos(servicios_excluidos)
+			pol.set_modulos_extra(modulos_extra)
