@@ -14,8 +14,8 @@ import datetime
 
 # Test comparación pólizas
 def test_compare_poliza():
-	u = UsuarioCliente("Carlos", "carlos7ma@gmail.com", "75925767-F", "ES12345678", "12345678")
-	u2 = UsuarioCliente("Carlos", "carlos7ma@gmail.com", "75925767-F", "ES12345678", "12345678")
+	u = UsuarioCliente("Carlos", "carlos7ma@gmail.com", "75925767-F", "ES12345678")
+	u2 = UsuarioCliente("Carlos", "carlos7ma@gmail.com", "75925767-F", "ES12345678")
 	fecha = datetime.datetime(2020, 5, 17)
 	fecha2 = datetime.datetime(2020, 5, 18)
 	
