@@ -116,3 +116,19 @@ Fedora es una distribución *GNU/Linux* que nace de *Red Hat Linux*. Al igual qu
 Tras un simple análisis, se puede observar que realmente se plantearía un debate entre las versiones *33* y *32*, ya que una es bastante más ligera, pero la otra posee integrada la versión deseada de *Python*.
 
 Realmente no tiene mucho sentido plantearse la opción de utilizar *Fedora* existiendo opciones más ligeras, ya que en el contexto del proyecto *Fedora* no aporta ninguna ventaja relevante respecto a las otras opciones propuestas.
+
+##### Python
+
+El contenedor base "oficial" del lenguaje cuenta con una base *Debian* en la que se añaden los distintos paquetes y configuraciones para trabajar con dicho lenguaje. El estudio se centrará en las versiones que utilicen *Python3.8*, ya que utilizar versiones superiores carece de sentido ya que sería incompatible momentáneamente con el desarrollo del proyecto.
+
+| Release    | Size   | Libc6 | Python3.8 | Pip3 | LTS  | Comentarios                                                     |
+|------------|--------|-------|-----------|------|------|-----------------------------------------------------------------|
+| 3.8-buster | 840M   | Sí    | Sí        | Sí   | 2024 | Demasiadas librerías innecesarias. Es la alternativa más pesada.|
+| 3.8-slim   | 106.5M | Sí    | Sí        | Sí   | 2024 |                                                                 |
+| 3.8-alpine | 40.1M  | No    | No        | Sí   | 2024 | Se descarta al tratarse de *Alpine*.                            |
+
+Tal y como se explicaba en el apartado de *Alpine*, esta opción, pese a traer integrado *pip* queda descartada debido a su rendimiento y carencia de *wheels*. Por otro lado, la primera reacción al ver la versión *3.8-buster* es bastante mala ya que ocupa demasiado, pero se ha decidido crear un contenedor y comprobar que contiene realmente, para compararla con la versión *3.8-slim*.
+
+Tras comprobar realmente que aportan cada una de las opciones, se ve que la opción más completa es evidentemente la *3.8-buster* y en ciertos casos sería una opción considerablemente buena, pero en este proyecto se pretende optimizar el contenedor, y obtener una base ligera y con la mayor funcionalidad, por lo que *3.8-slim*, que contiene los elementos más basicos de *Python3.8*, junto a *Pip3* es más que suficiente sin incluir bibliotecas extra que no van a ser utilizadas. Quedaría comprobar si esta instalación es realmente mejor que las seleccionadas previamente.
+
+Teniendo en cuenta todos estos factores, nos quedaremos como candidato para instalación de *Python* con **3.8-slim**.
