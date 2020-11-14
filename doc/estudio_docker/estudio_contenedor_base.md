@@ -77,3 +77,28 @@ Por estos motivos se descartan todas las opciones de *Alpine* de cara a ser cons
 Como se indicaba antes de realizar la tabla, las versiones de *CentOS* son considerablemente pesadas en comparación las versiones de otras opciones contempladas, además, cabe destacar que la última versión es la única que no posee alguna version de *Python* antigua, aunque sí posee bibliotecas relativas a *Python3.6*.
 
 *CentOS* sería una opción considerable debido a la comodidad que supondría realizar la construcción de nuestro contenedor, lo sencillo que es su manejo y la enorme comunidad que posee detrás. Sin embargo, existen opciones considerablemente mejores, por lo que realizar una comparativa en la que se tenga en cuenta *CentOS* carece realmente de sentido.
+
+##### Debian
+
+*Debian* es el sistema operativo principal a la hora de utilizar un contenedor base, se debe a que es un sistema ligero, de software libre y que posee la funcionalidad básica de un sistema operativo. Más adelante se verá que la versión oficial de *Python* utiliza *Debian* como sistema operativo.
+
+| Release      | Size   | Libc6 | Python3.8 | Pip3 | LTS  | Comentarios                                                           |
+|--------------|--------|-------|-----------|------|------|-----------------------------------------------------------------------|
+| buster       | 111.8M | Sí    | No        | No   | 2024 | Última versión estable.                                               |
+| buster-slim  | 69.1M  | Sí    | No        | No   | 2024 | Contiene menos paquetes que la versión estándar. Funcionalidad básica.|
+| 9            | 97.9M  | Sí    | No        | No   | 2022 | Sin actualizaciones de seguridad. El tag *stretch* no es válido.      |
+| 9-slim       | 54.7M  | Sí    | No        | No   | 2022 | Sin actualizaciones de seguridad. El tag *stretch-slim* no es válido. |
+| jessie       | 123.1M | Sí    | No        | No   | 2020 | Dejará de estar soportada este año.                                   |
+| jessie-slim  | 77.6M  | Sí    | No        | No   | 2020 | Dejará de estar soportada este año.                                   |
+
+Se han descartado las siguientes versiones:
+* **bullseye**: Actual versión en desarrollo.
+* **wheezy**: Obsoleta.
+* Versiones **sid**: Versiones inestables.
+* Versiones **backports**: Poseen tests de la siguiente versión en desarrollo.
+
+Viendo la tabla queda claro que las versiones *jessie* quedan descartadas al dejar de estar soportadas en este mismo año, mientras que si se investiga un poco más, se puede ver que las versiones *9* (o *stretch*, el cual es el nombre que recibe dicha versión, pero no se emplea ya que el *tag* asociado no dirige a dicha versión) han dejado de tener actualizaciones de seguridad, por lo que teniendo en cuenta dichos factores, se descartan todas esas versiones.
+
+Por otro lado, se puede observar que el caso de *buster* es bastante parecido al estudiado en *Ubuntu*, pero en este caso la versión es considerablemente más pesada. Sin embargo, existe la versión *buster-slim*, la cual es una versión más ligera ya que solo incluye las bibliotecas básicas para el funcionamiento del sistema operativo y se presenta como una de los principales candidatos de cara a ser el contendor base de nuestro contenedor, por lo que se evaluará posteriormente esta opción.
+
+Teniendo en cuenta todos estos factores, nos quedaremos como candidato para instalación de *Debian* con **buster-slim**.
