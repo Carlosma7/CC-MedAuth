@@ -63,3 +63,17 @@ Esta operación es realizable, pero nuevamente encontramos un problema, además 
 Cabría destacar como dato interesante que *Alpine* piensa incorporar en su versión *edge* algunas de las librerías más comunes, para poder realizar construcciones más rápidas, pero esto tampoco solucionaría el problema, ya que con el planteamiento de *Alpine* de ser un sistema ligero, no tendría sentido instalar todas las dependencias de *PyPI*.
 
 Por estos motivos se descartan todas las opciones de *Alpine* de cara a ser considerado como contenedor base del contenedor del proyecto.
+
+##### CentOS
+
+*CentOS* es una distribución de **GNU/Linux Red Hat Enterprise Linux RHEL**. Es un sistema estable, de calidad y sobre todo *open source*. Inicialmente se destaca que es un sistema robusto, que utiliza sistema *rpm* y que posee por norma general un tamaño quizás elevado en comparación con otros sistemas operativos.
+
+| Release | Size   | Libc6 | Python3.8                    | Pip3 | LTS  | Comentarios                                                               |
+|---------|--------|-------|------------------------------|------|------|---------------------------------------------------------------------------|
+| centos8 | 205.1M | No    | No, pero librerías de 3.6 sí | No   | 2029 | Versión latest.                                                           |
+| centos7 | 201.3M | No    | No, Python 2.7               | No   | 2024 | Sería necesario desinstalar la versión de Python2.7 e instalar Python3.8. |
+| centos6 | 197.5M | No    | No, Python 2.6               | No   | 2020 | Dejará de estar soportada este año.                                       |
+
+Como se indicaba antes de realizar la tabla, las versiones de *CentOS* son considerablemente pesadas en comparación las versiones de otras opciones contempladas, además, cabe destacar que la última versión es la única que no posee alguna version de *Python* antigua, aunque sí posee bibliotecas relativas a *Python3.6*.
+
+*CentOS* sería una opción considerable debido a la comodidad que supondría realizar la construcción de nuestro contenedor, lo sencillo que es su manejo y la enorme comunidad que posee detrás. Sin embargo, existen opciones considerablemente mejores, por lo que realizar una comparativa en la que se tenga en cuenta *CentOS* carece realmente de sentido.
