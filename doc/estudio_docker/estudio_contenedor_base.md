@@ -135,8 +135,8 @@ Teniendo en cuenta todos estos factores, nos quedaremos como candidato para inst
 
 ## 3. Preselección
 
-| Release            | Size   | Libc6 | Python3.8 | Pip3 | LTS  | Comentarios |
-|--------------------|--------|-------|-----------|------|------|-------------|
-| ubuntu:bionic      | 62.4M  | Sí    | No        | No   | 2028 |             |
-| debian:buster-slim | 69.1M  | Sí    | No        | No   | 2024 |             |
-| python:3.8-slim    | 106.5M | Sí    | Sí        | Sí   | 2024 |             |
+| Release            | Size   | Libc6 | Python3.8 | Pip3 | LTS  | Comentarios                                |
+|--------------------|--------|-------|-----------|------|------|--------------------------------------------|
+| ubuntu:bionic      | 62.4M  | Sí    | No        | No   | 2028 | Opción más ligera.                         |
+| debian:buster-slim | 69.1M  | Sí    | No        | No   | 2024 | Opción a priori menos destacada.           |
+| python:3.8-slim    | 106.5M | Sí    | Sí        | Sí   | 2024 | Opción con Python3.8 integrada.            |
