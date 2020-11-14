@@ -132,3 +132,11 @@ Tal y como se explicaba en el apartado de *Alpine*, esta opción, pese a traer i
 Tras comprobar realmente que aportan cada una de las opciones, se ve que la opción más completa es evidentemente la *3.8-buster* y en ciertos casos sería una opción considerablemente buena, pero en este proyecto se pretende optimizar el contenedor, y obtener una base ligera y con la mayor funcionalidad, por lo que *3.8-slim*, que contiene los elementos más basicos de *Python3.8*, junto a *Pip3* es más que suficiente sin incluir bibliotecas extra que no van a ser utilizadas. Quedaría comprobar si esta instalación es realmente mejor que las seleccionadas previamente.
 
 Teniendo en cuenta todos estos factores, nos quedaremos como candidato para instalación de *Python* con **3.8-slim**.
+
+## 3. Preselección
+
+| Release            | Size   | Libc6 | Python3.8 | Pip3 | LTS  | Comentarios |
+|--------------------|--------|-------|-----------|------|------|-------------|
+| ubuntu:bionic      | 62.4M  | Sí    | No        | No   | 2028 |             |
+| debian:buster-slim | 69.1M  | Sí    | No        | No   | 2024 |             |
+| python:3.8-slim    | 106.5M | Sí    | Sí        | Sí   | 2024 |             |
