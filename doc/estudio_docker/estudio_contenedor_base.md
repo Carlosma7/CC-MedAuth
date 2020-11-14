@@ -41,3 +41,25 @@ Tras observar, la única diferencia entre ambos sistemas, es la instalación y a
 Por otro lado, podemos observar que las versiones de *Libc6* son, respectivamente, *2.31-0ubuntu9.1* y *2.27-3ubuntu1.2*, las cuales soportan nuestra versión deseada de *Python* y poseen un tamaño similar.
 
 Teniendo en cuenta todos estos factores, nos quedaremos como candidato para instalación de *Ubuntu* con **bionic**.
+
+##### Alpine
+
+Uno de los sistemas operativos más ligeros, del que destaca su enorme multitud de versiones, ya que anualmente se lanza una nueva versión del mismo, que será un factor a tener en cuenta de cara al futuro del proyecto.
+
+| Release | Size | Libc6 | Python3.8 | Pip3 | LTS  | Comentarios                         |
+|---------|-------|-------|----------|------|------|-------------------------------------|
+| edge    | 5.4M  | No    | No       | No   | n/a  | Versión en desarrollo. Inestable.   |
+| 3.12    | 5.3M  | No    | No       | No   | 2022 | Última versión estable.             |
+| 3.11    | 5.4M  | No    | No       | No   | 2021 |                                     |
+| 3.10    | 5.3M  | No    | No       | No   | 2021 |                                     |
+| 3.9     | 5.3M  | No    | No       | No   | 2020 | Dejará de estar soportada este año. |
+
+Tras evaluar las distintas opciones, y observar que apenas existen diferencias de cara a nuestro proyecto que sean relevantes, lo lógico sería pensar que es una excelente opción debido a su ligero tamaño y a que carece de bibliotecas instaladas por defecto, pero sin ir más lejos puede tratarse de una de las peores opciones si investigamos un poco.
+
+Alpine no cabe duda que sería la mejor opción tratándose de un desarrollo sencillo y ligero en *Python*, pero si requerimos de algunas dependencias, esto puede ocasionar problemas debido a que *Alpine* no soporta los *wheels* estándar de Linux. *Alpine*, a diferencia de la mayoría de las distribuciones de Linux, utiliza *musl* en lugar de la versión estándar de la librería *glibc*. Por este motivo requeriríamos de compatibilizar *Alpine* con los *wheels* de *PyPI*.
+
+Esta operación es realizable, pero nuevamente encontramos un problema, además de elevar considerablemente el tamaño del contenedor, la construcción del mismo es excesivamente lenta, tal y como se muestra en este [ejemplo](https://pythonspeed.com/articles/alpine-docker-python/) encontrado en [Pythonspeed](https://pythonspeed.com/), la construcción en comparación con una versión de *Ubuntu* es excesivamente lenta.
+
+Cabría destacar como dato interesante que *Alpine* piensa incorporar en su versión *edge* algunas de las librerías más comunes, para poder realizar construcciones más rápidas, pero esto tampoco solucionaría el problema, ya que con el planteamiento de *Alpine* de ser un sistema ligero, no tendría sentido instalar todas las dependencias de *PyPI*.
+
+Por estos motivos se descartan todas las opciones de *Alpine* de cara a ser considerado como contenedor base del contenedor del proyecto.
