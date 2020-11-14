@@ -102,3 +102,17 @@ Viendo la tabla queda claro que las versiones *jessie* quedan descartadas al dej
 Por otro lado, se puede observar que el caso de *buster* es bastante parecido al estudiado en *Ubuntu*, pero en este caso la versión es considerablemente más pesada. Sin embargo, existe la versión *buster-slim*, la cual es una versión más ligera ya que solo incluye las bibliotecas básicas para el funcionamiento del sistema operativo y se presenta como una de los principales candidatos de cara a ser el contendor base de nuestro contenedor, por lo que se evaluará posteriormente esta opción.
 
 Teniendo en cuenta todos estos factores, nos quedaremos como candidato para instalación de *Debian* con **buster-slim**.
+
+##### Fedora
+
+Fedora es una distribución *GNU/Linux* que nace de *Red Hat Linux*. Al igual que *CentOS*, utiliza un sistema *rpm* y es considerablemente más pesado que otras opciones vistas como *Ubuntu* o *Debian*.
+
+| Release | Size   | Libc6 | Python3.8      | Pip3 | LTS  | Comentarios                                                                                                          |
+|---------|--------|-------|----------------|------|------|----------------------------------------------------------------------------------------------------------------------|
+| 33      | 166.9M | No    | No, Python 3.9 | No   | 2022 | Última versión estable. Posee un Python superior al requerido, se necesita desinstalar e instalar la versión deseada.|
+| 32      | 191.7M | No    | Sí             | No   | 2021 |                                                                                                                      |
+| 31      | 168.9M | No    | No, Python 3.7 | No   | 2020 | Dejará de estar soportada este año.                                                                                  |
+
+Tras un simple análisis, se puede observar que realmente se plantearía un debate entre las versiones *33* y *32*, ya que una es bastante más ligera, pero la otra posee integrada la versión deseada de *Python*.
+
+Realmente no tiene mucho sentido plantearse la opción de utilizar *Fedora* existiendo opciones más ligeras, ya que en el contexto del proyecto *Fedora* no aporta ninguna ventaja relevante respecto a las otras opciones propuestas.
