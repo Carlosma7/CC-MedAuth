@@ -133,7 +133,7 @@ Tras comprobar realmente que aportan cada una de las opciones, se ve que la opci
 
 Teniendo en cuenta todos estos factores, nos quedaremos como candidato para instalación de *Python* con **3.8-slim**.
 
-## 3. Preselección
+### 3. Preselección
 
 | Release            | Size   | Libc6 | Python3.8 | Pip3 | LTS  | Comentarios                                |
 |--------------------|--------|-------|-----------|------|------|--------------------------------------------|
@@ -246,3 +246,48 @@ Tras observar las tres opciones con mayor detenimiento, el debate que se plantea
 
 Aunque en un principio cabe esperar, a continuación se realizará la creación de dicho contenedor en **ubuntu:bionic** y se examinará el tamaño respecto a **python:3.8-slim** para poder tomar una decisión final.
 
+### 4. Elección final
+
+Tras realizar las comparativas previas y seleccionar **ubuntu:bionic** y **python:3.8-slim** como opciones principales a comprobar, se ha optado por realizar dos imágenes sencillas, que contengan una instalación simple de *Python3.8* y *Pip3* como requesitos, por lo que se han creado los siguientes *Dockerfiles* de forma simple para comprobar el tamaño que se obtiene al hacer una construcción simple de una imagen:
+
+**ubuntu:bionic**
+
+```dockerfile
+FROM ubuntu:bionic
+
+# Se realizan las instalaciones de Python y Pip
+RUN apt-get update \								# Update apt packages
+  && apt-get install -y python3-pip python3-dev \	# Install Python3 and Pip3
+  && cd /usr/local/bin \
+  && ln -sf /usr/bin/python3 python \				# Link Python to Python3 version
+  && python -m pip install --upgrade pip \			# Upgrade Pip
+  && useradd -ms /bin/bash medauth					# Add user MedAuth for security
+
+USER medauth	# Set MedAuth user as default
+
+WORKDIR /home/medauth	# Change work directory to MedAuth's home directory
+
+CMD /bin/bash
+```
+
+**python:3.8-slim**
+
+```dockerfile
+FROM python:3.8-slim
+
+RUN useradd -ms /bin/bash medauth	# Add user MedAuth for security
+
+USER medauth	# Set MedAuth user as default
+
+WORKDIR /home/medauth	# Change work directory to MedAuth's home directory
+
+CMD /bin/bash
+```
+
+Como se puede observar, los ejemplos de *Dockerfiles* son muy sencillos para el proyecto e insuficientes en cuanto a dependencias, pero permiten comprobar tras crear ambas imágenes, las diferencias entre las mismas. A continuación se muestra la información sobre las imágenes creadas:
+
+![Comparativa Imágenes Docker](../img/docker_comparativa_images.png "Comparativa Imágenes Docker")
+
+Como se puede observar, en dos construcciones simples de dos imágenes, la imagen de **ubuntu:bionic** es cinco veces mayor que la imagen de **python:3.8-slim**. Esto se debe a que la instalación estándar de *Python3*, pese a ser simple, contiene muchas librerías y no está optimizada. Podría plantearse realizar una optimización exhaustiva en la imagen de **ubuntu::bionic**, pero no nos garantizaría obtener el mismo o mejor resultado, y conllevaría demasiado esfuerzo y tiempo disponiendo de una opción evidentemente mejor, no solo por el tamaño, sino porque al traer integradas las herramientas e instaladas de forma optimizada, cumple con los requisitos ideales para nuestro contenedor base.
+
+En base a todo este estudio, finalmente se decide utilizar **python:3.8-slim** como contenedor base del futuro contenedor del proyecto.
