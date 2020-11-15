@@ -164,3 +164,32 @@ Sin embargo, cabe añadir que la opción de *Python* incluye algunas variables d
 * GPG_KEY=E3FF2839C048B25C084DEBE9B26995E310250568. GNU Privacy Guard key.
 
 Tras observar estas diferencias, lo único que podemos observar es que la opción de *Python* de momento es preferible ya que demuestra una correcta instalación de los componentes necesarios para el proyecto de forma natural.
+
+##### Usuarios
+
+A continuación se observan los diferentes usuarios, y nuevamente nos encontramos con una situación similar a la anteriormente planteada con las variables de entorno, ya que las tres opciones poseen los mismos usuarios:
+
+* root
+* daemon
+* bin
+* sys
+* sync
+* games
+* man
+* lp
+* mail
+* news
+* uucp
+* proxy
+* www-data
+* backup
+* list
+* irc
+* gnats
+* nobody
+* _apt
+
+Realmente este aportado no nos aporta ninguna ventaja, además, por cuestiones de seguridad e integridad del proyecto, se diseñará un usuario específico para el propósito, por lo que los usuarios disponibles carecen aún más de sentido en cuanto a esta comparativa.
+
+
+
