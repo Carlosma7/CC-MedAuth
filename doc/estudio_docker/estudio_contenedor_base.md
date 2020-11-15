@@ -192,4 +192,57 @@ A continuación se observan los diferentes usuarios, y nuevamente nos encontramo
 Realmente este aportado no nos aporta ninguna ventaja, además, por cuestiones de seguridad e integridad del proyecto, se diseñará un usuario específico para el propósito, por lo que los usuarios disponibles carecen aún más de sentido en cuanto a esta comparativa.
 
 
+##### Paquetes
+
+Haciendo uso de nuevo de la herramienta [container-diff](https://github.com/GoogleContainerTools/container-diff), se procede a examinar los paquetes de las distintas bases preseleccionadas, en las que podemos encontrar principalmente los mismos paquetes, algunos con diferentes versiones, que no afectan en absoluto al desempeño de nuestro proyecto.
+
+Inicialmente realizamos una comparativa entre **ubuntu:bionic** y **debian:buster-slim**.
+
+Packages found only in **ubuntu:bionic**
+
+| NAME            | VERSION              | SIZE |
+|-----------------|----------------------|------|
+| -bzip2          | 1.0.6-8.1ubuntu0.2   | 177K |
+| -libncurses5    | 6.1-1ubuntu1.18.04   | 283K |
+| -libncursesw5   | 6.1-1ubuntu1.18.04   | 343K |
+| -libprocps6     | 2:3.3.12-3ubuntu1.2  | 118K |
+| -libtinfo5      | 6.1-1ubuntu1.18.04   | 497K |
+| -lsb-base       | 9.20170808ubuntu1    | 58K  |
+| -procps         | 2:3.3.12-3ubuntu1.2  | 709K |
+| -sensible-utils | 0.0.12               | 62K  |
+| -ubuntu-keyring | 2018.09.18.1~18.04.0 | 46K  |
+
+Packages found only in **debian:buster-slim**
+
+| NAME                          | VERSION                      | SIZE |
+|-------------------------------|------------------------------|------|
+| -debian-archive-keyring       | 2019.1                       | 198K |
+| -libncursesw6                 | 6.1 20181013-2+deb10u2       | 411K |
+| -libtinfo6                    | 6.1 20181013-2+deb10u2       | 521K |
+| -tzdata                       | 2020a-0 deb10u1              | 3M   |
+
+Como podemos observar, las diferencias consisten en distintos paquetes de herramientas y configuraciones de cada sistema, por lo que realmente se encuentran ambos en una situación similar en esta comparativa, teniendo en cuenta que la opción de **debian:buster-slim** utiliza paquetes con versiones más actualizadas, por lo que se decanta como mejor opción, ya que la diferencia de tamaño entre imágenes es despreciable en este caso, e interesaría poseer un sistema más actualizado.
+
+A continuación, lo comparamos con **python:3.8-slim**, el cual de antemano se razona que tendrá más paquetes debido a que se trata de una instalación del mismo sistema operativo con configuración de *Python*:
+
+
+Packages found only in **python:3.8-slim**
+
+| NAME                   | VERSION                | SIZE |
+|------------------------|------------------------|------|
+| -ca-certificates       | 20200601~deb10u1       | 381K |
+| -libexpat1             | 2.2.6-2 deb10u1        | 519K |
+| -libgdbm6              | 1.18.1-4               | 117K |
+| -libreadline7          | 7.0-5                  | 416K |
+| -libsqlite3-0          | 3.27.2-3               | 1.3M |
+| -libssl1.1             | 1.1.1d-0 deb10u3       | 4M   |
+| -netbase               | 5.6                    | 44K  |
+| -openssl               | 1.1.1d-0 deb10u3       | 1.4M |
+| -readline-common       | 7.0-5                  | 89K  |
+
+Tal y como se esperaba, la base de **python:3.8-slim** posee todos los paquetes de **debian:buster-slim** y además incluye paquetes o bibliotecas que pertenecen a *Python* o que se utilizan para su instalación, tal y como se puede observar en el *Dockerfile* del contenedor en [DockerHub](https://github.com/docker-library/python/blob/master/3.7/windows/windowsservercore-ltsc2016/Dockerfile).
+
+Tras observar las tres opciones con mayor detenimiento, el debate que se plantea es bastante sencillo: ¿Realizando una instalación lo más liviana posible de *Python3.8* y *Pip3* en los contenedores de *ubuntu:bionic* y *debian:buster-slim* se puede alcanzar un tamaño inferior al del contenedor base oficial del lenguaje? Cabe indicar que el contenedor base **python:3.8-slim** no solo está basado en **debian:buster-slim**, sino que además dicha configuración está optimizada, por lo que realmente la conclusión a la que se llega es que la única opción que se puede llegar a equiparar es la de **ubuntu:bionic** con una instalación minimal de *Python*.
+
+Aunque en un principio cabe esperar, a continuación se realizará la creación de dicho contenedor en **ubuntu:bionic** y se examinará el tamaño respecto a **python:3.8-slim** para poder tomar una decisión final.
 
