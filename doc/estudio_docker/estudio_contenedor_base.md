@@ -140,3 +140,27 @@ Teniendo en cuenta todos estos factores, nos quedaremos como candidato para inst
 | ubuntu:bionic      | 62.4M  | Sí    | No        | No   | 2028 | Opción más ligera.                         |
 | debian:buster-slim | 69.1M  | Sí    | No        | No   | 2024 | Opción a priori menos destacada.           |
 | python:3.8-slim    | 106.5M | Sí    | Sí        | Sí   | 2024 | Opción con Python3.8 integrada.            |
+
+##### Variables de entorno
+
+Aunque en el guión se comenta que uno de lo puntos a tener en cuenta es la observación de variables de entorno de los sistemas considerados, en nuestro problema es realmente carece de sentido ya que las opciones escogidas son relativamente similares y poseen las mismas variables de entorno. Si bien en *fedora* y *CentOS* podemos observar distintas variables, en *debian*, *ubuntu* y *python* (basado en *debian*), encontramos las mismas:
+
+* LS_COLORS: Colores de la shell.
+* HOSTNAME: Nombre del host.
+* PWD: Directorio de trabajo actual.
+* HOME: Directorio *home*
+* TERM: Terminal de la shell, todos poseen **xterm**.
+* SHLVL: Nivel de shell, todos poseen 1.
+* PATH: ruta de ejecutables.
+
+Sin embargo, cabe añadir que la opción de *Python* incluye algunas variables de entorno adicionales de configuraciones relativas a Python, las cuales pueden facilitar la configuración inicial:
+
+* PYTHON_VERSION=3.8.6. Indica la versión de *Python* por defecto.
+* PYTHON_PIP_VERSION=20.2.4. Indica la versión de *Pip* por defecto.
+* PYTHON_GET_PIP_SHA256=6e0bb0a2c2533361d7f297ed547237caf1b7507f197835974c0dd7eba998c53c. Clave hash para acceso a *Pip* en la instalación.
+* PYTHON_GET_PIP_URL=https://github.com/pypa/get-pip/raw/fa7dc83944936bf09a0e4cb5d5ec852c0d256599/get-pip.py. URL de descarga de *Pip*.
+
+* LANG=C.UTF-8. Lenguaje de interpretación. C de computer, UTF-8 de codificación.
+* GPG_KEY=E3FF2839C048B25C084DEBE9B26995E310250568. GNU Privacy Guard key.
+
+Tras observar estas diferencias, lo único que podemos observar es que la opción de *Python* de momento es preferible ya que demuestra una correcta instalación de los componentes necesarios para el proyecto de forma natural.
