@@ -8,9 +8,6 @@ doc
 # Markdown files
 *.md
 
-# Text files
-*.txt
-
 # Git files
 .git
 .gitignore
