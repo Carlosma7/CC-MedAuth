@@ -10,4 +10,6 @@ RUN useradd -ms /bin/bash medauth
 USER medauth
 
 WORKDIR /home/medauth
+COPY . .
+
 CMD /bin/bash

@@ -1,0 +1,24 @@
+# Documents and images
+doc
+
+# YAML files
+*.yml
+*.yaml
+
+# Markdown files
+*.md
+
+# Text files
+*.txt
+
+# Git files
+.git
+.gitignore
+
+# Docker files
+Dockerfile
+.dockerignore
+
+# Other files
+Gemfile
+LICENSE
