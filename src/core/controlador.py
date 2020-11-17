@@ -133,9 +133,10 @@ class Controller:
 	# [HU5] Consultar póliza
 	def consultar_poliza(self, dni: str):
 		# Se obtiene la póliza
-		poliza = [p for p in self.polizas if p.get_titular().get_dni() == dni and p.get_activa() == True][0]
+		poliza = [p for p in self.polizas if p.get_titular().get_dni() == dni and p.get_activa() == True]
 		
-		return poliza
+		if len(poliza) > 0:
+			return poliza[0]
 		
 	# [HU8] Administrar autorización: Crear una autorización
 	def crear_autorizacion(self, autorizacion: Autorizacion):
