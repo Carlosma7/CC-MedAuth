@@ -176,7 +176,16 @@ class Controller:
 			autorizacion.set_facultativo_realizador(facultativo_realizador)
 			autorizacion.set_consulta(consulta)
 			
-			
+	# [HU10] Aprobar/Denegar una autorización médica
+	def aprobar_denegar_autorizacion(self, autorizacion: Autorizacion, aceptada: bool, motivo_rechazo: str):
+		# Se obtiene la póliza asociada al identificador
+		aut = [a for a in self.autorizaciones if a.get_id_autorizacion() == autorizacion.get_id_autorizacion()]
+
+		if len(aut) > 0:
+			aut = aut[0]
+			# Modificación de la autorización médica
+			autorizacion.set_estado(aceptada)
+			autorizacion.set_motivo_rechazo(motivo_rechazo)
 			
 			
 			
