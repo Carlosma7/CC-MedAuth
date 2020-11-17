@@ -2,6 +2,7 @@ from usuarioAdmin import UsuarioAdmin
 from usuarioCliente import UsuarioCliente
 from poliza import Poliza
 from autorizacion import Autorizacion
+from cita import Cita
 
 from tipoPoliza import TipoPoliza
 from moduloExtra import ModuloExtra
@@ -17,6 +18,7 @@ class Controller:
 	usuariosClientes: List[UsuarioCliente] = []
 	polizas: List[Poliza] = []
 	autorizaciones: List[Autorizacion] = []
+	cita: List[Cita] = []
 	
 	# [HU1] Creación usuario administrativo
 	def crear_admin(self, admin: UsuarioAdmin):
@@ -193,3 +195,11 @@ class Controller:
 			# Modificación de la autorización médica
 			autorizacion.set_estado(aceptada)
 			autorizacion.set_motivo_rechazo(motivo_rechazo)
+	
+	# [HU11] Administrar cita médica: Crear cita médica
+	def crear_cita(self, cita: Cita):
+		# Se obtiene la autorización asociada para comprobar que está aceptada
+		autorizacion = [a for a in self.autorizaciones if a.get_id_autorizacion() == cita.get_id_autorizacion() and a.get_aceptada() == True]
+		
+		if len(autorizacion) > 0:
+			self.citas.append(cita)
