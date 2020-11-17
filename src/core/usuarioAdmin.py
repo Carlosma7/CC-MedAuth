@@ -10,13 +10,13 @@ class UsuarioAdmin():
 	def get_nombre(self):
 		return self.__nombre
 	
-	def set_nombre(self, nombre):
+	def set_nombre(self, nombre: str):
 		self.__nombre = nombre
 		
 	def get_email(self):
 		return self.__email
 		
-	def set_email(self, email):
+	def set_email(self, email: str):
 		self.__email = email
 	
 	def get_dni(self):
@@ -25,7 +25,7 @@ class UsuarioAdmin():
 	def get_email_empresarial(self):
 		return self.__email_empresarial
 	
-	def set_email_empresarial(self, email_empresarial):
+	def set_email_empresarial(self, email_empresarial: str):
 		self.__email_empresarial = email_empresarial
 	
 	# Override método equal
