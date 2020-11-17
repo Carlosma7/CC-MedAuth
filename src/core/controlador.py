@@ -181,9 +181,10 @@ class Controller:
 	# [HU9] Consultar autorización médica
 	def consultar_autorizacion(self, id_autorizacion: str):
 		# Se obtiene la autorizacion
-		autorizacion = [a for a in self.autorizaciones if a.get_id_autorizacion() == id_autorizacion][0]
+		autorizacion = [a for a in self.autorizaciones if a.get_id_autorizacion() == id_autorizacion]
 		
-		return autorizacion
+		if len(autorizacion) > 0:
+			return autorizacion[0]
 			
 	# [HU10] Aprobar/Denegar una autorización médica
 	def aprobar_denegar_autorizacion(self, autorizacion: Autorizacion, aceptada: bool, motivo_rechazo: str):
