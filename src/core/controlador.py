@@ -161,9 +161,20 @@ class Controller:
 
 				self.autorizaciones.append(autorizacion)
 			
-			
-			
-			
+	# [HU8] Administrar autorización: Modificar una autorización		
+	def modificar_autorizacion(self, autorizacion: Autorizacion, motivo_rechazo: str, fecha_realizacion: datetime, especialidad: Especialidad, servicios_aceptados: List[str], facultativo_realizador: str, consulta: str):
+		# Se obtiene la póliza asociada al identificador
+		aut = [a for a in self.autorizaciones if a.get_id_autorizacion() == autorizacion.get_id_autorizacion()]
+
+		if len(aut) > 0:
+			aut = aut[0]
+			# Modificación de la autorización médica
+			autorizacion.set_motivo_rechazo(motivo_rechazo)
+			autorizacion.set_fecha_realizacion(fecha_realizacion)
+			autorizacion.set_especialidad(especialidad)
+			autorizacion.set_servicios_aceptados(servicios_aceptados)
+			autorizacion.set_facultativo_realizador(facultativo_realizador)
+			autorizacion.set_consulta(consulta)
 			
 			
 			
