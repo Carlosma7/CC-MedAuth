@@ -27,49 +27,49 @@ class Poliza:
     def get_id_poliza(self):
     	return self.__id_poliza
     
-    def set_id_poliza(self, id_poliza):
+    def set_id_poliza(self, id_poliza: str):
     	self.__id_poliza = id_poliza
 
     def get_periodo_carencia(self):
     	return self.__periodo_carencia
     
-    def set_periodo_carencia(self, periodo_carencia):
+    def set_periodo_carencia(self, periodo_carencia: datetime):
     	self.__periodo_carencia == periodo_carencia
 
     def get_tipo(self):
     	return self.__tipo
 
-    def set_tipo(self, tipo):
+    def set_tipo(self, tipo: TipoPoliza):
     	self.__tipo = tipo
 
     def get_copagos(self):
     	return self.__copagos
 
-    def set_copagos(self, copagos):
+    def set_copagos(self, copagos: float):
     	self.__copagos = copagos
 
     def get_mensualidad(self):
     	return self.__mensualidad
 
-    def set_mensualidad(self, mensualidad):
+    def set_mensualidad(self, mensualidad: float):
     	self.__mensualidad = mensualidad
 
     def get_servicios_excluidos(self):
     	return self.__servicios_excluidos
 
-    def set_servicios_excluidos(self, servicios_excluidos):
+    def set_servicios_excluidos(self, servicios_excluidos: List[str]):
     	self.__servicios_excluidos = servicios_excluidos[:]
     
     def get_modulos_extra(self):
     	return self.__modulos_extra
 
-    def set_modulos_extra(self, modulos_extra):
+    def set_modulos_extra(self, modulos_extra: List[ModuloExtra]):
     	self.__modulos_extra = modulos_extra[:]
     	
     def get_activa(self):
     	return self.__activa
     	
-    def set_activa(self, activa):
+    def set_activa(self, activa: bool):
     	self.__activa = activa
     
     # Override método equal
