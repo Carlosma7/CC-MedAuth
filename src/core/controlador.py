@@ -1,9 +1,11 @@
 from usuarioAdmin import UsuarioAdmin
 from usuarioCliente import UsuarioCliente
 from poliza import Poliza
+from autorizacion import Autorizacion
 
 from tipoPoliza import TipoPoliza
 from moduloExtra import ModuloExtra
+from especialidad import Especialidad
 from typing import List
 import datetime
 
@@ -14,6 +16,7 @@ class Controller:
 	usuariosAdmins: List[UsuarioAdmin] = []
 	usuariosClientes: List[UsuarioCliente] = []
 	polizas: List[Poliza] = []
+	autorizaciones: List[Autorizacion] = []
 	
 	# [HU1] Creación usuario administrativo
 	def crear_admin(self, admin: UsuarioAdmin):
@@ -131,3 +134,39 @@ class Controller:
 		poliza = [p for p in self.polizas if p.get_titular().get_dni() == dni and p.get_activa() == True][0]
 		
 		return poliza
+		
+	# [HU8] Administrar autorización: Crear una autorización
+	def crear_autorizacion(self, autorizacion: Autorizacion):
+		poliza_activa = [p for p in self.polizas if p.get_titular().get_dni() == autorizacion.get_asegurado().get_dni()]
+		
+		if len(poliza_activa) > 0:
+			poliza_activa = poliza_activa[-1]
+			# Se comprueba que la autorización esté asignada a la póliza activa del asegurado
+			if autorizacion.get_id_poliza() == poliza_activa.get_id_poliza():
+				dni = autorizacion.get_asegurado().get_dni()
+				
+				# Se compone el identificador de la póliza con el formato AU-DNI-ID_ULTIMA_AUTORIZACION+1
+				id_autorizacion = "AU-" + dni[:9]
+				# Se obtienen las autorizaciones previas del cliente/asegurado
+				autorizaciones_previas = [a for a in self.autorizaciones if a.get_asegurado().get_dni() == dni]
+				
+				if len(autorizaciones_previas) > 0:
+					# Si se han realizado autorizaciones previas se obtiene el último identificador y se aumenta en uno
+					id_autorizacion = id_autorizacion + str(int(autorizaciones_previas[-1][-1]) + 1)
+				else:
+					# Si no se han realizado autorizaciones previas se marca como la primera
+					id_autorizacion = id_autorizacion + "1"
+				
+				autorizacion.set_id_autorizacion(id_autorizacion)
+
+				self.autorizaciones.append(autorizacion)
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
