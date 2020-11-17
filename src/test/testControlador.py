@@ -164,5 +164,21 @@ def test_aprobar_denegar_autorizacion():
 		autorizacionNueva = [a for a in controlador.autorizaciones if a.get_asegurado().get_dni() == autorizacionAntigua.get_asegurado().get_dni()]
 		if len(autorizacionNueva) > 0:
 			assert_that(autorizacionAntigua).is_not_equal_to(autorizacionNueva[0])
-			
-			
+
+# Test de aprobar/denegar autorizacion
+def test_aprobar_denegar_autorizacion():
+	controlador = Controller()
+	autorizacion = [a for a in controlador.autorizaciones if a.get_id_poliza() == "AU-777223418-1"]
+	
+	if len(autorizacion) > 0:
+		autorizacion = autorizacion[0]
+		controlador.aprobar_denegar_autorizacion(autorizacion, True, "")
+		
+		hora = datetime.time(3, 45, 12)
+		cita = Cita(autorizacion.get_id_autorizacion(), autorizacion.get_asegurado(), autorizacion.get_id_prescripcion(), autorizacion.get_fecha_realizacion(), hora, autorizacion.get_facultativo_realizador(), autorizacion.get_consulta())
+		
+		assert_that(controlador.citas).does_not_contain(cita)
+		controlador.crear_autorizacion(cita)
+		assert_that(controlador.citas).contains(cita)
+				
+				
