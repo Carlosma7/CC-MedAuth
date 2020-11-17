@@ -192,4 +192,15 @@ def test_modificar_cita():
 		controlador.modificar_cita(citaAntigua, cita.get_fecha(), hora, cita.get_consulta())
 		citaNueva = [c for c in controlador.citas if c.get_id_autorizacion() == citaAntigua.get_id_autorizacion()]
 		if len(citaNueva) > 0:
-			assert_that(citaAntigua).is_not_equal_to(citaNueva[0])				
+			assert_that(citaAntigua).is_not_equal_to(citaNueva[0])		
+			
+# Test de consulta de cita médica
+def test_consultar_cita():
+	controlador = Controller()
+	autorizacion = [a for a in controlador.autorizaciones if a.get_id_poliza() == "AU-777223418-1"]
+	
+	if len(autorizacion) > 0:
+		hora = datetime.time(3, 30, 11)
+		cita1 = Cita(autorizacion.get_id_autorizacion(), autorizacion.get_asegurado(), autorizacion.get_id_prescripcion(), autorizacion.get_fecha_realizacion(), hora, autorizacion.get_facultativo_realizador(), autorizacion.get_consulta())
+		cita2 = controlador.consultar_cita("AU-777223418-1")
+		assert_that(cita1).is_equal_to(cita2)		
