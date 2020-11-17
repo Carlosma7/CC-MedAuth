@@ -26,25 +26,25 @@ class Cita:
 	def get_fecha(self):
 		return self.__fecha
 
-	def set_fecha(self, fecha):
+	def set_fecha(self, fecha: datetime):
 		self.__fecha = fecha
 
 	def get_hora(self):
 		return self.__hora
 
-	def set_hora(self, hora):
+	def set_hora(self, hora: datetime):
 		self.__hora = hora
 
 	def get_facultativo_realizador(self):
 		return self.__facultativo_realizador
 
-	def set_facultativo_realizador(self, facultativo_realizador):
+	def set_facultativo_realizador(self, facultativo_realizador: str):
 		self.facultativo_realizador = facultativo_realizador
 
 	def get_consulta(self):
 		return self.__consulta
 
-	def set_consulta(self, consulta):
+	def set_consulta(self, consulta: str):
 		self.__consulta = consulta
 
 	# Override método equal
