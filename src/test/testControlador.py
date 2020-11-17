@@ -110,6 +110,7 @@ def test_desactivar_poliza():
 			assert_that(polizaAntigua).is_not_equal_to(polizaNueva[0])
 
 # Test de crear autorización
+def test_crear_autorizacion():
 	controlador = Controller()
 	cliente = UsuarioCliente("Julio", "julio1@gmail.com", "777223418-R", "ES99123458")
 	controlador.crear_cliente(cliente)
@@ -123,3 +124,19 @@ def test_desactivar_poliza():
 	assert_that(controlador.autorizaciones).does_not_contain(autorizacion)
 	controlador.crear_autorizacion(autorizacion)
 	assert_that(controlador.autorizaciones).contains(autorizacion)
+
+# Test de modificar autorización
+def test_modificar_autorizacion():
+	controlador = Controller()
+	cliente = [c for c in controlador.usuariosClientes if c.get_dni() == "777223418-R"]
+	poliza = [p for p in controlador.polizas if p.get_id_poliza() == "MA-777223418-1"]
+	
+	if len(cliente) > 0 and len(poliza) > 0:
+		fecha_realizacion = datetime.datetime(2020, 6, 22)
+		autorizacionAntigua = Autorizacion("AU-777223418-1", cliente[0], cliente[0].get_dni(), poliza[0].get_id_poliza(), True, "", fecha_realizacion, Especialidad.Epidemiologia, ["PCR"], "D. Miguel", "Consulta 3")
+		controlador.modificar_autorizacion(autorizacionAntigua, "", fecha_realizacion, Especialidad.Epidemiologia, ["PCR"], "D. Gustavo", "Consulta 3")
+		autorizacionNueva = [a for a in controlador.autorizaciones if a.get_asegurado().get_dni() == autorizacionAntigua.get_asegurado().get_dni()]
+		if len(autorizacionNueva) > 0:
+			assert_that(autorizacionAntigua).is_not_equal_to(autorizacionNueva[0])
+			
+			
