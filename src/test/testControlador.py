@@ -139,6 +139,18 @@ def test_modificar_autorizacion():
 		if len(autorizacionNueva) > 0:
 			assert_that(autorizacionAntigua).is_not_equal_to(autorizacionNueva[0])
 			
+# Test de consulta de autorización
+def test_consultar_autorizacion():
+	controlador = Controller()
+	cliente = [c for c in controlador.usuariosClientes if c.get_dni() == "75125767-F"]
+	poliza = [p for p in controlador.polizas if p.get_id_poliza() == "MA-777223418-1"]
+	
+	if len(cliente) > 0 and len(poliza) > 0:
+		fecha_realizacion = datetime.datetime(2020, 6, 22)
+		autorizacion1 = Autorizacion("AU-777223418-1", cliente[0], cliente[0].get_dni(), poliza[0].get_id_poliza(), True, "", fecha_realizacion, Especialidad.Epidemiologia, ["PCR"], "D. Gustavo", "Consulta 3")
+		autorizacion2 = controlador.consultar_autorizacion("AU-777223418-1")
+		assert_that(autorizacion1).is_equal_to(autorizacion2)
+			
 # Test de aprobar/denegar autorizacion
 def test_aprobar_denegar_autorizacion():
 	controlador = Controller()
