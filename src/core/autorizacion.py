@@ -21,6 +21,9 @@ class Autorizacion:
 	# Métodos get/set
 	def get_id_autorizacion(self):
 		return self.__id_autorizacion
+	
+	def set_id_autorizacion(self, id_autorizacion: str):
+		self.__id_autorizacion = id_autorizacion
 
 	def get_asegurado(self):
 		return self.__asegurado
@@ -34,43 +37,43 @@ class Autorizacion:
 	def get_aceptada(self):
 		return self.__aceptada
 
-	def set_aceptada(self, aceptada):
+	def set_aceptada(self, aceptada: bool):
 		self.__aceptada = aceptada
 
 	def get_motivo_rechazo(self):
 		return self.__motivo_rechazo
 
-	def set_motivo_rechazo(self, motivo_rechazo):
+	def set_motivo_rechazo(self, motivo_rechazo: str):
 		self.__motivo_rechazo = motivo_rechazo
 
 	def get_fecha_realizacion(self):
 		return self.__fecha_realizacion
 
-	def set_fecha_realizacion(self, fecha_realizacion):
+	def set_fecha_realizacion(self, fecha_realizacion: datetime):
 		self.__fecha_realizacion = fecha_realizacion
 
 	def get_especialidad(self):
 		return self.__especialidad
 
-	def set_especialidad(self, especialidad):
+	def set_especialidad(self, especialidad: Especialidad):
 		self.__especialidad = especialidad
 
 	def get_servicios_aceptados(self):
 		return self.__servicios_aceptados
 
-	def set_servicios_aceptados(self, servicios_aceptados):
+	def set_servicios_aceptados(self, servicios_aceptados: List[str]):
 		self.__servicios_aceptados = servicios_aceptados
 
 	def get_facultativo_realizador(self):
 		return self.__facultativo_realizador
 
-	def set_facultativo_realizador(self, facultativo_realizador):
+	def set_facultativo_realizador(self, facultativo_realizador: str):
 		self.__facultativo_realizador = facultativo_realizador
 
 	def get_consulta(self):
 		return self.__consulta
 
-	def set_consulta(self, consulta):
+	def set_consulta(self, consulta: str):
 		self.__consulta = consulta
 
 	# Override método equal
