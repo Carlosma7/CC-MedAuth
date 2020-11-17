@@ -86,24 +86,27 @@ class Controller:
 	# [HU4] Administrar póliza: Crear una póliza
 	def crear_poliza(self, poliza: Poliza):
 		# Se obtiene el usuario cliente/asegurado por su dni
-		cliente = [c for c in self.usuariosClientes if c.get_dni() == poliza.get_titular().get_dni()][0]
+		cliente = [c for c in self.usuariosClientes if c.get_dni() == poliza.get_titular().get_dni()]
+		
+		if len(cliente) > 0:
+			cliente = cliente[0]
 
-		# Se compone el identificador de la póliza con el formato MA-DNI-ID_ULTIMA_POLIZA+1
-		dni = cliente.get_dni()
-		id_poliza = "MA-" + dni[:9]
-		# Se obtienen las polizas previas
-		polizas_previas = [p for p in self.polizas if p.get_id_poliza()[:12] == id_poliza]
+			# Se compone el identificador de la póliza con el formato MA-DNI-ID_ULTIMA_POLIZA+1
+			dni = cliente.get_dni()
+			id_poliza = "MA-" + dni[:9]
+			# Se obtienen las polizas previas
+			polizas_previas = [p for p in self.polizas if p.get_id_poliza()[:12] == id_poliza]
 
-		if len(polizas_previas) > 0:
-			# Si posee polizas previas canceladas, se obtiene el ID de la última que tuvo
-			id_poliza = id_poliza + str(int(polizas_previas[-1][-1]) + 1)
-		else:
-			# Si es la primera se crea como tal
-			id_poliza = id_poliza + "1"
+			if len(polizas_previas) > 0:
+				# Si posee polizas previas canceladas, se obtiene el ID de la última que tuvo
+				id_poliza = id_poliza + str(int(polizas_previas[-1][-1]) + 1)
+			else:
+				# Si es la primera se crea como tal
+				id_poliza = id_poliza + "1"
 
-		poliza.set_id_poliza(id_poliza)
+			poliza.set_id_poliza(id_poliza)
 
-		self.polizas.append(poliza)
+			self.polizas.append(poliza)
 
 	# [HU4] Administrar póliza: Modificar una póliza
 	def modificar_poliza(self, poliza: Poliza, periodo_carencia: datetime, tipo: TipoPoliza, copagos: float, mensualidad: float, servicios_excluidos: List[str], modulos_extra: List[ModuloExtra]):
