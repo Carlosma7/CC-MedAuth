@@ -161,7 +161,7 @@ def test_aprobar_denegar_autorizacion():
 		fecha_realizacion = datetime.datetime(2020, 6, 22)
 		autorizacionAntigua = Autorizacion("AU-777223418-1", cliente[0], cliente[0].get_dni(), poliza[0].get_id_poliza(), True, "", fecha_realizacion, Especialidad.Epidemiologia, ["PCR"], "D. Gustavo", "Consulta 3")
 		controlador.aprobar_denegar_autorizacion(autorizacionAntigua, False, "Servicio no cubierto en póliza.")
-		autorizacionNueva = [a for a in controlador.autorizaciones if a.get_asegurado().get_dni() == autorizacionAntigua.get_asegurado().get_dni()]
+		autorizacionNueva = [a for a in controlador.autorizaciones if a.get_id_autorizacion() == autorizacionAntigua.get_id_autorizacion()]
 		if len(autorizacionNueva) > 0:
 			assert_that(autorizacionAntigua).is_not_equal_to(autorizacionNueva[0])
 
