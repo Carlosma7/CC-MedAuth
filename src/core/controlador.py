@@ -203,3 +203,16 @@ class Controller:
 		
 		if len(autorizacion) > 0:
 			self.citas.append(cita)
+	
+	# [HU11] administrar cita médica: Modificar cita médica
+	def modificar_cita(self, cita: Cita, fecha: datetime, hora: datetime, facultativo_realizador: str, consulta: str):
+		# Se obtiene la cita médica
+		ci = [c for c in self.citas if c.get_id_autorizacion() == cita.get_id_autorizacion()]
+		
+		if len(ci) > 0:
+			ci = ci[0]
+			# Modificación de la cita médica
+			ci.set_fecha(fecha)
+			ci.set_hora(hora)
+			ci.set_facultativo_realizador(facultativo_realizador)
+			ci.set_consulta(consulta)
