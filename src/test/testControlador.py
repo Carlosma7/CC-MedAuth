@@ -109,3 +109,17 @@ def test_desactivar_poliza():
 		if len(polizaNueva) > 0:
 			assert_that(polizaAntigua).is_not_equal_to(polizaNueva[0])
 
+# Test de crear autorización
+	controlador = Controller()
+	cliente = UsuarioCliente("Julio", "julio1@gmail.com", "777223418-R", "ES99123458")
+	controlador.crear_cliente(cliente)
+	
+	fecha = datetime.datetime(2020, 5, 17)
+	poliza = Poliza(cliente, cliente.get_dni(), fecha, TipoPoliza.Total, 9.99, 50.99, ["TAC", "Apendicitis"], [ModuloExtra.Dental], True)
+	controlador.crear_poliza(poliza)
+
+	fecha_realizacion = datetime.datetime(2020, 6, 22)
+	autorizacion = Autorizacion(cliente.get_dni(), cliente, cliente.get_dni(), poliza.get_id_poliza(), True, "", fecha_realizacion, Especialidad.Epidemiologia, ["PCR"], "D. Miguel", "Consulta 3")
+	assert_that(controlador.autorizaciones).does_not_contain(autorizacion)
+	controlador.crear_autorizacion(autorizacion)
+	assert_that(controlador.autorizaciones).contains(autorizacion)
