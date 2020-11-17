@@ -6,8 +6,7 @@ MAINTAINER Carlos Morales <carlos7ma@correo.ugr.es>
 
 # Creación de usuario con permisos básicos
 RUN useradd -ms /bin/bash medauth \
-	&& mkdir app \
-	&& mkdir app/test \
+	&& mkdir -p app/test \
 	&& chown medauth /app/test
 
 # Se configura para utilizarse el usuario creado
