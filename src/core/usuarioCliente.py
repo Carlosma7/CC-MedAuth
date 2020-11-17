@@ -10,13 +10,13 @@ class UsuarioCliente():
 	def get_nombre(self):
 		return self.__nombre
 		
-	def set_nombre(self, nombre):
+	def set_nombre(self, nombre: str):
 		self.__nombre = nombre
 		
 	def get_email(self):
 		return self.__email
 		
-	def set_email(self, email):
+	def set_email(self, email: str):
 		self.__email = email
 	
 	def get_dni(self):
@@ -25,7 +25,7 @@ class UsuarioCliente():
 	def get_cuenta_bancaria(self):
 		return self.__cuenta_bancaria
 		
-	def set_cuenta_bancaria(self, cuenta_bancaria):
+	def set_cuenta_bancaria(self, cuenta_bancaria: str):
 		self.__cuenta_bancaria = cuenta_bancaria
 	
 	# Override método equal
