@@ -3,6 +3,7 @@ FROM python:3.8-slim
 
 # Se indica mantenedor de la imagen
 MAINTAINER Carlos Morales <carlos7ma@correo.ugr.es>
+LABEL org.opencontainers.image.source https://github.com/Carlosma7/MedAuth
 
 # Creación de usuario con permisos básicos
 RUN useradd -ms /bin/bash medauth \
