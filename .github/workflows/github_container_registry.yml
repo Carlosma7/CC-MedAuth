@@ -1,0 +1,57 @@
+name: GitHub-Container-Registry
+
+# When is activated
+on:
+  # When pushing to the repository
+  push:
+    # Only considers "main" branch
+    branches:
+      - main
+
+    # Publish "v1.2.3" tags as releases
+    tags:
+      - v*
+
+# Jobs to do
+jobs:
+  # Push of the docker image
+  push:
+    # Detect on ubuntu the "push" event
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    # Steps of the job
+    steps:
+      # Checks-out repository under $GITHUB_WORKSPACE, so workflow can access it
+      - uses: actions/checkout@v2
+
+      # Build the image in local space
+      - name: Build image
+        run: docker build -t medauth .
+
+      # Log into Github Container using secrets
+      - name: Log into GitHub Container Registry
+        run: echo "${{ secrets.PAT }}" | docker login ghcr.io -u Carlosma7 -p ${{ secrets.DOCKER_PAS }}
+
+      # Push the image to the repository
+      - name: Push image
+        run: |
+          # Image on Github Container Registry
+          IMAGE_ID=ghcr.io/carlosma7/medauth
+
+          # Strip git ref prefix from version
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+
+          # Strip "v" prefix from tag name
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+
+          # Use Docker `latest` tag convention
+          [ "$VERSION" == "main" ] && VERSION=latest
+
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$VERSION
+
+          # Tag of the image
+          docker tag medauth $IMAGE_ID:$VERSION
+          # Push the image
+          docker push $IMAGE_ID:$VERSION
