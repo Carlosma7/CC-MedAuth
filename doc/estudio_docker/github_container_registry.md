@@ -95,7 +95,7 @@ jobs:
 
       # Log into Github Container using secrets
       - name: Log into GitHub Container Registry
-        run: echo "${{ secrets.PAT }}" | docker login ghcr.io -u Carlosma7 -p ${{ secrets.DOCKER_PAS }}
+        run: echo "${{ secrets.PAT }}" | docker login ghcr.io -u Carlosma7 --password-stdin
 
       # Push the image to the repository
       - name: Push image
