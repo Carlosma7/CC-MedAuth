@@ -23,3 +23,28 @@ Para poder subir el contenedor, se han seguido los siguientes pasos:
 
 Este mismo proceso se ha seguido a la hora de crear la versión actual del proyecto, etiquetada como **latest**.
 ![Imagen latest](../img/docker_hub_latest.png "Imagen latests")
+
+### Automización de builds
+
+Se pretende automatizar el proceso de *build* de la imagen respecto a las actualizaciones que se realicen en el [repositorio de Github](https://github.com/Carlosma7/MedAuth), para ello *Docker Hub* ofrece una automatización de este procedimiento. Para realizar este procedimiento se ha seguido este [tutorial](https://docs.docker.com/docker-hub/builds/#autobuild-for-teams).
+
+Para poder automatizar este procedimiento, se han seguidos los siguientes pasos:
+
+1. Dirigirse al [repositorio en Docker Hub](https://hub.docker.com/r/carlosma7/medauth).
+![Repositorio Docker Hub](../img/docker_hub_repo.png "Repositorio Docker Hub")
+
+2. Una vez en el repositorio, se selecciona la sección **builds**.
+![Sección Build](../img/docker_hub_build.png "Sección Build")
+
+3. Se selecciona en *Link to Github* y se nos despliega la siguiente pantalla de configuración:
+![Configuración automatización Docker Hub](../img/docker_hub_conf.png "Configuración automatización Docker Hub")
+
+4. Se selecciona el usuario y repositorio de *Github*.
+5. **No** se selecciona la opción *Autotest*, ya que de momento no se considera un escenario en el que se realicen *Pull Requests* sobre el repositorio.
+6. **No** se selecciona la opción *Repository Links*, ya que no se desea que se realice un build si se actualiza la imagen base del proyecto (*python:3.8-slim*).
+7. Se indica la rama de *Github* que se utilizará como fuente del repositorio del que obtener la información. En este caso se selecciona la rama *main*.
+8. Por último, se presiona en *Save and Build*.
+
+Tras realizar todo este procedimiento, cada vez que se realice un *Push* en *Github*, se creará el *build* correspondiente en *Docker Hub*. A continuación se muestra un ejemplo de un *build* realizado de forma automática:
+
+![Build Automático](../img/docker_hub_auto.png "Build Automático")
