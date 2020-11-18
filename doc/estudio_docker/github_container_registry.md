@@ -13,45 +13,45 @@ Para poder gestionar este registro, se han seguido los siguientes pasos:
 
 1. Generar un ```Personal access tokens```:
 
-![Personal Access Token](../img/PAT.png "Personal Access Token")
+	![Personal Access Token](../img/PAT.png "Personal Access Token")
 
 2. Se loguea con ```docker``` en *GitHub Container Registry*, utilizando el *PAT* generado previamente (se muestra con una variable de entorno de forma que quede oculta por seguridad del proyecto).
 
-![Login GHCR](../img/ghcr_login.png "Login GHCR")
+	![Login GHCR](../img/ghcr_login.png "Login GHCR")
 
 3. Creamos el *tag* con la orden ```docker tag <ID_IMAGEN> ghcr.io/carlosma7/medauth:1.0.0```.
 
-![Imagen GHCR](../img/ghcr_image.png "Imagen GHCR")
+	![Imagen GHCR](../img/ghcr_image.png "Imagen GHCR")
 
 4. Antes de realizar el *push*, hay que habilitar el *soporte mejorado de contenedores*, para ello, se selecciona en la esquina superior derecha nuestro perfil, y se selecciona la opción **Feature preview**. Una vez dentro, se presiona en **Enable**.
 
-![Feature Preview](../img/feature_preview1.png "Feature Preview")
+	![Feature Preview](../img/feature_preview1.png "Feature Preview")
 
-![Enable Feature Preview](../img/feature_preview2.png "Enable Feature Preview")
+	![Enable Feature Preview](../img/feature_preview2.png "Enable Feature Preview")
 
 5. Se realiza el *push* de la imagen a *GitHub*.
 
-![Push Docker GHRC](../img/docker_push_ghcr.png "Push Docker GHRC")
+	![Push Docker GHRC](../img/docker_push_ghcr.png "Push Docker GHRC")
 
 6. Una vez que ha finalizado, en el perfil de *GitHub*, en la sección *Packages* se puede observar que se ha creado el contenedor.
 
-![Docker Package](../img/docker_package1.png "Docker Package")
+	![Docker Package](../img/docker_package1.png "Docker Package")
 
 7. Se puede observar que se indica que se conecte el repositorio al contenedor, para ello, más abajo se puede observar la instrucción necesaria para unir el repositorio mediante el *Dockerfile*.
 
-![Docker Link GHRC](../img/docker_link.png "Docker Link GHRC")
+	![Docker Link GHRC](../img/docker_link.png "Docker Link GHRC")
 
 8. Una vez actualizado el *Dockerfile*, se puede ver que se ha conectado correctamente al repositorio. A continuación se observa el resultado final:
 
-![Docker Package Linked](../img/docker_package2.png "Docker Package Linked")
+	![Docker Package Linked](../img/docker_package2.png "Docker Package Linked")
 
 9. Para hacerlo visible, hay que entrar en la opción *Package Settings* y seleccionar la opción **Make Public**.
 
-![Make Public](../img/docker_package_public.png "Make Public") 
+	![Make Public](../img/docker_package_public.png "Make Public") 
 
 10. Por último, desde el repositorio, a la derecha se puede observar que el contenedor queda claramente reflejado en la sección *Packages*:
 
-![Repository Package](../img/repository_package.png "Repository Package")
+	![Repository Package](../img/repository_package.png "Repository Package")
 
 
 ### Actualización automática
