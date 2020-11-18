@@ -1,7 +1,10 @@
 
+
 ## GitHub Container Registry
 
 ---
+
+### Subida contenedor a GitHub Container Registry
 
 Una de los registros alternativos que se presentan como alternativa a [Docker Hub](https://hub.docker.com/) es la propuesta que presenta *GitHub* con su nuevo registro [GitHub Container Registry](https://github.blog/2020-09-01-introducing-github-container-registry/). Este surge como una evolución natural de la herramienta [GitHub Packages Registry](https://github.com/features/packages). De hecho, consiste en una versión beta de la herramienta y está actualmente sujeta a cambios que se realicen en la misma.
 
@@ -50,4 +53,66 @@ Para poder gestionar este registro, se han seguido los siguientes pasos:
 ![Repository Package](../img/repository_package.png "Repository Package")
 
 
+### Actualización automática
+
+Para la actualización automática del contenedor con el repositorio de *GitHub*, se ha diseñado una **GitHub Action** que controle el evento de realización de un *push* al repositorio. Para ello se ha utilizado como base de desarrollo la *Action* **Publish Docker Container** que pertenece al conjunto *starter-workflows* del propio *GitHub*.
+
+![Publish Docker Container](../img/publish_docker_container.png "Publish Docker Container")
+
+A continuación se muestra la *GitHub Action* definida como ```GitHub-Container-Registry```:
+
+```yaml
+name: GitHub-Container-Registry
+
+# When is activated
+on:
+  # When pushing to the repository
+  push:
+    # Only considers "main" branch
+    branches:
+      - main
+
+    # Publish "v1.2.3" tags as releases
+    tags:
+      - v*
+
+# Jobs to do
+jobs:
+  # Push of the docker image
+  push:
+    # Detect on ubuntu the "push" event
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    # Steps of the job
+    steps:
+      # Checks-out repository under $GITHUB_WORKSPACE, so workflow can access it
+      - uses: actions/checkout@v2
+
+      # Build the image in local space
+      - name: Build image
+        run: docker build -t medauth .
+
+      # Log into Github Container using secrets
+      - name: Log into GitHub Container Registry
+        run: echo "${{ secrets.PAT }}" | docker login ghcr.io -u Carlosma7 -p ${{ secrets.DOCKER_PAS }}
+
+      # Push the image to the repository
+      - name: Push image
+        run: |
+          # Image on Github Container Registry
+          IMAGE_ID=ghcr.io/carlosma7/medauth
+          # Strip git ref prefix from version
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          # Strip "v" prefix from tag name
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+          # Use Docker `latest` tag convention
+          [ "$VERSION" == "main" ] && VERSION=latest
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$VERSION
+          # Tag of the image
+          docker tag medauth $IMAGE_ID:$VERSION
+          # Push the image
+          docker push $IMAGE_ID:$VERSION
+```
 
