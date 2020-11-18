@@ -1,5 +1,6 @@
 
 
+
 ## GitHub Container Registry
 
 ---
@@ -115,4 +116,16 @@ jobs:
           # Push the image
           docker push $IMAGE_ID:$VERSION
 ```
+
+Para la realización se han utilizado algunas [variables de entorno de GitHub](https://docs.github.com/es/free-pro-team@latest/actions/reference/environment-variables) y también se ha utilizado para almacenar el *PAT* un [secret](https://docs.github.com/es/free-pro-team@latest/actions/reference/encrypted-secrets).
+
+![Secret PAT](../img/github_secret.png "Secret PAT")
+
+A continuación, tras realizar un commit, se puede observar que se lanza la ejecución pertinente de la *GitHub Action* y funciona correctamente (tras unos ajustes).
+
+![Github Workflow](../img/github_workflow.png "Github Workflow")
+
+Por último, se comprueba que realmente se ha actualizado el contenedor:
+
+![Contenedor Actualizado](../img/github_ghcr_updated.png "Contenedor actualizado")
 
