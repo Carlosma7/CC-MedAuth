@@ -42,3 +42,16 @@
 
 :small_blue_diamond: [Tests y sugerencias](https://carlosma7.github.io/MedAuth/doc/test_sugerencias) previas.
 
+## Contenerización, automatización de registros y avance del proyecto
+
+---
+
+:small_blue_diamond: [Estudio de contenedor base](https://carlosma7.github.io/MedAuth/doc/estudio_docker/estudio_contenedor_base)
+
+:small_blue_diamond: [Documentación sobre Dockerfile](https://carlosma7.github.io/MedAuth/doc/estudio_docker/documentacion_dockerfile)
+
+:small_blue_diamond: [Docker Hub y automatización de subidas](https://carlosma7.github.io/MedAuth/doc/estudio_docker/documentacion_docker_hub)
+
+:small_blue_diamond: [Github Container Registry y automatización de subidas](https://carlosma7.github.io/MedAuth/doc/estudio_docker/github_container_registry)
+
+:small_blue_diamond: [Avance del código](https://carlosma7.github.io/MedAuth/doc/avance_codigo_2)
