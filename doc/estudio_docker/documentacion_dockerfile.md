@@ -2,6 +2,8 @@
 
 ---
 
+El **Dockerfile** del proyecto se puede ver [aquí](https://github.com/Carlosma7/MedAuth/blob/main/Dockerfile).
+
 ### Primera versión
 
 Para la creación de la imagen, tras realizar el [estudio](https://carlosma7.github.io/MedAuth/doc/estudio_docker/estudio_contenedor_base) sobre el contenedor base, y escoger **python:3.8-slim**, se deben analizar los distintos requisitos que exige el proyecto para la ejecución del mismo.
