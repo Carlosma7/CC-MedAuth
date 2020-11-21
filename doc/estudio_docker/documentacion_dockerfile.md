@@ -168,5 +168,3 @@ Por último, se procede a comprobar con la herramienta [skopeo](https://github.c
 ![Skopeo](../img/skopeo2.png "Skopeo")
 
 Como se puede observar, sigue indicando 8 capas, ya que *skopeo* no considera las *LABEL*, ya que su tamaño es prácticamente despreciable, por lo que no es contraproducente su inclusión en cuanto a creación de capas.
-
-El *Dockerfile* del proyecto se puede ver [aquí](https://github.com/Carlosma7/MedAuth/blob/main/Dockerfile).
