@@ -2,6 +2,8 @@
 
 ---
 
+### Primera versión
+
 Para la creación de la imagen, tras realizar el [estudio](https://carlosma7.github.io/MedAuth/doc/estudio_docker/estudio_contenedor_base) sobre el contenedor base, y escoger **python:3.8-slim**, se deben analizar los distintos requisitos que exige el proyecto para la ejecución del mismo.
 
 El objetivo es poder ejecutar nuestro contenedor como un entorno de desarrollo y test, indicándole como parámetro en la creación el directorio local y el directorio donde se debe montar en nuestro contenedor el directorio con la información del proyecto. Un ejemplo propuesto de ejecución de la imagen es:
@@ -72,6 +74,8 @@ Aunque esta versión cumple con los requisitos propuestos y hace uso de la mayor
 * Identificar que tareas se han de realizar con permisos de usuario y cuales no. :heavy_check_mark:
 * Eliminar la información innecesaria. :heavy_check_mark:
 
+### Segunda versión
+
 A continuación, se procede a realizar los cambios de optimización, con el objetivo de reducir en memoria y en número de capas de la imagen. En el *Dockerfile* basta con agrupar las distintas sentencias que se pueden ejecutar de forma secuencial en una única. En este caso, el *Dockerfile* resultante y optimizado sería:
 
 ```dockerfile
@@ -112,5 +116,57 @@ Por último, se procede a comprobar con la herramienta [skopeo](https://github.c
 ![Skopeo](../img/skopeo.png "Skopeo")
 
 Como se puede observar, se ha reducido el número de capas en 3. En este caso la mayor parte de la configuración viene por parte del contenedor base, pero en un futuro, si se realizan modificaciones en el proyecto que requieran de instalaciones en nuestro contenedor, puede suponer un gran ahorro en memoria.
+
+### Tercera versión
+
+A continuación, se han añadido una serie de etiquetas descriptivas sobre el contenedor como mejora de buenas prácticas, además de añadir la configuración de variable de entorno al inicio, también por el mismo motivo de buenas prácticas.
+
+```dockerfile
+# Python 3.8-slim (Debian buster-slim based)
+FROM python:3.8-slim
+
+# Se indica mantenedor de la imagen
+MAINTAINER Carlos Morales <carlos7ma@correo.ugr.es>
+
+# Se etiqueta la imagen para almacenarla en Github Container Registry
+LABEL org.opencontainers.image.source https://github.com/carlosma7/medauth
+
+# Etiquetas relativas a la imagen creada
+LABEL build-date="21/10/2020"
+LABEL description="Medical Authorization Project on Python3.8-slim debian based docker."
+LABEL github.url="https://github.com/Carlosma7/MedAuth"
+LABEL version="1.0.0"
+
+# Se configura el PATH para ejecutar paquetes de Pip
+ENV PATH=/home/medauth/.local/bin:$PATH
+
+# Creación de usuario con permisos básicos
+RUN useradd -ms /bin/bash medauth \
+	&& mkdir -p app/test \
+	&& chown medauth /app/test
+
+# Se configura para utilizarse el usuario creado
+USER medauth
+
+# Se configura el directorio de trabajo
+WORKDIR /app/test
+
+# Se copia el fichero de requisitos de paquetes pip
+COPY requirements.txt .
+
+# Instalación de los requisitos y se borra el fichero tras la instalación
+RUN pip install -r requirements.txt --no-warn-script-location \
+	&& rm requirements.txt
+
+
+# Ejecución
+CMD ["invoke", "tests"]
+```
+
+Por último, se procede a comprobar con la herramienta [skopeo](https://github.com/containers/skopeo) esta última imagen obtenida:
+
+![Skopeo](../img/skopeo2.png "Skopeo")
+
+Como se puede observar, sigue indicando 8 capas, ya que *skopeo* no considera las *LABEL*, ya que su tamaño es prácticamente despreciable, por lo que no es contraproducente su inclusión en cuanto a creación de capas.
 
 El *Dockerfile* del proyecto se puede ver [aquí](https://github.com/Carlosma7/MedAuth/blob/main/Dockerfile).
