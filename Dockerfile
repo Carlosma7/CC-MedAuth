@@ -27,6 +27,9 @@ USER medauth
 # Se configura el directorio de trabajo
 WORKDIR /app/test
 
+# Se copia el fichero de requisitos de paquetes pip
+COPY requirements.txt .
+
 # Instalación de los requisitos y se borra el fichero tras la instalación
 RUN pip install -r requirements.txt --no-warn-script-location \
 	&& rm requirements.txt
