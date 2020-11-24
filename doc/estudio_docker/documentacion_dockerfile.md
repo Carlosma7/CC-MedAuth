@@ -32,7 +32,7 @@ Cumpliendo los distintos requisitos impuestos, se alcanza una primera versión d
 FROM python:3.8-slim
 
 # Se indica mantenedor de la imagen
-MAINTAINER Carlos Morales <carlos7ma@correo.ugr.es>
+LABEL maintainer="Carlos Morales <carlos7ma@correo.ugr.es>""
 
 # Creación de usuario con permisos básicos
 RUN useradd -ms /bin/bash medauth
@@ -85,7 +85,7 @@ A continuación, se procede a realizar los cambios de optimización, con el obje
 FROM python:3.8-slim
 
 # Se indica mantenedor de la imagen
-MAINTAINER Carlos Morales <carlos7ma@correo.ugr.es>
+LABEL maintainer="Carlos Morales <carlos7ma@correo.ugr.es>""
 
 # Creación de usuario con permisos básicos
 RUN useradd -ms /bin/bash medauth \
@@ -128,7 +128,7 @@ A continuación, se han añadido una serie de etiquetas descriptivas sobre el co
 FROM python:3.8-slim
 
 # Se indica mantenedor de la imagen
-MAINTAINER Carlos Morales <carlos7ma@correo.ugr.es>
+LABEL maintainer="Carlos Morales <carlos7ma@correo.ugr.es>""
 
 # Se etiqueta la imagen para almacenarla en Github Container Registry
 LABEL org.opencontainers.image.source https://github.com/carlosma7/medauth

@@ -2,7 +2,7 @@
 FROM python:3.8-slim
 
 # Se indica mantenedor de la imagen
-MAINTAINER Carlos Morales <carlos7ma@correo.ugr.es>
+LABEL maintainer="Carlos Morales <carlos7ma@correo.ugr.es>"
 
 # Se etiqueta la imagen para almacenarla en Github Container Registry
 LABEL org.opencontainers.image.source https://github.com/carlosma7/medauth
