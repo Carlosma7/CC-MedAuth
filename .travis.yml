@@ -1,10 +1,11 @@
+---
 # Language Python with versions 3.6, 3.7 and 3.8
 language: python
 python:
   - "3.6"
   - "3.7"
   - "3.8"
-  
+
 # Install dependencies (Invoke, Pytest and Assertpy)
 install:
   - pip install -r requirements.txt
@@ -12,7 +13,7 @@ install:
 # Branches to track (we are working currently with two branches)
 branches:
   only:
-  - master
+    - master
 
 # Launch tests using the task manager
 script:
