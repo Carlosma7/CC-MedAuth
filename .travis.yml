@@ -13,7 +13,7 @@ install:
 # Branches to track (we are working currently with two branches)
 branches:
   only:
-    - master
+    - main
 
 # Launch tests using the task manager
 script:
