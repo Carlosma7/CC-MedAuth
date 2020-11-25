@@ -1,6 +1,7 @@
 ## Herramientas de Integración Continua (*CI*)
----
+
 ### Estudio inicial
+
 Existen numerosas herramientas destinadas a la integración continua (algunas de ellas además poseen también herramientas de despliegue continuo), por lo que para escoger una que se adapte a las necesidades de nuestro proyecto, se van a evaluar las Principales herramientas de *CI* (referencias al final del documento) observando sus principales ventajas y desventajas de cara a nuestro proyecto:
 
 * [Jenkins](https://www.jenkins.io/): Es un servidor de automatización *open source*, proporciona cientos de de plugins y está desarrollado en *Java*. Es la herramienta más utilizada actualmente.
@@ -34,7 +35,6 @@ Existen numerosas herramientas destinadas a la integración continua (algunas de
 | Facíl de configurar, extensible e interactivo.              | Logs poco intuitivos y con un formato que no resulta agradable de interpretar. |
 | Permite asignación de roles y permisos.                     | Errores en ocasiones poco claros.                                              |
 | Documentación sencilla, limpia e intuitiva.                 | Suele ofrecer problemas en las actualizaciones de version.                     |
-|                                                             |                                                                                |
 
 * [Shippable](https://www.shippable.com/): Es una plataforma de DevOps que ayuda a los desarrolladores y equipos de DevOps a lograr integración continua y despliegue continuo, y hacer lanzamientos de software frecuentes, predecibles y sin errores. 
 
@@ -97,6 +97,8 @@ Existen numerosas herramientas destinadas a la integración continua (algunas de
 | Integración con *GitHub*.            | No está hosteado, por lo que hay que adquirir una máquina virtual y configurarlo. |
 
 Además de las previamente analizadas, se han estudiado también opciones como [GitLabCI](https://docs.gitlab.com/ee/ci/), [Bamboo](https://www.atlassian.com/es/software/bamboo), [Buddy](https://buddy.works/) o [GoCD](https://www.gocd.org/), que han sido rechazadas directamente por distintos motivos. Se puede observar que realmente hay un amplio abanico de opciones a elegir para realizar la integración continua en el proyecto, por lo que dentro de elegir aquellas que más se adecúen al proyecto, también cabe observar aquellas que resulten más interesantes para el mismo.
+
+### Elecciones finales
 
 Tras analizar las distintas opciones, se ha decidido finalmente realizar la integración continua con distintas herramientas y ver como se realiza en cada una de ellas:
 
