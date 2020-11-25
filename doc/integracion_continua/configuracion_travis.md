@@ -37,3 +37,40 @@ Para poder configurar Travis, se deben seguir los siguientes pasos:
 8. Podemos observar que se ha configurado correctamente ya que se pueden observar todos los *builds* previos:
 
 	![Travis Setup Ok](../img/travis_setup_ok.png "Travis Setup Ok")
+	
+### Configuración .travis.yml
+
+Se puede ver el fichero **.travis.yml** [aquí](https://github.com/Carlosma7/MedAuth/blob/main/.travis.yml).
+
+Cada vez que se realiza un *push*, *Travis* mediante *triggers* automatiza el proceso de ejecución de *builds*, usando para ello el fichero de configuración definido en nuestro repositorio, denominado ```.travis.yml```. Este fichero contiene los *pipelines* que permiten la ejecución del *build* y las diferentes características de dicho build, mediante *YAML*.
+
+En el proyecto, hay que tener en cuenta los siguientes requisitos de cara a la configuración del fichero *.travis.yml*:
+
+* El lenguaje debe ser Python3.8, pero se debe comprobar también con versiones inferiores como la 3.6 o 3.7.
+* Se deben tener en cuenta las dependencias del proyecto que hacen que este funcione como biblioteca de aserciones, gestor de tareas o marco de pruebas.
+* Una buena práctica es únicamente llevar un seguimiento de aquello que se desea testear, por lo que se indican las ramas. Actualmente estamos trabajando con dos ramas por lo que se indican estas, pero al realizar el *merge* correspondiente, deberá modificarse el fichero para que únicamente trabaje con la rama *main*.
+* Ejecución de tests, empleando para ello el gestor de tareas previamente configurado.
+
+```yaml
+---
+# Language Python with versions 3.6, 3.7 and 3.8
+language: python
+python:
+  - "3.6"
+  - "3.7"
+  - "3.8"
+
+# Install dependencies (Invoke, Pytest and Assertpy)
+install:
+  - pip install -r requirements.txt
+
+# Branches to track (we are working currently with two branches)
+branches:
+  only:
+    - main
+    - hito4
+
+# Launch tests using the task manager
+script:
+  - invoke tests
+```
