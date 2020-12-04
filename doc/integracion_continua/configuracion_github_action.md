@@ -2,6 +2,8 @@
 
 ### Configuración GitHub Action
 
+[![Build Status](https://github.com/Carlosma7/MedAuth/workflows/GitHub-Actions-CI/badge.svg)](https://github.com/Carlosma7/MedAuth/actions?query=workflow%3AGitHub-Actions-CI)
+
 Las [GitHub Actions](https://github.com/features/actions) son una serie de ficheros de configuración para la automatización de tareas y flujos de trabajo de nuestro repositorio de *GitHub*. Estas ayudan a automatizar tareas dentro del ciclo de vida del desarrollo de software. 
 
 Están controladas por eventos, lo que significa que puede ejecutar una serie de comandos después de que haya ocurrido un evento específico. Por ejemplo, si queremos que se realicen una serie de acciones tras realizar un *push*.
