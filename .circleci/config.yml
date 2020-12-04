@@ -1,24 +1,21 @@
+---
 version: 2.1
 
 # Tasks definition
 jobs:
-	test:
-		docker:
-			# CircleCI official docker image with the project version
-			- image: circleci/python:3.8-buster
-		steps:
-			- checkout
-			# Install dependencies (Invoke, Pytest, and Assertpy)
-			- run:
-				name: Install dependencies
-				command: pip3 install -r requirements.txt
-			# Launch tests using the task manager
-			- run:
-				name: Run tests
-				command: invoke tests
+    test:
+        docker:
+            # CircleCI official docker image with the project version
+            - image: circleci/python:3.8-buster
+        steps:
+            - checkout
+            # Install dependencies (Invoke, Pytest, and Assertpy)
+            - run: pip3 install -r requirements.txt
+            # Launch tests using the task manager
+            - run: invoke tests
 
 # Workflows of CircleCI
 workflows:
-	test_project:
-		jobs:
-			- test
+    test_project:
+        jobs:
+            - test
