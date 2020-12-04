@@ -9,8 +9,6 @@ jobs:
             - image: carlosma7/medauth:latest
         steps:
             - checkout
-            # Install dependencies (Invoke, Pytest, and Assertpy)
-            - run: pip3 install -r requirements.txt
             # Launch tests using the task manager
             - run: invoke tests
 
