@@ -33,3 +33,41 @@ Para poder configurar CircleCI, se deben seguir los siguientes pasos:
 7. El fichero de configuración es un esquema estándar, y como tal no cumple con los requisitos de nuestro proyecto, por lo que para ello hay que definir correctamente el fichero **config.yml**, y una vez realizada la configuración, se puede observar que funciona correctamente:
 
 ![CircleCI Finally Working](../img/circleci_bien.png "CircleCI Finally Working")
+
+### Configuración config.yml
+
+Se puede ver el fichero **config.yml** [aquí](https://github.com/Carlosma7/MedAuth/blob/main/.circleci/config.yml).
+
+Cada vez que se realiza un *push*, *CircleCI* mediante *triggers* automatiza el proceso de ejecución de *builds*, usando para ello el fichero de configuración definido en nuestro repositorio, denominado ```config.yml```. Este fichero contiene los *pipelines* que permiten la ejecución del *build* y las diferentes características de dicho build, mediante *YAML*.
+
+En el proyecto, hay que tener en cuenta los siguientes requisitos de cara a la configuración del fichero *config.yml*:
+
+* El lenguaje debe ser Python3.8, pero se debe comprobar también con versiones inferiores como la 3.6 o 3.7.
+* Se deben tener en cuenta las dependencias del proyecto que hacen que este funcione como biblioteca de aserciones, gestor de tareas o marco de pruebas.
+* Ejecución de tests, empleando para ello el gestor de tareas previamente configurado.
+
+Para ello se utiliza una imagen de *Docker* oficial de *CircleCI*, que se puede observar [aquí](https://hub.docker.com/r/circleci/python). Esta imagen no servirá de entorno donde ejecutar los tests.
+
+```yaml
+---
+version: 2.1
+
+# Tasks definition
+jobs:
+    test:
+        docker:
+            # CircleCI official docker image with the project version
+            - image: circleci/python:3.8-buster
+        steps:
+            - checkout
+            # Install dependencies (Invoke, Pytest, and Assertpy)
+            - run: pip3 install -r requirements.txt
+            # Launch tests using the task manager
+            - run: invoke tests
+
+# Workflows of CircleCI
+workflows:
+    test_project:
+        jobs:
+            - test
+```
