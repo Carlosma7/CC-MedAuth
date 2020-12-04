@@ -71,3 +71,29 @@ workflows:
         jobs:
             - test
 ```
+
+### Configuración config.yml con contenedor Docker del proyecto
+
+Una de las mejoras es la de aprovechar el propio entorno de pruebas que se crea con el contenedor del proyecto, ya que no será necesario instalar nada, y tenemos el entorno ideal para realizar la comprobación del proyecto. Para ello se aprovecha las características de *CircleCI*, indicando como contenedor sobre el que trabajar el propio del proyecto en [Docker Hub](https://hub.docker.com/repository/docker/carlosma7/medauth).
+
+```yaml
+---
+version: 2.1
+
+# Tasks definition
+jobs:
+    test:
+        docker:
+            # Project's Docker image in Docker Hub
+            - image: carlosma7/medauth:latest
+        steps:
+            - checkout
+            # Launch tests using the task manager
+            - run: invoke tests
+
+# Workflows of CircleCI
+workflows:
+    test_project:
+        jobs:
+            - test
+```
