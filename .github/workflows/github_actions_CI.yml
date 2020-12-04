@@ -1,0 +1,30 @@
+name: GitHub-Actions-CI
+
+# When is activated
+on:
+  # When pushing to the repository
+  push:
+    # Only considers "main" branch
+    branches:
+      - main
+
+    # Publish "v1.2.3" tags as releases
+    tags:
+      - v*
+
+# Jobs to do
+jobs:
+  # Push of the docker image
+  push:
+    # Detect on ubuntu the "push" event
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    # Steps of the job
+    steps:
+      # Checks-out repository under $GITHUB_WORKSPACE, so workflow can access it
+      - uses: actions/checkout@v2
+
+      # Build the image in local space
+      - name: Build image
+        run: docker build -t medauth .
