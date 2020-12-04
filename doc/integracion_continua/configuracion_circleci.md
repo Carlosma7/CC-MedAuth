@@ -28,7 +28,7 @@ Para poder configurar CircleCI, se deben seguir los siguientes pasos:
 
 6. A continuación introducimos el ejemplo propuesto anteriormente en la carpeta indicada dentro de la raíz del proyecto: **.circleci/config.yml**:
 
-![CircleCI Detects Config.yml](../img/circleci_detecta "CircleCI Detects Config.yml")
+![CircleCI Detects Config.yml](../img/circleci_detecta.png "CircleCI Detects Config.yml")
 
 7. El fichero de configuración es un esquema estándar, y como tal no cumple con los requisitos de nuestro proyecto, por lo que para ello hay que definir correctamente el fichero **config.yml**, y una vez realizada la configuración, se puede observar que funciona correctamente:
 
