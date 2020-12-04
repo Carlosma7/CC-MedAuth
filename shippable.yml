@@ -1,0 +1,14 @@
+---
+# Language Python with versions 3.6, 3.7 and 3.8
+language: python
+python:
+  - "3.6"
+  - "3.7"
+  - "3.8"
+
+build:
+  ci:
+    # Install dependencies (Invoke, Pytest and Assertpy)
+    - pip3 install -r requirements.txt
+    # Launch tests using the task manager
+    - invoke tests
