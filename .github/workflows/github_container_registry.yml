@@ -11,6 +11,9 @@ on:
     # Publish "v1.2.3" tags as releases
     tags:
       - v*
+    # Triggers only with this path
+    path:
+      - Dockerfile
 
 # Jobs to do
 jobs:
