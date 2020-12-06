@@ -1,0 +1,16 @@
+name: "Sintaxis YAML"
+on:
+  push:
+    paths:
+      - 'cc.yaml'
+
+jobs:
+  comprueba_ficheros_YAML:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Descarga repo"
+        uses: actions/checkout@v2
+      - name: "Comprueba fichero"
+        run:
+          yamllint cc.yaml
+      
