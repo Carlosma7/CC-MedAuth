@@ -12,7 +12,7 @@ on:
     tags:
       - v*
     # Triggers only with this path
-    path:
+    paths:
       - Dockerfile
 
 # Jobs to do
