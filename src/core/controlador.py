@@ -28,29 +28,33 @@ class Controller:
 		
 		# Comprobar si el DNI existe en los usuarios existentes
 		if len(usr) == 0:
-			# Comprobar correo
-			if bool(re.match("([a-zA-Z0-9]+@[a-zA-Z]+\.)(com|es)", usuario.get_email())):
-			
-				if tipo_usuario == 0: # Admin
-					# Patrón correo: email@medauth
-					email_empresarial = usuario.get_email().split('@')[0] + '@medauth.com'
-					usuario.set_email_empresarial(email_empresarial)
-					
-					# Se crea el usuario administrativo
-					usr_creado = UsuarioAdmin(usuario.get_nombre(), usuario.get_email(), usuario.get_dni(), usuario.get_email_empresarial())
-					
-				elif tipo_usuario == 1: # Cliente
-					# Se crea el usuario cliente
-					usr_creado = UsuarioCliente(usuario.get_nombre(), usuario.get_email(), usuario.get_dni(), usuario.get_cuenta_bancaria())
-					
+			# Comropobar DNI
+			if bool(re.match("[0-9]{8}-[A-Z]", usuario.get_dni())):
+				# Comprobar correo
+				if bool(re.match("([a-zA-Z0-9]+@[a-zA-Z]+\.)(com|es)", usuario.get_email())):
+				
+					if tipo_usuario == 0: # Admin
+						# Patrón correo: email@medauth
+						email_empresarial = usuario.get_email().split('@')[0] + '@medauth.com'
+						usuario.set_email_empresarial(email_empresarial)
+						
+						# Se crea el usuario administrativo
+						usr_creado = UsuarioAdmin(usuario.get_nombre(), usuario.get_email(), usuario.get_dni(), usuario.get_email_empresarial())
+						
+					elif tipo_usuario == 1: # Cliente
+						# Se crea el usuario cliente
+						usr_creado = UsuarioCliente(usuario.get_nombre(), usuario.get_email(), usuario.get_dni(), usuario.get_cuenta_bancaria())
+						
+					else:
+						raise ValueError('Wrong user type.')
+						
+					# Se almacena
+					self.usuarios.append(usr_creado)
+				
 				else:
-					raise ValueError('Wrong user type.')
-					
-				# Se almacena
-				self.usuarios.append(usr_creado)
-			
+					raise ValueError('Email not valid.')
 			else:
-				raise ValueError('Email not valid.')
+				raise ValueError('DNI not valid.')
 			
 		else:
 			raise ValueError('An user exists with DNI provided.')
