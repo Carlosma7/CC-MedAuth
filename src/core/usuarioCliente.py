@@ -1,27 +1,12 @@
+from usuario import Usuario
+
 # Clase de usuario cliente/asegurado
-class UsuarioCliente():
+class UsuarioCliente(Usuario):
 	def __init__(self, nombre: str, email: str, dni: str, cuenta_bancaria: str):
-		self.__nombre = nombre
-		self.__email = email
-		self.__dni = dni
 		self.__cuenta_bancaria = cuenta_bancaria
+		super().__init__(nombre, email, dni)
 	
 	# Métodos get/set
-	def get_nombre(self):
-		return self.__nombre
-		
-	def set_nombre(self, nombre: str):
-		self.__nombre = nombre
-		
-	def get_email(self):
-		return self.__email
-		
-	def set_email(self, email: str):
-		self.__email = email
-	
-	def get_dni(self):
-		return self.__dni
-		
 	def get_cuenta_bancaria(self):
 		return self.__cuenta_bancaria
 		
@@ -30,4 +15,4 @@ class UsuarioCliente():
 	
 	# Override método equal
 	def __eq__(self, otra):
-		return (self.__nombre == otra.get_nombre() ) and (self.__email == otra.get_email()) and (self.__dni == otra.get_dni()) and (self.__cuenta_bancaria == otra.get_cuenta_bancaria())
+		return super().__eq__(otra) and (self.__cuenta_bancaria == otra.get_cuenta_bancaria())
