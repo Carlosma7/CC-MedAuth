@@ -107,15 +107,23 @@ def test_crear_poliza():
 # Test de modificación de póliza
 def test_modificar_poliza():
 	controlador = Controller()
+	# Obtener cliente por el DNI
 	cliente = [c for c in controlador.usuariosClientes if c.get_dni() == "75125767-F"]
 	
 	if len(cliente) > 0:
+		# Creación fecha
 		fecha = datetime.datetime(2020, 5, 17)
+		# Creación objeto Póliza
 		polizaAntigua = Poliza(cliente[0], "MA-75125767-1", fecha, TipoPoliza.Basica, 5.99, 50.99, ["TAC", "Apendicitis"], [ModuloExtra.Dental], True)
+		# Modificación de póliza
 		controlador.modificar_poliza(polizaAntigua, fecha, TipoPoliza.Basica, 10.99, 50.99, ["TAC", "Apendicitis"], [ModuloExtra.Dental])
+		# Obtener la póliza del controlador tras modificar
 		polizaNueva = [a for a in controlador.polizas if a.get_titular().get_dni() == polizaAntigua.get_titular().get_dni()]
 		if len(polizaNueva) > 0:
+			# Comprobar que la póliza no es igual tras la modificación
 			assert_that(polizaAntigua).is_not_equal_to(polizaNueva[0])
+			# Comprobar que el ID de la póliza es el mismo
+			assert_that(polizaAntigua.get_id_poliza()).is_equal_to(polizaNueva[0].get_id_poliza())
 
 
 # Test de consulta de póliza
