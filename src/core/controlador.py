@@ -55,7 +55,7 @@ class Controller:
 			raise ValueError('An user exists with DNI provided.')
 			
 
-	# [HU3] Administrar usuario
+	# [HU3] Administrar usuario: Modificar usuario
 	def modificar_usuario(self, usuario: Usuario, nombre: str, email: str, cuenta_bancaria: str):
 		# Se obtiene el usuario por su dni
 		usuario = [u for u in self.usuarios if u.get_dni() == usuario.get_dni()]
@@ -79,21 +79,15 @@ class Controller:
 		else:
 			raise ValueError('User doesn´t exist.')
 
-	# [HU3] Administrar usuario: Eliminar administrador
-	def eliminar_admin(self, dni: str):
-		admin_buscado = [c for c in self.usuariosAdmins if c.get_dni() == dni]
-
+	# [HU3] Administrar usuario: Eliminar usuario
+	def eliminar_usuario(self, dni: str):
+		usuario_buscado = [u for u in self.usuarios if u.get_dni() == dni]
+		
 		if len(admin_buscado) > 0:
 			# Se elimina el usuario
-			self.usuariosAdmins.remove(admin_buscado[0])
-
-	# [HU3] Administrar usuario: Eliminar cliente
-	def eliminar_cliente(self, dni: str):
-		cliente_buscado = [c for c in self.usuariosClientes if c.get_dni() == dni]
-
-		if len(cliente_buscado) > 0:
-			# Se elimina el usuario
-			self.usuariosClientes.remove(cliente_buscado[0])
+			self.usuarios.remove(usuario_buscado[0])
+		else:
+			raise ValueError('User doesn´t exist.')
 
 	# [HU4] Administrar póliza: Crear una póliza
 	def crear_poliza(self, poliza: Poliza):
