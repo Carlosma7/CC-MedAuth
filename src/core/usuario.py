@@ -23,4 +23,4 @@ class Usuario():
 	
 	# Override método equal
 	def __eq__(self, otra):
-		return (self.__nombre == otra.get_nombre() ) and (self.__email == otra.get_email()) and (self.__dni == otra.get_dni()))
+		return (self.__nombre == otra.get_nombre() ) and (self.__email == otra.get_email()) and (self.__dni == otra.get_dni())
