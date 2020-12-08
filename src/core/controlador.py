@@ -34,9 +34,10 @@ class Controller:
 				if tipo_usuario == 0: # Admin
 					# Patrón correo: email@medauth
 					email_empresarial = usuario.get_email().split('@')[0] + '@medauth.com'
+					usuario.set_email_empresarial(email_empresarial)
 					
 					# Se crea el usuario administrativo
-					usr_creado = UsuarioAdmin(usuario.get_nombre(), usuario.get_email(), usuario.get_dni(), email_empresarial)
+					usr_creado = UsuarioAdmin(usuario.get_nombre(), usuario.get_email(), usuario.get_dni(), usuario.get_email_empresarial())
 					
 				elif tipo_usuario == 1: # Cliente
 					# Se crea el usuario cliente
