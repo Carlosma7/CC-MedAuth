@@ -10,10 +10,13 @@ from assertpy import assert_that
 # Test de creación de usuario administrativo
 def test_crear_admin():
 	controlador = Controller()
+	# Creación de usuario administrador
 	admin = UsuarioAdmin("Carlos", "carlos7ma@gmail.com", "75925767-F", "")
 	adminOtro = UsuarioAdmin("Fernando", "fer@gmail.com", "12925767-F", "")
 	
-	controlador.crear_admin(admin)
+	# Crear administrador
+	controlador.crear_admin(admin, 0)
+	# Comprobar que únicamente se ha insertado el usuario seleccionado
 	assert_that(controlador.usuariosAdmins).contains(admin).does_not_contain(adminOtro)
 	
 # Test de creación de usuario cliente/asegurado
