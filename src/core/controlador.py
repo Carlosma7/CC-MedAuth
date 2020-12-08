@@ -38,7 +38,7 @@ class Controller:
 					# Se crea el usuario administrativo
 					usr_creado = UsuarioAdmin(usuario.get_nombre(), usuario.get_email(), usuario.get_dni(), email_empresarial)
 					
-				else if tipo_usuario == 1: # Cliente
+				elif tipo_usuario == 1: # Cliente
 					# Se crea el usuario cliente
 					usr_creado = UsuarioCliente(usuario.get_nombre(), usuario.get_email(), usuario.get_dni(), usuario.get_cuenta_bancaria())
 					
