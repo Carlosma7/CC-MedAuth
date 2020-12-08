@@ -192,16 +192,25 @@ def test_crear_autorizacion():
 # Test de modificar autorización
 def test_modificar_autorizacion():
 	controlador = Controller()
+	# Obtener cliente por el DNI
 	cliente = [c for c in controlador.usuariosClientes if c.get_dni() == "777223418-R"]
+	# Obtener póliza por el ID
 	poliza = [p for p in controlador.polizas if p.get_id_poliza() == "MA-777223418-1"]
 	
 	if len(cliente) > 0 and len(poliza) > 0:
+		# Creación de fecha
 		fecha_realizacion = datetime.datetime(2020, 6, 22)
+		# Creación de autorización
 		autorizacionAntigua = Autorizacion("AU-777223418-1", cliente[0], cliente[0].get_dni(), poliza[0].get_id_poliza(), True, "", fecha_realizacion, Especialidad.Epidemiologia, ["PCR"], "D. Miguel", "Consulta 3")
+		# Modificar la autorización
 		controlador.modificar_autorizacion(autorizacionAntigua, "", fecha_realizacion, Especialidad.Epidemiologia, ["PCR"], "D. Gustavo", "Consulta 3")
+		# Obtener la autorización del controlador
 		autorizacionNueva = [a for a in controlador.autorizaciones if a.get_id_autorizacion() == autorizacionAntigua.get_id_autorizacion()]
 		if len(autorizacionNueva) > 0:
+			# Comprobar que la autorización no es igual tras la modificación
 			assert_that(autorizacionAntigua).is_not_equal_to(autorizacionNueva[0])
+			# Comprobar que el ID de la autorización es el mismo
+			assert_that(autorizacionAntigua.get_id_autorizacion()).is_equal_to(autorizacionNueva[0].get_id_autorizacion())
 			
 # Test de consulta de autorización
 def test_consultar_autorizacion():
