@@ -256,17 +256,24 @@ def test_aprobar_denegar_autorizacion():
 # Test de crear cita médica
 def test_crear_cita():
 	controlador = Controller()
+	# Obtener autorización por el ID
 	autorizacion = [a for a in controlador.autorizaciones if a.get_id_poliza() == "AU-777223418-1"]
 	
 	if len(autorizacion) > 0:
 		autorizacion = autorizacion[0]
+		# Aprobar la autorización
 		controlador.aprobar_denegar_autorizacion(autorizacion, True, "")
 		
+		# Creación hora
 		hora = datetime.time(3, 45, 12)
+		# Creación de cita
 		cita = Cita(autorizacion.get_id_autorizacion(), autorizacion.get_asegurado(), autorizacion.get_id_prescripcion(), autorizacion.get_fecha_realizacion(), hora, autorizacion.get_facultativo_realizador(), autorizacion.get_consulta())
 		
+		# Comprobar que la cita no existe en el controlador
 		assert_that(controlador.citas).does_not_contain(cita)
+		# Crear cita
 		controlador.crear_cita(cita)
+		# Comprobar que la cita ya sí existe en el controlador
 		assert_that(controlador.citas).contains(cita)
 				
 # Test de modificar cita médica
