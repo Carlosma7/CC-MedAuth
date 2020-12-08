@@ -166,17 +166,27 @@ def test_desactivar_poliza():
 # Test de crear autorización
 def test_crear_autorizacion():
 	controlador = Controller()
+	# Creación de usuario cliente
 	cliente = UsuarioCliente("Julio", "julio1@gmail.com", "777223418-R", "ES99123458")
-	controlador.crear_cliente(cliente)
+	# Crear usuario cliente
+	controlador.crear_usuario(cliente)
 	
+	# Creación fecha
 	fecha = datetime.datetime(2020, 5, 17)
+	# Creación Póliza activa
 	poliza = Poliza(cliente, cliente.get_dni(), fecha, TipoPoliza.Total, 9.99, 50.99, ["TAC", "Apendicitis"], [ModuloExtra.Dental], True)
+	# Crear Póliza
 	controlador.crear_poliza(poliza)
 
+	# Creación fecha
 	fecha_realizacion = datetime.datetime(2020, 6, 22)
+	# Creación autorización con usuario y póliza
 	autorizacion = Autorizacion(cliente.get_dni(), cliente, cliente.get_dni(), poliza.get_id_poliza(), True, "", fecha_realizacion, Especialidad.Epidemiologia, ["PCR"], "D. Miguel", "Consulta 3")
+	# Comprobar que en el controlador no existe la autorización
 	assert_that(controlador.autorizaciones).does_not_contain(autorizacion)
+	# Crear autorización
 	controlador.crear_autorizacion(autorizacion)
+	# Comprobar que en el controlador ya sí existe la autorización
 	assert_that(controlador.autorizaciones).contains(autorizacion)
 
 # Test de modificar autorización
