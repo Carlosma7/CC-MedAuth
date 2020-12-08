@@ -91,7 +91,7 @@ def test_crear_poliza():
 	# Creación de usuario cliente
 	cliente = UsuarioCliente("Alejandro", "alex@gmail.com", "75125767-F", "ES99345678")
 	# Crear cliente
-	controlador.crear_usuario(cliente)
+	controlador.crear_usuario(cliente, 1)
 
 	# Creación fecha
 	fecha = datetime.datetime(2020, 5, 17)
@@ -169,7 +169,7 @@ def test_crear_autorizacion():
 	# Creación de usuario cliente
 	cliente = UsuarioCliente("Julio", "julio1@gmail.com", "777223418-R", "ES99123458")
 	# Crear usuario cliente
-	controlador.crear_usuario(cliente)
+	controlador.crear_usuario(cliente, 1)
 	
 	# Creación fecha
 	fecha = datetime.datetime(2020, 5, 17)
