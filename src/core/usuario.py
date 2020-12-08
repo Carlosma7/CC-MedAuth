@@ -1,9 +1,10 @@
 # Clase de usuario
 class Usuario():
-	def __init__(self, nombre: str, email: str, dni: str):
+	def __init__(self, nombre: str, email: str, dni: str, tipo: int):
 		self.__nombre = nombre
 		self.__email = email
 		self.__dni = dni
+		self.__tipo = tipo
 	
 	# Métodos get/set
 	def get_nombre(self):
@@ -21,6 +22,9 @@ class Usuario():
 	def get_dni(self):
 		return self.__dni
 	
+	def get_tipo(self):
+		return self.__tipo
+	
 	# Override método equal
 	def __eq__(self, otra):
-		return (self.__nombre == otra.get_nombre() ) and (self.__email == otra.get_email()) and (self.__dni == otra.get_dni())
+		return (self.__nombre == otra.get_nombre() ) and (self.__email == otra.get_email()) and (self.__dni == otra.get_dni()) and (self.__tipo == otra.get_tipo())
