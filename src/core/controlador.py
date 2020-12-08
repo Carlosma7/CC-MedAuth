@@ -92,7 +92,7 @@ class Controller:
 	# [HU4] Administrar póliza: Crear una póliza
 	def crear_poliza(self, poliza: Poliza):
 		# Se obtiene el usuario cliente/asegurado por su dni
-		cliente = [c for c in self.usuariosClientes if c.get_dni() == poliza.get_titular().get_dni()]
+		cliente = [c for c in self.usuarios if c.get_dni() == poliza.get_titular().get_dni()]
 		
 		if len(cliente) > 0:
 			cliente = cliente[0]
@@ -113,6 +113,8 @@ class Controller:
 			poliza.set_id_poliza(id_poliza)
 
 			self.polizas.append(poliza)
+		else:
+			raise ValueError('User doesn´t exist.')
 
 	# [HU4] Administrar póliza: Modificar una póliza
 	def modificar_poliza(self, poliza: Poliza, periodo_carencia: datetime, tipo: TipoPoliza, copagos: float, mensualidad: float, servicios_excluidos: List[str], modulos_extra: List[ModuloExtra]):
