@@ -83,7 +83,7 @@ class Controller:
 	def eliminar_usuario(self, dni: str):
 		usuario_buscado = [u for u in self.usuarios if u.get_dni() == dni]
 		
-		if len(admin_buscado) > 0:
+		if len(usuario_buscado) > 0:
 			# Se elimina el usuario
 			self.usuarios.remove(usuario_buscado[0])
 		else:
