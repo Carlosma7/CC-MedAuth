@@ -27,7 +27,7 @@ def test_crear_cliente():
 	clienteOtro = UsuarioCliente("Victor", "victor7ma@gmail.com", "71855223-F", "ES12345678")
 	
 	# Crear cliente
-	controlador.crear_usuario(cliente)
+	controlador.crear_usuario(cliente, 1)
 	# Comprobar que únicamente se ha insertado el usuario seleccionado
 	assert_that(controlador.usuarios).contains(cliente).does_not_contain(clienteOtro)
 	
@@ -37,7 +37,7 @@ def test_modificar_admin():
 	# Creación de usuario administrador
 	adminAntiguo = UsuarioAdmin("Carlos", "carlos7ma@gmail.com", "75925767-F", "")
 	# Modificación de usuario administrador
-	controlador.modificar_admin(adminAntiguo, 'Carlos', 'charles@gmail.com')
+	controlador.modificar_usuario(adminAntiguo, 'Carlos', 'charles@gmail.com')
 	# Obtengo el usuario administrador almacenado
 	adminNuevo = [a for a in controlador.usuarios if a.get_dni() == adminAntiguo.get_dni()]
 	if len(adminNuevo) > 0:
@@ -49,11 +49,17 @@ def test_modificar_admin():
 # Test de modificación de cliente
 def test_modificar_cliente():
 	controlador = Controller()
+	# Creación de usuario cliente
 	clienteAntiguo = UsuarioCliente("Juan", "juan@gmail.com", "7512354-F", "ES12341118")
-	controlador.modificar_cliente(clienteAntiguo, 'Juan', 'juan@gmail.com', "ES12987428")
-	clienteNuevo = [a for a in controlador.usuariosClientes if a.get_dni() == clienteAntiguo.get_dni()]
+	# Modificación de usuario cliente
+	controlador.modificar_usuario(clienteAntiguo, 'Juan', 'juan@gmail.com', "ES12987428")
+	# Obtengo el usuario cliente almacenado
+	clienteNuevo = [a for a in controlador.usuarios if a.get_dni() == clienteAntiguo.get_dni()]
 	if len(clienteNuevo) > 0:
+		# Comprobar que el cliente es diferente tras la modificación
 		assert_that(clienteAntiguo).is_not_equal_to(clienteNuevo[0])
+		# Comprobar que es el mismo DNI
+		assert_that(clienteNuevo[0].get_dni()).is_equal_to(clienteAntiguo[0].get_dni())
 
 # Test de eliminar administración
 def test_eliminar_admin():
