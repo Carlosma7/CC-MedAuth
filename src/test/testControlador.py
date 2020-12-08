@@ -37,7 +37,7 @@ def test_modificar_admin():
 	# Creación de usuario administrador
 	adminAntiguo = UsuarioAdmin("Carlos", "carlos7ma@gmail.com", "75925767-F", "")
 	# Modificación de usuario administrador
-	controlador.modificar_usuario(adminAntiguo, 'Carlos', 'charles@gmail.com')
+	controlador.modificar_usuario(adminAntiguo, 'Carlos', 'charles@gmail.com', "")
 	# Obtengo el usuario administrador almacenado
 	adminNuevo = [a for a in controlador.usuarios if a.get_dni() == adminAntiguo.get_dni()]
 	if len(adminNuevo) > 0:
