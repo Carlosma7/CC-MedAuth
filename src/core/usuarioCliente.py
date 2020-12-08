@@ -4,7 +4,7 @@ from usuario import Usuario
 class UsuarioCliente(Usuario):
 	def __init__(self, nombre: str, email: str, dni: str, cuenta_bancaria: str):
 		self.__cuenta_bancaria = cuenta_bancaria
-		super().__init__(nombre, email, dni)
+		super().__init__(nombre, email, dni, 1)
 	
 	# Métodos get/set
 	def get_cuenta_bancaria(self):
