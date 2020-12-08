@@ -10,6 +10,7 @@ from moduloExtra import ModuloExtra
 from especialidad import Especialidad
 from typing import List
 import datetime
+import re
 
 # Clase controladora de lógica de negocio
 class Controller:
@@ -21,26 +22,38 @@ class Controller:
 	cita: List[Cita] = []
 	
 	# [HU1] Creación usuario administrativo
-	def crear_admin(self, admin: UsuarioAdmin):
-		adm = [a for a in self.usuariosAdmins if a.get_dni() == admin.get_dni()]
-
-		if len(adm) == 0:
-			# Patrón correo: email@medauth
-			email_empresarial = admin.get_email().split('@')[0] + '@medauth.com'
-
-			# Se crea el usuario administrativo
-			admin.set_email_empresarial(email_empresarial)
-
-			# Se almacena
-			self.usuariosAdmins.append(admin)
-
 	# [HU2] Creación usuario asegurado
-	def crear_cliente(self, cliente: UsuarioCliente):
-		cli = [c for c in self.usuariosClientes if c.get_dni() == cliente.get_dni()]
-
-		if len(cli) == 0:
-			# Se crea el usuario cliente/asegurado
-			self.usuariosClientes.append(cliente)
+	def crear_usuario(self, usuario: Usuario, tipo_usuario: int):
+		usr = [u for u in self.usuarios if u.get_dni() == usuario.get_dni()]
+		
+		# Comprobar si el DNI existe en los usuarios existentes
+		if len(usr) == 0:
+			# Comprobar correo
+			if bool(re.match("([a-zA-Z0-9]+@[a-zA-Z]+\.)(com|es)", usuario.get_email())):
+			
+				if tipo_usuario == 0: # Admin
+					# Patrón correo: email@medauth
+					email_empresarial = usuario.get_email().split('@')[0] + '@medauth.com'
+					
+					# Se crea el usuario administrativo
+					usr_creado = UsuarioAdmin(usuario.get_nombre(), usuario.get_email(), usuario.get_dni(), email_empresarial)
+					
+				else if tipo_usuario == 1: # Cliente
+					# Se crea el usuario cliente
+					usr_creado = UsuarioCliente(usuario.get_nombre(), usuario.get_email(), usuario.get_dni(), usuario.get_cuenta_bancaria())
+					
+				else:
+					raise ValueError('Wrong user type.')
+					
+				# Se almacena
+				self.usuarios.append(usr_creado)
+			
+			else:
+				raise ValueError('Email not valid.')
+			
+		else:
+			raise ValueError('An user exists with DNI provided.')
+			
 
 	# [HU3] Administrar usuario: Modificación administrador
 	def modificar_admin(self, admin: UsuarioAdmin, nombre: str, email: str):
