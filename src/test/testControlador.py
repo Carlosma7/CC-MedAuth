@@ -160,7 +160,7 @@ def test_desactivar_poliza():
 		if len(polizaNueva) > 0:
 			# Comprobar que la póliza no es igual tras la desactivación
 			assert_that(polizaAntigua).is_not_equal_to(polizaNueva[0])
-			# Comprobar que el ID de la pñoliza es el mismo
+			# Comprobar que el ID de la póliza es el mismo
 			assert_that(polizaAntigua.get_id_poliza()).is_equal_to(polizaNueva[0].get_id_poliza())
 
 # Test de crear autorización
@@ -215,13 +215,19 @@ def test_modificar_autorizacion():
 # Test de consulta de autorización
 def test_consultar_autorizacion():
 	controlador = Controller()
+	# Obtener cliente por el DNI
 	cliente = [c for c in controlador.usuariosClientes if c.get_dni() == "75125767-F"]
+	# Obtener póliza por el ID
 	poliza = [p for p in controlador.polizas if p.get_id_poliza() == "MA-777223418-1"]
 	
 	if len(cliente) > 0 and len(poliza) > 0:
+		# Creación de fecha
 		fecha_realizacion = datetime.datetime(2020, 6, 22)
+		# Creación de autorización
 		autorizacion1 = Autorizacion("AU-777223418-1", cliente[0], cliente[0].get_dni(), poliza[0].get_id_poliza(), True, "", fecha_realizacion, Especialidad.Epidemiologia, ["PCR"], "D. Gustavo", "Consulta 3")
+		# Consultar autorización del controlador con el ID de la autorización
 		autorizacion2 = controlador.consultar_autorizacion("AU-777223418-1")
+		# Comprobar que la autorización obtenida es igual, y por lo tanto la consulta es correcta
 		assert_that(autorizacion1).is_equal_to(autorizacion2)
 			
 # Test de aprobar/denegar autorizacion
