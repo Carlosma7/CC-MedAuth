@@ -44,7 +44,7 @@ def test_modificar_admin():
 		# Comprobar que el administrador es diferente tras la modificación
 		assert_that(adminAntiguo).is_not_equal_to(adminNuevo[0])
 		# Comprobar que es el mismo DNI
-		assert_that(adminNuevo[0].get_dni()).is_equal_to(adminAntiguo[0].get_dni())
+		assert_that(adminNuevo[0].get_dni()).is_equal_to(adminAntiguo.get_dni())
 
 # Test de modificación de cliente
 def test_modificar_cliente():
@@ -59,7 +59,7 @@ def test_modificar_cliente():
 		# Comprobar que el cliente es diferente tras la modificación
 		assert_that(clienteAntiguo).is_not_equal_to(clienteNuevo[0])
 		# Comprobar que es el mismo DNI
-		assert_that(clienteNuevo[0].get_dni()).is_equal_to(clienteAntiguo[0].get_dni())
+		assert_that(clienteNuevo[0].get_dni()).is_equal_to(clienteAntiguo.get_dni())
 
 # Test de eliminar administración
 def test_eliminar_admin():
