@@ -4,7 +4,7 @@ from usuario import Usuario
 class UsuarioAdmin(Usuario):
 	def __init__(self, nombre: str, email: str, dni: str, email_empresarial: str):
 		self.__email_empresarial = email_empresarial
-		super().__init__(nombre, email, dni)
+		super().__init__(nombre, email, dni, 0)
 	
 	# Métodos get/set
 	def get_email_empresarial(self):
