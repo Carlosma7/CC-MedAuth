@@ -55,30 +55,29 @@ class Controller:
 			raise ValueError('An user exists with DNI provided.')
 			
 
-	# [HU3] Administrar usuario: Modificación administrador
-	def modificar_admin(self, admin: UsuarioAdmin, nombre: str, email: str):
-		# Se obtiene el usuario administrativo por su dni
-		usuario = [c for c in self.usuariosAdmins if c.get_dni() == admin.get_dni()]
-
-		if len(usuario) > 0:
-			usuario = usuario[0]
-			# Se modifica la información
-			usuario.set_nombre(nombre)
-			usuario.set_email(email)
-			email_empresarial = email.split('@')[0] + '@medauth.com'
-			usuario.set_email_empresarial(email_empresarial)
-
-	# [HU3] Administrar usuario: Modificación cliente
-	def modificar_cliente(self, cliente: UsuarioCliente, nombre: str, email: str, cuenta_bancaria: str):
-		# Se obtiene el usuario cliente/asegurado por su dni
-		usuario = [c for c in self.usuariosClientes if c.get_dni() == cliente.get_dni()]
+	# [HU3] Administrar usuario
+	def modificar_usuario(self, usuario: Usuario, nombre: str, email: str, cuenta_bancaria: str):
+		# Se obtiene el usuario por su dni
+		usuario = [u for u in self.usuarios if u.get_dni() == usuario.get_dni()]
 		
 		if len(usuario) > 0:
 			usuario = usuario[0]
-			# Se modifica la información
-			usuario.set_nombre(nombre)
-			usuario.set_email(email)
-			usuario.set_cuenta_bancaria(cuenta_bancaria)
+			# Comprobar correo
+			if bool(re.match("([a-zA-Z0-9]+@[a-zA-Z]+\.)(com|es)", usuario.get_email())):
+				# Se modifica la información
+				usuario.set_nombre(nombre)
+				usuario.set_email(email)
+				
+				if usuario.get_tipo() == 0: # Admin
+					email_empresarial = email.split('@')[0] + '@medauth.com'
+					usuario.set_email_empresarial(email_empresarial)
+				else: # Cliente
+					usuario.set_cuenta_bancaria(cuenta_bancaria)
+					
+			else:
+				raise ValueError('Email not valid.')
+		else:
+			raise ValueError('User doesn´t exist.')
 
 	# [HU3] Administrar usuario: Eliminar administrador
 	def eliminar_admin(self, dni: str):
