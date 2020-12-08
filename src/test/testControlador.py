@@ -193,7 +193,7 @@ def test_crear_autorizacion():
 def test_modificar_autorizacion():
 	controlador = Controller()
 	# Obtener cliente por el DNI
-	cliente = [c for c in controlador.usuariosClientes if c.get_dni() == "777223418-R"]
+	cliente = [c for c in controlador.usuarios if c.get_dni() == "777223418-R"]
 	# Obtener póliza por el ID
 	poliza = [p for p in controlador.polizas if p.get_id_poliza() == "MA-777223418-1"]
 	
@@ -216,7 +216,7 @@ def test_modificar_autorizacion():
 def test_consultar_autorizacion():
 	controlador = Controller()
 	# Obtener cliente por el DNI
-	cliente = [c for c in controlador.usuariosClientes if c.get_dni() == "75125767-F"]
+	cliente = [c for c in controlador.usuarios if c.get_dni() == "75125767-F"]
 	# Obtener póliza por el ID
 	poliza = [p for p in controlador.polizas if p.get_id_poliza() == "MA-777223418-1"]
 	
@@ -234,7 +234,7 @@ def test_consultar_autorizacion():
 def test_aprobar_denegar_autorizacion():
 	controlador = Controller()
 	# Obtener cliente por el DNI
-	cliente = [c for c in controlador.usuariosClientes if c.get_dni() == "777223418-R"]
+	cliente = [c for c in controlador.usuarios if c.get_dni() == "777223418-R"]
 	# Obtener póliza por el ID
 	poliza = [p for p in controlador.polizas if p.get_id_poliza() == "MA-777223418-1"]
 	
