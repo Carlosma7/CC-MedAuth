@@ -14,6 +14,15 @@ docker:
 
 El claro ejemplo de aprovechamiento es que el contenedor ya posee las librerías necesarias (*invoke*, *pytest* y *assertpy*) para la ejecución de los tests sin necesidad de instalar nada, simplemente se obtiene el contenedor y se ejecutan los tests.
 
+Con el step ```checkout``` se comprueba y copia el directorio de *git*, a continuación se ejecutan los tests con la orden ```run: invoke tests```.
+
+```yaml
+steps:
+            - checkout
+            # Launch tests using the task manager
+            - run: invoke tests
+```
+
 ### GitHub Action
 
 Al tratarse de una automatización de tareas, una *GitHub Action* por propia definición permite realizar la ejecución de una tarea de forma automatizada, por lo que la automatización de la comprobación de un contenedor *Docker* es una tarea sencilla y programable. Para ello se construirá el contenedor del proyecto, el cual lleva implícito en la construcción la instalación de dependencias y ejecución de los tests.
