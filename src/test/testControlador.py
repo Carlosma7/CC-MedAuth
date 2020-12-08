@@ -279,7 +279,7 @@ def test_crear_cita():
 # Test de modificar cita médica
 def test_modificar_cita():
 	controlador = Controller()
-	# Obtener autorización por el DNI
+	# Obtener autorización por el ID
 	autorizacion = [a for a in controlador.autorizaciones if a.get_id_poliza() == "AU-777223418-1"]
 	
 	if len(autorizacion) > 0:
@@ -300,10 +300,15 @@ def test_modificar_cita():
 # Test de consulta de cita médica
 def test_consultar_cita():
 	controlador = Controller()
+	# Obtener autorización por el ID
 	autorizacion = [a for a in controlador.autorizaciones if a.get_id_poliza() == "AU-777223418-1"]
 	
 	if len(autorizacion) > 0:
+		# Creación hora
 		hora = datetime.time(3, 30, 11)
+		# Creación de cita
 		cita1 = Cita(autorizacion.get_id_autorizacion(), autorizacion.get_asegurado(), autorizacion.get_id_prescripcion(), autorizacion.get_fecha_realizacion(), hora, autorizacion.get_facultativo_realizador(), autorizacion.get_consulta())
+		# Consultar cita
 		cita2 = controlador.consultar_cita("AU-777223418-1")
+		# Comprobar que la cita obtenida es igual, y por lo tanto la consulta es correcta
 		assert_that(cita1).is_equal_to(cita2)		
