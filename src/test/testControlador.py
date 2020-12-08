@@ -88,13 +88,20 @@ def test_eliminar_cliente():
 # Test de creación de póliza
 def test_crear_poliza():
 	controlador = Controller()
+	# Creación de usuario cliente
 	cliente = UsuarioCliente("Alejandro", "alex@gmail.com", "75125767-F", "ES99345678")
-	controlador.crear_cliente(cliente)
+	# Crear cliente
+	controlador.crear_usuario(cliente)
 
+	# Creación fecha
 	fecha = datetime.datetime(2020, 5, 17)
+	# Creación objeto Póliza
 	p = Poliza(cliente, cliente.get_dni(), fecha, TipoPoliza.Basica, 5.99, 50.99, ["TAC", "Apendicitis"], [ModuloExtra.Dental], True)
+	# Comprobar que no existe la póliza en el controlador
 	assert_that(controlador.polizas).does_not_contain(p)
+	# Crear póliza
 	controlador.crear_poliza(p)
+	# Comprobar que la póliza ya si existe en el controlador
 	assert_that(controlador.polizas).contains(p)
 
 # Test de modificación de póliza
