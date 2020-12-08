@@ -1,3 +1,4 @@
+from usuario import Usuario
 from usuarioAdmin import UsuarioAdmin
 from usuarioCliente import UsuarioCliente
 from poliza import Poliza
@@ -14,8 +15,7 @@ import datetime
 class Controller:
 
 	# Lista de entidades
-	usuariosAdmins: List[UsuarioAdmin] = []
-	usuariosClientes: List[UsuarioCliente] = []
+	usuarios: List[Usuario] = []
 	polizas: List[Poliza] = []
 	autorizaciones: List[Autorizacion] = []
 	cita: List[Cita] = []
