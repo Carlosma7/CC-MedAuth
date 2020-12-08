@@ -64,18 +64,26 @@ def test_modificar_cliente():
 # Test de eliminar administración
 def test_eliminar_admin():
 	controlador = Controller()
+	# Creación de usuario administrativo
 	admin = UsuarioAdmin("Carlos", "charles@gmail.com", "75925767-F", "charles@medauth.com")
-	assert_that(controlador.usuariosAdmins).contains(admin)
-	controlador.eliminar_admin(admin.get_dni())
-	assert_that(controlador.usuariosAdmins).does_not_contain(admin)
+	# Comprobar que el usuario administrativo existe en el controlador
+	assert_that(controlador.usuarios).contains(admin)
+	# Eliminar el usuario administrativo
+	controlador.eliminar_usuario(admin.get_dni())
+	# Comprobar que el usuario administrativo ya no existe en el controlador
+	assert_that(controlador.usuarios).does_not_contain(admin)
 
 # Test de eliminar cliente
 def test_eliminar_cliente():
 	controlador = Controller()
+	# Creación de usuario cliente
 	cliente = UsuarioCliente("Juan", "juan@gmail.com", "7512354-F", "ES12987428")
-	assert_that(controlador.usuariosClientes).contains(cliente)
-	controlador.eliminar_cliente(cliente.get_dni())
-	assert_that(controlador.usuariosClientes).does_not_contain(cliente)
+	# Comprobar que el usuario cliente existe en el controlador
+	assert_that(controlador.usuarios).contains(cliente)
+	# Eliminar el usuario cliente
+	controlador.eliminar_usuario(cliente.get_dni())
+	# Comprobar que el usuario cliente ya no existe en el controlador
+	assert_that(controlador.usuarios).does_not_contain(cliente)
 
 # Test de creación de póliza
 def test_crear_poliza():
