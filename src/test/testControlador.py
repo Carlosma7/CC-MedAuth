@@ -108,7 +108,7 @@ def test_crear_poliza():
 def test_modificar_poliza():
 	controlador = Controller()
 	# Obtener cliente por el DNI
-	cliente = [c for c in controlador.usuariosClientes if c.get_dni() == "75125767-F"]
+	cliente = [c for c in controlador.usuarios if c.get_dni() == "75125767-F"]
 	
 	if len(cliente) > 0:
 		# Creación fecha
@@ -129,12 +129,17 @@ def test_modificar_poliza():
 # Test de consulta de póliza
 def test_consultar_poliza():
 	controlador = Controller()
-	cliente = [c for c in controlador.usuariosClientes if c.get_dni() == "75125767-F"]
+	# Obtener cliente por el DNI
+	cliente = [c for c in controlador.usuarios if c.get_dni() == "75125767-F"]
 	
 	if len(cliente) > 0:
+		# Creación fecha
 		fecha = datetime.datetime(2020, 5, 17)
+		# Creación objeto Póliza
 		poliza1 = Poliza(cliente[0], "MA-75125767-1", fecha, TipoPoliza.Basica, 10.99, 50.99, ["TAC", "Apendicitis"], [ModuloExtra.Dental], True)
+		# Consultar póliza del controlador con el DNI del asegurado asociado
 		poliza2 = controlador.consultar_poliza("75125767-F")
+		# Comprobar que la póliza obtenida es igual, y por lo tanto la consulta es correcta
 		assert_that(poliza1).is_equal_to(poliza2)
 
 # Test de desactivar póliza
