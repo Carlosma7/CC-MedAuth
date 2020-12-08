@@ -133,6 +133,8 @@ class Controller:
 			pol.set_mensualidad(mensualidad)
 			pol.set_servicios_excluidos(servicios_excluidos)
 			pol.set_modulos_extra(modulos_extra)
+		else:
+			raise ValueError('Policy doesn´t exist.')
 
 	# [HU4] Administrar póliza: Desactivar una póliza
 	def desactivar_poliza(self, dni: str):
