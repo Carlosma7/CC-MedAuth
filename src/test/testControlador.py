@@ -17,7 +17,7 @@ def test_crear_admin():
 	# Crear administrador
 	controlador.crear_usuario(admin, 0)
 	# Comprobar que únicamente se ha insertado el usuario seleccionado
-	assert_that(controlador.usuariosAdmins).contains(admin).does_not_contain(adminOtro)
+	assert_that(controlador.usuarios).contains(admin).does_not_contain(adminOtro)
 	
 # Test de creación de usuario cliente/asegurado
 def test_crear_cliente():
@@ -29,16 +29,22 @@ def test_crear_cliente():
 	# Crear cliente
 	controlador.crear_usuario(cliente)
 	# Comprobar que únicamente se ha insertado el usuario seleccionado
-	assert_that(controlador.usuariosClientes).contains(cliente).does_not_contain(clienteOtro)
+	assert_that(controlador.usuarios).contains(cliente).does_not_contain(clienteOtro)
 	
 # Test de modificación de administrador
 def test_modificar_admin():
 	controlador = Controller()
+	# Creación de usuario administrador
 	adminAntiguo = UsuarioAdmin("Carlos", "carlos7ma@gmail.com", "75925767-F", "")
+	# Modificación de usuario administrador
 	controlador.modificar_admin(adminAntiguo, 'Carlos', 'charles@gmail.com')
-	adminNuevo = [a for a in controlador.usuariosAdmins if a.get_dni() == adminAntiguo.get_dni()]
+	# Obtengo el usuario administrador almacenado
+	adminNuevo = [a for a in controlador.usuarios if a.get_dni() == adminAntiguo.get_dni()]
 	if len(adminNuevo) > 0:
+		# Comprobar que el administrador es diferente tras la modificación
 		assert_that(adminAntiguo).is_not_equal_to(adminNuevo[0])
+		# Comprobar que es el mismo DNI
+		assert_that(adminNuevo[0].get_dni()).is_equal_to(adminAntiguo[0].get_dni())
 
 # Test de modificación de cliente
 def test_modificar_cliente():
