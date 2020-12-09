@@ -222,13 +222,13 @@ def test_modificar_autorizacion():
 	# Obtener cliente por el DNI
 	cliente = [c for c in controlador.usuarios if c.get_dni() == "77223418-R"]
 	# Obtener póliza por el ID
-	poliza = [p for p in controlador.polizas if p.get_id_poliza() == "MA-777223418-1"]
+	poliza = [p for p in controlador.polizas if p.get_id_poliza() == "MA-77223418-1"]
 	
 	if len(cliente) > 0 and len(poliza) > 0:
 		# Creación de fecha
 		fecha_realizacion = datetime.datetime(2020, 6, 22)
 		# Creación de autorización
-		autorizacionAntigua = Autorizacion("AU-777223418-1", cliente[0], cliente[0].get_dni(), poliza[0].get_id_poliza(), True, "", fecha_realizacion, Especialidad.Epidemiologia, ["PCR"], "D. Miguel", "Consulta 3")
+		autorizacionAntigua = Autorizacion("AU-77223418-1", cliente[0], cliente[0].get_dni(), poliza[0].get_id_poliza(), True, "", fecha_realizacion, Especialidad.Epidemiologia, ["PCR"], "D. Miguel", "Consulta 3")
 		# Modificar la autorización
 		controlador.modificar_autorizacion(autorizacionAntigua, "", fecha_realizacion, Especialidad.Epidemiologia, ["PCR"], "D. Gustavo", "Consulta 3")
 		# Obtener la autorización del controlador
@@ -245,15 +245,15 @@ def test_consultar_autorizacion():
 	# Obtener cliente por el DNI
 	cliente = [c for c in controlador.usuarios if c.get_dni() == "75125767-F"]
 	# Obtener póliza por el ID
-	poliza = [p for p in controlador.polizas if p.get_id_poliza() == "MA-777223418-1"]
+	poliza = [p for p in controlador.polizas if p.get_id_poliza() == "MA-77223418-1"]
 	
 	if len(cliente) > 0 and len(poliza) > 0:
 		# Creación de fecha
 		fecha_realizacion = datetime.datetime(2020, 6, 22)
 		# Creación de autorización
-		autorizacion1 = Autorizacion("AU-777223418-1", cliente[0], cliente[0].get_dni(), poliza[0].get_id_poliza(), True, "", fecha_realizacion, Especialidad.Epidemiologia, ["PCR"], "D. Gustavo", "Consulta 3")
+		autorizacion1 = Autorizacion("AU-77223418-1", cliente[0], cliente[0].get_dni(), poliza[0].get_id_poliza(), True, "", fecha_realizacion, Especialidad.Epidemiologia, ["PCR"], "D. Gustavo", "Consulta 3")
 		# Consultar autorización del controlador con el ID de la autorización
-		autorizacion2 = controlador.consultar_autorizacion("AU-777223418-1")
+		autorizacion2 = controlador.consultar_autorizacion("AU-77223418-1")
 		# Comprobar que la autorización obtenida es igual, y por lo tanto la consulta es correcta
 		assert_that(autorizacion1).is_equal_to(autorizacion2)
 			
@@ -263,13 +263,13 @@ def test_aprobar_denegar_autorizacion():
 	# Obtener cliente por el DNI
 	cliente = [c for c in controlador.usuarios if c.get_dni() == "77223418-R"]
 	# Obtener póliza por el ID
-	poliza = [p for p in controlador.polizas if p.get_id_poliza() == "MA-777223418-1"]
+	poliza = [p for p in controlador.polizas if p.get_id_poliza() == "MA-77223418-1"]
 	
 	if len(cliente) > 0 and len(poliza) > 0:
 		# Creación de fecha
 		fecha_realizacion = datetime.datetime(2020, 6, 22)
 		# Creación de autorización
-		autorizacionAntigua = Autorizacion("AU-777223418-1", cliente[0], cliente[0].get_dni(), poliza[0].get_id_poliza(), True, "", fecha_realizacion, Especialidad.Epidemiologia, ["PCR"], "D. Gustavo", "Consulta 3")
+		autorizacionAntigua = Autorizacion("AU-77223418-1", cliente[0], cliente[0].get_dni(), poliza[0].get_id_poliza(), True, "", fecha_realizacion, Especialidad.Epidemiologia, ["PCR"], "D. Gustavo", "Consulta 3")
 		# Denegar la autorización
 		controlador.aprobar_denegar_autorizacion(autorizacionAntigua, False, "Servicio no cubierto en póliza.")
 		# Obtener la autorización del controlador
@@ -284,7 +284,7 @@ def test_aprobar_denegar_autorizacion():
 def test_crear_cita():
 	controlador = Controller()
 	# Obtener autorización por el ID
-	autorizacion = [a for a in controlador.autorizaciones if a.get_id_poliza() == "AU-777223418-1"]
+	autorizacion = [a for a in controlador.autorizaciones if a.get_id_poliza() == "AU-77223418-1"]
 	
 	if len(autorizacion) > 0:
 		autorizacion = autorizacion[0]
@@ -307,7 +307,7 @@ def test_crear_cita():
 def test_modificar_cita():
 	controlador = Controller()
 	# Obtener autorización por el ID
-	autorizacion = [a for a in controlador.autorizaciones if a.get_id_poliza() == "AU-777223418-1"]
+	autorizacion = [a for a in controlador.autorizaciones if a.get_id_poliza() == "AU-77223418-1"]
 	
 	if len(autorizacion) > 0:
 		# Creación hora
@@ -328,7 +328,7 @@ def test_modificar_cita():
 def test_consultar_cita():
 	controlador = Controller()
 	# Obtener autorización por el ID
-	autorizacion = [a for a in controlador.autorizaciones if a.get_id_poliza() == "AU-777223418-1"]
+	autorizacion = [a for a in controlador.autorizaciones if a.get_id_poliza() == "AU-77223418-1"]
 	
 	if len(autorizacion) > 0:
 		# Creación hora
@@ -336,6 +336,6 @@ def test_consultar_cita():
 		# Creación de cita
 		cita1 = Cita(autorizacion.get_id_autorizacion(), autorizacion.get_asegurado(), autorizacion.get_id_prescripcion(), autorizacion.get_fecha_realizacion(), hora, autorizacion.get_facultativo_realizador(), autorizacion.get_consulta())
 		# Consultar cita
-		cita2 = controlador.consultar_cita("AU-777223418-1")
+		cita2 = controlador.consultar_cita("AU-77223418-1")
 		# Comprobar que la cita obtenida es igual, y por lo tanto la consulta es correcta
 		assert_that(cita1).is_equal_to(cita2)		
