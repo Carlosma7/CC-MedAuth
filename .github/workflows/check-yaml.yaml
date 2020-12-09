@@ -1,8 +1,15 @@
+---
 name: "Sintaxis YAML"
 on:
   push:
     paths:
       - 'cc.yaml'
+      - '_config.yml'
+      - 'shippable.yml'
+      - '.travis.yml'
+      - '.circleci/config.yml'
+      - '.github/workflows/github_actions_CI.yml'
+      - '.github/workflows/github_container_registry.yml'
 
 jobs:
   comprueba_ficheros_YAML:
@@ -10,7 +17,24 @@ jobs:
     steps:
       - name: "Descarga repo"
         uses: actions/checkout@v2
-      - name: "Comprueba fichero"
+      - name: "Comprueba fichero de la asignatura"
         run:
           yamllint cc.yaml
-      
+      - name: "Comprueba fichero de configuracion del proyecto"
+        run:
+          yamllint _config.yml
+      - name: "Comprueba fichero de configuracion de Shippable"
+        run:
+          yamllint shippable.yml
+      - name: "Comprueba fichero de configuración de Travis"
+        run:
+          yamllint .travis.yml
+      - name: "Comprueba fichero de configuración de CircleCI"
+        run:
+          yamllint .travis.yml
+      - name: "Comprueba fichero de GitHub Action CI"
+        run:
+          yamllint .github/workflows/github_actions_CI.yml
+      - name: "Comprueba fichero de GitHub Action de Container Registry"
+        run:
+          yamllint .github/workflows/github_container_registry.yml
