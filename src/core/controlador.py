@@ -151,6 +151,8 @@ class Controller:
 		
 		if len(poliza_activa) > 0:
 			poliza_activa[0].set_activa(False)
+		else:
+			raise ValueError('Policy doesn´t exist.')
 
 	# [HU5] Consultar póliza
 	def consultar_poliza(self, dni: str):
