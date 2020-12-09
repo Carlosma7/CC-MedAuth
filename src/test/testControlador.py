@@ -23,7 +23,7 @@ def test_crear_admin():
 def test_crear_cliente():
 	controlador = Controller()
 	# Creación de usuario cliente
-	cliente = UsuarioCliente("Juan", "juan@gmail.com", "7512354-F", "ES12341118")
+	cliente = UsuarioCliente("Juan", "juan@gmail.com", "75123540-F", "ES12341118")
 	clienteOtro = UsuarioCliente("Victor", "victor7ma@gmail.com", "71855223-F", "ES12345678")
 	
 	# Crear cliente
@@ -50,7 +50,7 @@ def test_modificar_admin():
 def test_modificar_cliente():
 	controlador = Controller()
 	# Creación de usuario cliente
-	clienteAntiguo = UsuarioCliente("Juan", "juan@gmail.com", "7512354-F", "ES12341118")
+	clienteAntiguo = UsuarioCliente("Juan", "juan@gmail.com", "75123540-F", "ES12341118")
 	# Modificación de usuario cliente
 	controlador.modificar_usuario(clienteAntiguo, 'Juan', 'juan@gmail.com', "ES12987428")
 	# Obtengo el usuario cliente almacenado
@@ -77,7 +77,7 @@ def test_eliminar_admin():
 def test_eliminar_cliente():
 	controlador = Controller()
 	# Creación de usuario cliente
-	cliente = UsuarioCliente("Juan", "juan@gmail.com", "7512354-F", "ES12987428")
+	cliente = UsuarioCliente("Juan", "juan@gmail.com", "75123540-F", "ES12987428")
 	# Comprobar que el usuario cliente existe en el controlador
 	assert_that(controlador.usuarios).contains(cliente)
 	# Eliminar el usuario cliente
@@ -167,7 +167,7 @@ def test_desactivar_poliza():
 def test_crear_autorizacion():
 	controlador = Controller()
 	# Creación de usuario cliente
-	cliente = UsuarioCliente("Julio", "julio1@gmail.com", "777223418-R", "ES99123458")
+	cliente = UsuarioCliente("Julio", "julio1@gmail.com", "77223418-R", "ES99123458")
 	# Crear usuario cliente
 	controlador.crear_usuario(cliente, 1)
 	
@@ -193,7 +193,7 @@ def test_crear_autorizacion():
 def test_modificar_autorizacion():
 	controlador = Controller()
 	# Obtener cliente por el DNI
-	cliente = [c for c in controlador.usuarios if c.get_dni() == "777223418-R"]
+	cliente = [c for c in controlador.usuarios if c.get_dni() == "77223418-R"]
 	# Obtener póliza por el ID
 	poliza = [p for p in controlador.polizas if p.get_id_poliza() == "MA-777223418-1"]
 	
@@ -234,7 +234,7 @@ def test_consultar_autorizacion():
 def test_aprobar_denegar_autorizacion():
 	controlador = Controller()
 	# Obtener cliente por el DNI
-	cliente = [c for c in controlador.usuarios if c.get_dni() == "777223418-R"]
+	cliente = [c for c in controlador.usuarios if c.get_dni() == "77223418-R"]
 	# Obtener póliza por el ID
 	poliza = [p for p in controlador.polizas if p.get_id_poliza() == "MA-777223418-1"]
 	
