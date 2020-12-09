@@ -284,7 +284,7 @@ def test_aprobar_denegar_autorizacion():
 def test_crear_cita():
 	controlador = Controller()
 	# Obtener autorización por el ID
-	autorizacion = [a for a in controlador.autorizaciones if a.get_id_poliza() == "AU-77223418-1"]
+	autorizacion = [a for a in controlador.autorizaciones if a.get_id_autorizacion() == "AU-77223418-1"]
 	
 	if len(autorizacion) > 0:
 		autorizacion = autorizacion[0]
@@ -306,16 +306,17 @@ def test_crear_cita():
 # Test de modificar cita médica
 def test_modificar_cita():
 	controlador = Controller()
-	# Obtener autorización por el ID
-	autorizacion = [a for a in controlador.autorizaciones if a.get_id_poliza() == "AU-77223418-1"]
+	# Obtener cita por el ID
+	cita = [c for c in controlador.citas if c.get_id_autorizacion() == "AU-77223418-1"]
 	
-	if len(autorizacion) > 0:
+	if len(cita) > 0:
+		cita = cita[0]
 		# Creación hora
 		hora = datetime.time(3, 30, 11)
 		# Creación de cita
-		citaAntigua = Cita(autorizacion.get_id_autorizacion(), autorizacion.get_asegurado(), autorizacion.get_id_prescripcion(), autorizacion.get_fecha_realizacion(), hora, autorizacion.get_facultativo_realizador(), autorizacion.get_consulta())
+		citaAntigua = Cita(cita.get_id_autorizacion(), cita.get_asegurado(), cita.get_id_prescripcion(), cita.get_fecha(), cita.get_hora(), cita.get_facultativo_realizador(), cita.get_consulta())
 		# Modificar cita
-		controlador.modificar_cita(citaAntigua, cita.get_fecha(), hora, cita.get_consulta())
+		controlador.modificar_cita(citaAntigua, cita.get_fecha(), hora, cita.get_facultativo_realizador(), cita.get_consulta())
 		# Obtener cita del controlador
 		citaNueva = [c for c in controlador.citas if c.get_id_autorizacion() == citaAntigua.get_id_autorizacion()]
 		if len(citaNueva) > 0:
@@ -327,14 +328,13 @@ def test_modificar_cita():
 # Test de consulta de cita médica
 def test_consultar_cita():
 	controlador = Controller()
-	# Obtener autorización por el ID
-	autorizacion = [a for a in controlador.autorizaciones if a.get_id_poliza() == "AU-77223418-1"]
+	# Obtener cita por el ID
+	cita = [c for c in controlador.citas if c.get_id_autorizacion() == "AU-77223418-1"]
 	
-	if len(autorizacion) > 0:
-		# Creación hora
-		hora = datetime.time(3, 30, 11)
+	if len(cita) > 0:
+		cita = cita[0]
 		# Creación de cita
-		cita1 = Cita(autorizacion.get_id_autorizacion(), autorizacion.get_asegurado(), autorizacion.get_id_prescripcion(), autorizacion.get_fecha_realizacion(), hora, autorizacion.get_facultativo_realizador(), autorizacion.get_consulta())
+		cita1 = Cita(cita.get_id_autorizacion(), cita.get_asegurado(), cita.get_id_prescripcion(), cita.get_fecha(), cita.get_hora(), cita.get_facultativo_realizador(), cita.get_consulta())
 		# Consultar cita
 		cita2 = controlador.consultar_cita("AU-77223418-1")
 		# Comprobar que la cita obtenida es igual, y por lo tanto la consulta es correcta
