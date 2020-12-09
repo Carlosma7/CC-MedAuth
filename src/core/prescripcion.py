@@ -20,6 +20,9 @@ class Prescripcion:
 	def get_id_prescripcion(self):
 		return self.__id_prescripcion
 
+	def set_id_prescripcion(self, id_prescripcion):
+		self.__id_prescripcion = id_prescripcion
+
 	def get_asegurado(self):
 		return self.__asegurado
 
