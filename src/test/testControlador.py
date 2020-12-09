@@ -23,8 +23,8 @@ def test_crear_admin():
 def test_crear_cliente():
 	controlador = Controller()
 	# Creación de usuario cliente
-	cliente = UsuarioCliente("Juan", "juan@gmail.com", "75123540-F", "ES12341118")
-	clienteOtro = UsuarioCliente("Victor", "victor7ma@gmail.com", "71855223-F", "ES12345678")
+	cliente = UsuarioCliente("Juan", "juan@gmail.com", "75123540-F", "ES1234111892738495273849")
+	clienteOtro = UsuarioCliente("Victor", "victor7ma@gmail.com", "71855223-F", "ES1234567812345678910231")
 	
 	# Crear cliente
 	controlador.crear_usuario(cliente, 1)
@@ -50,9 +50,9 @@ def test_modificar_admin():
 def test_modificar_cliente():
 	controlador = Controller()
 	# Creación de usuario cliente
-	clienteAntiguo = UsuarioCliente("Juan", "juan@gmail.com", "75123540-F", "ES12341118")
+	clienteAntiguo = UsuarioCliente("Juan", "juan@gmail.com", "75123540-F", "ES1234111892738495273849")
 	# Modificación de usuario cliente
-	controlador.modificar_usuario(clienteAntiguo, 'Juan', 'juan@gmail.com', "ES12987428")
+	controlador.modificar_usuario(clienteAntiguo, 'Juan', 'juan@gmail.com', "ES1298742874928365740192")
 	# Obtengo el usuario cliente almacenado
 	clienteNuevo = [a for a in controlador.usuarios if a.get_dni() == clienteAntiguo.get_dni()]
 	if len(clienteNuevo) > 0:
@@ -77,7 +77,7 @@ def test_eliminar_admin():
 def test_eliminar_cliente():
 	controlador = Controller()
 	# Creación de usuario cliente
-	cliente = UsuarioCliente("Juan", "juan@gmail.com", "75123540-F", "ES12987428")
+	cliente = UsuarioCliente("Juan", "juan@gmail.com", "75123540-F", "ES1298742874928365740192")
 	# Comprobar que el usuario cliente existe en el controlador
 	assert_that(controlador.usuarios).contains(cliente)
 	# Eliminar el usuario cliente
@@ -89,7 +89,7 @@ def test_eliminar_cliente():
 def test_crear_poliza():
 	controlador = Controller()
 	# Creación de usuario cliente
-	cliente = UsuarioCliente("Alejandro", "alex@gmail.com", "75125767-F", "ES99345678")
+	cliente = UsuarioCliente("Alejandro", "alex@gmail.com", "75125767-F", "ES9934567899283722194827")
 	# Crear cliente
 	controlador.crear_usuario(cliente, 1)
 
@@ -167,7 +167,7 @@ def test_desactivar_poliza():
 def test_crear_autorizacion():
 	controlador = Controller()
 	# Creación de usuario cliente
-	cliente = UsuarioCliente("Julio", "julio1@gmail.com", "77223418-R", "ES99123458")
+	cliente = UsuarioCliente("Julio", "julio1@gmail.com", "77223418-R", "ES9912345811003387447729")
 	# Crear usuario cliente
 	controlador.crear_usuario(cliente, 1)
 	
