@@ -21,7 +21,7 @@ class Controller:
 	polizas: List[Poliza] = []
 	prescripciones: List[Prescripcion] = []
 	autorizaciones: List[Autorizacion] = []
-	cita: List[Cita] = []
+	citas: List[Cita] = []
 	
 	# [HU1] Creación usuario administrativo
 	# [HU2] Creación usuario asegurado
