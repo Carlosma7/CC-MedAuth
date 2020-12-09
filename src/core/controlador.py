@@ -2,6 +2,7 @@ from usuario import Usuario
 from usuarioAdmin import UsuarioAdmin
 from usuarioCliente import UsuarioCliente
 from poliza import Poliza
+from prescripcion import Prescripcion
 from autorizacion import Autorizacion
 from cita import Cita
 
@@ -18,6 +19,7 @@ class Controller:
 	# Lista de entidades
 	usuarios: List[Usuario] = []
 	polizas: List[Poliza] = []
+	prescripciones: List[Prescripcion] = []
 	autorizaciones: List[Autorizacion] = []
 	cita: List[Cita] = []
 	
@@ -157,6 +159,34 @@ class Controller:
 		
 		if len(poliza) > 0:
 			return poliza[0]
+	
+	# [HU6] Subir prescripción médica
+	def subir_prescripcion(self, prescripcion: Prescripcion):
+		poliza_activa = [p for p in self.polizas if p.get_titular().get_dni() == prescripcion.get_asegurado().get_dni()]
+		
+		if len(poliza_activa) > 0:
+			poliza_activa = poliza_activa[-1]
+			# Se comprueba que la prescripción esté asignada a la póliza activa del asegurado
+			if prescripcion.get_id_poliza() == poliza_activa.get_id_poliza():
+				dni = prescripcion.get_asegurado().get_dni()
+				
+				# Se compone el identificador de la póliza con el formato PR-DNI-ID_ULTIMA_PRESCRIPCION+1
+				id_prescripcion = "PR-" + dni[:9]
+				# Se obtienen las prescripciones previas del cliente/asegurado
+				prescripciones_previas = [p for p in self.prescripciones if p.get_asegurado().get_dni() == dni]
+				
+				if len(prescripciones_previas) > 0:
+					# Si existen prescripciones previas se obtiene el último identificador y se aumenta en uno
+					id_prescripcion = id_prescripcion + str(int(prescripciones_previas[-1][-1]) + 1)
+				else:
+					# Si no existen prescripciones previas se marca como la primera
+					id_prescripcion = id_prescripcion + "1"
+				
+				prescripcion.set_id_prescripcion(id_prescripcion)
+				
+				self.prescripciones.append(prescripcion)
+			else:
+				raise ValueError('The prescription is not associated with the active policy.')
 		
 	# [HU8] Administrar autorización: Crear una autorización
 	def crear_autorizacion(self, autorizacion: Autorizacion):
