@@ -161,6 +161,8 @@ class Controller:
 		
 		if len(poliza) > 0:
 			return poliza[0]
+		else:
+			raise ValueError('Policy doesn´t exist.')
 	
 	# [HU6] Subir prescripción médica
 	def subir_prescripcion(self, prescripcion: Prescripcion):
