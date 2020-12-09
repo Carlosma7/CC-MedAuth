@@ -67,21 +67,21 @@ class Controller:
 	# [HU3] Administrar usuario: Modificar usuario
 	def modificar_usuario(self, usuario: Usuario, nombre: str, email: str, cuenta_bancaria: str):
 		# Se obtiene el usuario por su dni
-		usuario = [u for u in self.usuarios if u.get_dni() == usuario.get_dni()]
+		usr = [u for u in self.usuarios if u.get_dni() == usuario.get_dni()]
 		
-		if len(usuario) > 0:
-			usuario = usuario[0]
+		if len(usr) > 0:
+			usr = usr[0]
 			# Comprobar correo
-			if bool(re.match("([a-zA-Z0-9]+@[a-zA-Z]+\.)(com|es)", usuario.get_email())):
+			if bool(re.match("([a-zA-Z0-9]+@[a-zA-Z]+\.)(com|es)", usr.get_email())):
 				# Se modifica la información
-				usuario.set_nombre(nombre)
-				usuario.set_email(email)
+				usr.set_nombre(nombre)
+				usr.set_email(email)
 				
-				if usuario.get_tipo() == 0: # Admin
+				if usr.get_tipo() == 0: # Admin
 					email_empresarial = email.split('@')[0] + '@medauth.com'
-					usuario.set_email_empresarial(email_empresarial)
+					usr.set_email_empresarial(email_empresarial)
 				else: # Cliente
-					usuario.set_cuenta_bancaria(cuenta_bancaria)
+					usr.set_cuenta_bancaria(cuenta_bancaria)
 					
 			else:
 				raise ValueError('Email not valid.')
