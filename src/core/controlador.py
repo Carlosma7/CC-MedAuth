@@ -191,7 +191,6 @@ class Controller:
 				self.prescripciones.append(prescripcion)
 			else:
 				raise ValueError('The prescription is not associated with the active policy.')
-		
 		else:
 			raise ValueError('User has not an active policy.')
 		
@@ -220,6 +219,10 @@ class Controller:
 				autorizacion.set_id_autorizacion(id_autorizacion)
 
 				self.autorizaciones.append(autorizacion)
+			else:
+				raise ValueError('The authorization is not associated with the active policy.')
+		else:
+			raise ValueError('User has not an active policy.')
 			
 	# [HU8] Administrar autorización: Modificar una autorización		
 	def modificar_autorizacion(self, autorizacion: Autorizacion, motivo_rechazo: str, fecha_realizacion: datetime, especialidad: Especialidad, servicios_aceptados: List[str], facultativo_realizador: str, consulta: str):
