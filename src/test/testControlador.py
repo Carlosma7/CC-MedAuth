@@ -243,7 +243,7 @@ def test_modificar_autorizacion():
 def test_consultar_autorizacion():
 	controlador = Controller()
 	# Obtener cliente por el DNI
-	cliente = [c for c in controlador.usuarios if c.get_dni() == "75125767-F"]
+	cliente = [c for c in controlador.usuarios if c.get_dni() == "77223418-R"]
 	# Obtener póliza por el ID
 	poliza = [p for p in controlador.polizas if p.get_id_poliza() == "MA-77223418-1"]
 	
