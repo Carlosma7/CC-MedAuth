@@ -271,6 +271,8 @@ class Controller:
 		
 		if len(autorizacion) > 0:
 			self.citas.append(cita)
+		else:
+			raise ValueError('Authorization doesn´t exist.')
 	
 	# [HU11] Administrar cita médica: Modificar cita médica
 	def modificar_cita(self, cita: Cita, fecha: datetime, hora: datetime, facultativo_realizador: str, consulta: str):
@@ -284,6 +286,8 @@ class Controller:
 			ci.set_hora(hora)
 			ci.set_facultativo_realizador(facultativo_realizador)
 			ci.set_consulta(consulta)
+		else:
+			raise ValueError('Appointment doesn´t exist.')
 	
 	# [HU12] Consultar cita médica
 	def consultar_cita(self, id_autorizacion: str):
