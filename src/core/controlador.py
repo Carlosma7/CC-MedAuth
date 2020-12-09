@@ -259,7 +259,7 @@ class Controller:
 		if len(aut) > 0:
 			aut = aut[0]
 			# Modificación de la autorización médica
-			autorizacion.set_estado(aceptada)
+			autorizacion.set_aceptada(aceptada)
 			autorizacion.set_motivo_rechazo(motivo_rechazo)
 		else:
 			raise ValueError('Authorization doesn´t exist.')
