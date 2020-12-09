@@ -261,6 +261,8 @@ class Controller:
 			# Modificación de la autorización médica
 			autorizacion.set_estado(aceptada)
 			autorizacion.set_motivo_rechazo(motivo_rechazo)
+		else:
+			raise ValueError('Authorization doesn´t exist.')
 	
 	# [HU11] Administrar cita médica: Crear cita médica
 	def crear_cita(self, cita: Cita):
