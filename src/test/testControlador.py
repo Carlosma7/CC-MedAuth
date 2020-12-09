@@ -163,6 +163,33 @@ def test_desactivar_poliza():
 			# Comprobar que el ID de la póliza es el mismo
 			assert_that(polizaAntigua.get_id_poliza()).is_equal_to(polizaNueva[0].get_id_poliza())
 
+# Test de subir prescripcion
+def test_subir_prescripcion():
+	controlador = Controller()
+	# Creación de usuario cliente
+	cliente = UsuarioCliente("Marcos", "marcos@gmail.com", "28394819-T", "ES9912345392003384830729")
+	# Crear usuario cliente
+	controlador.crear_usuario(cliente, 1)
+	
+	# Creación fecha
+	fecha = datetime.datetime(2020, 5, 17)
+	# Creación Póliza activa
+	poliza = Poliza(cliente, cliente.get_dni(), fecha, TipoPoliza.Total, 9.99, 50.99, ["TAC", "Apendicitis"], [ModuloExtra.Dental], True)
+	# Crear Póliza
+	controlador.crear_poliza(poliza)
+	
+	# Creación fecha
+	fecha_realizacion = datetime.datetime(2020, 6, 22)
+	# Creación prescripción con usuario y póliza
+	prescripcion = Prescripcion(cliente.get_dni(), cliente, poliza.get_id_poliza(), fecha_realizacion, Especialidad.Epidemiologia, "D. Miguel", "D. Fernando", ["Serología", "PCR"], "Consulta 3")
+	# Comprobar que en el controlador no existe la prescripción
+	assert_that(controlador.prescripciones).does_not_contain(prescripcion)
+	# Crear prescripción
+	controlador.subir_prescripcion(prescripcion)
+	# Comprobar que en el controlador ya sí existe la prescripción
+	assert_that(controlador.prescripciones).contains(prescripcion)
+	
+
 # Test de crear autorización
 def test_crear_autorizacion():
 	controlador = Controller()
