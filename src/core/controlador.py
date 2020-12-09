@@ -232,12 +232,12 @@ class Controller:
 		if len(aut) > 0:
 			aut = aut[0]
 			# Modificación de la autorización médica
-			autorizacion.set_motivo_rechazo(motivo_rechazo)
-			autorizacion.set_fecha_realizacion(fecha_realizacion)
-			autorizacion.set_especialidad(especialidad)
-			autorizacion.set_servicios_aceptados(servicios_aceptados)
-			autorizacion.set_facultativo_realizador(facultativo_realizador)
-			autorizacion.set_consulta(consulta)
+			aut.set_motivo_rechazo(motivo_rechazo)
+			aut.set_fecha_realizacion(fecha_realizacion)
+			aut.set_especialidad(especialidad)
+			aut.set_servicios_aceptados(servicios_aceptados)
+			aut.set_facultativo_realizador(facultativo_realizador)
+			aut.set_consulta(consulta)
 		else:
 			raise ValueError('User has not an active policy.')
 			
