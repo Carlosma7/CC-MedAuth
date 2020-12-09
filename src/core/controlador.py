@@ -192,6 +192,9 @@ class Controller:
 			else:
 				raise ValueError('The prescription is not associated with the active policy.')
 		
+		else:
+			raise ValueError('User has not an active policy.')
+		
 	# [HU8] Administrar autorización: Crear una autorización
 	def crear_autorizacion(self, autorizacion: Autorizacion):
 		poliza_activa = [p for p in self.polizas if p.get_titular().get_dni() == autorizacion.get_asegurado().get_dni()]
