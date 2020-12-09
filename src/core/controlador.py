@@ -238,6 +238,8 @@ class Controller:
 			autorizacion.set_servicios_aceptados(servicios_aceptados)
 			autorizacion.set_facultativo_realizador(facultativo_realizador)
 			autorizacion.set_consulta(consulta)
+		else:
+			raise ValueError('User has not an active policy.')
 			
 	# [HU9] Consultar autorización médica
 	def consultar_autorizacion(self, id_autorizacion: str):
@@ -246,6 +248,8 @@ class Controller:
 		
 		if len(autorizacion) > 0:
 			return autorizacion[0]
+		else:
+			raise ValueError('Authorization doesn´t exist.')
 			
 	# [HU10] Aprobar/Denegar una autorización médica
 	def aprobar_denegar_autorizacion(self, autorizacion: Autorizacion, aceptada: bool, motivo_rechazo: str):
