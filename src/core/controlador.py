@@ -296,3 +296,5 @@ class Controller:
 		
 		if len(cita) > 0:
 			return cita[0]
+		else:
+			raise ValueError('Appointment doesn´t exist.')
