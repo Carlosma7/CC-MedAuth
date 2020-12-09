@@ -42,9 +42,11 @@ class Controller:
 						usr_creado = UsuarioAdmin(usuario.get_nombre(), usuario.get_email(), usuario.get_dni(), usuario.get_email_empresarial())
 						
 					elif tipo_usuario == 1: # Cliente
-						# Se crea el usuario cliente
-						usr_creado = UsuarioCliente(usuario.get_nombre(), usuario.get_email(), usuario.get_dni(), usuario.get_cuenta_bancaria())
-						
+						if bool(re.match("ES[0-9]{22}", usuario.get_cuenta_bancaria())):
+							# Se crea el usuario cliente
+							usr_creado = UsuarioCliente(usuario.get_nombre(), usuario.get_email(), usuario.get_dni(), usuario.get_cuenta_bancaria())
+						else:
+							raise ValueError('IBAN not valid.')
 					else:
 						raise ValueError('Wrong user type.')
 						
