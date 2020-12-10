@@ -13,14 +13,37 @@ La versión escogida será [Python 3.6](https://www.python.org/downloads/release
 
 Por lo tanto, las herramientas que se escogan a continuación buscarán obtener la mayor integración natural posible con el lenguaje.
 
-##### Framework
+##### Gestor de tareas
 
-Se empleará como framework [Flask](https://flask.palletsprojects.com/en/1.1.x/), frente a *Django* y otros competidores, el cual nos permitirá realizar el proceso de construcción de nuestra web. Se ha escogido *Flask* debido a que se trata un framework más sencillo de desarrollar frente a *Django*, tras analizar las distintas [ventajas y desventajas](https://openwebinars.net/blog/django-vs-flask/) que ofrecen ambos.
+El gestor de tareas empleado será [Invoke](http://www.pyinvoke.org/). Se han examinado otras herramientas, realizado una comparativa y realizado la decisión, tal y como se puede ver [aquí](https://carlosma7.github.io/MedAuth/doc/gestor_tareas).
 
-##### Configuración distribuida
+##### Biblioteca de aserciones
 
-Se utilizará Consul como sistema de descubrimiento de servicios ya que permite un registro de los servicios, es compatible con APIs basadas en HTML y JSON, utiliza un sistema de almacenamiento por pares clave-valor, y posee una documentación detallada y sencilla.
+Como biblioteca de aserciones se ha decidido utilizar [assertpy](https://github.com/assertpy/assertpy), tras realizar una comparativa con otras opciones, junto a las aserciones estándar de *Python*, tal y como se puede ver [aquí](https://carlosma7.github.io/MedAuth/doc/biblioteca_asercion).
 
-##### Log
+##### Marco de pruebas
 
-Para realizar una configuración con loggers se utilizará un propio módulo de *Python*, que es la librería [Logging](https://www.ionos.es/digitalguide/paginas-web/desarrollo-web/logging-de-python/). Este módulo permite realizar una gestión y análisis de errores, seguimiento de acciones y depuración del sistema bastante sencilla y de forma natural con el lenguaje propuesto.
+Se ha escogido como marco de pruebas [Pytest](https://docs.pytest.org/en/stable/), tras realizar un análisis de las diferentes opciones disponibles, el cual se puede ver [aquí](https://carlosma7.github.io/MedAuth/doc/marco_pruebas).
+
+##### Contenerización Docker
+
+Para la contenerización del proyecto, se ha decidido utilizar dos registros distintos [Docker Hub](https://hub.docker.com/) y [GitHub Container Registry](https://github.com/features/packages), tras realizar un estudio sobre la imagen base de *Docker* que se puede ver [aquí](https://carlosma7.github.io/MedAuth/doc/estudio_docker/estudio_contenedor_base).
+
+La información se organiza de la siguiente forma:
+
+* [Documentación sobre Dockerfile](https://carlosma7.github.io/MedAuth/doc/estudio_docker/documentacion_dockerfile)
+* [Docker Hub y automatización de subidas](https://carlosma7.github.io/MedAuth/doc/estudio_docker/documentacion_docker_hub)
+* [Github Container Registry y automatización de subidas](https://carlosma7.github.io/MedAuth/doc/estudio_docker/github_container_registry)
+
+##### Integración continua
+
+Se ha decidido utilizar varias herramientas de *CI*, entre las cuales se encuentran:
+
+* [TravisCI](https://carlosma7.github.io/MedAuth/doc/integracion_continua/configuracion_travis)
+* [CircleCI](https://carlosma7.github.io/MedAuth/doc/integracion_continua/configuracion_circleci)
+* [Shippable](https://carlosma7.github.io/MedAuth/doc/integracion_continua/configuracion_shippable)
+* [GitHub Actions](https://carlosma7.github.io/MedAuth/doc/integracion_continua/configuracion_github_action)
+
+Además se puede encontrar un [estudio](https://carlosma7.github.io/MedAuth/doc/integracion_continua/estudio_ci) sobre las herramientas *CI* existentes.
+
+Por último se puede observar una documentación sobre la integración del [gestor de tareas con las herramientas de CI](https://carlosma7.github.io/MedAuth/doc/integracion_continua/justificacion_invoke) y el [aprovechamiento del contenedor Docker para CI](https://carlosma7.github.io/MedAuth/doc/integracion_continua/justificacion_docker).
