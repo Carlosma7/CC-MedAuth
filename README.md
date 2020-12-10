@@ -46,7 +46,7 @@ pip3 install invoke==1.4.1
 
 ## Descarga del proyecto
 
-**Con** GitHub.
+**Con** Git.
 
 ```shell
 git clone https://github.com/Carlosma7/MedAuth.git
