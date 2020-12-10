@@ -12,7 +12,7 @@ def test_compare_usuario_admin():
 	t2 = UsuarioAdmin("Carlos", "carlos7ma@gmail.com", "75925767-F", "carlos@medauth.com")
 	# Creación de un usuario administrativo distinto
 	t3 = UsuarioAdmin("Carlos", "carlos7ma@gmail.com", "75925767-F", "morales@medauth.com")
-	# Comprobar que una prescripción es igual a otra si tienen la misma información
+	# Comprobar que un usuario admin es igual a otro si tienen la misma información
 	assert t1 == t2 # Pasa test
-	# Comprobar que una prescripción es distinta de otra si tienen alguna información distinta
+	# Comprobar que un usuario admin es distinto de otro si tienen alguna información distinta
 	assert t1 != t3

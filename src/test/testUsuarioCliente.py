@@ -12,7 +12,7 @@ def test_compare_usuario_cliente():
 	t2 = UsuarioCliente("Carlos", "carlos7ma@gmail.com", "75925767-F", "ES12345678")
 	# Creación de un usuario cliente distinto
 	t3 = UsuarioCliente("Carlos", "carlos7ma@gmail.com", "22225767-F", "ES12345678")
-	# Comprobar que una prescripción es igual a otra si tienen la misma información
+	# Comprobar que un usuario cliente es igual a otro si tienen la misma información
 	assert t1 == t2 # Pasa test
-	# Comprobar que una prescripción es distinta de otra si tienen alguna información distinta
+	# Comprobar que un usuario cliente es distinto de otro si tienen alguna información distinta
 	assert t1 != t3
