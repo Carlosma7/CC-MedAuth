@@ -1,6 +1,10 @@
 # Servicio de solicitudes de autorizaciones médicas
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![Language](https://img.shields.io/badge/Language-Python-red.svg)](https://www.python.org/)  [![Build Test](https://img.shields.io/travis/Carlosma7/CC-MedAuth/main)](https://travis-ci.org/github/Carlosma7/CC-MedAuth) 
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![Language](https://img.shields.io/badge/Language-Python-red.svg)](https://www.python.org/)
+
+---
+
+[![Build Status](https://travis-ci.com/Carlosma7/MedAuth.svg?branch=main)](https://travis-ci.com/Carlosma7/MedAuth)
 
 ---
 
