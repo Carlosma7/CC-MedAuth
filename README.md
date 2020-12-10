@@ -4,7 +4,7 @@
 
 ---
 
-[![Build Status](https://travis-ci.com/Carlosma7/MedAuth.svg?branch=main)](https://travis-ci.com/Carlosma7/MedAuth) [![Build Status](https://circleci.com/gh/Carlosma7/MedAuth.svg?style=svg)](https://github.com/Carlosma7/MedAuth) [![Run Status](https://api.shippable.com/projects/5fca65728d5266000640fc4c/badge?branch=main)](https://app.shippable.com/github/Carlosma7/MedAuth/dashboard/jobs)
+[![Build Status](https://travis-ci.com/Carlosma7/MedAuth.svg?branch=main)](https://travis-ci.com/Carlosma7/MedAuth) [![Build Status](https://circleci.com/gh/Carlosma7/MedAuth.svg?style=svg)](https://github.com/Carlosma7/MedAuth) [![Run Status](https://api.shippable.com/projects/5fca65728d5266000640fc4c/badge?branch=main)](https://app.shippable.com/github/Carlosma7/MedAuth/dashboard/jobs) [![Build Status](https://github.com/Carlosma7/MedAuth/workflows/GitHub-Actions-CI/badge.svg)](https://github.com/Carlosma7/MedAuth/actions?query=workflow%3AGitHub-Actions-CI)
 
 ---
 
