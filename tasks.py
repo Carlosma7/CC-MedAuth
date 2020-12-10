@@ -12,6 +12,9 @@ def clean(c):
 @task
 def tests(c):
 	print("Ejecución de test.\n")
+	print("Test Clase Usuario:")
+	run("pytest -v --disable-pytest-warnings ./src/test/testUsuario.py")
+	
 	print("Test Clase UsuarioAdmin:")
 	run("pytest -v --disable-pytest-warnings ./src/test/testUsuarioAdmin.py")
 	
