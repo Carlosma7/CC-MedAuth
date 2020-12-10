@@ -2,8 +2,6 @@
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![Language](https://img.shields.io/badge/Language-Python-red.svg)](https://www.python.org/)
 
----
-
 [![Build Status](https://travis-ci.com/Carlosma7/MedAuth.svg?branch=main)](https://travis-ci.com/Carlosma7/MedAuth) [![Build Status](https://circleci.com/gh/Carlosma7/MedAuth.svg?style=svg)](https://github.com/Carlosma7/MedAuth) [![Run Status](https://api.shippable.com/projects/5fca65728d5266000640fc4c/badge?branch=main)](https://app.shippable.com/github/Carlosma7/MedAuth/dashboard/jobs) [![Build Status](https://github.com/Carlosma7/MedAuth/workflows/GitHub-Actions-CI/badge.svg)](https://github.com/Carlosma7/MedAuth/actions?query=workflow%3AGitHub-Actions-CI)
 
 ---
@@ -12,50 +10,88 @@
 
 ---
 
-**Autor:** Carlos Morales Aguilera
-
-**Asignatura:** Cloud Computing
-
-**Universidad:** Universidad de Granada (UGR)
+**MedAuth** es una plataforma para empresas en el sector de la salud, destinada a resolver los problemas derivados de la gestión de autorizaciones médicas. Es una herramienta que pretende realizar el proceso de una autorización médica de un modo ágil, no presencial y lo más automatizado posible.
 
 ## Información del proyecto
 
 ---
 
-:hospital: La descripción del problema y la solución propuesta se puede leer en el [Planteamiento del problema](https://carlosma7.github.io/MedAuth/doc/descripcion_problema).
+:hospital: [Introduccion](https://carlosma7.github.io/MedAuth/doc/descripcion_problema).
 
-:triangular_ruler: Elección y justificación de la [Arquitectura](https://carlosma7.github.io/MedAuth/doc/arquitectura).
+:triangular_ruler: [Arquitectura](https://carlosma7.github.io/MedAuth/doc/arquitectura) del proyecto.
 
-:hammer: La justificación de las [Herramientas](https://carlosma7.github.io/MedAuth/doc/justificacion_herramientas).
+:hammer: [Herramientas](https://carlosma7.github.io/MedAuth/doc/justificacion_herramientas) utilizadas.
 
-:round_pushpin: Planificación del proyecto y [Roadmap](https://carlosma7.github.io/MedAuth/doc/roadmap).
+:round_pushpin:[Roadmap](https://carlosma7.github.io/MedAuth/doc/roadmap) del proyecto.
 
-:package: Comprobación de sintaxis y [Modelo inicial](https://carlosma7.github.io/MedAuth/doc/modelo_inicial).
+:package: [Modelo actual](https://carlosma7.github.io/MedAuth/doc/modelo_inicial) del proyecto.
 
-## Gestión de tareas, tests y avance del proyecto
+## Dependencias
 
----
+**Python3**: Cualquier versión superior a la versión 3.6.
 
-:small_blue_diamond: [Gestor de tareas](https://carlosma7.github.io/MedAuth/doc/gestor_tareas) y justificación.
+```shell
+sudo apt update
+sudo apt install software-properties-common
+sudo apt install python3.8
+```
 
-:small_blue_diamond: [Biblioteca de aserciones](https://carlosma7.github.io/MedAuth/doc/biblioteca_asercion) y justificación.
+**Invoke**, **Pytest** y **Assertpy**.
 
-:small_blue_diamond: [Marco de pruebas](https://carlosma7.github.io/MedAuth/doc/marco_pruebas) y justificación.
+```shell
+pip3 install assertpy
+pip3 install pytest==6.1.2
+pip3 install invoke==1.4.1
+```
 
-:small_blue_diamond: [Avance del código](https://carlosma7.github.io/MedAuth/doc/avance_codigo) y justificación con historias de usuario.
+## Descarga del proyecto
 
-:small_blue_diamond: [Tests y sugerencias](https://carlosma7.github.io/MedAuth/doc/test_sugerencias) previas.
+**Con** GitHub.
 
-## Contenerización, automatización de registros y avance del proyecto
+```shell
+git clone https://github.com/Carlosma7/MedAuth.git
+```
 
----
+**Con** GitHub CLI.
 
-:small_blue_diamond: [Estudio de contenedor base](https://carlosma7.github.io/MedAuth/doc/estudio_docker/estudio_contenedor_base)
+```shell
+gh repo clone Carlosma7/MedAuth
+```
 
-:small_blue_diamond: [Documentación sobre Dockerfile](https://carlosma7.github.io/MedAuth/doc/estudio_docker/documentacion_dockerfile)
+**Sin** GitHub.
 
-:small_blue_diamond: [Docker Hub y automatización de subidas](https://carlosma7.github.io/MedAuth/doc/estudio_docker/documentacion_docker_hub)
+```shell
+wget https://github.com/carlosma7/medauth/archive/main.zip
+```
 
-:small_blue_diamond: [Github Container Registry y automatización de subidas](https://carlosma7.github.io/MedAuth/doc/estudio_docker/github_container_registry)
+## Ejecución
 
-:small_blue_diamond: [Avance del código](https://carlosma7.github.io/MedAuth/doc/avance_codigo_2)
+Para ejecutar el programa, una vez instalados los requisitos previos y descargado el proyecto, se ejecuta la siguiente orden:
+
+```shell
+invoke execute
+```
+
+Para limpiar la caché, se ejecuta:
+
+```shell
+invoke clean
+```
+
+Para comprobar el estado, se pueden ejecutar los tests con:
+
+```shell
+invoke tests
+```
+
+## Integración Continua
+
+:small_blue_diamond: Configuración de [TravisCI](https://carlosma7.github.io/MedAuth/doc/integracion_continua/configuracion_travis).
+
+:small_blue_diamond: [Estudio herramientas CI](https://carlosma7.github.io/MedAuth/doc/integracion_continua/estudio_ci) y configuración de [CircleCI](https://carlosma7.github.io/MedAuth/doc/integracion_continua/configuracion_circleci), [Shippable](https://carlosma7.github.io/MedAuth/doc/integracion_continua/configuracion_shippable) y [GitHub Action](https://carlosma7.github.io/MedAuth/doc/integracion_continua/configuracion_github_action).
+
+:small_blue_diamond: Justificación uso del [gestor de tareas con herramientas CI](https://carlosma7.github.io/MedAuth/doc/integracion_continua/justificacion_invoke).
+
+:small_blue_diamond: Justificación de [aprovechamiento del contenedor Docker](https://carlosma7.github.io/MedAuth/doc/integracion_continua/justificacion_docker) del proyecto.
+
+:small_blue_diamond: [Avance del proyecto](https://carlosma7.github.io/MedAuth/doc/avance_codigo_3).
