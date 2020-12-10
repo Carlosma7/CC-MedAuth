@@ -57,3 +57,10 @@ El plan de desarrollo del proyecto va a seguir una serie de etapas que irán añ
     
     Por último, además de haber conectado toda la funcionalidad anterior del sistema, se añade un extra de [gestión de citas médicas](https://github.com/Carlosma7/MedAuth/milestone/8) como es la notificación previa a una cita por correo:
     * [Como asegurado quiero ser notificado para saber cuando debo asistir a una cita médica.](https://github.com/Carlosma7/MedAuth/issues/42)
+
+
+### Avances
+
+1. [Primer avance](https://carlosma7.github.io/MedAuth/doc/avance_codigo) que corresponde con las entregas de la primera y segunda fase.
+2. [Segundo avance](https://carlosma7.github.io/MedAuth/doc/avance_codigo_2) que corresponde con la entrega de la tercera fase.
+3. [Tercer avance](https://carlosma7.github.io/MedAuth/doc/avance_codigo_3) que corresponde con la entrega de la cuarta fase.
