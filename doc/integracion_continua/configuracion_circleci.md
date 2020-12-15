@@ -2,7 +2,7 @@
 
 ### Configuración CircleCI
 
-[![Build Status](https://circleci.com/gh/Carlosma7/MedAuth.svg?style=svg)](https://github.com/Carlosma7/MedAuth)
+[![Build Status](https://circleci.com/gh/Carlosma7/MedAuth.svg?style=svg)](https://app.circleci.com/pipelines/github/Carlosma7/MedAuth)
 
 Para poder configurar CircleCI, se deben seguir los siguientes pasos:
 
