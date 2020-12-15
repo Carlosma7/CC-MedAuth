@@ -10,7 +10,7 @@ jobs:
         steps:
             - checkout
             # Launch tests using the task manager
-            - run: invoke tests
+            - run: invoke test
 
 # Workflows of CircleCI
 workflows:

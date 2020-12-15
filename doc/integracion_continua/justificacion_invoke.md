@@ -18,12 +18,12 @@ install:
   - pip3 install -r requirements.txt
 ```
 
-* Utilizar la opción ```tests``` de *invoke* para lanzar los tests.
+* Utilizar la opción ```test``` de *invoke* para lanzar los tests.
 
 ```yaml
 # Launch tests using the task manager
 script:
-  - invoke tests
+  - invoke test
 ```
 
 ### Invoke con CircleCI
@@ -40,13 +40,13 @@ docker:
 
 Al hacer uso del contenedor del proyecto, utiliza un entorno ya preparado con las herramientas necesarias para realizar los tests, por lo que no es necesario instalar nada, ya posee dichas herramientas.
 
-* Utilizar la opción ```tests``` de *invoke* para lanzar los tests.
+* Utilizar la opción ```test``` de *invoke* para lanzar los tests.
 
 ```yaml
 steps:
             - checkout
             # Launch tests using the task manager
-            - run: invoke tests
+            - run: invoke test
 ```
 
 ### Invoke con Shippable
@@ -62,11 +62,11 @@ build:
     - pip3 install -r requirements.txt
 ```
 
-* Utilizar la opción ```tests``` de *invoke* para lanzar los tests.
+* Utilizar la opción ```test``` de *invoke* para lanzar los tests.
 
 ```yaml
 	# Launch tests using the task manager
-    - invoke tests
+    - invoke test
 ```
 
 ### Invoke con GitHub Actions
@@ -74,7 +74,7 @@ build:
 Para utilizar *invoke* con una [GitHub Action](https://github.com/Carlosma7/MedAuth/blob/main/.github/workflows/github_actions_CI.yml), son necesarios nuevamente los mismos requisitos:
 
 * Instalar *invoke*, para el cual se utiliza el fichero *requirements.txt* y se instala mediante *pip3*.
-* Utilizar la opción ```tests``` de *invoke* para lanzar los tests.
+* Utilizar la opción ```test``` de *invoke* para lanzar los tests.
 
 ```yaml
 # Checks-out repository under $GITHUB_WORKSPACE, so workflow can access it

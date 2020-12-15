@@ -60,5 +60,5 @@ build:
     # Install dependencies (Invoke, Pytest and Assertpy)
     - pip3 install -r requirements.txt
     # Launch tests using the task manager
-    - invoke tests
+    - invoke test
 ```

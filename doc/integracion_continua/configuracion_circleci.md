@@ -63,7 +63,7 @@ jobs:
             # Install dependencies (Invoke, Pytest, and Assertpy)
             - run: pip3 install -r requirements.txt
             # Launch tests using the task manager
-            - run: invoke tests
+            - run: invoke test
 
 # Workflows of CircleCI
 workflows:
@@ -89,7 +89,7 @@ jobs:
         steps:
             - checkout
             # Launch tests using the task manager
-            - run: invoke tests
+            - run: invoke test
 
 # Workflows of CircleCI
 workflows:

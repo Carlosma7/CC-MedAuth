@@ -71,5 +71,5 @@ branches:
 
 # Launch tests using the task manager
 script:
-  - invoke tests
+  - invoke test
 ```

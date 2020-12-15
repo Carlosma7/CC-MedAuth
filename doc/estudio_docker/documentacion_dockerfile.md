@@ -62,7 +62,7 @@ RUN rm requirements.txt
 ENV PATH=/home/medauth/.local/bin:$PATH
 
 # Ejecución
-CMD ["invoke", "tests"]
+CMD ["invoke", "test"]
 ```
 
 Aunque esta versión cumple con los requisitos propuestos y hace uso de la mayoría de las [buenas prácticas](https://www.docker.com/blog/intro-guide-to-dockerfile-best-practices/), no es una versión optimizada, y tampoco utilizar todas las buenas prácticas, por lo que se debe tener en cuenta:
@@ -110,7 +110,7 @@ RUN pip install -r requirements.txt --no-warn-script-location \
 ENV PATH=/home/medauth/.local/bin:$PATH
 
 # Ejecución
-CMD ["invoke", "tests"]
+CMD ["invoke", "test"]
 ```
 
 Por último, se procede a comprobar con la herramienta [skopeo](https://github.com/containers/skopeo) la diferencia de capas entre ambas imágenes:
@@ -162,7 +162,7 @@ RUN pip install -r requirements.txt --no-warn-script-location \
 
 
 # Ejecución
-CMD ["invoke", "tests"]
+CMD ["invoke", "test"]
 ```
 
 Por último, se procede a comprobar con la herramienta [skopeo](https://github.com/containers/skopeo) esta última imagen obtenida:

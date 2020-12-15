@@ -14,13 +14,13 @@ docker:
 
 El claro ejemplo de aprovechamiento es que el contenedor ya posee las librerías necesarias (*invoke*, *pytest* y *assertpy*) para la ejecución de los tests sin necesidad de instalar nada, simplemente se obtiene el contenedor y se ejecutan los tests.
 
-Con el step ```checkout``` se comprueba y copia el directorio de *git*, a continuación se ejecutan los tests con la orden ```run: invoke tests```.
+Con el step ```checkout``` se comprueba y copia el directorio de *git*, a continuación se ejecutan los tests con la orden ```run: invoke test```.
 
 ```yaml
 steps:
             - checkout
             # Launch tests using the task manager
-            - run: invoke tests
+            - run: invoke test
 ```
 
 ### GitHub Action

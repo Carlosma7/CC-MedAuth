@@ -46,7 +46,7 @@ Una vez creado el fichero *tasks.py*, procedemos a definir las tareas necesarias
 
 * clean: Limpieza de ficheros.
 * execute: Ejecución del *main* del proyecto.
-* tests: Ejecución de los test unitarios. (Cabe destacar que el núcleo de *Invoke* posee una tarea predefinida que trabaja con *pytest* llamada [test](https://github.com/pyinvoke/invoke/blob/master/tasks.py#L13), la cual podría ser modificada, pero para el fin deseado se creará una nueva).
+* test: Ejecución de los test unitarios. (Cabe destacar que el núcleo de *Invoke* posee una tarea predefinida que trabaja con *pytest* llamada [test](https://github.com/pyinvoke/invoke/blob/master/tasks.py#L13), la cual podría ser modificada, pero para el fin deseado se creará una nueva).
 
 Una vez definidas las tareas, se configuran en *Invoke* de la siguiente manera:
 
@@ -73,12 +73,12 @@ def execute(c):
 	print("Fin de la ejecución.")
 ```
 
-* tests: Se ejecutan todos los tests del proyecto, demostrando que funciona correctamente cada una de las entidades del mismo. Para ello ejecutamos *pytest* con la entidad que queremos comprobar.
+* test: Se ejecutan todos los tests del proyecto, demostrando que funciona correctamente cada una de las entidades del mismo. Para ello ejecutamos *pytest* con la entidad que queremos comprobar.
 
 ```python
 # Tarea de ejecución de tests
 @task
-def tests(c):
+def test(c):
 	print("Ejecución de test.\n")
 	print("Test Clase UsuarioAdmin:")
 	run("pytest -v --disable-pytest-warnings ./src/test/testUsuarioAdmin.py")

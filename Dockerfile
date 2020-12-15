@@ -36,4 +36,4 @@ RUN pip install -r requirements.txt --no-warn-script-location \
 
 
 # Ejecución
-CMD ["invoke", "tests"]
+CMD ["invoke", "test"]

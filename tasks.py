@@ -10,7 +10,7 @@ def clean(c):
 
 # Tarea de ejecución de tests
 @task
-def tests(c):
+def test(c):
 	print("Ejecución de test.\n")
 	print("Test Clase Usuario:")
 	run("pytest -v --disable-pytest-warnings ./src/test/testUsuario.py")
