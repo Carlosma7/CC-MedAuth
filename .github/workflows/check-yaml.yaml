@@ -3,6 +3,7 @@ name: "Sintaxis YAML"
 on:
   push:
     paths:
+      - 'check-yaml.yaml'
       - 'cc.yaml'
       - '_config.yml'
       - 'shippable.yml'
@@ -35,3 +36,6 @@ jobs:
       - name: "Comprueba fichero de GitHub Action CI"
         run:
           yamllint .github/workflows/github_actions_CI.yml
+      - name: "Compruebo fichero de check yaml"
+        run:
+          yamllint .github/workflows/check-yaml.yaml
