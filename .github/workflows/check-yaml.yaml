@@ -3,7 +3,7 @@ name: "Sintaxis YAML"
 on:
   push:
     paths:
-      - 'check-yaml.yaml'
+      - '.github/workflows/check-yaml.yaml'
       - 'cc.yaml'
       - '_config.yml'
       - 'shippable.yml'
