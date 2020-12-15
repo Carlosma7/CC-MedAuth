@@ -35,6 +35,3 @@ jobs:
       - name: "Comprueba fichero de GitHub Action CI"
         run:
           yamllint .github/workflows/github_actions_CI.yml
-      - name: "Comprueba fichero de GitHub Action de Container Registry"
-        run:
-          yamllint .github/workflows/github_container_registry.yml
