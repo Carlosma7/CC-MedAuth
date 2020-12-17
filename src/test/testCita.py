@@ -6,6 +6,7 @@ from usuarioCliente import UsuarioCliente
 from cita import Cita
 from typing import List
 import datetime
+from assertpy import assert_that
 
 # Test comparación de cita médica
 def test_compare_cita():
@@ -22,6 +23,6 @@ def test_compare_cita():
 	# Creación de una cita distinta
 	t3 = Cita("AU-77925767-1", u, "PR-77925767-1", fecha, hora, "D. Miguel", "Centro médico capital, Sala 2")
 	# Comprobar que una cita es igual a otra si tienen la misma información
-	assert t1 == t2 # Pasa test
+	assert_that(t1).is_equal_to(t2) # Pasa test
 	# Comprobar que una cita es distinta de otra si tienen alguna información distinta
-	assert t1 != t3
+	assert_that(t1).is_not_equal_to(t3) # Pasa test
