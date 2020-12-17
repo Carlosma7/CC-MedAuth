@@ -7,6 +7,7 @@ from especialidad import Especialidad
 from prescripcion import Prescripcion
 from typing import List
 import datetime
+from assertpy import assert_that
 
 # Test comparación de prescripciones
 def test_compare_prescripcion():
@@ -20,6 +21,6 @@ def test_compare_prescripcion():
 	# Creación de una prescripción distinta
 	t3 = Prescripcion("PR-12345678", u, "MA-75925767-1", fecha, Especialidad.Traumatologia, "D. Juan", "D. Juan", ["Radiografía", "Ortopedia"], "Centro médico capital, Sala 2")
 	# Comprobar que una prescripción es igual a otra si tienen la misma información
-	assert t1 == t2 # Pasa test
+	assert_that(t1).is_equal_to(t2) # Pasa test
 	# Comprobar que una prescripción es distinta de otra si tienen alguna información distinta
-	assert t1 != t3
+	assert_that(t1).is_not_equal_to(t3) # Pasa test
