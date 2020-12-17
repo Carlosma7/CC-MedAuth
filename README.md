@@ -81,7 +81,7 @@ invoke clean
 Para comprobar el estado, se pueden ejecutar los tests con:
 
 ```shell
-invoke tests
+invoke test
 ```
 
 ## Integración Continua
