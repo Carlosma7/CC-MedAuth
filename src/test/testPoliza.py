@@ -8,6 +8,7 @@ from tipoPoliza import TipoPoliza
 from moduloExtra import ModuloExtra
 from typing import List
 import datetime
+from assertpy import assert_that
 
 # Test comparación pólizas
 def test_compare_poliza():
@@ -21,6 +22,6 @@ def test_compare_poliza():
 	# Creación de una póliza distinta
 	t3 = Poliza(u, "12345678", fecha, TipoPoliza.Basica, 35.99, 20.0, ["TAC", "Apendicitis"], [ModuloExtra.Dental], True)
 	# Comprobar que una póliza es igual a otra si tienen la misma información
-	assert t1 == t2 # Pasa test
+	assert_that(t1).is_equal_to(t2) # Pasa test
 	# Comprobar que una póliza es distinta de otra si tienen alguna información distinta
-	assert t1 != t3
+	assert_that(t1).is_not_equal_to(t3) # Pasa test
