@@ -116,7 +116,11 @@ class Controller:
 
 			if len(polizas_previas) > 0:
 				# Si posee polizas previas canceladas, se obtiene el ID de la última que tuvo
-				id_poliza = id_poliza + str(int(polizas_previas[-1][-1]) + 1)
+				if not polizas_previas[-1].get_activa():
+					# Si la última póliza no está activa
+					id_poliza = id_poliza + str(int(polizas_previas[-1][-1]) + 1)
+				else:
+					raise ValueError('User has an active policy.')
 			else:
 				# Si es la primera se crea como tal
 				id_poliza = id_poliza + "1"
