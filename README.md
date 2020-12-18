@@ -28,20 +28,18 @@
 
 ## Dependencias
 
-**Python3**: Cualquier versión superior a la versión 3.6.
-
-```shell
-sudo apt update
-sudo apt install software-properties-common
-sudo apt install python3.8
-```
-
 **Invoke**, **Pytest** y **Assertpy**.
 
 ```shell
 pip3 install assertpy
 pip3 install pytest==6.1.2
 pip3 install invoke==1.4.1
+```
+
+Otra opción es descargar el proyecto y ejecutar:
+
+```shell
+pip3 install -r requirements.txt
 ```
 
 ## Descarga del proyecto
