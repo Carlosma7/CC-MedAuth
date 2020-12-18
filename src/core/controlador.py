@@ -81,8 +81,10 @@ class Controller:
 					email_empresarial = email.split('@')[0] + '@medauth.com'
 					usr.set_email_empresarial(email_empresarial)
 				else: # Cliente
-					usr.set_cuenta_bancaria(cuenta_bancaria)
-					
+					if bool(re.match("ES[0-9]{22}", cuenta_bancaria)):
+						usr.set_cuenta_bancaria(cuenta_bancaria)
+					else:
+						raise ValueError('IBAN not valid.')
 			else:
 				raise ValueError('Email not valid.')
 		else:
