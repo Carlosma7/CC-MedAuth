@@ -192,9 +192,12 @@ class Controller:
 					# Si no existen prescripciones previas se marca como la primera
 					id_prescripcion = id_prescripcion + "1"
 				
-				prescripcion.set_id_prescripcion(id_prescripcion)
+				if isinstance(prescripcion.get_especialidad(), Especialidad):
+					prescripcion.set_id_prescripcion(id_prescripcion)
 				
-				self.prescripciones.append(prescripcion)
+					self.prescripciones.append(prescripcion)
+				else:
+					raise ValueError('The medical speciality is not valid.')
 			else:
 				raise ValueError('The prescription is not associated with the active policy.')
 		else:
