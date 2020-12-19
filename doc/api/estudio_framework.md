@@ -2,7 +2,7 @@
 
 Existen numerosas herramientas destinadas al diseño y configuración de *APIs* para microservicios, por lo que para escoger una que se adapte a las necesidades de nuestro proyecto, se van a evaluar las principales herramientas observando sus principales ventajas y desventajas de cara a nuestro proyecto:
 
-* [Django](https://www.djangoproject.com/): Es un marco web avanzado que puede desarrollar rápidamente sitios web seguros y fáciles de mantener. Es gratuito y de código abierto, tiene una comunidad activa, mucha documentación y considerables opciones de soporte gratuitas y de pago.
+[Django](https://www.djangoproject.com/): Es un marco web avanzado que puede desarrollar rápidamente sitios web seguros y fáciles de mantener. Es gratuito y de código abierto, tiene una comunidad activa, mucha documentación y considerables opciones de soporte gratuitas y de pago.
 
 | Ventajas                                                 | Desventajas                                                                                |
 |----------------------------------------------------------|--------------------------------------------------------------------------------------------|
@@ -14,7 +14,8 @@ Existen numerosas herramientas destinadas al diseño y configuración de *APIs* 
 | Buena documetnación y comunidad activa.                  |                                                                                            |
 | Integración sencilla con bases de datos.                 |                                                                                            |
 
-* [Flask](https://flask.palletsprojects.com/en/1.1.x/): Es un microframework escrito en *Python* que no requiere herramientas o bibliotecas específicas y admite extensiones que pueden agregar funcionalidad a la aplicación como si estuvieran implementadas en el propio *Flask*.
+
+[Flask](https://flask.palletsprojects.com/en/1.1.x/): Es un microframework escrito en *Python* que no requiere herramientas o bibliotecas específicas y admite extensiones que pueden agregar funcionalidad a la aplicación como si estuvieran implementadas en el propio *Flask*.
 
 | Ventajas                                                           | Desventajas                                                   |
 |--------------------------------------------------------------------|---------------------------------------------------------------|
@@ -26,7 +27,8 @@ Existen numerosas herramientas destinadas al diseño y configuración de *APIs* 
 | Permite tests unitarios, y se integra principalmente con *pytest*. |                                                               |
 | Debug fácil y rápido.                                              |                                                               |
 
-* [Web2py](http://www.web2py.com/): Es un framework completo de código abierto gratuito para el desarrollo rápido de aplicaciones basadas en web escalables, rápidas y seguras. Escrito y programado en *Python*.
+
+[Web2py](http://www.web2py.com/): Es un framework completo de código abierto gratuito para el desarrollo rápido de aplicaciones basadas en web escalables, rápidas y seguras. Escrito y programado en *Python*.
 
 | Ventajas                                | Desventajas                                      |
 |-----------------------------------------|--------------------------------------------------|
@@ -36,7 +38,8 @@ Existen numerosas herramientas destinadas al diseño y configuración de *APIs* 
 | Fácil mantenimiento.                    | No soporta tests unitarios. Aunque sí *doctest*. |
 | Posee un IDE basado en web.             | Requiere demasiado tiempo la integración.        |
 
-* [Bottle](https://bottlepy.org/docs/dev/): Es un microframework web *WSGI* rápido, simple y ligero para *Python*. Se distribuye como un módulo de archivo único y no tiene más dependencias que la Biblioteca estándar de *Python*.
+
+[Bottle](https://bottlepy.org/docs/dev/): Es un microframework web *WSGI* rápido, simple y ligero para *Python*. Se distribuye como un módulo de archivo único y no tiene más dependencias que la Biblioteca estándar de *Python*.
 
 | Ventajas                                                      | Desventajas                                                   |
 |---------------------------------------------------------------|---------------------------------------------------------------|
@@ -45,7 +48,8 @@ Existen numerosas herramientas destinadas al diseño y configuración de *APIs* 
 | Asíncrono.                                                    | Orientada a proyectos minimalistas.                           |
 | Toda la configuración se encuentra en el fichero *bottle.py*. | Poco extensible.                                              |
 
-* [Tornado](https://www.tornadoweb.org/en/stable/): Es un framework web desarrollado en *Python* junto a una biblioteca de red asincrónica. Al usar E/S de red sin bloqueo, *Tornado* puede escalar a miles de conexiones abiertas.
+
+[Tornado](https://www.tornadoweb.org/en/stable/): Es un framework web desarrollado en *Python* junto a una biblioteca de red asincrónica. Al usar E/S de red sin bloqueo, *Tornado* puede escalar a miles de conexiones abiertas.
 
 | Ventajas                                                            | Desventajas                                                                                                                                 |
 |---------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
@@ -56,7 +60,8 @@ Existen numerosas herramientas destinadas al diseño y configuración de *APIs* 
 | Muy utilizado en campos de minería de datos.                        | Muchas bases de datos y librerías puede producir problemas de bloqueo del IOLoop, y gestionar este problema requiere bastante conocimiento. |
 |                                                                     | Difícil de aprender y poco intuitivo, muy orientado a un determinado sector.                                                                |
 
-* [Pyramid](https://trypyramid.com/): Es un framework web desarrolado en *Python* pequeño, rápido y práctico. Se desarrolla como parte del Proyecto *Pylones*. Tiene una licencia similar a *BSD*.
+
+[Pyramid](https://trypyramid.com/): Es un framework web desarrolado en *Python* pequeño, rápido y práctico. Se desarrolla como parte del Proyecto *Pylones*. Tiene una licencia similar a *BSD*.
 
 | Ventajas                      | Desventajas                                                               |
 |-------------------------------|---------------------------------------------------------------------------|
@@ -65,7 +70,8 @@ Existen numerosas herramientas destinadas al diseño y configuración de *APIs* 
 | Fácil de entender y extender. | Muy pesado, por lo que no es recomendable para proyectos pequeños.        |
 | Moderno.                      | Documentación escasa, y pequeña comunidad debido a su poco tiempo.        |
 
-* [TurboGears](https://turbogears.org/): Es un framework desarrollado en *Python* con capa full-stack implementada sobre un núcleo de microframework con soporte para MongoDB, aplicaciones conectables y administración autogenerada.
+
+[TurboGears](https://turbogears.org/): Es un framework desarrollado en *Python* con capa full-stack implementada sobre un núcleo de microframework con soporte para MongoDB, aplicaciones conectables y administración autogenerada.
 
 | Ventajas                                                                    | Desventajas                                        |
 |-----------------------------------------------------------------------------|----------------------------------------------------|
@@ -76,7 +82,8 @@ Existen numerosas herramientas destinadas al diseño y configuración de *APIs* 
 | Fácil para crear librerías reutilizables.                                   |                                                    |
 | Sistema de administración propio.                                           |                                                    |
 
-* [CherryPy](https://cherrypy.org/): Es un framework web orientado a objetos desarrollado en *Python*. Tiene como objetivo desarrollar rápidamente aplicaciones Web, pero las funcionalidades son demasiado básicas para proyectos con muchas especificaciones.
+
+[CherryPy](https://cherrypy.org/): Es un framework web orientado a objetos desarrollado en *Python*. Tiene como objetivo desarrollar rápidamente aplicaciones Web, pero las funcionalidades son demasiado básicas para proyectos con muchas especificaciones.
 
 | Ventajas                                      | Desventajas                                                    |
 |-----------------------------------------------|----------------------------------------------------------------|
@@ -85,7 +92,8 @@ Existen numerosas herramientas destinadas al diseño y configuración de *APIs* 
 | Permite diseñar APIs y manejar formatos JSON. | Existen opciones mejor como *Flask*.                           |
 | Configuración robusta.                        |                                                                |
 
-* [Hug](https://www.hug.rest/): Es una pequeña biblioteca para crear API que son fáciles de entender y mantener. Permite crear APIs muy rápidamente con muy poco código y siguiendo unas buenas prácticas. *Hug* no es una biblioteca patentada para hacer API web, sino que se centra en permitirle crear API desde la perspectiva más amplia: una interfaz que permite el uso automático (a través del código) de los programas.
+
+[Hug](https://www.hug.rest/): Es una pequeña biblioteca para crear API que son fáciles de entender y mantener. Permite crear APIs muy rápidamente con muy poco código y siguiendo unas buenas prácticas. *Hug* no es una biblioteca patentada para hacer API web, sino que se centra en permitirle crear API desde la perspectiva más amplia: una interfaz que permite el uso automático (a través del código) de los programas.
 
 | Ventajas                           | Desventajas                                                                                                           |
 |------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
@@ -94,7 +102,8 @@ Existen numerosas herramientas destinadas al diseño y configuración de *APIs* 
 | Gestión de APIs sencillas.         |                                                                                                                       |
 | Minimalista.                       |                                                                                                                       |
 
-* [FastAPI](https://fastapi.tiangolo.com/): Es un framework rápido, con poco tiempo ya que se originó en 2019. Permite crear APIs con *Python* 3.6+ basado en sugerencias de tipado *Python* estándar.
+
+[FastAPI](https://fastapi.tiangolo.com/): Es un framework rápido, con poco tiempo ya que se originó en 2019. Permite crear APIs con *Python* 3.6+ basado en sugerencias de tipado *Python* estándar.
 
 | Ventajas                                        | Desventajas                    |
 |-------------------------------------------------|--------------------------------|
@@ -105,8 +114,8 @@ Existen numerosas herramientas destinadas al diseño y configuración de *APIs* 
 | Validación de datos.                            |                                |
 | Inyección de dependencias.                      |                                |
 
-* [Falcon Framework](https://falconframework.org/): Es una biblioteca *WSGI* minimalista que sirve para crear APIs web rápidas y backends de aplicaciones. El diseño de *Falcon* es simple y claro, utilizando estilos arquitectónicos *HTTP* y *REST*.
 
+[Falcon Framework](https://falconframework.org/): Es una biblioteca *WSGI* minimalista que sirve para crear APIs web rápidas y backends de aplicaciones. El diseño de *Falcon* es simple y claro, utilizando estilos arquitectónicos *HTTP* y *REST*.
 
 | Ventajas                         | Desventajas                         |
 |----------------------------------|-------------------------------------|
