@@ -189,6 +189,38 @@ def test_subir_prescripcion():
 	# Comprobar que en el controlador ya sí existe la prescripción
 	assert_that(controlador.prescripciones).contains(prescripcion)
 	
+# Test de solicitar autorización
+def test_solicitar_autorizacion():
+	controlador = Controller()
+	# Creación de usuario cliente
+	cliente = UsuarioCliente("Marta", "marta@gmail.com", "71238492-W", "ES9912341852003384000029")
+	# Crear usuario cliente
+	controlador.crear_usuario(cliente, 1)
+	
+	# Creación fecha
+	fecha = datetime.datetime(2020,6,18)
+	# Creación Póliza activa
+	poliza = Poliza(cliente, cliente.get_dni(), fecha, TipoPoliza.Total, 13.99, 30.99, ["Serología"], [ModuloExtra.Dental], True)
+	# Crear Póliza
+	controlador.crear_poliza(poliza)
+	
+	# Creación fecha
+	fecha_realizacion = datetime.datetime(2020, 6, 24)
+	# Creación prescripción con usuario y póliza
+	prescripcion = Prescripcion(cliente.get_dni(), cliente, poliza.get_id_poliza(), fecha_realizacion, Especialidad.Neurologia, "D. Miguel", "D. Fernando", ["TAC", "PCR"], "Consulta 3")
+	# Crear prescripción
+	controlador.subir_prescripcion(prescripcion)
+	
+	# Creación fecha
+	fecha_realizacion = datetime.datetime(2020, 6, 24)
+	# Creación autorización con usuario y póliza
+	autorizacion = Autorizacion("AU-71238492-1", cliente, prescripcion.get_id_prescripcion(), poliza.get_id_poliza(), True, "", fecha_realizacion, Especialidad.Neurologia, ["TAC", "PCR"], "D. Fernando", "Consulta 3")
+	# Comprobar que en el controlador no existe la autorización
+	assert_that(controlador.autorizaciones).does_not_contain(autorizacion)
+	# Crear autorización
+	controlador.solicitar_autorizacion(prescripcion.get_id_prescripcion())
+	# Comprobar que en el controlador ya sí existe la autorización
+	assert_that(controlador.autorizaciones).contains(autorizacion)
 
 # Test de crear autorización
 def test_crear_autorizacion():
