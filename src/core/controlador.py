@@ -202,6 +202,51 @@ class Controller:
 				raise ValueError('The prescription is not associated with the active policy.')
 		else:
 			raise ValueError('User has not an active policy.')
+	
+	def solicitar_autorizacion(self, id_prescripcion: str):
+		prescripcion = [p for p in self.prescripciones if p.get_id_prescripcion() == id_prescripcion]
+		
+		# Se comprueba que la prescripción exista en el sistema
+		if len(prescripcion) > 0:
+			prescripcion = prescripcion[0]
+			# Se obtiene la póliza activa del asegurado
+			poliza_activa = [p for p in self.polizas if p.get_titular().get_dni() == prescripcion.get_asegurado().get_dni() and p.get_activa()]
+			
+			if len(poliza_activa) > 0:
+				poliza_activa = poliza_activa[0]
+				
+				dni = prescripcion.get_asegurado().get_dni()
+				# Se compone el identificador de la póliza con el formato AU-DNI-ID_ULTIMA_AUTORIZACION+1
+				id_autorizacion = "AU-" + dni[0:9]
+				# Se obtienen las autorizaciones previas del cliente/asegurado
+				autorizaciones_previas = [a for a in self.autorizaciones if a.get_asegurado().get_dni() == dni]
+				
+				if len(autorizaciones_previas) > 0:
+					# Si se han realizado autorizaciones previas se obtiene el último identificador y se aumenta en uno
+					id_autorizacion = id_autorizacion + str(int(autorizaciones_previas[-1][-1]) + 1)
+				else:
+					# Si no se han realizado autorizaciones previas se marca como la primera
+					id_autorizacion = id_autorizacion + "1"
+				
+				# Comprobar si se rechaza algún servicio no incluido en la póliza
+				servicios_rechazados = [serv for serv in prescripcion.get_servicios_solicitados() if serv in poliza_activa.get_servicios_excluidos()]
+				
+				if len(servicios_rechazados) > 0:
+					# Se deniega la autorización
+					servicios_rechazados = ','.join([str(serv) for serv in servicios_rechazados])
+					motivo_rechazo = "Los servicios " + servicios_rechazados + " no se incluyen en la póliza."
+					autorizacion = Autorizacion(id_autorizacion, prescripcion.get_asegurado(), id_prescripcion, poliza_activa.get_id_poliza(), False, motivo_rechazo, prescripcion.get_fecha_realizacion(), prescripcion.get_especialidad(), [""], prescripcion.get_facultativo_realizador(), prescripcion.get_consulta())
+				else:
+					# Se acepta la autorización
+					autorizacion = Autorizacion(id_autorizacion, prescripcion.get_asegurado(), id_prescripcion, poliza_activa.get_id_poliza(), True, "", prescripcion.get_fecha_realizacion(), prescripcion.get_especialidad(), prescripcion.get_servicios_solicitados(), prescripcion.get_facultativo_realizador(), prescripcion.get_consulta())
+					
+				# Se almacena la autorización
+				self.autorizaciones.append(autorizacion)
+			else:
+				raise ValueError('User has not an active policy.')
+		else:
+			raise Valueerror('Prescription ID not valid.')
+			
 		
 	# [HU8] Administrar autorización: Crear una autorización
 	def crear_autorizacion(self, autorizacion: Autorizacion):
