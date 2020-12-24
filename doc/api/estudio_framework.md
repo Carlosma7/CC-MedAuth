@@ -1,3 +1,4 @@
+
 ### Estudio inicial
 
 Existen numerosas herramientas destinadas al diseño y configuración de *APIs* para microservicios, por lo que para escoger una que se adapte a las necesidades de nuestro proyecto, se van a evaluar las principales herramientas observando sus principales ventajas y desventajas de cara a nuestro proyecto:
@@ -124,9 +125,21 @@ Existen numerosas herramientas destinadas al diseño y configuración de *APIs* 
 | Ligero con dependencias mínimas. | Únicamente documentación oficial.   |
 |                                  | Documentación oficial algo confusa. |
 
+[Starlette](https://www.starlette.io/): Es un conjunto de herramientas y framework *ASGI* liviano, ideal para crear servicios *asyncio* de alto rendimiento.
+
+
+| Ventajas                                                                                                                      | Desventajas                                        |
+|-------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------|
+| Alto rendimiento.                                                                                                             | No posee interfaz de administrador.                |
+| Comunidad activa.                                                                                                             | No existe apenas documentación que no sea oficial. |
+| Optimizado con *ASGI*.                                                                                                        | Existen opciones similares como *FastAPI*.         |
+| Excelente documentación oficial.                                                                                              |                                                    |
+| Permite una definición de rutas aisladas, permitiendo crear una jerarquía de forma sencilla y de forma separada del programa. |                                                    |
+
 Tras un análisis inicial, se ha decidido seguir explorando las siguientes herramientas:
 * *Flask*: La opción más utilizada junto a *Django*, además de ser la opción minimalista principal. Quizás se ajuste para el proyecto mejor que *Django*. Un gran contra es el de no soportar las peticiones asíncronas, aunque se evaluará la forma de suplirlo.
 * *FastAPI*: Opción más moderna, es muy interesante ya que ofrece ventajas frente a los otros dos competidores, y parece ser una opción a considerar importante en un futuro próximo.
+* *Starlette*: Igual que *FastAPI*, es una opción novedosa e interesante, realmente se podrían considerar competidores.
 * *Django*: Opción más conocida, y de las que más ventajas ofrece, aunque quizás sea una herramienta demasiado pesada con opciones innecesarias.
 
 ### Análisis opciones
@@ -139,10 +152,13 @@ Tras evaluar las diferentes opciones posibles para configurar *Flask* con petici
 *  [Flask-aiohttp](https://flask-aiohttp.readthedocs.io/en/latest/): Trata de solventar el problema realizando peticiones *asyncio*, pero las funcionalidades de *Flask* se ven reducidas, por lo que no es realmente una opción válida.
 * Utilizar *Flask* junto a una cola de eventos y un broker para las diferentes peticiones: Es una opción válida, que permitiría una configuración correcta de cada elemento por separado, pero que conllevaría un mayor trabajo, y uso de herramientas que realmente se podrían omitir con la utilización de otros microframeworks asíncronos que realizan esta función de por sí.
 * [Quart](https://gitlab.com/pgjones/quart): Probablemente la opción más interesante, ya que se basa complemante en la API de *Flask* y añade la funcionalidad de *async* para peticiones asíncronas, por lo que realmente es una librería top de *Flask*.
+* [Sanic](https://sanic.readthedocs.io/en/latest/):  Es otra opción interesante, ya que utiliza una API similar a la de *Flask*, y se podría considerar un competidor directo de *Quart*, por lo que realmente no hay demasiadas diferencias a la hora de escoger un framework u otro.
 
-Tras analizar estas opciones, realmente el debate se encuentra en utilizar *Quart* o *FastAPI*. Si bien ambas opciones son interesantes, y *FastAPI* es una gran opción a considerar, la documentación de la misma considero que es insuficiente para asegurar la continuidad del proyecto en este momento, mientras que *Flask* posee una gran trayectoria, una gran comunidad y una documentación extensa ofrece una mayor confiabilidad, y al estar *Quart* desarrollada sobre *Flask*, posee esta ventaja.
+Tras analizar estas opciones, realmente el debate se encuentra en utilizar *Quart*, *Sanic* o *FastAPI*. Si bien todas las opciones son interesantes, y *FastAPI* es una gran opción a considerar, la documentación de la misma considero que es insuficiente para asegurar la continuidad del proyecto en este momento, mientras que *Flask* posee una gran trayectoria, una gran comunidad y una documentación extensa ofrece una mayor confiabilidad, y al estar *Quart* desarrollada sobre *Flask*, posee esta ventaja, y *Sanic* se presenta como una alternativa del mismo.
 
 *FastAPI* es una herramienta que promete ser un gran competidor de *Flask*, pero que al haber sido creada tan recientemente, no ofrece garantías suficientes aún de poder superar a *Flask* y la curva de aprendizaje es considerablemente superior.
+
+Por último, aunque la decisión debería basarse en decisiones técnicas, realmente no hay aspectos que definan cual de los dos frameworks es mejor para el proyecto, ya que ambos son completamente válidos. Por cuestión de curiosidad e investigación, y por tener menor popularidad pese a ser una herramienta bastante interesante, se utilizará *Quart*, con el objetivo de aprender a utilizar un framework nuevo.
 
 Finalmente el microframework sobre el que se va a desarrollar la API del proyecto es **Quart**.
 
