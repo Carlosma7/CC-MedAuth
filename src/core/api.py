@@ -114,7 +114,6 @@ async def crear_poliza():
 	except ValueError as error:
 		# Se produce un error
 		return str(error), 400
-	print(poliza.get_id_poliza())
 	# Estado de éxito
 	return 'Póliza creada con éxito.', 200
 
@@ -179,7 +178,7 @@ async def desactivar_poliza(dni):
 @rutas_medauth.route('/poliza/<dni>', methods=['GET'])
 async def consultar_poliza(dni):
 	try:
-		# Desactivación póliza
+		# Consultar póliza
 		poliza = controlador.consultar_poliza(dni)
 	except ValueError as error:
 		# Se produce un error
@@ -207,7 +206,7 @@ async def subir_prescripcion():
 	prescripcion = Prescripcion('', asegurado, data.get('id_poliza'), fecha_realizacion, especialidad, data.get('facultativo_prescriptor'), data.get('facultativo_realizador'), data.get('servicios_solicitados'), data.get('consulta'))
 	
 	try:
-		# Creación póliza
+		# Subir prescripcion
 		controlador.subir_prescripcion(prescripcion)
 	except ValueError as error:
 		print(error)
@@ -215,4 +214,17 @@ async def subir_prescripcion():
 		return str(error), 400
 	
 	# Estado de éxito
-	return 'Póliza creada con éxito.', 200
+	return 'Prescripción subida con éxito.', 200
+
+# [HU7] Solicitar autorización médica
+@rutas_medauth.route('/autorizacion/<id_prescripcion>', methods=['POST'])
+async def solicitar_autorizacion(id_prescripcion):
+	try:
+		# Solicitar autorizacion
+		controlador.solicitar_autorizacion(id_prescripcion)
+	except ValueError as error:
+		# Se produce un error
+		return str(error), 400
+	
+	# Estado de éxito
+	return 'Autorización solicitada con éxito.', 200
