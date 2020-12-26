@@ -16,3 +16,7 @@ class UsuarioCliente(Usuario):
 	# Override método equal
 	def __eq__(self, otra):
 		return super().__eq__(otra) and (self.__cuenta_bancaria == otra.get_cuenta_bancaria())
+		
+	# Método para transformar objeto en un dict
+	def to_dict(self):
+		return {'nombre': super().get_nombre(), 'email': super().get_email(), 'dni': super().get_dni(), 'cuenta_bancaria': self.__cuenta_bancaria}
