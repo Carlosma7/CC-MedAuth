@@ -203,6 +203,7 @@ class Controller:
 		else:
 			raise ValueError('User has not an active policy.')
 	
+	# [HU7] Solicitar autorización médica
 	def solicitar_autorizacion(self, id_prescripcion: str):
 		prescripcion = [p for p in self.prescripciones if p.get_id_prescripcion() == id_prescripcion]
 		
