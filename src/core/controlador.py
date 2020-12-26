@@ -118,7 +118,7 @@ class Controller:
 				# Si posee polizas previas canceladas, se obtiene el ID de la última que tuvo
 				if not polizas_previas[-1].get_activa():
 					# Si la última póliza no está activa
-					id_poliza = id_poliza + str(int(polizas_previas[-1][-1]) + 1)
+					id_poliza = id_poliza + str(int(polizas_previas[-1].get_id_poliza()[-1]) + 1)
 				else:
 					raise ValueError('User has an active policy.')
 			else:
@@ -187,7 +187,7 @@ class Controller:
 				
 				if len(prescripciones_previas) > 0:
 					# Si existen prescripciones previas se obtiene el último identificador y se aumenta en uno
-					id_prescripcion = id_prescripcion + str(int(prescripciones_previas[-1][-1]) + 1)
+					id_prescripcion = id_prescripcion + str(int(prescripciones_previas[-1].get_id_prescripcion()[-1]) + 1)
 				else:
 					# Si no existen prescripciones previas se marca como la primera
 					id_prescripcion = id_prescripcion + "1"
@@ -224,7 +224,7 @@ class Controller:
 				
 				if len(autorizaciones_previas) > 0:
 					# Si se han realizado autorizaciones previas se obtiene el último identificador y se aumenta en uno
-					id_autorizacion = id_autorizacion + str(int(autorizaciones_previas[-1][-1]) + 1)
+					id_autorizacion = id_autorizacion + str(int(autorizaciones_previas[-1].get_id_autorizacion()[-1]) + 1)
 				else:
 					# Si no se han realizado autorizaciones previas se marca como la primera
 					id_autorizacion = id_autorizacion + "1"
@@ -266,7 +266,7 @@ class Controller:
 				
 				if len(autorizaciones_previas) > 0:
 					# Si se han realizado autorizaciones previas se obtiene el último identificador y se aumenta en uno
-					id_autorizacion = id_autorizacion + str(int(autorizaciones_previas[-1][-1]) + 1)
+					id_autorizacion = id_autorizacion + str(int(autorizaciones_previas[-1].get_id_autorizacion()[-1]) + 1)
 				else:
 					# Si no se han realizado autorizaciones previas se marca como la primera
 					id_autorizacion = id_autorizacion + "1"
