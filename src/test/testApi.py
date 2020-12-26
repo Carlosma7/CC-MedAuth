@@ -147,7 +147,7 @@ async def test_modificar_poliza_api(test_medauth):
 	# Crear url
 	url = '/poliza/modificar'
 
-	# Crear usuario administrativo
+	# Crear usuario cliente
 	usuario = UsuarioCliente('Roberto', 'rober@gmail.com', '25123540-F', 'ES1234111892738495273840')
 	# Creación fecha
 	fecha = datetime.datetime(2020, 5, 17)
@@ -167,5 +167,18 @@ async def test_modificar_poliza_api(test_medauth):
 	
 	# Lanzar petición
 	response = await client.post(url, data = json.dumps({'poliza': poliza.to_dict(), 'periodo_carencia': periodo_carencia, 'tipo': tipo, 'copagos': copagos, 'mensualidad': mensualidad, 'servicios_excluidos': servicios_excluidos, 'modulos_extra': modulos_extra}))
+	# Comprobar que el estado es correcto
+	assert_that(response.status_code).is_equal_to(200)
+
+# Test de modificar póliza
+@pytest.mark.asyncio
+async def test_desactivar_poliza_api(test_medauth):
+	# Obtener el servidor de la app
+	client = app.test_client()
+	# Crear url
+	url = '/poliza/25123540-F'
+
+	# Lanzar petición
+	response = await client.post(url)
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(200)
