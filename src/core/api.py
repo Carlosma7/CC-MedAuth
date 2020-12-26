@@ -24,7 +24,10 @@ async def crear_usuario():
 	tipo = data.get('tipo')
 	
 	# Crear usuario con la información
-	usuario = UsuarioAdmin(usuario.get('nombre'), usuario.get('email'), usuario.get('dni'), usuario.get('email_empresarial'))
+	if tipo == 0: # Usuario administrativo
+		usuario = UsuarioAdmin(usuario.get('nombre'), usuario.get('email'), usuario.get('dni'), usuario.get('email_empresarial'))
+	else:
+		usuario = UsuarioCliente(usuario.get('nombre'), usuario.get('email'), usuario.get('dni'), usuario.get('cuenta_bancaria'))
 	
 	try:
 		# Creación usuario
