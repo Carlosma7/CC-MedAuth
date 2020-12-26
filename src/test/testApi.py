@@ -110,3 +110,31 @@ async def test_eliminar_cliente_api(test_medauth):
 	response = await client.delete(url)
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(200)
+
+# Test de crear póliza
+@pytest.mark.asyncio
+async def test_crear_poliza_api(test_medauth):
+	# Obtener el servidor de la app
+	client = app.test_client()
+	# Crear url
+	url = '/usuario/crear'
+	
+	# Crear usuario administrativo
+	usuario = UsuarioCliente('Roberto', 'rober@gmail.com', '25123540-F', 'ES1234111892738495273840')
+	tipo = 1
+	
+	# Lanzar petición
+	response = await client.post(url, data = json.dumps({'usuario': usuario.to_dict(), 'tipo': tipo}))
+	
+	# Crear url
+	url = '/poliza/crear'
+
+	# Creación fecha
+	fecha = datetime.datetime(2020, 5, 17)
+	# Creación objeto Póliza
+	poliza = Poliza(usuario, usuario.get_dni(), fecha, TipoPoliza.Basica, 5.99, 50.99, ["TAC", "Apendicitis"], [ModuloExtra.Dental], True)
+	
+	# Lanzar petición
+	response = await client.post(url, data = json.dumps(poliza.to_dict()))
+	# Comprobar que el estado es correcto
+	assert_that(response.status_code).is_equal_to(200)
