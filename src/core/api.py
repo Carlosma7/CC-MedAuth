@@ -174,3 +174,16 @@ async def desactivar_poliza(dni):
 	
 	# Estado de éxito
 	return 'Póliza desactivada con éxito.', 200
+
+# [HU5] Consultar póliza
+@rutas_medauth.route('/poliza/<dni>', methods=['GET'])
+async def consultar_poliza(dni):
+	try:
+		# Desactivación póliza
+		poliza = controlador.consultar_poliza(dni)
+	except ValueError as error:
+		# Se produce un error
+		return str(error), 400
+	
+	# Estado de éxito
+	return poliza.to_dict(), 200
