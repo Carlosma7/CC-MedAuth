@@ -195,3 +195,34 @@ async def test_desactivar_poliza_api(test_medauth):
 	response = await client.post(url)
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(200)
+
+# Test de subir prescripción
+@pytest.mark.asyncio
+async def test_subir_prescripcion_api(test_medauth):
+	# Obtener el servidor de la app
+	client = app.test_client()
+	
+	# Crear url
+	url = '/poliza/crear'
+	
+	# Crear usuario cliente
+	usuario = UsuarioCliente('Roberto', 'rober@gmail.com', '25123540-F', 'ES1234111892738495273840')
+	# Creación fecha
+	fecha = datetime.datetime(2020, 5, 17)
+	# Creación objeto Póliza
+	poliza = Poliza(usuario, usuario.get_dni(), fecha, TipoPoliza.Basica, 5.99, 50.99, ["TAC", "Apendicitis"], [ModuloExtra.Dental], True)
+	# Lanzar petición
+	response = await client.post(url, data = json.dumps(poliza.to_dict()))
+	
+	# Crear url
+	url = '/prescripcion'
+	
+	# Creación fecha
+	fecha_realizacion = datetime.datetime(2020, 6, 22)
+	# Creación prescripción con usuario y póliza
+	prescripcion = Prescripcion(usuario.get_dni(), usuario, 'MA-25123540-2', fecha_realizacion, Especialidad.Epidemiologia, "D. Miguel", "D. Fernando", ["Serología", "PCR"], "Consulta 3")
+
+	# Lanzar petición
+	response = await client.post(url, data = json.dumps(prescripcion.to_dict()))
+	# Comprobar que el estado es correcto
+	assert_that(response.status_code).is_equal_to(200)
