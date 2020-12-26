@@ -170,7 +170,20 @@ async def test_modificar_poliza_api(test_medauth):
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(200)
 
-# Test de modificar póliza
+# Test de consultar póliza
+@pytest.mark.asyncio
+async def test_consultar_poliza_api(test_medauth):
+	# Obtener el servidor de la app
+	client = app.test_client()
+	# Crear url
+	url = '/poliza/25123540-F'
+
+	# Lanzar petición
+	response = await client.get(url)
+	# Comprobar que el estado es correcto
+	assert_that(response.status_code).is_equal_to(200)
+
+# Test de desactivar póliza
 @pytest.mark.asyncio
 async def test_desactivar_poliza_api(test_medauth):
 	# Obtener el servidor de la app
