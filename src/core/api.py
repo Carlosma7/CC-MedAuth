@@ -66,7 +66,7 @@ async def modificar_usuario():
 		usuario = UsuarioCliente(usuario.get('nombre'), usuario.get('email'), usuario.get('dni'), '')
 	
 	try:
-		# Creación usuario
+		# Modificación usuario
 		controlador.modificar_usuario(usuario, nombre, email, cuenta_bancaria)
 	except ValueError as error:
 		# Se produce un error
@@ -79,7 +79,7 @@ async def modificar_usuario():
 @rutas_medauth.route('/usuario/<dni>', methods=['DELETE'])
 async def eliminar_usuario(dni):
 	try:
-		# Creación usuario
+		# Eliminación usuario
 		controlador.eliminar_usuario(dni)
 	except ValueError as error:
 		# Se produce un error
@@ -87,3 +87,33 @@ async def eliminar_usuario(dni):
 	
 	# Estado de éxito
 	return 'Usuario eliminado con éxito.', 200
+
+# [HU4] Administrar póliza: Crear una póliza
+@rutas_medauth.route('/poliza/crear', methods=['POST'])
+async def crear_poliza():
+	# Obtener la petición
+	data_string = await request.get_data()
+	# Cargar información de la petición en formato JSON
+	data = json.loads(data_string)
+	
+	# Obtener titular
+	titular = data.get('titular')
+	titular = UsuarioCliente(titular.get('nombre'), titular.get('email'), titular.get('dni'), titular.get('cuenta_bancaria'))
+	# Obtener periodo carencia
+	periodo_carencia = datetime.datetime.strptime(data.get('periodo_carencia'), '%m/%d/%Y')
+	# Obtener tipo de póliza
+	tipo = TipoPoliza(json.loads(data.get('tipo')))
+	# Obtener modulos extra
+	modulos_extra = [ModuloExtra(mod) for mod in data.get('modulos_extra')]
+	# Crear Póliza
+	poliza = Poliza(titular, data.get('id_poliza'), periodo_carencia, tipo, data.get('copagos'), data.get('mensualidad'), data.get('servicios_excluidos'), modulos_extra, data.get('activa'))
+	
+	try:
+		# Creación póliza
+		controlador.crear_poliza(poliza)
+	except ValueError as error:
+		# Se produce un error
+		return str(error), 400
+	
+	# Estado de éxito
+	return 'Póliza creada con éxito.', 200
