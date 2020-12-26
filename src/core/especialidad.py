@@ -1,6 +1,6 @@
 from enum import Enum
 
-class Especialidad(Enum):
+class Especialidad(str, Enum):
     Alergologia = 1
     Anestesiologia = 2
     Angiologia = 3
