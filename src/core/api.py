@@ -161,3 +161,16 @@ async def modificar_poliza():
 	
 	# Estado de éxito
 	return 'Póliza modificada con éxito.', 200
+
+# [HU4] Administrar póliza: Desactivar una póliza
+@rutas_medauth.route('/poliza/<dni>', methods=['POST'])
+async def desactivar_poliza(dni):
+	try:
+		# Desactivación póliza
+		controlador.desactivar_poliza(dni)
+	except ValueError as error:
+		# Se produce un error
+		return str(error), 400
+	
+	# Estado de éxito
+	return 'Póliza desactivada con éxito.', 200
