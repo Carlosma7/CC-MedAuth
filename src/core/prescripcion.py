@@ -2,6 +2,7 @@ from usuarioCliente import UsuarioCliente
 from especialidad import Especialidad
 from typing import List
 import datetime
+import json
 
 # Clase de prescripción médica
 class Prescripcion:
@@ -50,3 +51,7 @@ class Prescripcion:
 	# Override método equal
 	def __eq__(self, otra):
 		return ((self.__id_prescripcion == otra.get_id_prescripcion()) and (self.__asegurado == otra.get_asegurado()) and (self.__id_poliza == otra.get_id_poliza()) and (self.__fecha_realizacion == otra.get_fecha_realizacion()) and (self.__especialidad == otra.get_especialidad()) and (self.__facultativo_prescriptor == otra.get_facultativo_prescriptor()) and (self.__facultativo_realizador == otra.get_facultativo_realizador()) and (self.__servicios_solicitados == otra.get_servicios_solicitados()) and (self.__consulta == otra.get_consulta()))
+
+    # Método para transformar objeto en un dict
+	def to_dict(self):
+		return {'id_prescripcion': self.__id_prescripcion, 'asegurado': self.__asegurado.to_dict(), 'id_poliza': self.__id_poliza, 'fecha_realizacion': self.__fecha_realizacion.strftime('%m/%d/%Y'), 'especialidad': json.dumps(self.__especialidad), 'facultativo_prescriptor': self.__facultativo_prescriptor, 'facultativo_realizador': self.__facultativo_realizador, 'servicios_solicitados': self.__servicios_solicitados, 'consulta': self.__consulta}
