@@ -226,3 +226,16 @@ async def test_subir_prescripcion_api(test_medauth):
 	response = await client.post(url, data = json.dumps(prescripcion.to_dict()))
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(200)
+
+# Test de solicitar autorización
+@pytest.mark.asyncio
+async def test_solicitar_autorizacion_api(test_medauth):
+	# Obtener el servidor de la app
+	client = app.test_client()
+	# Crear url
+	url = '/autorizacion/PR-25123540-1'
+
+	# Lanzar petición
+	response = await client.post(url)
+	# Comprobar que el estado es correcto
+	assert_that(response.status_code).is_equal_to(200)
