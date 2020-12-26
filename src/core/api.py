@@ -114,7 +114,7 @@ async def crear_poliza():
 	except ValueError as error:
 		# Se produce un error
 		return str(error), 400
-	
+	print(poliza.get_id_poliza())
 	# Estado de éxito
 	return 'Póliza creada con éxito.', 200
 
@@ -187,3 +187,32 @@ async def consultar_poliza(dni):
 	
 	# Estado de éxito
 	return poliza.to_dict(), 200
+
+# [HU6] Subir prescripción médica
+@rutas_medauth.route('/prescripcion', methods=['POST'])
+async def subir_prescripcion():
+	# Obtener la petición
+	data_string = await request.get_data()
+	# Cargar información de la petición en formato JSON
+	data = json.loads(data_string)
+	
+	# Obtener asegurado
+	asegurado = data.get('asegurado')
+	asegurado = UsuarioCliente(asegurado.get('nombre'), asegurado.get('email'), asegurado.get('dni'), asegurado.get('cuenta_bancaria'))
+	# Obtener fecha realización
+	fecha_realizacion = datetime.datetime.strptime(data.get('fecha_realizacion'), '%m/%d/%Y')
+	# Obtener especialidad
+	especialidad = Especialidad(json.loads(data.get('especialidad')))
+	# Subir Prescripción
+	prescripcion = Prescripcion('', asegurado, data.get('id_poliza'), fecha_realizacion, especialidad, data.get('facultativo_prescriptor'), data.get('facultativo_realizador'), data.get('servicios_solicitados'), data.get('consulta'))
+	
+	try:
+		# Creación póliza
+		controlador.subir_prescripcion(prescripcion)
+	except ValueError as error:
+		print(error)
+		# Se produce un error
+		return str(error), 400
+	
+	# Estado de éxito
+	return 'Póliza creada con éxito.', 200
