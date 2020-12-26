@@ -172,10 +172,10 @@ class Controller:
 	
 	# [HU6] Subir prescripción médica
 	def subir_prescripcion(self, prescripcion: Prescripcion):
-		poliza_activa = [p for p in self.polizas if p.get_titular().get_dni() == prescripcion.get_asegurado().get_dni()]
+		poliza_activa = [p for p in self.polizas if p.get_titular().get_dni() == prescripcion.get_asegurado().get_dni() and p.get_activa()]
 		
 		if len(poliza_activa) > 0:
-			poliza_activa = poliza_activa[-1]
+			poliza_activa = poliza_activa[0]
 			# Se comprueba que la prescripción esté asignada a la póliza activa del asegurado
 			if prescripcion.get_id_poliza() == poliza_activa.get_id_poliza():
 				dni = prescripcion.get_asegurado().get_dni()
@@ -251,10 +251,10 @@ class Controller:
 		
 	# [HU8] Administrar autorización: Crear una autorización
 	def crear_autorizacion(self, autorizacion: Autorizacion):
-		poliza_activa = [p for p in self.polizas if p.get_titular().get_dni() == autorizacion.get_asegurado().get_dni()]
+		poliza_activa = [p for p in self.polizas if p.get_titular().get_dni() == autorizacion.get_asegurado().get_dni() and p.get_activa()]
 		
 		if len(poliza_activa) > 0:
-			poliza_activa = poliza_activa[-1]
+			poliza_activa = poliza_activa[0]
 			# Se comprueba que la autorización esté asignada a la póliza activa del asegurado
 			if autorizacion.get_id_poliza() == poliza_activa.get_id_poliza():
 				dni = autorizacion.get_asegurado().get_dni()
