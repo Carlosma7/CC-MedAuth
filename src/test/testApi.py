@@ -84,3 +84,29 @@ async def test_modificar_cliente_api(test_medauth):
 	response = await client.post(url, data = json.dumps({'usuario': usuario.to_dict(), 'tipo': tipo, 'nombre': nombre, 'email': email, 'cuenta_bancaria': cuenta_bancaria}))
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(200)
+	
+# Test de eliminar administrador
+@pytest.mark.asyncio
+async def test_eliminar_admin_api(test_medauth):
+	# Obtener el servidor de la app
+	client = app.test_client()
+	# Crear url
+	url = '/usuario/35925767-A'
+	
+	# Lanzar petición
+	response = await client.delete(url)
+	# Comprobar que el estado es correcto
+	assert_that(response.status_code).is_equal_to(200)
+
+# Test de eliminar cliente
+@pytest.mark.asyncio
+async def test_eliminar_cliente_api(test_medauth):
+	# Obtener el servidor de la app
+	client = app.test_client()
+	# Crear url
+	url = '/usuario/25123540-F'
+	
+	# Lanzar petición
+	response = await client.delete(url)
+	# Comprobar que el estado es correcto
+	assert_that(response.status_code).is_equal_to(200)
