@@ -37,7 +37,7 @@ async def crear_usuario():
 		return str(error), 400
 	
 	# Estado de éxito
-	return 'Usuario creado', 200
+	return 'Usuario creado con éxito.', 200
 
 # [HU3] Administrar usuario: Modificar usuario
 @rutas_medauth.route('/usuario/modificar', methods=['POST'])
@@ -73,4 +73,17 @@ async def modificar_usuario():
 		return str(error), 400
 	
 	# Estado de éxito
-	return 'Usuario creado', 200
+	return 'Usuario modificado con éxito.', 200
+
+# [HU3] Administrar usuario: Eliminar usuario
+@rutas_medauth.route('/usuario/<dni>', methods=['DELETE'])
+async def eliminar_usuario(dni):
+	try:
+		# Creación usuario
+		controlador.eliminar_usuario(dni)
+	except ValueError as error:
+		# Se produce un error
+		return str(error), 400
+	
+	# Estado de éxito
+	return 'Usuario eliminado con éxito.', 200
