@@ -228,3 +228,32 @@ async def solicitar_autorizacion(id_prescripcion):
 	
 	# Estado de éxito
 	return 'Autorización solicitada con éxito.', 200
+
+# # [HU8] Administrar autorización: Crear una autorización
+@rutas_medauth.route('/autorizacion/crear', methods=['POST'])
+async def crear_autorizacion():
+	# Obtener la petición
+	data_string = await request.get_data()
+	# Cargar información de la petición en formato JSON
+	data = json.loads(data_string)
+	
+	# Obtener asegurado
+	asegurado = data.get('asegurado')
+	asegurado = UsuarioCliente(asegurado.get('nombre'), asegurado.get('email'), asegurado.get('dni'), asegurado.get('cuenta_bancaria'))
+	# Obtener fecha realización
+	fecha_realizacion = datetime.datetime.strptime(data.get('fecha_realizacion'), '%m/%d/%Y')
+	# Obtener especialidad
+	especialidad = Especialidad(json.loads(data.get('especialidad')))
+	# Crear Autorizacion
+	autorizacion = Autorizacion('', asegurado, '', data.get('id_poliza'), data.get('aceptada'), data.get('motivo_rechazo'), fecha_realizacion, especialidad, data.get('servicios_aceptados'), data.get('facultativo_realizador'), data.get('consulta'))
+	
+	try:
+		# Subir prescripcion
+		controlador.crear_autorizacion(autorizacion)
+	except ValueError as error:
+		print(error)
+		# Se produce un error
+		return str(error), 400
+	
+	# Estado de éxito
+	return 'Prescripción subida con éxito.', 200
