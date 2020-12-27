@@ -16,6 +16,6 @@ def test(c):
 @task
 def execute(c):
 	print("Ejecución del modelo\n")
-	run("python3 ./src/main.py")
+	run("python3 ./src/core/main.py")
 	print("Fin de la ejecución.")
 
