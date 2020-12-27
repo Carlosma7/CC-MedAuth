@@ -302,3 +302,17 @@ async def modificar_autorizacion():
 	
 	# Estado de éxito
 	return 'Autorización modificada con éxito.', 200
+
+# [HU9] Consultar autorización médica
+@rutas_medauth.route('/autorizacion/<id_autorizacion>', methods=['GET'])
+async def consultar_autorizacion(id_autorizacion):
+	try:
+		# Consultar autorizacion
+		autorizacion = controlador.consultar_autorizacion(id_autorizacion)
+	except ValueError as error:
+		print(error)
+		# Se produce un error
+		return str(error), 400
+	
+	# Estado de éxito
+	return autorizacion.to_dict(), 200
