@@ -248,7 +248,7 @@ async def crear_autorizacion():
 	autorizacion = Autorizacion('', asegurado, '', data.get('id_poliza'), data.get('aceptada'), data.get('motivo_rechazo'), fecha_realizacion, especialidad, data.get('servicios_aceptados'), data.get('facultativo_realizador'), data.get('consulta'))
 	
 	try:
-		# Subir prescripcion
+		# Crear autorización
 		controlador.crear_autorizacion(autorizacion)
 	except ValueError as error:
 		print(error)
@@ -256,4 +256,49 @@ async def crear_autorizacion():
 		return str(error), 400
 	
 	# Estado de éxito
-	return 'Prescripción subida con éxito.', 200
+	return 'Autorización creada con éxito.', 200
+
+# [HU8] Administrar autorización: Modificar una autorización
+@rutas_medauth.route('/autorizacion/modificar', methods=['POST'])
+async def modificar_autorizacion():
+	# Obtener la petición
+	data_string = await request.get_data()
+	# Cargar información de la petición en formato JSON
+	data = json.loads(data_string)
+	
+	# Obtener póliza
+	autorizacion = data.get('autorizacion')
+	# Obtener titular de la póliza
+	asegurado = autorizacion.get('asegurado')
+	asegurado = UsuarioCliente(asegurado.get('nombre'), asegurado.get('email'), asegurado.get('dni'), asegurado.get('cuenta_bancaria'))
+	# Obtener fecha realización
+	fecha_realizacion = datetime.datetime.strptime(autorizacion.get('fecha_realizacion'), '%m/%d/%Y')
+	# Obtener especialidad
+	especialidad = Especialidad(json.loads(autorizacion.get('especialidad')))
+	# Crear Autorización
+	# Crear Póliza
+	autorizacion = Autorizacion(autorizacion.get('id_autorizacion'), asegurado, autorizacion.get('id_prescripcion'), autorizacion.get('id_poliza'), autorizacion.get('aceptada'), autorizacion.get('motivo_rechazo'), fecha_realizacion, especialidad, autorizacion.get('servicios_aceptados'), autorizacion.get('facultativo_realizador'), autorizacion.get('consulta'))
+	
+	# Obtener motivo rechazo
+	motivo_rechazo = data.get('motivo_rechazo')
+	# Obtener fecha realizacion
+	fecha_realizacion = datetime.datetime.strptime(data.get('fecha_realizacion'), '%m/%d/%Y')
+	# Obtener especialidad
+	especialidad = Especialidad(json.loads(data.get('especialidad')))
+	# Obtener servicios aceptados
+	servicios_aceptados = data.get('servicios_aceptados')
+	# Obtener facultativo realizador
+	facultativo_realizador = data.get('facultativo_realizador')
+	# Obtener consulta
+	consulta = data.get('consulta')
+	
+	try:
+		# Modificación autorización
+		controlador.modificar_autorizacion(autorizacion, motivo_rechazo, fecha_realizacion, especialidad, servicios_aceptados, facultativo_realizador, consulta)
+	except ValueError as error:
+		print(error)
+		# Se produce un error
+		return str(error), 400
+	
+	# Estado de éxito
+	return 'Autorización modificada con éxito.', 200
