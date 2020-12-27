@@ -229,7 +229,7 @@ async def solicitar_autorizacion(id_prescripcion):
 	# Estado de éxito
 	return 'Autorización solicitada con éxito.', 200
 
-# # [HU8] Administrar autorización: Crear una autorización
+# [HU8] Administrar autorización: Crear una autorización
 @rutas_medauth.route('/autorizacion/crear', methods=['POST'])
 async def crear_autorizacion():
 	# Obtener la petición
@@ -353,3 +353,33 @@ async def aprobar_denegar_autorizacion():
 	
 	# Estado de éxito
 	return 'Autorización aprobada/denegada con éxito.', 200
+
+# [HU11] Administrar cita médica: Crear cita médica
+@rutas_medauth.route('/cita/crear', methods=['POST'])
+async def crear_cita():
+	# Obtener la petición
+	data_string = await request.get_data()
+	# Cargar información de la petición en formato JSON
+	data = json.loads(data_string)
+	
+	# Obtener asegurado
+	asegurado = data.get('asegurado')
+	asegurado = UsuarioCliente(asegurado.get('nombre'), asegurado.get('email'), asegurado.get('dni'), asegurado.get('cuenta_bancaria'))
+	# Obtener fecha
+	fecha = datetime.datetime.strptime(data.get('fecha'), '%m/%d/%Y')
+	# Obtener hora
+	hora = datetime.datetime.strptime(data.get('hora'), '%H:%M')
+	print(hora)
+	# Crear Cita
+	cita = Cita(data.get('id_autorizacion'), asegurado, data.get('id_prescripcion'), fecha, hora, data.get('facultativo_realizador'), data.get('consulta'))
+	
+	try:
+		# Crear cita
+		controlador.crear_cita(cita)
+	except ValueError as error:
+		print(error)
+		# Se produce un error
+		return str(error), 400
+	
+	# Estado de éxito
+	return 'Cita creada con éxito.', 200
