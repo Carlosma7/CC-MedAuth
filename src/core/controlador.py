@@ -294,7 +294,7 @@ class Controller:
 			aut.set_facultativo_realizador(facultativo_realizador)
 			aut.set_consulta(consulta)
 		else:
-			raise ValueError('User has not an active policy.')
+			raise ValueError('User has not an authorization.')
 			
 	# [HU9] Consultar autorización médica
 	def consultar_autorizacion(self, id_autorizacion: str):
