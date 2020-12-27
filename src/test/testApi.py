@@ -26,7 +26,7 @@ async def test_crear_admin_api(test_medauth):
 	# Lanzar petición
 	response = await client.post(url, data = json.dumps({'usuario': usuario.to_dict(), 'tipo': tipo}))
 	# Comprobar que el estado es correcto
-	assert_that(response.status_code).is_equal_to(200)
+	assert_that(response.status_code).is_equal_to(201)
 
 # Test creacion usuario cliente
 @pytest.mark.asyncio
@@ -43,7 +43,7 @@ async def test_crear_cliente_api(test_medauth):
 	# Lanzar petición
 	response = await client.post(url, data = json.dumps({'usuario': usuario.to_dict(), 'tipo': tipo}))
 	# Comprobar que el estado es correcto
-	assert_that(response.status_code).is_equal_to(200)
+	assert_that(response.status_code).is_equal_to(201)
 
 # Test de modificación de administrador
 @pytest.mark.asyncio
@@ -63,7 +63,7 @@ async def test_modificar_admin_api(test_medauth):
 	# Lanzar petición
 	response = await client.post(url, data = json.dumps({'usuario': usuario.to_dict(), 'tipo': tipo, 'nombre': nombre, 'email': email, 'cuenta_bancaria': cuenta_bancaria}))
 	# Comprobar que el estado es correcto
-	assert_that(response.status_code).is_equal_to(200)
+	assert_that(response.status_code).is_equal_to(201)
 
 # Test de modificación de cliente
 @pytest.mark.asyncio
@@ -83,7 +83,7 @@ async def test_modificar_cliente_api(test_medauth):
 	# Lanzar petición
 	response = await client.post(url, data = json.dumps({'usuario': usuario.to_dict(), 'tipo': tipo, 'nombre': nombre, 'email': email, 'cuenta_bancaria': cuenta_bancaria}))
 	# Comprobar que el estado es correcto
-	assert_that(response.status_code).is_equal_to(200)
+	assert_that(response.status_code).is_equal_to(201)
 	
 # Test de eliminar administrador
 @pytest.mark.asyncio
@@ -137,7 +137,7 @@ async def test_crear_poliza_api(test_medauth):
 	# Lanzar petición
 	response = await client.post(url, data = json.dumps(poliza.to_dict()))
 	# Comprobar que el estado es correcto
-	assert_that(response.status_code).is_equal_to(200)
+	assert_that(response.status_code).is_equal_to(201)
 
 # Test de modificar póliza
 @pytest.mark.asyncio
@@ -168,7 +168,7 @@ async def test_modificar_poliza_api(test_medauth):
 	# Lanzar petición
 	response = await client.post(url, data = json.dumps({'poliza': poliza.to_dict(), 'periodo_carencia': periodo_carencia, 'tipo': tipo, 'copagos': copagos, 'mensualidad': mensualidad, 'servicios_excluidos': servicios_excluidos, 'modulos_extra': modulos_extra}))
 	# Comprobar que el estado es correcto
-	assert_that(response.status_code).is_equal_to(200)
+	assert_that(response.status_code).is_equal_to(201)
 
 # Test de consultar póliza
 @pytest.mark.asyncio
@@ -194,7 +194,7 @@ async def test_desactivar_poliza_api(test_medauth):
 	# Lanzar petición
 	response = await client.put(url)
 	# Comprobar que el estado es correcto
-	assert_that(response.status_code).is_equal_to(200)
+	assert_that(response.status_code).is_equal_to(201)
 
 # Test de subir prescripción
 @pytest.mark.asyncio
@@ -225,7 +225,7 @@ async def test_subir_prescripcion_api(test_medauth):
 	# Lanzar petición
 	response = await client.post(url, data = json.dumps(prescripcion.to_dict()))
 	# Comprobar que el estado es correcto
-	assert_that(response.status_code).is_equal_to(200)
+	assert_that(response.status_code).is_equal_to(201)
 
 # Test de solicitar autorización
 @pytest.mark.asyncio
@@ -238,7 +238,7 @@ async def test_solicitar_autorizacion_api(test_medauth):
 	# Lanzar petición
 	response = await client.put(url)
 	# Comprobar que el estado es correcto
-	assert_that(response.status_code).is_equal_to(200)
+	assert_that(response.status_code).is_equal_to(201)
 
 # Test de crear autorización
 @pytest.mark.asyncio
@@ -259,7 +259,7 @@ async def test_crear_autorizacion_api(test_medauth):
 	# Lanzar petición
 	response = await client.post(url, data = json.dumps(autorizacion.to_dict()))
 	# Comprobar que el estado es correcto
-	assert_that(response.status_code).is_equal_to(200)
+	assert_that(response.status_code).is_equal_to(201)
 
 # Test de modificar autorizacion
 @pytest.mark.asyncio
@@ -292,7 +292,7 @@ async def test_modificar_autorizacion_api(test_medauth):
 	# Lanzar petición
 	response = await client.post(url, data = json.dumps({'autorizacion': autorizacion.to_dict(), 'motivo_rechazo': motivo_rechazo, 'fecha_realizacion': fecha_realizacion, 'especialidad': json.dumps(especialidad), 'servicios_aceptados': servicios_aceptados, 'facultativo_realizador': facultativo_realizador, 'consulta': consulta}))
 	# Comprobar que el estado es correcto
-	assert_that(response.status_code).is_equal_to(200)
+	assert_that(response.status_code).is_equal_to(201)
 
 # Test de consultar autorizacion
 @pytest.mark.asyncio
@@ -330,7 +330,7 @@ async def test_aprobar_denegar_autorizacion_api(test_medauth):
 	# Lanzar petición
 	response = await client.post(url, data = json.dumps({'autorizacion': autorizacion.to_dict(), 'aceptada': aceptada, 'motivo_rechazo': motivo_rechazo}))
 	# Comprobar que el estado es correcto
-	assert_that(response.status_code).is_equal_to(200)
+	assert_that(response.status_code).is_equal_to(201)
 
 # Test de crear cita
 @pytest.mark.asyncio
@@ -366,7 +366,7 @@ async def test_crear_cita_api(test_medauth):
 	# Lanzar petición
 	response = await client.post(url, data = json.dumps(cita.to_dict()))
 	# Comprobar que el estado es correcto
-	assert_that(response.status_code).is_equal_to(200)
+	assert_that(response.status_code).is_equal_to(201)
 
 # Test de modificar cita
 @pytest.mark.asyncio
@@ -397,7 +397,7 @@ async def test_modificar_cita_api(test_medauth):
 	# Lanzar petición
 	response = await client.post(url, data = json.dumps({'cita': cita.to_dict(), 'fecha': fecha, 'hora': hora, 'facultativo_realizador': facultativo_realizador, 'consulta': consulta}))
 	# Comprobar que el estado es correcto
-	assert_that(response.status_code).is_equal_to(200)
+	assert_that(response.status_code).is_equal_to(201)
 
 # Test de consultar cita
 @pytest.mark.asyncio
