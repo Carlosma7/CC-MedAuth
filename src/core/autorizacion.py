@@ -2,6 +2,7 @@ from usuarioCliente import UsuarioCliente
 from especialidad import Especialidad
 from typing import List
 import datetime
+import json
 
 # Clase de autorización médica
 class Autorizacion:
@@ -79,3 +80,7 @@ class Autorizacion:
 	# Override método equal
 	def __eq__(self, otra):
 		return ((self.__id_autorizacion == otra.get_id_autorizacion()) and (self.__asegurado == otra.get_asegurado()) and (self.__id_prescripcion == otra.get_id_prescripcion()) and (self.__id_poliza == otra.get_id_poliza()) and (self.__aceptada == otra.get_aceptada()) and (self.__motivo_rechazo == otra.get_motivo_rechazo()) and (self.__fecha_realizacion == otra.get_fecha_realizacion()) and (self.__especialidad == otra.get_especialidad()) and (self.__servicios_aceptados == otra.get_servicios_aceptados()) and (self.__facultativo_realizador == otra.get_facultativo_realizador()) and (self.__consulta == otra.get_consulta()))
+
+	# Método para transformar objeto en un dict
+	def to_dict(self):
+		return {'id_autorizacion': self.__id_autorizacion, 'asegurado': self.__asegurado.to_dict(), 'id_prescripcion': self.__id_prescripcion, 'id_poliza': self.__id_poliza, 'aceptada': self.__aceptada, 'motivo_rechazo': self.__motivo_rechazo, 'fecha_realizacion': self.__fecha_realizacion.strftime('%m/%d/%Y'), 'especialidad': json.dumps(self.__especialidad), 'servicios_aceptados': self.__servicios_aceptados, 'facultativo_realizador': self.__facultativo_realizador, 'consulta': self.__consulta}
