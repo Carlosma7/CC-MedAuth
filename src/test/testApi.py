@@ -260,3 +260,36 @@ async def test_crear_autorizacion_api(test_medauth):
 	response = await client.post(url, data = json.dumps(autorizacion.to_dict()))
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(200)
+
+# Test de modificar autorizacion
+@pytest.mark.asyncio
+async def test_modificar_autorizacion_api(test_medauth):
+	# Obtener el servidor de la app
+	client = app.test_client()
+	# Crear url
+	url = '/autorizacion/modificar'
+
+	# Crear usuario cliente
+	usuario = UsuarioCliente('Roberto', 'rober@gmail.com', '25123540-F', 'ES1234111892738495273840')
+	# Creación fecha
+	fecha_realizacion = datetime.datetime(2020, 6, 22)
+	# Creación autorización con usuario y póliza
+	autorizacion = Autorizacion('AU-25123540-2', usuario, '', 'MA-25123540-2', True, '', fecha_realizacion, Especialidad.Epidemiologia, ["Serología", "PCR"], "D. Miguel", "Consulta 3")
+	
+	# Creación motivo rechazo
+	motivo_rechazo = ''
+	# Creación fecha realizacion
+	fecha_realizacion = fecha_realizacion.strftime('%m/%d/%Y')
+	# Creación especialidad
+	especialidad = Especialidad.Epidemiologia
+	# Creación servicios aceptados
+	servicios_aceptados = ["Serología", "PCR"]
+	# Creación facultativo realizador
+	facultativo_realizador = "D. Carlos"
+	# Creación consulta
+	consulta = "Consulta 3"
+	
+	# Lanzar petición
+	response = await client.post(url, data = json.dumps({'autorizacion': autorizacion.to_dict(), 'motivo_rechazo': motivo_rechazo, 'fecha_realizacion': fecha_realizacion, 'especialidad': json.dumps(especialidad), 'servicios_aceptados': servicios_aceptados, 'facultativo_realizador': facultativo_realizador, 'consulta': consulta}))
+	# Comprobar que el estado es correcto
+	assert_that(response.status_code).is_equal_to(200)
