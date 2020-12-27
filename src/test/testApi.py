@@ -192,7 +192,7 @@ async def test_desactivar_poliza_api(test_medauth):
 	url = '/poliza/25123540-F'
 
 	# Lanzar petición
-	response = await client.post(url)
+	response = await client.put(url)
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(200)
 
