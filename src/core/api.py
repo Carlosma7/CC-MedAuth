@@ -335,7 +335,6 @@ async def aprobar_denegar_autorizacion():
 	# Obtener especialidad
 	especialidad = Especialidad(json.loads(autorizacion.get('especialidad')))
 	# Crear Autorización
-	# Crear Póliza
 	autorizacion = Autorizacion(autorizacion.get('id_autorizacion'), asegurado, autorizacion.get('id_prescripcion'), autorizacion.get('id_poliza'), autorizacion.get('aceptada'), autorizacion.get('motivo_rechazo'), fecha_realizacion, especialidad, autorizacion.get('servicios_aceptados'), autorizacion.get('facultativo_realizador'), autorizacion.get('consulta'))
 	
 	# Obtener aceptada
@@ -369,7 +368,6 @@ async def crear_cita():
 	fecha = datetime.datetime.strptime(data.get('fecha'), '%m/%d/%Y')
 	# Obtener hora
 	hora = datetime.datetime.strptime(data.get('hora'), '%H:%M')
-	print(hora)
 	# Crear Cita
 	cita = Cita(data.get('id_autorizacion'), asegurado, data.get('id_prescripcion'), fecha, hora, data.get('facultativo_realizador'), data.get('consulta'))
 	
@@ -383,3 +381,43 @@ async def crear_cita():
 	
 	# Estado de éxito
 	return 'Cita creada con éxito.', 200
+
+# [HU11] Administrar cita médica: Modificar cita médica
+@rutas_medauth.route('/cita/modificar', methods=['POST'])
+async def modificar_cita():
+	# Obtener la petición
+	data_string = await request.get_data()
+	# Cargar información de la petición en formato JSON
+	data = json.loads(data_string)
+	
+	# Obtener cita
+	cita = data.get('cita')
+	# Obtener asegurado de la cita
+	asegurado = cita.get('asegurado')
+	asegurado = UsuarioCliente(asegurado.get('nombre'), asegurado.get('email'), asegurado.get('dni'), asegurado.get('cuenta_bancaria'))
+	# Obtener fecha
+	fecha = datetime.datetime.strptime(cita.get('fecha'), '%m/%d/%Y')
+	# Obtener hora
+	hora = datetime.datetime.strptime(cita.get('hora'), '%H:%M')
+	# Crear Cita
+	cita = Cita(cita.get('id_autorizacion'), asegurado, cita.get('id_prescripcion'), fecha, hora, cita.get('facultativo_realizador'), cita.get('consulta'))
+	
+	# Obtener fecha
+	fecha = datetime.datetime.strptime(data.get('fecha'), '%m/%d/%Y')
+	# Obtener hora
+	hora = datetime.datetime.strptime(data.get('hora'), '%H:%M')
+	# Obtener facultativo realizador
+	facultativo_realizador = data.get('facultativo_realizador')
+	# Obtener consulta
+	consulta = data.get('consulta')
+	
+	try:
+		# Modificación cita
+		controlador.modificar_cita(cita, fecha, hora, facultativo_realizador, consulta)
+	except ValueError as error:
+		print(error)
+		# Se produce un error
+		return str(error), 400
+	
+	# Estado de éxito
+	return 'Cita modificada con éxito.', 200
