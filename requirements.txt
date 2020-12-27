@@ -3,3 +3,5 @@ pytest==6.1.2
 assertpy
 quart
 pytest-asyncio
+etcd3
+python-dotenv
