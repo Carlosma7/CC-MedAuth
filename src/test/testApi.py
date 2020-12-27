@@ -398,3 +398,16 @@ async def test_modificar_cita_api(test_medauth):
 	response = await client.post(url, data = json.dumps({'cita': cita.to_dict(), 'fecha': fecha, 'hora': hora, 'facultativo_realizador': facultativo_realizador, 'consulta': consulta}))
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(200)
+
+# Test de consultar cita
+@pytest.mark.asyncio
+async def test_consultar_cita_api(test_medauth):
+	# Obtener el servidor de la app
+	client = app.test_client()
+	# Crear url
+	url = '/cita/AU-25123540-2'
+
+	# Lanzar petición
+	response = await client.get(url)
+	# Comprobar que el estado es correcto
+	assert_that(response.status_code).is_equal_to(200)
