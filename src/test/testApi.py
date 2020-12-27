@@ -293,3 +293,16 @@ async def test_modificar_autorizacion_api(test_medauth):
 	response = await client.post(url, data = json.dumps({'autorizacion': autorizacion.to_dict(), 'motivo_rechazo': motivo_rechazo, 'fecha_realizacion': fecha_realizacion, 'especialidad': json.dumps(especialidad), 'servicios_aceptados': servicios_aceptados, 'facultativo_realizador': facultativo_realizador, 'consulta': consulta}))
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(200)
+
+# Test de consultar autorizacion
+@pytest.mark.asyncio
+async def test_consultar_autorizacion_api(test_medauth):
+	# Obtener el servidor de la app
+	client = app.test_client()
+	# Crear url
+	url = '/autorizacion/AU-25123540-2'
+
+	# Lanzar petición
+	response = await client.get(url)
+	# Comprobar que el estado es correcto
+	assert_that(response.status_code).is_equal_to(200)
