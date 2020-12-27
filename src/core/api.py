@@ -37,7 +37,7 @@ async def crear_usuario():
 		return str(error), 400
 	
 	# Estado de éxito
-	return 'Usuario creado con éxito.', 200
+	return 'Usuario creado con éxito.', 201
 
 # [HU3] Administrar usuario: Modificar usuario
 @rutas_medauth.route('/usuario/modificar', methods=['POST'])
@@ -73,7 +73,7 @@ async def modificar_usuario():
 		return str(error), 400
 	
 	# Estado de éxito
-	return 'Usuario modificado con éxito.', 200
+	return 'Usuario modificado con éxito.', 201
 
 # [HU3] Administrar usuario: Eliminar usuario
 @rutas_medauth.route('/usuario/<dni>', methods=['DELETE'])
@@ -115,7 +115,7 @@ async def crear_poliza():
 		# Se produce un error
 		return str(error), 400
 	# Estado de éxito
-	return 'Póliza creada con éxito.', 200
+	return 'Póliza creada con éxito.', 201
 
 # [HU4] Administrar póliza: Modificar una póliza
 @rutas_medauth.route('/poliza/modificar', methods=['POST'])
@@ -159,7 +159,7 @@ async def modificar_poliza():
 		return str(error), 400
 	
 	# Estado de éxito
-	return 'Póliza modificada con éxito.', 200
+	return 'Póliza modificada con éxito.', 201
 
 # [HU4] Administrar póliza: Desactivar una póliza
 @rutas_medauth.route('/poliza/<dni>', methods=['PUT'])
@@ -172,7 +172,7 @@ async def desactivar_poliza(dni):
 		return str(error), 400
 	
 	# Estado de éxito
-	return 'Póliza desactivada con éxito.', 200
+	return 'Póliza desactivada con éxito.', 201
 
 # [HU5] Consultar póliza
 @rutas_medauth.route('/poliza/<dni>', methods=['GET'])
@@ -214,7 +214,7 @@ async def subir_prescripcion():
 		return str(error), 400
 	
 	# Estado de éxito
-	return 'Prescripción subida con éxito.', 200
+	return 'Prescripción subida con éxito.', 201
 
 # [HU7] Solicitar autorización médica
 @rutas_medauth.route('/autorizacion/<id_prescripcion>', methods=['PUT'])
@@ -227,7 +227,7 @@ async def solicitar_autorizacion(id_prescripcion):
 		return str(error), 400
 	
 	# Estado de éxito
-	return 'Autorización solicitada con éxito.', 200
+	return 'Autorización solicitada con éxito.', 201
 
 # [HU8] Administrar autorización: Crear una autorización
 @rutas_medauth.route('/autorizacion/crear', methods=['POST'])
@@ -256,7 +256,7 @@ async def crear_autorizacion():
 		return str(error), 400
 	
 	# Estado de éxito
-	return 'Autorización creada con éxito.', 200
+	return 'Autorización creada con éxito.', 201
 
 # [HU8] Administrar autorización: Modificar una autorización
 @rutas_medauth.route('/autorizacion/modificar', methods=['POST'])
@@ -301,7 +301,7 @@ async def modificar_autorizacion():
 		return str(error), 400
 	
 	# Estado de éxito
-	return 'Autorización modificada con éxito.', 200
+	return 'Autorización modificada con éxito.', 201
 
 # [HU9] Consultar autorización médica
 @rutas_medauth.route('/autorizacion/<id_autorizacion>', methods=['GET'])
@@ -351,7 +351,7 @@ async def aprobar_denegar_autorizacion():
 		return str(error), 400
 	
 	# Estado de éxito
-	return 'Autorización aprobada/denegada con éxito.', 200
+	return 'Autorización aprobada/denegada con éxito.', 201
 
 # [HU11] Administrar cita médica: Crear cita médica
 @rutas_medauth.route('/cita/crear', methods=['POST'])
@@ -380,7 +380,7 @@ async def crear_cita():
 		return str(error), 400
 	
 	# Estado de éxito
-	return 'Cita creada con éxito.', 200
+	return 'Cita creada con éxito.', 201
 
 # [HU11] Administrar cita médica: Modificar cita médica
 @rutas_medauth.route('/cita/modificar', methods=['POST'])
@@ -420,7 +420,7 @@ async def modificar_cita():
 		return str(error), 400
 	
 	# Estado de éxito
-	return 'Cita modificada con éxito.', 200
+	return 'Cita modificada con éxito.', 201
 
 # [HU12] Consultar cita médica
 @rutas_medauth.route('/cita/<id_autorizacion>', methods=['GET'])
