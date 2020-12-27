@@ -421,3 +421,17 @@ async def modificar_cita():
 	
 	# Estado de éxito
 	return 'Cita modificada con éxito.', 200
+
+# [HU12] Consultar cita médica
+@rutas_medauth.route('/cita/<id_autorizacion>', methods=['GET'])
+async def consultar_cita(id_autorizacion):
+	try:
+		# Consultar cita
+		autorizacion = controlador.consultar_cita(id_autorizacion)
+	except ValueError as error:
+		print(error)
+		# Se produce un error
+		return str(error), 400
+	
+	# Estado de éxito
+	return autorizacion.to_dict(), 200
