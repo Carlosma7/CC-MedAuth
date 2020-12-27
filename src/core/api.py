@@ -217,7 +217,7 @@ async def subir_prescripcion():
 	return 'Prescripción subida con éxito.', 200
 
 # [HU7] Solicitar autorización médica
-@rutas_medauth.route('/autorizacion/<id_prescripcion>', methods=['POST'])
+@rutas_medauth.route('/autorizacion/<id_prescripcion>', methods=['PUT'])
 async def solicitar_autorizacion(id_prescripcion):
 	try:
 		# Solicitar autorizacion
