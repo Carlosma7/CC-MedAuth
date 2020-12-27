@@ -236,7 +236,7 @@ async def test_solicitar_autorizacion_api(test_medauth):
 	url = '/autorizacion/PR-25123540-1'
 
 	# Lanzar petición
-	response = await client.post(url)
+	response = await client.put(url)
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(200)
 
