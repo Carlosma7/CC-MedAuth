@@ -239,3 +239,24 @@ async def test_solicitar_autorizacion_api(test_medauth):
 	response = await client.post(url)
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(200)
+
+# Test de crear autorización
+@pytest.mark.asyncio
+async def test_crear_autorizacion_api(test_medauth):
+	# Obtener el servidor de la app
+	client = app.test_client()
+	
+	# Crear usuario administrativo
+	usuario = UsuarioCliente('Roberto', 'rober@gmail.com', '25123540-F', 'ES1234111892738495273840')
+	# Crear url
+	url = '/autorizacion/crear'
+
+	# Creación fecha
+	fecha_realizacion = datetime.datetime(2020, 6, 22)
+	# Creación autorización con usuario y póliza
+	autorizacion = Autorizacion('', usuario, '', 'MA-25123540-2', True, '', fecha_realizacion, Especialidad.Epidemiologia, ["Serología", "PCR"], "D. Miguel", "Consulta 3")
+	
+	# Lanzar petición
+	response = await client.post(url, data = json.dumps(autorizacion.to_dict()))
+	# Comprobar que el estado es correcto
+	assert_that(response.status_code).is_equal_to(200)
