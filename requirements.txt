@@ -5,3 +5,4 @@ quart
 pytest-asyncio
 etcd3
 python-dotenv
+loguru
