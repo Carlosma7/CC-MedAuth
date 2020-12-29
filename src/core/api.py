@@ -127,26 +127,12 @@ async def crear_poliza():
 	return 'Póliza creada con éxito.', 201
 
 # [HU4] Administrar póliza: Modificar una póliza
-@rutas_medauth.route('/poliza/modificar', methods=['POST'])
-async def modificar_poliza():
+@rutas_medauth.route('/poliza/modificar/<id_poliza>', methods=['PUT'])
+async def modificar_poliza(id_poliza):
 	# Obtener la petición
 	data_string = await request.get_data()
 	# Cargar información de la petición en formato JSON
 	data = json.loads(data_string)
-	
-	# Obtener póliza
-	poliza = data.get('poliza')
-	# Obtener titular de la póliza
-	titular = poliza.get('titular')
-	titular = UsuarioCliente(titular.get('nombre'), titular.get('email'), titular.get('dni'), titular.get('cuenta_bancaria'))
-	# Obtener periodo carencia de la póliza
-	periodo_carencia = datetime.datetime.strptime(poliza.get('periodo_carencia'), '%m/%d/%Y')
-	# Obtener tipo de póliza de la póliza
-	tipo = TipoPoliza(json.loads(poliza.get('tipo')))
-	# Obtener modulos extra de la póliza
-	modulos_extra = [ModuloExtra(mod) for mod in poliza.get('modulos_extra')]
-	# Crear Póliza
-	poliza = Poliza(titular, poliza.get('id_poliza'), periodo_carencia, tipo, poliza.get('copagos'), poliza.get('mensualidad'), poliza.get('servicios_excluidos'), modulos_extra, poliza.get('activa'))
 	
 	# Obtener periodo carencia
 	periodo_carencia = datetime.datetime.strptime(data.get('periodo_carencia'), '%m/%d/%Y')
@@ -162,7 +148,7 @@ async def modificar_poliza():
 	modulos_extra = [ModuloExtra(mod) for mod in data.get('modulos_extra')]
 	try:
 		# Modificación póliza
-		controlador.modificar_poliza(poliza, periodo_carencia, tipo, copagos, mensualidad, servicios_excluidos, modulos_extra)
+		controlador.modificar_poliza(id_poliza, periodo_carencia, tipo, copagos, mensualidad, servicios_excluidos, modulos_extra)
 	except Exception as error:
 		# Se transmite el error mediante el log
 		logger.error(error)
