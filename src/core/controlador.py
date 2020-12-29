@@ -278,9 +278,9 @@ class Controller:
 			raise NonActivePolicyError('User has not an active policy.')
 			
 	# [HU8] Administrar autorización: Modificar una autorización		
-	def modificar_autorizacion(self, autorizacion: Autorizacion, motivo_rechazo: str, fecha_realizacion: datetime, especialidad: Especialidad, servicios_aceptados: List[str], facultativo_realizador: str, consulta: str):
+	def modificar_autorizacion(self, id_autorizacion: str, motivo_rechazo: str, fecha_realizacion: datetime, especialidad: Especialidad, servicios_aceptados: List[str], facultativo_realizador: str, consulta: str):
 		# Se obtiene la autorización asociada al identificador
-		aut = [a for a in self.autorizaciones if a.get_id_autorizacion() == autorizacion.get_id_autorizacion()]
+		aut = [a for a in self.autorizaciones if a.get_id_autorizacion() == id_autorizacion]
 
 		if len(aut) > 0:
 			aut = aut[0]
