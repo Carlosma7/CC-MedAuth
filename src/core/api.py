@@ -364,25 +364,13 @@ async def consultar_autorizacion(id_autorizacion):
 	return autorizacion.to_dict(), 200
 
 # [HU10] Aprobar/Denegar una autorización médica
-@rutas_medauth.route('/autorizacion/aprobar-denegar', methods=['POST'])
-async def aprobar_denegar_autorizacion():
+@rutas_medauth.route('/autorizacion/aprobar-denegar/<id_autorizacion>', methods=['PUT'])
+async def aprobar_denegar_autorizacion(id_autorizacion):
 	# Obtener la petición
 	data_string = await request.get_data()
 	# Cargar información de la petición en formato JSON
 	data = json.loads(data_string)
-	
-	# Obtener póliza
-	autorizacion = data.get('autorizacion')
-	# Obtener titular de la póliza
-	asegurado = autorizacion.get('asegurado')
-	asegurado = UsuarioCliente(asegurado.get('nombre'), asegurado.get('email'), asegurado.get('dni'), asegurado.get('cuenta_bancaria'))
-	# Obtener fecha realización
-	fecha_realizacion = datetime.datetime.strptime(autorizacion.get('fecha_realizacion'), '%m/%d/%Y')
-	# Obtener especialidad
-	especialidad = Especialidad(json.loads(autorizacion.get('especialidad')))
-	# Crear Autorización
-	autorizacion = Autorizacion(autorizacion.get('id_autorizacion'), asegurado, autorizacion.get('id_prescripcion'), autorizacion.get('id_poliza'), autorizacion.get('aceptada'), autorizacion.get('motivo_rechazo'), fecha_realizacion, especialidad, autorizacion.get('servicios_aceptados'), autorizacion.get('facultativo_realizador'), autorizacion.get('consulta'))
-	
+		
 	# Obtener aceptada
 	aceptada = data.get('aceptada')
 	# Obtener motivo rechazo
@@ -390,7 +378,7 @@ async def aprobar_denegar_autorizacion():
 	
 	try:
 		# Aprobar/Denegar autorización
-		controlador.aprobar_denegar_autorizacion(autorizacion, aceptada, motivo_rechazo)
+		controlador.aprobar_denegar_autorizacion(id_autorizacion, aceptada, motivo_rechazo)
 	except Exception as error:
 		# Se transmite el error mediante el log
 		logger.error(error)
