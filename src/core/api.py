@@ -387,24 +387,12 @@ async def crear_cita():
 	return 'Cita creada con éxito.', 201
 
 # [HU11] Administrar cita médica: Modificar cita médica
-@rutas_medauth.route('/cita/modificar', methods=['POST'])
-async def modificar_cita():
+@rutas_medauth.route('/cita/modificar/<id_cita>', methods=['PUT'])
+async def modificar_cita(id_cita):
 	# Obtener la petición
 	data_string = await request.get_data()
 	# Cargar información de la petición en formato JSON
 	data = json.loads(data_string)
-	
-	# Obtener cita
-	cita = data.get('cita')
-	# Obtener asegurado de la cita
-	asegurado = cita.get('asegurado')
-	asegurado = UsuarioCliente(asegurado.get('nombre'), asegurado.get('email'), asegurado.get('dni'), asegurado.get('cuenta_bancaria'))
-	# Obtener fecha
-	fecha = datetime.datetime.strptime(cita.get('fecha'), '%m/%d/%Y')
-	# Obtener hora
-	hora = datetime.datetime.strptime(cita.get('hora'), '%H:%M')
-	# Crear Cita
-	cita = Cita(cita.get('id_autorizacion'), asegurado, cita.get('id_prescripcion'), fecha, hora, cita.get('facultativo_realizador'), cita.get('consulta'))
 	
 	# Obtener fecha
 	fecha = datetime.datetime.strptime(data.get('fecha'), '%m/%d/%Y')
@@ -417,7 +405,7 @@ async def modificar_cita():
 	
 	try:
 		# Modificación cita
-		controlador.modificar_cita(cita, fecha, hora, facultativo_realizador, consulta)
+		controlador.modificar_cita(id_cita, fecha, hora, facultativo_realizador, consulta)
 	except Exception as error:
 		# Se transmite el error mediante el log
 		logger.error(error)
