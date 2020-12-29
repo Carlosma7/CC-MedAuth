@@ -37,7 +37,7 @@ def test_modificar_admin():
 	# Creación de usuario administrador
 	adminAntiguo = UsuarioAdmin("Carlos", "carlos7ma@gmail.com", "75925767-F", "")
 	# Modificación de usuario administrador
-	controlador.modificar_usuario(adminAntiguo, 'Carlos', 'charles@gmail.com', "")
+	controlador.modificar_usuario(adminAntiguo.get_dni(), 'Carlos', 'charles@gmail.com', "")
 	# Obtengo el usuario administrador almacenado
 	adminNuevo = [a for a in controlador.usuarios if a.get_dni() == adminAntiguo.get_dni()]
 	if len(adminNuevo) > 0:
@@ -52,7 +52,7 @@ def test_modificar_cliente():
 	# Creación de usuario cliente
 	clienteAntiguo = UsuarioCliente("Juan", "juan@gmail.com", "75123540-F", "ES1234111892738495273849")
 	# Modificación de usuario cliente
-	controlador.modificar_usuario(clienteAntiguo, 'Juan', 'juan@gmail.com', "ES1298742874928365740192")
+	controlador.modificar_usuario(clienteAntiguo.get_dni(), 'Juan', 'juan@gmail.com', "ES1298742874928365740192")
 	# Obtengo el usuario cliente almacenado
 	clienteNuevo = [a for a in controlador.usuarios if a.get_dni() == clienteAntiguo.get_dni()]
 	if len(clienteNuevo) > 0:
