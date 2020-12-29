@@ -353,16 +353,12 @@ async def test_modificar_cita_api(test_medauth):
 	# Obtener el servidor de la app
 	client = app.test_client()
 	# Crear url
-	url = '/cita/modificar'
+	url = '/cita/modificar/AU-25123540-2'
 
-	# Crear usuario cliente
-	usuario = UsuarioCliente('Roberto', 'rober@gmail.com', '25123540-F', 'ES1234111892738495273840')
 	# Creación fecha
 	fecha = datetime.datetime(2020, 6, 22)
 	# Creación hora
 	hora = datetime.time(3, 45, 12)
-	# Creación cita
-	cita = Cita('AU-25123540-2', usuario, '', fecha, hora, "D. Miguel", "Consulta 3")
 	
 	# Creación fecha
 	fecha = fecha.strftime('%m/%d/%Y')
@@ -374,7 +370,7 @@ async def test_modificar_cita_api(test_medauth):
 	consulta = "Consulta 19"
 	
 	# Lanzar petición
-	response = await client.post(url, data = json.dumps({'cita': cita.to_dict(), 'fecha': fecha, 'hora': hora, 'facultativo_realizador': facultativo_realizador, 'consulta': consulta}))
+	response = await client.put(url, data = json.dumps({'fecha': fecha, 'hora': hora, 'facultativo_realizador': facultativo_realizador, 'consulta': consulta}))
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(201)
 
