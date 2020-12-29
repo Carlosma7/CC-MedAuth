@@ -308,15 +308,15 @@ class Controller:
 			raise NonExistingAuthorizationError('Authorization doesn´t exist.')
 			
 	# [HU10] Aprobar/Denegar una autorización médica
-	def aprobar_denegar_autorizacion(self, autorizacion: Autorizacion, aceptada: bool, motivo_rechazo: str):
+	def aprobar_denegar_autorizacion(self, id_autorizacion: str, aceptada: bool, motivo_rechazo: str):
 		# Se obtiene la póliza asociada al identificador
-		aut = [a for a in self.autorizaciones if a.get_id_autorizacion() == autorizacion.get_id_autorizacion()]
+		aut = [a for a in self.autorizaciones if a.get_id_autorizacion() == id_autorizacion]
 
 		if len(aut) > 0:
 			aut = aut[0]
 			# Modificación de la autorización médica
-			autorizacion.set_aceptada(aceptada)
-			autorizacion.set_motivo_rechazo(motivo_rechazo)
+			aut.set_aceptada(aceptada)
+			aut.set_motivo_rechazo(motivo_rechazo)
 		else:
 			raise NonExistingAuthorizationError('Authorization doesn´t exist.')
 	
