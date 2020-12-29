@@ -313,22 +313,15 @@ async def test_aprobar_denegar_autorizacion_api(test_medauth):
 	# Obtener el servidor de la app
 	client = app.test_client()
 	# Crear url
-	url = '/autorizacion/aprobar-denegar'
+	url = '/autorizacion/aprobar-denegar/AU-25123540-2'
 
-	# Crear usuario cliente
-	usuario = UsuarioCliente('Roberto', 'rober@gmail.com', '25123540-F', 'ES1234111892738495273840')
-	# Creación fecha
-	fecha_realizacion = datetime.datetime(2020, 6, 22)
-	# Creación autorización con usuario y póliza
-	autorizacion = Autorizacion('AU-25123540-2', usuario, '', 'MA-25123540-2', True, '', fecha_realizacion, Especialidad.Epidemiologia, ["Serología", "PCR"], "D. Miguel", "Consulta 3")
-	
 	# Creación aceptada
 	aceptada = False
 	# Creación motivo rechazo
 	motivo_rechazo = 'Servicio no cubierto en póliza.'
 	
 	# Lanzar petición
-	response = await client.post(url, data = json.dumps({'autorizacion': autorizacion.to_dict(), 'aceptada': aceptada, 'motivo_rechazo': motivo_rechazo}))
+	response = await client.put(url, data = json.dumps({'aceptada': aceptada, 'motivo_rechazo': motivo_rechazo}))
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(201)
 
@@ -339,23 +332,19 @@ async def test_crear_cita_api(test_medauth):
 	client = app.test_client()
 	
 	# Crear url
-	url = '/autorizacion/aprobar-denegar'
-	# Crear usuario cliente
-	usuario = UsuarioCliente('Roberto', 'rober@gmail.com', '25123540-F', 'ES1234111892738495273840')
-	# Creación fecha
-	fecha_realizacion = datetime.datetime(2020, 6, 22)
-	# Creación autorización con usuario y póliza
-	autorizacion = Autorizacion('AU-25123540-2', usuario, '', 'MA-25123540-2', True, '', fecha_realizacion, Especialidad.Epidemiologia, ["Serología", "PCR"], "D. Miguel", "Consulta 3")
+	url = '/autorizacion/aprobar-denegar/AU-25123540-2'
 	# Creación aceptada
 	aceptada = True
 	# Creación motivo rechazo
 	motivo_rechazo = ''
 	# Lanzar petición
-	response = await client.post(url, data = json.dumps({'autorizacion': autorizacion.to_dict(), 'aceptada': aceptada, 'motivo_rechazo': motivo_rechazo}))
+	response = await client.put(url, data = json.dumps({'aceptada': aceptada, 'motivo_rechazo': motivo_rechazo}))
 	
 	# Crear url
 	url = '/cita/crear'
 
+	# Crear usuario cliente
+	usuario = UsuarioCliente('Roberto', 'rober@gmail.com', '25123540-F', 'ES1234111892738495273840')
 	# Creación fecha
 	fecha = datetime.datetime(2020, 6, 22)
 	# Creación hora
