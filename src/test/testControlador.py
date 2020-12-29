@@ -116,7 +116,7 @@ def test_modificar_poliza():
 		# Creación objeto Póliza
 		polizaAntigua = Poliza(cliente[0], "MA-75125767-1", fecha, TipoPoliza.Basica, 5.99, 50.99, ["TAC", "Apendicitis"], [ModuloExtra.Dental], True)
 		# Modificación de póliza
-		controlador.modificar_poliza(polizaAntigua, fecha, TipoPoliza.Basica, 10.99, 50.99, ["TAC", "Apendicitis"], [ModuloExtra.Dental])
+		controlador.modificar_poliza(polizaAntigua.get_id_poliza(), fecha, TipoPoliza.Basica, 10.99, 50.99, ["TAC", "Apendicitis"], [ModuloExtra.Dental])
 		# Obtener la póliza del controlador tras modificar
 		polizaNueva = [a for a in controlador.polizas if a.get_titular().get_dni() == polizaAntigua.get_titular().get_dni()]
 		if len(polizaNueva) > 0:
