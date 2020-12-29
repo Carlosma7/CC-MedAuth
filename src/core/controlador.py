@@ -66,9 +66,9 @@ class Controller:
 			
 
 	# [HU3] Administrar usuario: Modificar usuario
-	def modificar_usuario(self, usuario: Usuario, nombre: str, email: str, cuenta_bancaria: str):
+	def modificar_usuario(self, dni: str, nombre: str, email: str, cuenta_bancaria: str):
 		# Se obtiene el usuario por su dni
-		usr = [u for u in self.usuarios if u.get_dni() == usuario.get_dni()]
+		usr = [u for u in self.usuarios if u.get_dni() == dni]
 		
 		if len(usr) > 0:
 			usr = usr[0]
