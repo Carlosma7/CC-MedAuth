@@ -16,9 +16,8 @@ def test(c):
 # Tarea de ejecución del modelo
 @task
 def execute(c):
-	print("Ejecución del modelo\n")
+	print("Ejecución de MedAuth\n")
 	run("python3 ./src/core/main.py")
-	print("Fin de la ejecución.")
 
 # Tarea build, en nuestro caso no hace nada
 @task
