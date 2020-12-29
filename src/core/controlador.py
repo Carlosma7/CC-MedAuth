@@ -5,6 +5,7 @@ from poliza import Poliza
 from prescripcion import Prescripcion
 from autorizacion import Autorizacion
 from cita import Cita
+from excepciones import *
 
 from tipoPoliza import TipoPoliza
 from moduloExtra import ModuloExtra
@@ -48,20 +49,20 @@ class Controller:
 							# Se crea el usuario cliente
 							usr_creado = UsuarioCliente(usuario.get_nombre(), usuario.get_email(), usuario.get_dni(), usuario.get_cuenta_bancaria())
 						else:
-							raise ValueError('IBAN not valid.')
+							raise IBANFormatError('IBAN not valid.')
 					else:
-						raise ValueError('Wrong user type.')
+						raise WrongUserTypeError('Wrong user type.')
 						
 					# Se almacena
 					self.usuarios.append(usr_creado)
 				
 				else:
-					raise ValueError('Email not valid.')
+					raise EmailFormatError('Email not valid.')
 			else:
-				raise ValueError('DNI not valid.')
+				raise DNIFormatError('DNI not valid.')
 			
 		else:
-			raise ValueError('An user exists with DNI provided.')
+			raise ExistingUserError('An user exists with DNI provided.')
 			
 
 	# [HU3] Administrar usuario: Modificar usuario
@@ -84,11 +85,11 @@ class Controller:
 					if bool(re.match("ES[0-9]{22}", cuenta_bancaria)):
 						usr.set_cuenta_bancaria(cuenta_bancaria)
 					else:
-						raise ValueError('IBAN not valid.')
+						raise IBANFormatError('IBAN not valid.')
 			else:
-				raise ValueError('Email not valid.')
+				raise EmailFormatError('Email not valid.')
 		else:
-			raise ValueError('User doesn´t exist.')
+			raise NonExistingUserError('User doesn´t exist.')
 
 	# [HU3] Administrar usuario: Eliminar usuario
 	def eliminar_usuario(self, dni: str):
@@ -98,7 +99,7 @@ class Controller:
 			# Se elimina el usuario
 			self.usuarios.remove(usuario_buscado[0])
 		else:
-			raise ValueError('User doesn´t exist.')
+			raise NonExistingUserError('User doesn´t exist.')
 
 	# [HU4] Administrar póliza: Crear una póliza
 	def crear_poliza(self, poliza: Poliza):
@@ -120,7 +121,7 @@ class Controller:
 					# Si la última póliza no está activa
 					id_poliza = id_poliza + str(int(polizas_previas[-1].get_id_poliza()[-1]) + 1)
 				else:
-					raise ValueError('User has an active policy.')
+					raise ActivePolicyError('User already has an active policy.')
 			else:
 				# Si es la primera se crea como tal
 				id_poliza = id_poliza + "1"
@@ -129,7 +130,7 @@ class Controller:
 
 			self.polizas.append(poliza)
 		else:
-			raise ValueError('User doesn´t exist.')
+			raise NonExistingUserError('User doesn´t exist.')
 
 	# [HU4] Administrar póliza: Modificar una póliza
 	def modificar_poliza(self, poliza: Poliza, periodo_carencia: datetime, tipo: TipoPoliza, copagos: float, mensualidad: float, servicios_excluidos: List[str], modulos_extra: List[ModuloExtra]):
@@ -149,7 +150,7 @@ class Controller:
 			pol.set_servicios_excluidos(servicios_excluidos)
 			pol.set_modulos_extra(modulos_extra)
 		else:
-			raise ValueError('Policy doesn´t exist.')
+			raise NonExistingPolicyError('Policy doesn´t exist.')
 
 	# [HU4] Administrar póliza: Desactivar una póliza
 	def desactivar_poliza(self, dni: str):
@@ -158,7 +159,7 @@ class Controller:
 		if len(poliza_activa) > 0:
 			poliza_activa[0].set_activa(False)
 		else:
-			raise ValueError('Policy doesn´t exist.')
+			raise NonExistingPolicyError('Policy doesn´t exist.')
 
 	# [HU5] Consultar póliza
 	def consultar_poliza(self, dni: str):
@@ -168,7 +169,7 @@ class Controller:
 		if len(poliza) > 0:
 			return poliza[0]
 		else:
-			raise ValueError('Policy doesn´t exist.')
+			raise NonExistingPolicyError('Policy doesn´t exist.')
 	
 	# [HU6] Subir prescripción médica
 	def subir_prescripcion(self, prescripcion: Prescripcion):
@@ -197,11 +198,11 @@ class Controller:
 				
 					self.prescripciones.append(prescripcion)
 				else:
-					raise ValueError('The medical speciality is not valid.')
+					raise SpecialityError('The medical speciality is not valid.')
 			else:
-				raise ValueError('The prescription is not associated with the active policy.')
+				raise TimedOutPrescriptionError('The prescription is not associated with the active policy.')
 		else:
-			raise ValueError('User has not an active policy.')
+			raise NonActivePolicyError('User has not an active policy.')
 	
 	# [HU7] Solicitar autorización médica
 	def solicitar_autorizacion(self, id_prescripcion: str):
@@ -244,9 +245,9 @@ class Controller:
 				# Se almacena la autorización
 				self.autorizaciones.append(autorizacion)
 			else:
-				raise ValueError('User has not an active policy.')
+				raise NonActivePolicyError('User has not an active policy.')
 		else:
-			raise Valueerror('Prescription ID not valid.')
+			raise NonExistingPrescriptionIDError('Prescription ID doesnt exist.')
 			
 		
 	# [HU8] Administrar autorización: Crear una autorización
@@ -275,13 +276,13 @@ class Controller:
 
 				self.autorizaciones.append(autorizacion)
 			else:
-				raise ValueError('The authorization is not associated with the active policy.')
+				raise TimedOutAuthorizationError('The authorization is not associated with the active policy.')
 		else:
-			raise ValueError('User has not an active policy.')
+			raise NonActivePolicyError('User has not an active policy.')
 			
 	# [HU8] Administrar autorización: Modificar una autorización		
 	def modificar_autorizacion(self, autorizacion: Autorizacion, motivo_rechazo: str, fecha_realizacion: datetime, especialidad: Especialidad, servicios_aceptados: List[str], facultativo_realizador: str, consulta: str):
-		# Se obtiene la póliza asociada al identificador
+		# Se obtiene la autorización asociada al identificador
 		aut = [a for a in self.autorizaciones if a.get_id_autorizacion() == autorizacion.get_id_autorizacion()]
 
 		if len(aut) > 0:
@@ -294,7 +295,7 @@ class Controller:
 			aut.set_facultativo_realizador(facultativo_realizador)
 			aut.set_consulta(consulta)
 		else:
-			raise ValueError('User has not an authorization.')
+			raise NonExistingAuthorizationError('Authorization doesn´t exist.')
 			
 	# [HU9] Consultar autorización médica
 	def consultar_autorizacion(self, id_autorizacion: str):
@@ -304,7 +305,7 @@ class Controller:
 		if len(autorizacion) > 0:
 			return autorizacion[0]
 		else:
-			raise ValueError('Authorization doesn´t exist.')
+			raise NonExistingAuthorizationError('Authorization doesn´t exist.')
 			
 	# [HU10] Aprobar/Denegar una autorización médica
 	def aprobar_denegar_autorizacion(self, autorizacion: Autorizacion, aceptada: bool, motivo_rechazo: str):
@@ -317,7 +318,7 @@ class Controller:
 			autorizacion.set_aceptada(aceptada)
 			autorizacion.set_motivo_rechazo(motivo_rechazo)
 		else:
-			raise ValueError('Authorization doesn´t exist.')
+			raise NonExistingAuthorizationError('Authorization doesn´t exist.')
 	
 	# [HU11] Administrar cita médica: Crear cita médica
 	def crear_cita(self, cita: Cita):
@@ -327,7 +328,7 @@ class Controller:
 		if len(autorizacion) > 0:
 			self.citas.append(cita)
 		else:
-			raise ValueError('Authorization doesn´t exist.')
+			raise NonExistingAuthorizationError('Authorization doesn´t exist.')
 	
 	# [HU11] Administrar cita médica: Modificar cita médica
 	def modificar_cita(self, cita: Cita, fecha: datetime, hora: datetime, facultativo_realizador: str, consulta: str):
@@ -342,7 +343,7 @@ class Controller:
 			ci.set_facultativo_realizador(facultativo_realizador)
 			ci.set_consulta(consulta)
 		else:
-			raise ValueError('Appointment doesn´t exist.')
+			raise NonExistingAppointmentError('Appointment doesn´t exist.')
 	
 	# [HU12] Consultar cita médica
 	def consultar_cita(self, id_autorizacion: str):
@@ -352,4 +353,4 @@ class Controller:
 		if len(cita) > 0:
 			return cita[0]
 		else:
-			raise ValueError('Appointment doesn´t exist.')
+			raise NonExistingAppointmentError('Appointment doesn´t exist.')
