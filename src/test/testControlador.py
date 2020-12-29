@@ -262,7 +262,7 @@ def test_modificar_autorizacion():
 		# Creación de autorización
 		autorizacionAntigua = Autorizacion("AU-77223418-1", cliente[0], cliente[0].get_dni(), poliza[0].get_id_poliza(), True, "", fecha_realizacion, Especialidad.Epidemiologia, ["PCR"], "D. Miguel", "Consulta 3")
 		# Modificar la autorización
-		controlador.modificar_autorizacion(autorizacionAntigua, "", fecha_realizacion, Especialidad.Epidemiologia, ["PCR"], "D. Gustavo", "Consulta 3")
+		controlador.modificar_autorizacion(autorizacionAntigua.get_id_autorizacion(), "", fecha_realizacion, Especialidad.Epidemiologia, ["PCR"], "D. Gustavo", "Consulta 3")
 		# Obtener la autorización del controlador
 		autorizacionNueva = [a for a in controlador.autorizaciones if a.get_id_autorizacion() == autorizacionAntigua.get_id_autorizacion()]
 		if len(autorizacionNueva) > 0:
