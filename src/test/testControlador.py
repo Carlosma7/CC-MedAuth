@@ -348,7 +348,7 @@ def test_modificar_cita():
 		# Creación de cita
 		citaAntigua = Cita(cita.get_id_autorizacion(), cita.get_asegurado(), cita.get_id_prescripcion(), cita.get_fecha(), cita.get_hora(), cita.get_facultativo_realizador(), cita.get_consulta())
 		# Modificar cita
-		controlador.modificar_cita(citaAntigua, cita.get_fecha(), hora, cita.get_facultativo_realizador(), cita.get_consulta())
+		controlador.modificar_cita(citaAntigua.get_id_autorizacion(), cita.get_fecha(), hora, cita.get_facultativo_realizador(), cita.get_consulta())
 		# Obtener cita del controlador
 		citaNueva = [c for c in controlador.citas if c.get_id_autorizacion() == citaAntigua.get_id_autorizacion()]
 		if len(citaNueva) > 0:
