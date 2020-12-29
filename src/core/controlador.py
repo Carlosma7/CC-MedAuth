@@ -133,10 +133,7 @@ class Controller:
 			raise NonExistingUserError('User doesn´t exist.')
 
 	# [HU4] Administrar póliza: Modificar una póliza
-	def modificar_poliza(self, poliza: Poliza, periodo_carencia: datetime, tipo: TipoPoliza, copagos: float, mensualidad: float, servicios_excluidos: List[str], modulos_extra: List[ModuloExtra]):
-		# Se obtiene su póliza activa
-		id_poliza = poliza.get_id_poliza()
-		
+	def modificar_poliza(self, id_poliza: str, periodo_carencia: datetime, tipo: TipoPoliza, copagos: float, mensualidad: float, servicios_excluidos: List[str], modulos_extra: List[ModuloExtra]):
 		# Se obtiene la póliza asociada al identificador
 		pol = [p for p in self.polizas if p.get_id_poliza() == id_poliza]
 
