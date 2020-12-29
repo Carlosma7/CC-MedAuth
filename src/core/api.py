@@ -33,7 +33,7 @@ async def crear_usuario():
 	try:
 		# Creación usuario
 		controlador.crear_usuario(usuario, tipo)
-	except ValueError as error:
+	except Exception as error:
 		# Se transmite el error mediante el log
 		logger.error(error)
 		# Se produce un error
@@ -73,7 +73,7 @@ async def modificar_usuario():
 	try:
 		# Modificación usuario
 		controlador.modificar_usuario(usuario, nombre, email, cuenta_bancaria)
-	except ValueError as error:
+	except Exception as error:
 		# Se transmite el error mediante el log
 		logger.error(error)
 		# Se produce un error
@@ -90,7 +90,7 @@ async def eliminar_usuario(dni):
 	try:
 		# Eliminación usuario
 		controlador.eliminar_usuario(dni)
-	except ValueError as error:
+	except Exception as error:
 		# Se transmite el error mediante el log
 		logger.error(error)
 		# Se produce un error
@@ -124,7 +124,7 @@ async def crear_poliza():
 	try:
 		# Creación póliza
 		controlador.crear_poliza(poliza)
-	except ValueError as error:
+	except Exception as error:
 		# Se transmite el error mediante el log
 		logger.error(error)
 		# Se produce un error
@@ -172,7 +172,7 @@ async def modificar_poliza():
 	try:
 		# Modificación póliza
 		controlador.modificar_poliza(poliza, periodo_carencia, tipo, copagos, mensualidad, servicios_excluidos, modulos_extra)
-	except ValueError as error:
+	except Exception as error:
 		# Se transmite el error mediante el log
 		logger.error(error)
 		# Se produce un error
@@ -189,7 +189,7 @@ async def desactivar_poliza(dni):
 	try:
 		# Desactivación póliza
 		controlador.desactivar_poliza(dni)
-	except ValueError as error:
+	except Exception as error:
 		# Se transmite el error mediante el log
 		logger.error(error)
 		# Se produce un error
@@ -206,7 +206,7 @@ async def consultar_poliza(dni):
 	try:
 		# Consultar póliza
 		poliza = controlador.consultar_poliza(dni)
-	except ValueError as error:
+	except Exception as error:
 		# Se transmite el error mediante el log
 		logger.error(error)
 		# Se produce un error
@@ -238,7 +238,7 @@ async def subir_prescripcion():
 	try:
 		# Subir prescripcion
 		controlador.subir_prescripcion(prescripcion)
-	except ValueError as error:
+	except Exception as error:
 		# Se transmite el error mediante el log
 		logger.error(error)
 		# Se produce un error
@@ -255,7 +255,7 @@ async def solicitar_autorizacion(id_prescripcion):
 	try:
 		# Solicitar autorizacion
 		controlador.solicitar_autorizacion(id_prescripcion)
-	except ValueError as error:
+	except Exception as error:
 		# Se transmite el error mediante el log
 		logger.error(error)
 		# Se produce un error
@@ -287,7 +287,7 @@ async def crear_autorizacion():
 	try:
 		# Crear autorización
 		controlador.crear_autorizacion(autorizacion)
-	except ValueError as error:
+	except Exception as error:
 		# Se transmite el error mediante el log
 		logger.error(error)
 		# Se produce un error
@@ -335,7 +335,7 @@ async def modificar_autorizacion():
 	try:
 		# Modificación autorización
 		controlador.modificar_autorizacion(autorizacion, motivo_rechazo, fecha_realizacion, especialidad, servicios_aceptados, facultativo_realizador, consulta)
-	except ValueError as error:
+	except Exception as error:
 		# Se transmite el error mediante el log
 		logger.error(error)
 		# Se produce un error
@@ -352,7 +352,7 @@ async def consultar_autorizacion(id_autorizacion):
 	try:
 		# Consultar autorizacion
 		autorizacion = controlador.consultar_autorizacion(id_autorizacion)
-	except ValueError as error:
+	except Exception as error:
 		# Se transmite el error mediante el log
 		logger.error(error)
 		# Se produce un error
@@ -391,7 +391,7 @@ async def aprobar_denegar_autorizacion():
 	try:
 		# Aprobar/Denegar autorización
 		controlador.aprobar_denegar_autorizacion(autorizacion, aceptada, motivo_rechazo)
-	except ValueError as error:
+	except Exception as error:
 		# Se transmite el error mediante el log
 		logger.error(error)
 		# Se produce un error
@@ -423,7 +423,7 @@ async def crear_cita():
 	try:
 		# Crear cita
 		controlador.crear_cita(cita)
-	except ValueError as error:
+	except Exception as error:
 		# Se transmite el error mediante el log
 		logger.error(error)
 		# Se produce un error
@@ -466,7 +466,7 @@ async def modificar_cita():
 	try:
 		# Modificación cita
 		controlador.modificar_cita(cita, fecha, hora, facultativo_realizador, consulta)
-	except ValueError as error:
+	except Exception as error:
 		# Se transmite el error mediante el log
 		logger.error(error)
 		# Se produce un error
@@ -483,7 +483,7 @@ async def consultar_cita(id_autorizacion):
 	try:
 		# Consultar cita
 		autorizacion = controlador.consultar_cita(id_autorizacion)
-	except ValueError as error:
+	except Exception as error:
 		# Se transmite el error mediante el log
 		logger.error(error)
 		# Se produce un error
