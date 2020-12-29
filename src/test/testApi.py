@@ -261,14 +261,10 @@ async def test_modificar_autorizacion_api(test_medauth):
 	# Obtener el servidor de la app
 	client = app.test_client()
 	# Crear url
-	url = '/autorizacion/modificar'
+	url = '/autorizacion/modificar/AU-25123540-2'
 
-	# Crear usuario cliente
-	usuario = UsuarioCliente('Roberto', 'rober@gmail.com', '25123540-F', 'ES1234111892738495273840')
 	# Creación fecha
 	fecha_realizacion = datetime.datetime(2020, 6, 22)
-	# Creación autorización con usuario y póliza
-	autorizacion = Autorizacion('AU-25123540-2', usuario, '', 'MA-25123540-2', True, '', fecha_realizacion, Especialidad.Epidemiologia, ["Serología", "PCR"], "D. Miguel", "Consulta 3")
 	
 	# Creación motivo rechazo
 	motivo_rechazo = ''
@@ -284,7 +280,7 @@ async def test_modificar_autorizacion_api(test_medauth):
 	consulta = "Consulta 3"
 	
 	# Lanzar petición
-	response = await client.post(url, data = json.dumps({'autorizacion': autorizacion.to_dict(), 'motivo_rechazo': motivo_rechazo, 'fecha_realizacion': fecha_realizacion, 'especialidad': json.dumps(especialidad), 'servicios_aceptados': servicios_aceptados, 'facultativo_realizador': facultativo_realizador, 'consulta': consulta}))
+	response = await client.put(url, data = json.dumps({'motivo_rechazo': motivo_rechazo, 'fecha_realizacion': fecha_realizacion, 'especialidad': json.dumps(especialidad), 'servicios_aceptados': servicios_aceptados, 'facultativo_realizador': facultativo_realizador, 'consulta': consulta}))
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(201)
 
