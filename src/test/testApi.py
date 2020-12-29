@@ -51,17 +51,16 @@ async def test_modificar_admin_api(test_medauth):
 	# Obtener el servidor de la app
 	client = app.test_client()
 	# Crear url
-	url = '/usuario/modificar'
+	url = '/usuario/modificar/35925767-A'
 	
 	# Crear usuario administrativo
-	usuario = UsuarioAdmin('Alfredo', 'alfredo@gmail.com', '35925767-A', '')
 	tipo = 0
 	nombre = 'Alfredo'
 	email = 'alfred1@gmail.com'
 	cuenta_bancaria = ''
 	
 	# Lanzar petición
-	response = await client.post(url, data = json.dumps({'usuario': usuario.to_dict(), 'tipo': tipo, 'nombre': nombre, 'email': email, 'cuenta_bancaria': cuenta_bancaria}))
+	response = await client.put(url, data = json.dumps({'tipo': tipo, 'nombre': nombre, 'email': email, 'cuenta_bancaria': cuenta_bancaria}))
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(201)
 
@@ -71,17 +70,16 @@ async def test_modificar_cliente_api(test_medauth):
 	# Obtener el servidor de la app
 	client = app.test_client()
 	# Crear url
-	url = '/usuario/modificar'
+	url = '/usuario/modificar/25123540-F'
 	
 	# Crear usuario cliente
-	usuario = UsuarioCliente('Roberto', 'rober@gmail.com', '25123540-F', 'ES1234111892738495273840')
 	tipo = 1
 	nombre = 'Roberto'
 	email = 'rober@gmail.com'
 	cuenta_bancaria = 'ES1234111892738495270000'
 	
 	# Lanzar petición
-	response = await client.post(url, data = json.dumps({'usuario': usuario.to_dict(), 'tipo': tipo, 'nombre': nombre, 'email': email, 'cuenta_bancaria': cuenta_bancaria}))
+	response = await client.put(url, data = json.dumps({'tipo': tipo, 'nombre': nombre, 'email': email, 'cuenta_bancaria': cuenta_bancaria}))
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(201)
 	
