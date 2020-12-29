@@ -328,9 +328,9 @@ class Controller:
 			raise NonExistingAuthorizationError('Authorization doesn´t exist.')
 	
 	# [HU11] Administrar cita médica: Modificar cita médica
-	def modificar_cita(self, cita: Cita, fecha: datetime, hora: datetime, facultativo_realizador: str, consulta: str):
+	def modificar_cita(self, id_cita: str, fecha: datetime, hora: datetime, facultativo_realizador: str, consulta: str):
 		# Se obtiene la cita médica
-		ci = [c for c in self.citas if c.get_id_autorizacion() == cita.get_id_autorizacion()]
+		ci = [c for c in self.citas if c.get_id_autorizacion() == id_cita]
 		
 		if len(ci) > 0:
 			ci = ci[0]
