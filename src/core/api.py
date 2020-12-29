@@ -276,25 +276,12 @@ async def crear_autorizacion():
 	return 'Autorización creada con éxito.', 201
 
 # [HU8] Administrar autorización: Modificar una autorización
-@rutas_medauth.route('/autorizacion/modificar', methods=['POST'])
-async def modificar_autorizacion():
+@rutas_medauth.route('/autorizacion/modificar/<id_autorizacion>', methods=['PUT'])
+async def modificar_autorizacion(id_autorizacion):
 	# Obtener la petición
 	data_string = await request.get_data()
 	# Cargar información de la petición en formato JSON
 	data = json.loads(data_string)
-	
-	# Obtener póliza
-	autorizacion = data.get('autorizacion')
-	# Obtener titular de la póliza
-	asegurado = autorizacion.get('asegurado')
-	asegurado = UsuarioCliente(asegurado.get('nombre'), asegurado.get('email'), asegurado.get('dni'), asegurado.get('cuenta_bancaria'))
-	# Obtener fecha realización
-	fecha_realizacion = datetime.datetime.strptime(autorizacion.get('fecha_realizacion'), '%m/%d/%Y')
-	# Obtener especialidad
-	especialidad = Especialidad(json.loads(autorizacion.get('especialidad')))
-	# Crear Autorización
-	# Crear Póliza
-	autorizacion = Autorizacion(autorizacion.get('id_autorizacion'), asegurado, autorizacion.get('id_prescripcion'), autorizacion.get('id_poliza'), autorizacion.get('aceptada'), autorizacion.get('motivo_rechazo'), fecha_realizacion, especialidad, autorizacion.get('servicios_aceptados'), autorizacion.get('facultativo_realizador'), autorizacion.get('consulta'))
 	
 	# Obtener motivo rechazo
 	motivo_rechazo = data.get('motivo_rechazo')
@@ -311,7 +298,7 @@ async def modificar_autorizacion():
 	
 	try:
 		# Modificación autorización
-		controlador.modificar_autorizacion(autorizacion, motivo_rechazo, fecha_realizacion, especialidad, servicios_aceptados, facultativo_realizador, consulta)
+		controlador.modificar_autorizacion(id_autorizacion, motivo_rechazo, fecha_realizacion, especialidad, servicios_aceptados, facultativo_realizador, consulta)
 	except Exception as error:
 		# Se transmite el error mediante el log
 		logger.error(error)
