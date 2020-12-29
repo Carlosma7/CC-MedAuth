@@ -45,15 +45,13 @@ async def crear_usuario():
 	return 'Usuario creado con éxito.', 201
 
 # [HU3] Administrar usuario: Modificar usuario
-@rutas_medauth.route('/usuario/modificar', methods=['POST'])
-async def modificar_usuario():
+@rutas_medauth.route('/usuario/modificar/<dni>', methods=['PUT'])
+async def modificar_usuario(dni):
 	# Obtener la petición
 	data_string = await request.get_data()
 	# Cargar información de la petición en formato JSON
 	data = json.loads(data_string)
 	
-	# Obtener usuario
-	usuario = data.get('usuario')
 	# Obtener nombre 
 	nombre = data.get('nombre')
 	# Obtener email
@@ -63,16 +61,9 @@ async def modificar_usuario():
 	# Obtener tipo
 	tipo = data.get('tipo')
 	
-	
-	# Crear usuario con la información
-	if tipo == 0: # Usuario administrativo
-		usuario = UsuarioAdmin(usuario.get('nombre'), usuario.get('email'), usuario.get('dni'), '')
-	else: # Usuario cliente
-		usuario = UsuarioCliente(usuario.get('nombre'), usuario.get('email'), usuario.get('dni'), '')
-	
 	try:
 		# Modificación usuario
-		controlador.modificar_usuario(usuario, nombre, email, cuenta_bancaria)
+		controlador.modificar_usuario(dni, nombre, email, cuenta_bancaria)
 	except Exception as error:
 		# Se transmite el error mediante el log
 		logger.error(error)
