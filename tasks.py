@@ -4,7 +4,8 @@ from invoke import task, run
 @task 
 def clean(c):
 	print("Borrando caché de python.")
-	run("find . -maxdepth 5 -type d -name __pycache__ -name  .pytest_cache  -exec rm -r {} +")
+	run("find . -maxdepth 5 -type d -name  .pytest_cache -exec rm -r {} +")
+	run("find . -maxdepth 5 -type d -name __pycache__ -exec rm -r {} +")
 
 # Tarea de ejecución de tests
 @task
@@ -19,3 +20,12 @@ def execute(c):
 	run("python3 ./src/core/main.py")
 	print("Fin de la ejecución.")
 
+# Tarea build, en nuestro caso no hace nada
+@task
+def build(c):
+	print("Build realizado\n")
+
+# Tarea install, en nuestro caso no hace nada
+@task
+def install(c):
+	print("Instalación completada\n")
