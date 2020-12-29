@@ -1,5 +1,6 @@
 ---
 entidad:
+ - src/core/usuario.py
  - src/core/usuarioAdmin.py
  - src/core/usuarioCliente.py
  - src/core/poliza.py
@@ -15,6 +16,7 @@ lenguaje:
  - python3.9
 
 test:
+ - src/test/testUsuario.py
  - src/test/testUsuarioAdmin.py
  - src/test/testUsuarioCliente.py
  - src/test/testPoliza.py
@@ -22,6 +24,14 @@ test:
  - src/test/testAutorizacion.py
  - src/test/testCita.py
  - src/test/testControlador.py
+ - src/test/testApi.py
 
 fichero_tareas:
  - tasks.py
+
+invoke:
+ - clean
+ - build
+ - install
+ - test
+ - execute
