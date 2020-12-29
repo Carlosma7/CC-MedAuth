@@ -303,11 +303,11 @@ def test_aprobar_denegar_autorizacion():
 		# Creación de autorización
 		autorizacionAntigua = Autorizacion("AU-77223418-1", cliente[0], cliente[0].get_dni(), poliza[0].get_id_poliza(), True, "", fecha_realizacion, Especialidad.Epidemiologia, ["PCR"], "D. Gustavo", "Consulta 3")
 		# Denegar la autorización
-		controlador.aprobar_denegar_autorizacion(autorizacionAntigua, False, "Servicio no cubierto en póliza.")
+		controlador.aprobar_denegar_autorizacion(autorizacionAntigua.get_id_autorizacion(), False, "Servicio no cubierto en póliza.")
 		# Obtener la autorización del controlador
 		autorizacionNueva = [a for a in controlador.autorizaciones if a.get_id_autorizacion() == autorizacionAntigua.get_id_autorizacion()]
 		if len(autorizacionNueva) > 0:
-			# Comrpobar que la autorización no es igual tras la denegación
+			# Comprobar que la autorización no es igual tras la denegación
 			assert_that(autorizacionAntigua).is_not_equal_to(autorizacionNueva[0])
 			# Comprobar que el ID de la autorización es el mismo
 			assert_that(autorizacionAntigua.get_id_autorizacion()).is_equal_to(autorizacionNueva[0].get_id_autorizacion())
@@ -321,7 +321,7 @@ def test_crear_cita():
 	if len(autorizacion) > 0:
 		autorizacion = autorizacion[0]
 		# Aprobar la autorización
-		controlador.aprobar_denegar_autorizacion(autorizacion, True, "")
+		controlador.aprobar_denegar_autorizacion(autorizacion.get_id_autorizacion(), True, "")
 		
 		# Creación hora
 		hora = datetime.time(3, 45, 12)
