@@ -433,3 +433,20 @@ async def consultar_cita(id_autorizacion):
 	logger.info('Cita obtenida con éxito')
 	# Estado de éxito
 	return autorizacion.to_dict(), 200
+
+# [HU14] Consultar usuario
+@rutas_medauth.route('/usuario/<dni>', methods=['GET'])
+async def consultar_usuario(dni):
+	try:
+		# Consultar usuario
+		usuario = controlador.consultar_usuario(dni)
+	except Exception as error:
+		# Se transmite el error mediante el log
+		logger.error(error)
+		# Se produce un error
+		return str(error), 400
+	
+	# Se transmite el estado de éxito mediante el log	
+	logger.info('Usuario obtenido con éxito')
+	# Estado de éxito
+	return usuario.to_dict(), 200
