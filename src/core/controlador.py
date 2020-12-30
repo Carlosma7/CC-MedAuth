@@ -351,3 +351,13 @@ class Controller:
 			return cita[0]
 		else:
 			raise NonExistingAppointmentError('Appointment doesn´t exist.')
+	
+	# [HU14] Consultar usuario
+	def consultar_usuario(self, dni: str):
+		# Se obtiene el usuario
+		usuario = [u for u in self.usuarios if u.get_dni() == dni]
+		
+		if len(usuario) > 0:
+			return usuario[0]
+		else:
+			raise NonExistingUserError('User doesn´t exist.')
