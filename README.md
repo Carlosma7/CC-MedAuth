@@ -29,7 +29,6 @@
 
 ## Dependencias
 
-**Invoke**, **Pytest** y **Assertpy**.
 
 ```shell
 pip3 install assertpy
