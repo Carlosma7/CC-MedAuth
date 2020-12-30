@@ -1,4 +1,5 @@
 
+
 ### Estudio inicial
 
 Existen numerosas herramientas destinadas al diseño y configuración de *APIs* para microservicios, por lo que para escoger una que se adapte a las necesidades de nuestro proyecto, se van a evaluar las principales herramientas observando sus principales ventajas y desventajas de cara a nuestro proyecto:
@@ -158,7 +159,7 @@ Tras analizar estas opciones, realmente el debate se encuentra en utilizar *Quar
 
 *FastAPI* es una herramienta que promete ser un gran competidor de *Flask*, pero que al haber sido creada tan recientemente, no ofrece garantías suficientes aún de poder superar a *Flask* y la curva de aprendizaje es considerablemente superior.
 
-Por último, aunque la decisión debería basarse en decisiones técnicas, realmente no hay aspectos que definan cual de los dos frameworks es mejor para el proyecto, ya que ambos son completamente válidos. Por cuestión de curiosidad e investigación, y por tener menor popularidad pese a ser una herramienta bastante interesante, se utilizará *Quart*, con el objetivo de aprender a utilizar un framework nuevo.
+Por último, aunque la decisión debería basarse en decisiones técnicas, realmente no hay aspectos que definan cual de los dos frameworks es mejor para el proyecto, ya que ambos son completamente válidos. Por cuestión de curiosidad e investigación, y por tener menor popularidad pese a ser una herramienta bastante interesante, se utilizará *Quart*, con el objetivo de aprender a utilizar un framework nuevo y porque nos facilita el mecanismo [Blueprint](https://flask.palletsprojects.com/en/1.1.x/blueprints/) el cual nos permite separar las rutas de la aplicación, lo cual es una práctica más que deseable.
 
 Finalmente el microframework sobre el que se va a desarrollar la API del proyecto es **Quart**.
 
