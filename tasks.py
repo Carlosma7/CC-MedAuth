@@ -17,7 +17,7 @@ def test(c):
 @task
 def execute(c):
 	print("Ejecución de MedAuth\n")
-	run("python3 ./src/core/main.py")
+	run("gunicorn --bind 0.0.0.0:2020 --chdir ./src/core main:app")
 
 # Tarea build, en nuestro caso no hace nada
 @task
