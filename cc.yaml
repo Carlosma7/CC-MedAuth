@@ -29,9 +29,4 @@ test:
 fichero_tareas:
  - tasks.py
 
-invoke:
- - clean
- - build
- - install
- - test
- - execute
+make: invoke
