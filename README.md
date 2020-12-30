@@ -1,3 +1,4 @@
+
 # Servicio de solicitudes de autorizaciones médicas
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![Language](https://img.shields.io/badge/Language-Python-red.svg)](https://www.python.org/)
@@ -34,9 +35,15 @@
 pip3 install assertpy
 pip3 install pytest==6.1.2
 pip3 install invoke==1.4.1
+pip3 install quart
+pip3 install pytest-asyncio
+pip3 install etcd3
+pip3 install python-dotenv
+pip3 install loguru
+pip3 install gunicorn
 ```
 
-Otra opción es descargar el proyecto y ejecutar:
+Para mayor comodidad, otra opción es descargar el proyecto y ejecutar:
 
 ```shell
 pip3 install -r requirements.txt
@@ -64,7 +71,7 @@ wget https://github.com/carlosma7/medauth/archive/main.zip
 
 ## Ejecución
 
-Para ejecutar el programa, una vez instalados los requisitos previos y descargado el proyecto, se ejecuta la siguiente orden:
+Para ejecutar el servidor, una vez instalados los requisitos previos y descargado el proyecto, se ejecuta la siguiente orden:
 
 ```shell
 invoke execute
@@ -82,14 +89,15 @@ Para comprobar el estado, se pueden ejecutar los tests con:
 invoke test
 ```
 
-## Integración Continua
+## Diseño y test de un microservicio
 
-:small_blue_diamond: Configuración de [TravisCI](https://carlosma7.github.io/MedAuth/doc/integracion_continua/configuracion_travis).
+:small_blue_diamond: Documentación sobre elección del [framework para microservicio](https://carlosma7.github.io/MedAuth/doc/api/estudio_framework).
 
-:small_blue_diamond: [Estudio herramientas CI](https://carlosma7.github.io/MedAuth/doc/integracion_continua/estudio_ci) y configuración de [CircleCI](https://carlosma7.github.io/MedAuth/doc/integracion_continua/configuracion_circleci), [Shippable](https://carlosma7.github.io/MedAuth/doc/integracion_continua/configuracion_shippable) y [GitHub Action](https://carlosma7.github.io/MedAuth/doc/integracion_continua/configuracion_github_action).
+:small_blue_diamond: Documentación sobre la [API y tests](https://carlosma7.github.io/MedAuth/doc/api/doc_api).
 
-:small_blue_diamond: Justificación uso del [gestor de tareas con herramientas CI](https://carlosma7.github.io/MedAuth/doc/integracion_continua/justificacion_invoke).
+:small_blue_diamond: Documentación sobre [Configuración distribuida](https://carlosma7.github.io/MedAuth/doc/api/config_distribuida) y [Logs](https://carlosma7.github.io/MedAuth/doc/api/logs).
 
-:small_blue_diamond: Justificación de [aprovechamiento del contenedor Docker](https://carlosma7.github.io/MedAuth/doc/integracion_continua/justificacion_docker) del proyecto.
+:small_blue_diamond: La documentación sobre los nuevos tests se encuentra en [API y tests](https://carlosma7.github.io/MedAuth/doc/api/doc_api).
 
-:small_blue_diamond: [Avance del proyecto](https://carlosma7.github.io/MedAuth/doc/avance_codigo_3).
+:small_blue_diamond: [Avance del proyecto](https://carlosma7.github.io/MedAuth/doc/avance_codigo_4) y documentación sobre la [imagen Docker de despliegue](https://carlosma7.github.io/MedAuth/doc/api/despliegue).
+
