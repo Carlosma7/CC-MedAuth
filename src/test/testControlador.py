@@ -370,4 +370,15 @@ def test_consultar_cita():
 		# Consultar cita
 		cita2 = controlador.consultar_cita("AU-77223418-1")
 		# Comprobar que la cita obtenida es igual, y por lo tanto la consulta es correcta
-		assert_that(cita1).is_equal_to(cita2)		
+		assert_that(cita1).is_equal_to(cita2)
+
+# Test de consulta de usuario
+def test_consultar_usuario():
+	controlador = Controller()
+	
+	# Creación objeto UsuarioCliente
+	usuario1 = UsuarioCliente("Julio", "julio1@gmail.com", "77223418-R", "ES9912345811003387447729")
+	# Consultar usuario del controlador con el DNI del usuario asociado
+	usuario2 = controlador.consultar_usuario("77223418-R")
+	# Comprobar que el usuario obtenido es igual, y por lo tanto la consulta es correcta
+	assert_that(usuario1).is_equal_to(usuario2)	
