@@ -36,6 +36,7 @@ Teniendo en cuenta estas entidades, y las diferentes historias de usuario se han
     *  ```/usuario``` con método **POST** y con código de estado **201**. Se corresponde con el método ```crear_usuario``` y las *HUs* [Como usuario anónimo quiero crear un usuario administrativo en el sistema para gestionar el sistema](https://github.com/Carlosma7/MedAuth/issues/43) y [Como administrativo quiero crear un usuario para un asegurado en el sistema para usar el sistema](https://github.com/Carlosma7/MedAuth/issues/44).
     * ```/usuario/modificar/<dni>``` con método **PUT** y con código de estado **201**. Se corresponde con el método ```modificar_usuario``` y la *HU* [Como administrativo quiero gestionar los usuarios existentes en el sistema para modificar o eliminar usuarios](https://github.com/Carlosma7/MedAuth/issues/55).
     * ```/usuario/<dni>``` con método **DELETE** y con código de estado **200**. Se corresponde con el método ```eliminar_usuario``` y la *HU* [Como administrativo quiero gestionar los usuarios existentes en el sistema para modificar o eliminar usuarios](https://github.com/Carlosma7/MedAuth/issues/55).
+    * ```/usuario/<dni>``` con método **GET** y con código de estado **200**. Se corresponde con el método ```consultar_usuario``` y la *HU* [Como administrativo quiero consultar un usuario para poder ver la información asociada](https://github.com/Carlosma7/MedAuth/issues/96).
 
 * Pólizas:
     * ```/poliza``` con método **POST** y con código de estado **201**. Se corresponde con el método ```crear_poliza``` y la *HU* [Como administrativo quiero administrar la póliza de un asegurado para crear, modificar o dar de baja una póliza](https://github.com/Carlosma7/MedAuth/issues/35).
@@ -153,15 +154,15 @@ async def eliminar_usuario(dni):
 	return 'Usuario eliminado con éxito.', 200
 ```
 
-* ```/poliza/<dni>``` con método **GET**:
+* ```/usuario/<dni>``` con método **GET**:
 
 ```python
-# [HU5] Consultar póliza
-@rutas_medauth.route('/poliza/<dni>', methods=['GET'])
-async def consultar_poliza(dni):
+# [HU14] Consultar usuario
+@rutas_medauth.route('/usuario/<dni>', methods=['GET'])
+async def consultar_usuario(dni):
 	try:
-		# Consultar póliza
-		poliza = controlador.consultar_poliza(dni)
+		# Consultar usuario
+		usuario = controlador.consultar_usuario(dni)
 	except Exception as error:
 		# Se transmite el error mediante el log
 		logger.error(error)
@@ -169,9 +170,9 @@ async def consultar_poliza(dni):
 		return str(error), 400
 	
 	# Se transmite el estado de éxito mediante el log	
-	logger.info('Póliza obtenida con éxito')
+	logger.info('Usuario obtenido con éxito')
 	# Estado de éxito
-	return poliza.to_dict(), 200
+	return usuario.to_dict(), 200
 ```
 
 
