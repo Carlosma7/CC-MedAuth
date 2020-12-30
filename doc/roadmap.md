@@ -1,3 +1,4 @@
+
 ## Roadmap
 
 ---
@@ -41,7 +42,7 @@ El plan de desarrollo del proyecto va a seguir una serie de etapas que irán añ
     Finalmente, se realizará la [administración de citas médicas](https://github.com/Carlosma7/MedAuth/milestone/11), las cuales son creadas tras las autorizaciones:
     * [Como administrativo quiero administrar una cita médica para crear una cita o modificar información asociada a una cita existente.](https://github.com/Carlosma7/MedAuth/issues/49)
     
-3. :heavy_check_mark: **Cuarta fase**: En esta fase se añaden las funcionalidades asociadas a la gestión de una cita médica y una autorización médica. En esta fase además se cumplen los requisitos administrativos previos para poder gestionar por la parte administrativa los distintos elementos a tratar.
+4. :heavy_check_mark: **Cuarta fase**: En esta fase se añaden las funcionalidades asociadas a la gestión de una cita médica y una autorización médica. En esta fase además se cumplen los requisitos administrativos previos para poder gestionar por la parte administrativa los distintos elementos a tratar.
 
     Inicialmente, se realizará la [gestión de autorizaciones](https://github.com/Carlosma7/MedAuth/milestone/7), preparando el escenario para desarrollar en un futuro la solicitud de autorizaciones con toda la funcionalidad previa necesaria:
     * [Como asegurado quiero añadir una prescripción médica para poder solicitar una autorización de una prueba médica.](https://github.com/Carlosma7/MedAuth/issues/36)
@@ -50,11 +51,19 @@ El plan de desarrollo del proyecto va a seguir una serie de etapas que irán añ
     Posteriormente, tras dotar al sistema de la funcionalidad de cara al cliente para gestionar autorizaciones, se añadiran las funcionalidades básicas de [gestión de citas médicas](https://github.com/Carlosma7/MedAuth/milestone/8):
     * [Como asegurado quiero consultar una cita médica fijada para ver la información asociada.](https://github.com/Carlosma7/MedAuth/issues/41)
     
-4. **Fase final**: Finalmente en esta entrega, se añaden las funcionalidades que intercomunican todos los elementos anteriormente definidos y desarrollados, añadiendo las funcionalidades de solicitud de autorización médica y los cambios que implican en el sistema. Se añaden también funcionalidades relativas a notificación del usuario sobre citas médicas.
+5. :heavy_check_mark: **Quinta fase**: En esta entrega, se añaden las funcionalidades que intercomunican todos los elementos anteriormente definidos y desarrollados, añadiendo las funcionalidades de solicitud de autorización médica y los cambios que implican en el sistema. Se añaden también funcionalidades relativas a notificación del usuario sobre citas médicas.
 
     Para realizar el proceso completo de [gestión de autorizaciones](https://github.com/Carlosma7/MedAuth/milestone/7), se añade el procedimiento de solicitud:
     * [Como asegurado quiero solicitar una autorización médica para poder obtener un servicio médico.](https://github.com/Carlosma7/MedAuth/issues/37)
-    
+
+    Relacionado con la [administración de pólizas](https://github.com/Carlosma7/MedAuth/milestone/10), se añade la consulta de un usuario, no contemplada hasta el momento:
+    * [Como administrativo quiero consultar un usuario para poder ver la información asociada](https://github.com/Carlosma7/MedAuth/issues/96)
+
+6. **Sexta fase**: En esta fase, se añaden las últimas funcionalidades asociadas a la gestión de citas por parte del asegurado, dotándole de capacidad para gestionar las citas y ser notificado.
+
+    Para realizar el proceso completo de [gestión de citas médicas](https://github.com/Carlosma7/MedAuth/milestone/8), se añade el procedimiento de solicitud:
+    * [Como asegurado quiero solicitar una cita para poder registrar una consulta o intervención](https://github.com/Carlosma7/MedAuth/issues/97)
+
     Por último, además de haber conectado toda la funcionalidad anterior del sistema, se añade un extra de [gestión de citas médicas](https://github.com/Carlosma7/MedAuth/milestone/8) como es la notificación previa a una cita por correo:
     * [Como asegurado quiero ser notificado para saber cuando debo asistir a una cita médica.](https://github.com/Carlosma7/MedAuth/issues/42)
 
@@ -64,3 +73,5 @@ El plan de desarrollo del proyecto va a seguir una serie de etapas que irán añ
 1. [Primer avance](https://carlosma7.github.io/MedAuth/doc/avance_codigo) que corresponde con las entregas de la primera y segunda fase.
 2. [Segundo avance](https://carlosma7.github.io/MedAuth/doc/avance_codigo_2) que corresponde con la entrega de la tercera fase.
 3. [Tercer avance](https://carlosma7.github.io/MedAuth/doc/avance_codigo_3) que corresponde con la entrega de la cuarta fase.
+4. [Cuarto avance](https://carlosma7.github.io/MedAuth/doc/avance_codigo_4) que corresponde con la entrega de la quinta fase.
+

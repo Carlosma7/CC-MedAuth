@@ -7,10 +7,13 @@ El proyecto sigue la siguiente estructura:
 ```
 src
  ├── core
+ │   ├── api.py
  │   ├── autorizacion.py
  │   ├── cita.py
  │   ├── controlador.py
  │   ├── especialidad.py
+ │   ├── excepciones.py
+ │   ├── main.py
  │   ├── moduloExtra.py
  │   ├── poliza.py
  │   ├── prescripcion.py
@@ -18,8 +21,8 @@ src
  │   ├── usuario.py
  │   ├── usuarioAdmin.py
  │   └── usuarioCliente.py
- ├── main.py
  └── test
+     ├── testApi.py
      ├── testAutorizacion.py
      ├── testCita.py
      ├── testControlador.py
