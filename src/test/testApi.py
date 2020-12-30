@@ -386,3 +386,16 @@ async def test_consultar_cita_api(test_medauth):
 	response = await client.get(url)
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(200)
+
+# Test de consultar usuario
+@pytest.mark.asyncio
+async def test_consultar_usuario_api(test_medauth):
+	# Obtener el servidor de la app
+	client = app.test_client()
+	# Crear url
+	url = '/usuario/25123540-F'
+
+	# Lanzar petición
+	response = await client.get(url)
+	# Comprobar que el estado es correcto
+	assert_that(response.status_code).is_equal_to(200)
