@@ -1,32 +1,28 @@
----
-entidad:
- - src/core/usuario.py
- - src/core/usuarioAdmin.py
- - src/core/usuarioCliente.py
- - src/core/poliza.py
- - src/core/prescripcion.py
- - src/core/autorizacion.py
- - src/core/cita.py
- - src/core/tipoPoliza.py
- - src/core/moduloExtra.py
- - src/core/especialidad.py
- - src/core/controlador.py
-
-lenguaje:
- - python3.9
-
-test:
- - src/test/testUsuario.py
- - src/test/testUsuarioAdmin.py
- - src/test/testUsuarioCliente.py
- - src/test/testPoliza.py
- - src/test/testPrescripcion.py
- - src/test/testAutorizacion.py
- - src/test/testCita.py
- - src/test/testControlador.py
- - src/test/testApi.py
-
-fichero_tareas:
- - tasks.py
-
+--- 
+entidad: 
+  - src/core/usuario.py
+  - src/core/usuarioAdmin.py
+  - src/core/usuarioCliente.py
+  - src/core/poliza.py
+  - src/core/prescripcion.py
+  - src/core/autorizacion.py
+  - src/core/cita.py
+  - src/core/tipoPoliza.py
+  - src/core/moduloExtra.py
+  - src/core/especialidad.py
+  - src/core/controlador.py
+fichero_tareas: 
+  - tasks.py
+lenguaje: 
+  - python3.9
 make: invoke
+test: 
+  - src/test/testUsuario.py
+  - src/test/testUsuarioAdmin.py
+  - src/test/testUsuarioCliente.py
+  - src/test/testPoliza.py
+  - src/test/testPrescripcion.py
+  - src/test/testAutorizacion.py
+  - src/test/testCita.py
+  - src/test/testControlador.py
+  - src/test/testApi.py
