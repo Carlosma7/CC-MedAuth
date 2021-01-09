@@ -11,10 +11,8 @@ entidad:
   - src/core/moduloExtra.py
   - src/core/especialidad.py
   - src/core/controlador.py
-fichero_tareas:
-  - tasks.py
-lenguaje:
-  - python3.9
+fichero_tareas: tasks.py
+lenguaje: python3.9
 make: invoke
 test:
   - src/test/testUsuario.py
