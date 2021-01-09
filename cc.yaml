@@ -1,5 +1,5 @@
---- 
-entidad: 
+---
+entidad:
   - src/core/usuario.py
   - src/core/usuarioAdmin.py
   - src/core/usuarioCliente.py
@@ -11,12 +11,12 @@ entidad:
   - src/core/moduloExtra.py
   - src/core/especialidad.py
   - src/core/controlador.py
-fichero_tareas: 
+fichero_tareas:
   - tasks.py
-lenguaje: 
+lenguaje:
   - python3.9
 make: invoke
-test: 
+test:
   - src/test/testUsuario.py
   - src/test/testUsuarioAdmin.py
   - src/test/testUsuarioCliente.py
