@@ -39,7 +39,7 @@ pip3 install pytest-asyncio
 pip3 install etcd3
 pip3 install python-dotenv
 pip3 install loguru
-pip3 install gunicorn
+pip3 install hypercorn
 ```
 
 Para mayor comodidad, otra opción es descargar el proyecto y ejecutar:

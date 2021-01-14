@@ -6,4 +6,4 @@ pytest-asyncio
 etcd3
 python-dotenv
 loguru
-gunicorn
+hypercorn

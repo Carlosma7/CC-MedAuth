@@ -1,12 +1,12 @@
 ### Contenedor de despliegue
 
-#### WSGI
-Para poder desplegar el proyecto en un contenedor, se debe configurar un *Dockerfile* que permita lanzar el servidor del proyecto, pero en *Python* necesitaremos un *Web Server Gateway Interface* (WSGI) para su ejecución, por lo que se han observador algunas opciones como [gunicorn](https://gunicorn.org/), [hypercorn](https://pypi.org/project/Hypercorn/) o [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/WSGIquickstart.html), pero finalmente se ha utilizado **gunicorn** ya que la configuración necesaria es sencilla y se podría realizar con cualquiera de las herramientas propuestas.
+#### ASGI
+Para poder desplegar el proyecto en un contenedor, se debe configurar un *Dockerfile* que permita lanzar el servidor del proyecto, pero en *Python* necesitaremos un *Asynchronous Server Gateway Interface* (ASGI) para su ejecución, por lo que se han observador algunas opciones como [hypercorn](https://pypi.org/project/Hypercorn/) [daphne](https://pypi.org/project/daphne/) o [uvicorn](https://www.uvicorn.org/), pero finalmente se ha utilizado **hypercorn** ya que la configuración necesaria es sencilla y se podría realizar con cualquiera de las herramientas propuestas.
 
-Tras instalar *gunicorn*, lanzamos el proceso con:
+Tras instalar *hypercorn*, lanzamos el proceso con:
 
 ```shell
-gunicorn --bind 0.0.0.0:2020 --chdir ./src/core main:app
+hypercorn src/core/main.py --bind '0.0.0.0:2020'
 ```
 
 Para su ejecución con el gestor de tareas, se ha adaptado la tarea *execute*, ya que está pensada para este fin, de la siguiente manera en el fichero [tasks.py](https://github.com/Carlosma7/MedAuth/blob/main/tasks.py):
@@ -15,7 +15,7 @@ Para su ejecución con el gestor de tareas, se ha adaptado la tarea *execute*, y
 @task
 def execute(c):
 	print("Ejecución de MedAuth\n")
-	run("gunicorn --bind 0.0.0.0:2020 --chdir ./src/core main:app")
+	run("hypercorn src/core/main.py --bind '0.0.0.0:2020'")
 ```
 
 #### Contenedor Docker de despliegue
