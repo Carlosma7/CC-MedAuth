@@ -45,7 +45,7 @@ async def crear_usuario():
 	return 'Usuario creado con éxito.', 201
 
 # [HU3] Administrar usuario: Modificar usuario
-@rutas_medauth.route('/usuarios/modificar/<dni>', methods=['POST'])
+@rutas_medauth.route('/usuarios/<dni>', methods=['POST'])
 async def modificar_usuario(dni):
 	# Obtener la petición
 	data_string = await request.get_data()
