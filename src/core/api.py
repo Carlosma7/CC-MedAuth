@@ -387,7 +387,7 @@ async def crear_cita():
 	return 'Cita creada con éxito.', 201
 
 # [HU11] Administrar cita médica: Modificar cita médica
-@rutas_medauth.route('/citas/modificar/<id_cita>', methods=['POST'])
+@rutas_medauth.route('/citas/<id_cita>', methods=['POST'])
 async def modificar_cita(id_cita):
 	# Obtener la petición
 	data_string = await request.get_data()
