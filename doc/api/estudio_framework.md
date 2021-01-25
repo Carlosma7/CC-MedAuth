@@ -1,165 +1,246 @@
 
 
+
 ### Estudio inicial
 
-Existen numerosas herramientas destinadas al diseño y configuración de *APIs* para microservicios, por lo que para escoger una que se adapte a las necesidades de nuestro proyecto, se van a evaluar las principales herramientas observando sus principales ventajas y desventajas de cara a nuestro proyecto:
+Para poder escoger un framework que se adapte a las necesidades del proyecto, primero hay que comprender el enfoque del mismo. Se parte de la base de que al tratarse de un servicio médico, es relevante la asincronicidad del proyecto, ya que no se pueden realizar peticiones de forma síncronas y con esperas. Por lo tanto, solo se contemplaran frameworks asíncronos, y para realizar una justificación técnica se realizará una implementación sencilla de los mismos:
 
-[Django](https://www.djangoproject.com/): Es un marco web avanzado que puede desarrollar rápidamente sitios web seguros y fáciles de mantener. Es gratuito y de código abierto, tiene una comunidad activa, mucha documentación y considerables opciones de soporte gratuitas y de pago.
+[Quart](https://gitlab.com/pgjones/quart): Una de las principales ventajas es que posee la API de Flask, cumpliendo además con el estándar ASGI, que ofrece soporte asíncrono. Lo interesante de Quart es que no solo es similar a Flask, sino que en realidad cumple con la API de Flask. Una de las consideraciones más importantes es que al poseer las funciones de Flask, contiene los *Blueprint*, los cuales permiten separar las rutas de la API, lo cual es una buena práctica deseada. Por otro lado, otra de las ventajas principales es que posee una integración natural con *pytest*, el marco de pruebas del proyecto.
 
-| Ventajas                                                 | Desventajas                                                                                |
-|----------------------------------------------------------|--------------------------------------------------------------------------------------------|
-| Filosofía *DRY*, incluyendo baterías de configuraciones. | Es monolítico, permite configurar pero basándose en unos ajustes estándar.                 |
-| Utiliza una arquitectura MVC.                            | Es una herramienta muy potente, pero no adecuada para proyectos pequeños.                  |
-| Permite desarrollo paralelo.                             | Utiliza expresiones regulares para las URLs, generando más código y sintaxis más compleja. |
-| Escalable.                                               | Los errores con templates no están gestionados.                                            |
-| Encriptación de información.                             |                                                                                            |
-| Buena documetnación y comunidad activa.                  |                                                                                            |
-| Integración sencilla con bases de datos.                 |                                                                                            |
+```python
+from controlador import *
 
+from quart import Quart, Blueprint, jsonify, request
+import json
 
-[Flask](https://flask.palletsprojects.com/en/1.1.x/): Es un microframework escrito en *Python* que no requiere herramientas o bibliotecas específicas y admite extensiones que pueden agregar funcionalidad a la aplicación como si estuvieran implementadas en el propio *Flask*.
+# Controlador de la lógica de negocio
+controlador = Controller()
 
-| Ventajas                                                           | Desventajas                                                   |
-|--------------------------------------------------------------------|---------------------------------------------------------------|
-| Fácil y cómodo de usar.                                            | No es asíncrono salvo que se configure como tal.              |
-| Gran comunidad y documentación.                                    | Orientado a HTML.                                             |
-| Extensible mediante plugins.                                       | La modularización requiere una mayor gestión de la seguridad. |
-| Muy flexible.                                                      |                                                               |
-| Diseño minimalista.                                                |                                                               |
-| Permite tests unitarios, y se integra principalmente con *pytest*. |                                                               |
-| Debug fácil y rápido.                                              |                                                               |
+# Definición de Blueprint
+rutas_medauth = Blueprint("rutas_medauth", __name__)
 
+# [HU1] Creación usuario administrativo
+# [HU2] Creación usuario asegurado
+@rutas_medauth.route('/usuarios', methods=['POST'])
+async def crear_usuario():
+	# Obtener la petición
+	data_string = await request.get_data()
+	# Cargar información de la petición en formato JSON
+	data = json.loads(data_string)
+	
+	# Obtener usuario
+	usuario = data.get('usuario')
+	# Obtener tipo 
+	tipo = data.get('tipo')
+	
+	# Crear usuario con la información
+	if tipo == 0: # Usuario administrativo
+		usuario = UsuarioAdmin(usuario.get('nombre'), usuario.get('email'), usuario.get('dni'), usuario.get('email_empresarial'))
+	else: # Usuario cliente
+		usuario = UsuarioCliente(usuario.get('nombre'), usuario.get('email'), usuario.get('dni'), usuario.get('cuenta_bancaria'))
+	
+	try:
+		# Creación usuario
+		controlador.crear_usuario(usuario, tipo)
+	except Exception as error:
+		# Se produce un error
+		return str(error), 400
+	
+	# Estado de éxito
+	return 'Usuario creado con éxito.', 201
+```
 
-[Web2py](http://www.web2py.com/): Es un framework completo de código abierto gratuito para el desarrollo rápido de aplicaciones basadas en web escalables, rápidas y seguras. Escrito y programado en *Python*.
+[Sanic](https://sanicframework.org/): Al estar desarrollado en las versiones más modernas de *Python* posee un enfoque simple y hace uso de la sintaxis *async/await*. Al tratarse de un framework sencillo de implementar es una opción interesante, y que no necesita de demasiada documentación para llevarse a cabo. Su sintaxis de hecho es bastante similar a la de Flask, sin utilizar su misma API, pero utilizando algunos de sus componentes como las *Blueprints*.
 
-| Ventajas                                | Desventajas                                      |
-|-----------------------------------------|--------------------------------------------------|
-| Extensible                              | Comunidad casi inexistente.                      |
-| Documentación a modo de libro tutorial. | El IDE web es muy limitado.                      |
-| Soporte de usuario.                     | Poca documentación no oficial.                   |
-| Fácil mantenimiento.                    | No soporta tests unitarios. Aunque sí *doctest*. |
-| Posee un IDE basado en web.             | Requiere demasiado tiempo la integración.        |
+```python
+from controlador import *
 
+from sanic import Sanic, Blueprint
+from sanic.response import json
 
-[Bottle](https://bottlepy.org/docs/dev/): Es un microframework web *WSGI* rápido, simple y ligero para *Python*. Se distribuye como un módulo de archivo único y no tiene más dependencias que la Biblioteca estándar de *Python*.
+# Controlador de la lógica de negocio
+controlador = Controller()
 
-| Ventajas                                                      | Desventajas                                                   |
-|---------------------------------------------------------------|---------------------------------------------------------------|
-| Flexible mediante plugins.                                    | Pequeña comunidad.                                            |
-| Incluido en las librerías estándar.                           | Poca documentación no oficial y tutoriales demasiado simples. |
-| Asíncrono.                                                    | Orientada a proyectos minimalistas.                           |
-| Toda la configuración se encuentra en el fichero *bottle.py*. | Poco extensible.                                              |
+# Definición de Blueprint
+rutas_medauth = Blueprint("rutas_medauth", __name__)
 
+# [HU1] Creación usuario administrativo
+# [HU2] Creación usuario asegurado
+@rutas_medauth.route('/usuarios', methods=['POST'])
+async def crear_usuario():
+	# Obtener la petición
+	data_string = await request.get_data()
+	# Cargar información de la petición en formato JSON
+	data = json.loads(data_string)
+	
+	# Obtener usuario
+	usuario = data.get('usuario')
+	# Obtener tipo 
+	tipo = data.get('tipo')
+	
+	# Crear usuario con la información
+	if tipo == 0: # Usuario administrativo
+		usuario = UsuarioAdmin(usuario.get('nombre'), usuario.get('email'), usuario.get('dni'), usuario.get('email_empresarial'))
+	else: # Usuario cliente
+		usuario = UsuarioCliente(usuario.get('nombre'), usuario.get('email'), usuario.get('dni'), usuario.get('cuenta_bancaria'))
+	
+	try:
+		# Creación usuario
+		controlador.crear_usuario(usuario, tipo)
+	except Exception as error:
+		# Se produce un error
+		return str(error), 400
+	
+	# Estado de éxito
+	return 'Usuario creado con éxito.', 201
+```
 
-[Tornado](https://www.tornadoweb.org/en/stable/): Es un framework web desarrollado en *Python* junto a una biblioteca de red asincrónica. Al usar E/S de red sin bloqueo, *Tornado* puede escalar a miles de conexiones abiertas.
+[Tornado](https://www.tornadoweb.org/en/stable/): Más que un framework web, se trata de una seria de utilidades y funciones asíncronas desarrolladas en *Python* con el objetivo de comportarse igual que un framework web. Al usar E/S de red sin bloqueo, *Tornado* puede escalar a miles de conexiones abiertas. Una de las principales desventajas es que no soporta el estándar ASGI.
 
-| Ventajas                                                            | Desventajas                                                                                                                                 |
-|---------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| Minimalista.                                                        | El modo *WSGI* no permite aprovechar todas sus características.                                                                             |
-| Paradigma basado en eventos, via IOLoop. Para tareas de networking. | La comunidad y la documentación es pequeña.                                                                                                 |
-| El sistema de templates es muy flexible.                            | Poca documentación no oficial.                                                                                                              |
-| Servidor HTTP muy rápido desarrollado en su mayoría en *Python*.    | Los ficheros son almacenados en el servidor, no en directorios temporales.                                                                  |
-| Muy utilizado en campos de minería de datos.                        | Muchas bases de datos y librerías puede producir problemas de bloqueo del IOLoop, y gestionar este problema requiere bastante conocimiento. |
-|                                                                     | Difícil de aprender y poco intuitivo, muy orientado a un determinado sector.                                                                |
+No se ha realizado una implementación ya que no se considera una opción considerable de cara a la realización de la API, ya que interesa más un framework completo que una serie de utilidades.
 
+[FastAPI](https://fastapi.tiangolo.com/): Es un framework rápido, con poco tiempo ya que se originó en 2019. Permite crear APIs con *Python* 3.6+ basado en sugerencias de tipado *Python* estándar. Uno de sus puntos fuertes es que se percibe un claro estudio por parte del autor sobre otros competidores, tratando de mejorar los puntos débiles de estos.
 
-[Pyramid](https://trypyramid.com/): Es un framework web desarrolado en *Python* pequeño, rápido y práctico. Se desarrolla como parte del Proyecto *Pylones*. Tiene una licencia similar a *BSD*.
+```python
+from controlador import *
 
-| Ventajas                      | Desventajas                                                               |
-|-------------------------------|---------------------------------------------------------------------------|
-| Flexible mediante templates.  | No permite gestión de bases de datos. Se necesitan herramientas externas. |
-| Soporta arquitectura MVC.     | Enfoca el desarrollo del proyecto en un único fichero.                    |
-| Fácil de entender y extender. | Muy pesado, por lo que no es recomendable para proyectos pequeños.        |
-| Moderno.                      | Documentación escasa, y pequeña comunidad debido a su poco tiempo.        |
+from fastapi import FastAPI
+from pydantic import BaseModel
 
+# Controlador de la lógica de negocio
+controlador = Controller()
 
-[TurboGears](https://turbogears.org/): Es un framework desarrollado en *Python* con capa full-stack implementada sobre un núcleo de microframework con soporte para MongoDB, aplicaciones conectables y administración autogenerada.
+# Definición de la aplicación
+medauth_app = FastAPI()
 
-| Ventajas                                                                    | Desventajas                                        |
-|-----------------------------------------------------------------------------|----------------------------------------------------|
-| Soporta varias bases de datos.                                              | Comunidad pequeña.                                 |
-| Orientado al manejo de bases deda tos.                                      | Poca documentación, tanto oficial como no oficial. |
-| Sistema de transacciones que maneja transacciones de varias bases de datos. | Existen mejores opciones, como *Django*.           |
-| Flexible mediante plugins.                                                  |                                                    |
-| Fácil para crear librerías reutilizables.                                   |                                                    |
-| Sistema de administración propio.                                           |                                                    |
+class Item(BaseModel):
+    usuario: Usuario
+    tipo: int
 
+# [HU1] Creación usuario administrativo
+# [HU2] Creación usuario asegurado
+@medauth_app.post('/usuarios')
+async def crear_usuario(item: Item):	
+	# Obtener usuario
+	usuario = item.usuario
+	# Obtener tipo 
+	tipo = item.tipo
+	
+	# Crear usuario con la información
+	if tipo == 0: # Usuario administrativo
+		usuario = UsuarioAdmin(usuario.get('nombre'), usuario.get('email'), usuario.get('dni'), usuario.get('email_empresarial'))
+	else: # Usuario cliente
+		usuario = UsuarioCliente(usuario.get('nombre'), usuario.get('email'), usuario.get('dni'), usuario.get('cuenta_bancaria'))
+	
+	try:
+		# Creación usuario
+		controlador.crear_usuario(usuario, tipo)
+	except Exception as error:
+		# Se produce un error
+		return str(error), 400
+	
+	# Estado de éxito
+	return 'Usuario creado con éxito.', 201
+```
 
-[CherryPy](https://cherrypy.org/): Es un framework web orientado a objetos desarrollado en *Python*. Tiene como objetivo desarrollar rápidamente aplicaciones Web, pero las funcionalidades son demasiado básicas para proyectos con muchas especificaciones.
+[Starlette](https://www.starlette.io/): Se trata de un framework y serie de utilidades que utilizan el estándar ASGI, para construir servicios haciendo uso de funciones asíncronas. Al igual que las demás opciones mencionadas, contiene las principales herramientas de cara a diseñar una API con funciones asíncronas, por lo que no presenta en un principio ninguna ventaja respecto a las alternativas.
 
-| Ventajas                                      | Desventajas                                                    |
-|-----------------------------------------------|----------------------------------------------------------------|
-| Sencillo y fácil de entender.                 | La documentación es escasa e insuficiente.                     |
-| La opción más ligera.                         | Las funcionalidades son muy limitadas para pequeños proyectos. |
-| Permite diseñar APIs y manejar formatos JSON. | Existen opciones mejor como *Flask*.                           |
-| Configuración robusta.                        |                                                                |
+```python
+from controlador import *
 
+from starlette.applications import Starlette
 
-[Hug](https://www.hug.rest/): Es una pequeña biblioteca para crear API que son fáciles de entender y mantener. Permite crear APIs muy rápidamente con muy poco código y siguiendo unas buenas prácticas. *Hug* no es una biblioteca patentada para hacer API web, sino que se centra en permitirle crear API desde la perspectiva más amplia: una interfaz que permite el uso automático (a través del código) de los programas.
+# Controlador de la lógica de negocio
+controlador = Controller()
 
-| Ventajas                           | Desventajas                                                                                                           |
-|------------------------------------|-----------------------------------------------------------------------------------------------------------------------|
-| Muy simple e intuitiva.            | Documentación escasa y sin comunidad existente.                                                                       |
-| Sencillez a la hora de configurar. | Es una opción interesante, pero a la vez demasiado arriesgada debido a la falta de documentación que permita saberlo. |
-| Gestión de APIs sencillas.         |                                                                                                                       |
-| Minimalista.                       |                                                                                                                       |
+# Definición de la aplicación
+medauth_app = Starlette()
 
+# [HU1] Creación usuario administrativo
+# [HU2] Creación usuario asegurado
+@medauth_app.route('/usuarios', methods=['POST'])
+async def crear_usuario(request):
+	# Obtener la petición
+	data_string = await request.get_data()
+	# Cargar información de la petición en formato JSON
+	data = json.loads(data_string)
+	
+	# Obtener usuario
+	usuario = data.get('usuario')
+	# Obtener tipo 
+	tipo = data.get('tipo')
+	
+	# Crear usuario con la información
+	if tipo == 0: # Usuario administrativo
+		usuario = UsuarioAdmin(usuario.get('nombre'), usuario.get('email'), usuario.get('dni'), usuario.get('email_empresarial'))
+	else: # Usuario cliente
+		usuario = UsuarioCliente(usuario.get('nombre'), usuario.get('email'), usuario.get('dni'), usuario.get('cuenta_bancaria'))
+	
+	try:
+		# Creación usuario
+		controlador.crear_usuario(usuario, tipo)
+	except Exception as error:
+		# Se produce un error
+		return str(error), 400
+	
+	# Estado de éxito
+	return 'Usuario creado con éxito.', 201
+```
 
-[FastAPI](https://fastapi.tiangolo.com/): Es un framework rápido, con poco tiempo ya que se originó en 2019. Permite crear APIs con *Python* 3.6+ basado en sugerencias de tipado *Python* estándar.
+[Vibora](https://vibora.io/): Otro de los microframeworks que se basan en su similitud con Flask, se considera a sí mismo como uno de los frameworks más veloces y con mejor rendimiento, incluso duplicando la velocidad de *Sanic* con quien guarda una gran similitud. Además de la diferencia de la velocidad no aporta nada nuevo respecto al resto de sus competidores.
 
-| Ventajas                                        | Desventajas                    |
-|-------------------------------------------------|--------------------------------|
-| Moderna y sencilla.                             | Comunidad pequeña.             |
-| Asíncrona.                                      | Poca documentación no oficial. |
-| Independiente de base de datos.                 |                                |
-| Generación automática de documentaciónd de API. |                                |
-| Validación de datos.                            |                                |
-| Inyección de dependencias.                      |                                |
+```python
+from controlador import *
 
+from vibora import Vibora, JsonResponse, Blueprint
 
-[Falcon Framework](https://falconframework.org/): Es una biblioteca *WSGI* minimalista que sirve para crear APIs web rápidas y backends de aplicaciones. El diseño de *Falcon* es simple y claro, utilizando estilos arquitectónicos *HTTP* y *REST*.
+# Controlador de la lógica de negocio
+controlador = Controller()
 
-| Ventajas                         | Desventajas                         |
-|----------------------------------|-------------------------------------|
-| Ligero con dependencias mínimas. | Limitado al diseño de APIs REST.    |
-| Gran performance.                | Solamente posee backend.            |
-| Ligero con dependencias mínimas. | Únicamente documentación oficial.   |
-|                                  | Documentación oficial algo confusa. |
+# Definición de Blueprint
+rutas_medauth = Blueprint("rutas_medauth", __name__)
 
-[Starlette](https://www.starlette.io/): Es un conjunto de herramientas y framework *ASGI* liviano, ideal para crear servicios *asyncio* de alto rendimiento.
-
-
-| Ventajas                                                                                                                      | Desventajas                                        |
-|-------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------|
-| Alto rendimiento.                                                                                                             | No posee interfaz de administrador.                |
-| Comunidad activa.                                                                                                             | No existe apenas documentación que no sea oficial. |
-| Optimizado con *ASGI*.                                                                                                        | Existen opciones similares como *FastAPI*.         |
-| Excelente documentación oficial.                                                                                              |                                                    |
-| Permite una definición de rutas aisladas, permitiendo crear una jerarquía de forma sencilla y de forma separada del programa. |                                                    |
-
-Tras un análisis inicial, se ha decidido seguir explorando las siguientes herramientas:
-* *Flask*: La opción más utilizada junto a *Django*, además de ser la opción minimalista principal. Quizás se ajuste para el proyecto mejor que *Django*. Un gran contra es el de no soportar las peticiones asíncronas, aunque se evaluará la forma de suplirlo.
-* *FastAPI*: Opción más moderna, es muy interesante ya que ofrece ventajas frente a los otros dos competidores, y parece ser una opción a considerar importante en un futuro próximo.
-* *Starlette*: Igual que *FastAPI*, es una opción novedosa e interesante, realmente se podrían considerar competidores.
-* *Django*: Opción más conocida, y de las que más ventajas ofrece, aunque quizás sea una herramienta demasiado pesada con opciones innecesarias.
+# [HU1] Creación usuario administrativo
+# [HU2] Creación usuario asegurado
+@rutas_medauth.route('/usuarios', methods=['POST'])
+async def crear_usuario():
+	# Obtener la petición
+	data_string = await request.get_data()
+	# Cargar información de la petición en formato JSON
+	data = json.loads(data_string)
+	
+	# Obtener usuario
+	usuario = data.get('usuario')
+	# Obtener tipo 
+	tipo = data.get('tipo')
+	
+	# Crear usuario con la información
+	if tipo == 0: # Usuario administrativo
+		usuario = UsuarioAdmin(usuario.get('nombre'), usuario.get('email'), usuario.get('dni'), usuario.get('email_empresarial'))
+	else: # Usuario cliente
+		usuario = UsuarioCliente(usuario.get('nombre'), usuario.get('email'), usuario.get('dni'), usuario.get('cuenta_bancaria'))
+	
+	try:
+		# Creación usuario
+		controlador.crear_usuario(usuario, tipo)
+	except Exception as error:
+		# Se produce un error
+		return str(error), 400
+	
+	# Estado de éxito
+	return 'Usuario creado con éxito.', 201
+```
 
 ### Análisis opciones
 
-Tras una investigación más profunda, se ve claramente que *Django* no es la opción más adecuada para el proyecto, ya que generaría más código del ya existente y la mayoría de las funcionalidades que ofrece no serían utilizadas, básicamente sería el equivalente a "*matar moscas a cañonazos*". Por este motivo, la decisión se decidirá entre **Flask** y **FastAPI**.
+Tras examinar las diferentes alternativas y realizar la implementación de uno de los métodos del proyecto como es la creación de usuarios, se puede comprobar que entre las opciones que se consideran realmente hay pocas diferencias como para determinar la elección más correcta para el proyecto. Con el fin de decidir una opción correcta, se han tenido en cuenta las siguientes consideraciones:
 
-El principal problema encontrado a la hora de elegir *Flask* es el de las peticiones asíncronas, ya que en el contexto del proyecto, carece de sentido realizar las peticiones de forma síncrona, ya que un cliente no puede quedar a la espera de otro para solicitar una autorización, por ejemplo.
+* Es deseable utilizar un framework que permita la definición y diseño de la API completa, por lo que utilizar un conjunto de utilidades como *Tornado* no es una opción deseada.
+* No existe gran diferencia entre utilizar *Sanic*, *Vibora* o *Quart* a nivel de implementación para el proyecto actual, por lo que el framework deseado a nivel de velocidad sería *Vibora*, a nivel de contenidos, soporte y comunidad sería *Sanic*, y a nivel de similitud con *Flask* sería *Quart*, sin dejar de lado *Starlette*, pero tampoco aporta nada nuevo respecto a los otros frameworks.
+* Sin embargo, existe un factor determinante en esta comparativa que es la integración con *Pytest*, si bien todos los frameworks pueden trabajar con dicho marco de pruebas, *Quart* se encuentra directamente integrado con el mismo, por lo que es una opción más que deseable en este proyecto.
+* *FastAPI* considera las debilidades de sus competidores y trata de enmendarlas, por lo que es una opción más que deseable, sin embargo, no posee la integración de *Blueprints*, lo cual nos permite separar las rutas de la aplicación y es una buena práctica deseada.
 
-Tras evaluar las diferentes opciones posibles para configurar *Flask* con peticiones asíncronas, se han encontrado las siguientes opciones:
-*  [Flask-aiohttp](https://flask-aiohttp.readthedocs.io/en/latest/): Trata de solventar el problema realizando peticiones *asyncio*, pero las funcionalidades de *Flask* se ven reducidas, por lo que no es realmente una opción válida.
-* Utilizar *Flask* junto a una cola de eventos y un broker para las diferentes peticiones: Es una opción válida, que permitiría una configuración correcta de cada elemento por separado, pero que conllevaría un mayor trabajo, y uso de herramientas que realmente se podrían omitir con la utilización de otros microframeworks asíncronos que realizan esta función de por sí.
-* [Quart](https://gitlab.com/pgjones/quart): Probablemente la opción más interesante, ya que se basa complemante en la API de *Flask* y añade la funcionalidad de *async* para peticiones asíncronas, por lo que realmente es una librería top de *Flask*.
-* [Sanic](https://sanic.readthedocs.io/en/latest/):  Es otra opción interesante, ya que utiliza una API similar a la de *Flask*, y se podría considerar un competidor directo de *Quart*, por lo que realmente no hay demasiadas diferencias a la hora de escoger un framework u otro.
-
-Tras analizar estas opciones, realmente el debate se encuentra en utilizar *Quart*, *Sanic* o *FastAPI*. Si bien todas las opciones son interesantes, y *FastAPI* es una gran opción a considerar, la documentación de la misma considero que es insuficiente para asegurar la continuidad del proyecto en este momento, mientras que *Flask* posee una gran trayectoria, una gran comunidad y una documentación extensa ofrece una mayor confiabilidad, y al estar *Quart* desarrollada sobre *Flask*, posee esta ventaja, y *Sanic* se presenta como una alternativa del mismo.
-
-*FastAPI* es una herramienta que promete ser un gran competidor de *Flask*, pero que al haber sido creada tan recientemente, no ofrece garantías suficientes aún de poder superar a *Flask* y la curva de aprendizaje es considerablemente superior.
-
-Por último, aunque la decisión debería basarse en decisiones técnicas, realmente no hay aspectos que definan cual de los dos frameworks es mejor para el proyecto, ya que ambos son completamente válidos. Por cuestión de curiosidad e investigación, y por tener menor popularidad pese a ser una herramienta bastante interesante, se utilizará *Quart*, con el objetivo de aprender a utilizar un framework nuevo y porque nos facilita el mecanismo [Blueprint](https://flask.palletsprojects.com/en/1.1.x/blueprints/) el cual nos permite separar las rutas de la aplicación, lo cual es una práctica más que deseable.
+Como se ha comentado previamente, a nivel técnico de cara a este proyecto cualquiera de las opciones sería válida excepto *Tornado*, que presenta una serie de claras desventajas. Sin embargo, la integración con *Blueprints* para separar las rutas de la aplicación, y la integración con *Pytest* son los dos factores a nivel técnico que declinan la balanza para la decisión de un framework en este proyecto.
 
 Finalmente el microframework sobre el que se va a desarrollar la API del proyecto es **Quart**.
 
