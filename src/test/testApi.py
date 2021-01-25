@@ -353,7 +353,7 @@ async def test_modificar_cita_api(test_medauth):
 	# Obtener el servidor de la app
 	client = app.test_client()
 	# Crear url
-	url = '/citas/modificar/AU-25123540-2'
+	url = '/citas/AU-25123540-2'
 
 	# Creación fecha
 	fecha = datetime.datetime(2020, 6, 22)
