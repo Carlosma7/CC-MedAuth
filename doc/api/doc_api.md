@@ -1,3 +1,4 @@
+
 ### API
 
 Para el diseño de la API se han considerado las indicaciones sobre sistemas *REST* y códigos de estado indicadas en el [tema asociado](http://jj.github.io/CC/documentos/temas/REST.html).
@@ -34,14 +35,13 @@ Teniendo en cuenta estas entidades, y las diferentes historias de usuario se han
 
 * Usuarios:
     *  ```/usuario``` con método **POST** y con código de estado **201**. Se corresponde con el método ```crear_usuario``` y las *HUs* [Como usuario anónimo quiero crear un usuario administrativo en el sistema para gestionar el sistema](https://github.com/Carlosma7/MedAuth/issues/43) y [Como administrativo quiero crear un usuario para un asegurado en el sistema para usar el sistema](https://github.com/Carlosma7/MedAuth/issues/44).
-    * ```/usuario/modificar/<dni>``` con método **PUT** y con código de estado **201**. Se corresponde con el método ```modificar_usuario``` y la *HU* [Como administrativo quiero gestionar los usuarios existentes en el sistema para modificar o eliminar usuarios](https://github.com/Carlosma7/MedAuth/issues/55).
+    * ```/usuario/<dni>``` con método **POST** y con código de estado **201**. Se corresponde con el método ```modificar_usuario``` y la *HU* [Como administrativo quiero gestionar los usuarios existentes en el sistema para modificar o eliminar usuarios](https://github.com/Carlosma7/MedAuth/issues/55).
     * ```/usuario/<dni>``` con método **DELETE** y con código de estado **200**. Se corresponde con el método ```eliminar_usuario``` y la *HU* [Como administrativo quiero gestionar los usuarios existentes en el sistema para modificar o eliminar usuarios](https://github.com/Carlosma7/MedAuth/issues/55).
     * ```/usuario/<dni>``` con método **GET** y con código de estado **200**. Se corresponde con el método ```consultar_usuario``` y la *HU* [Como administrativo quiero consultar un usuario para poder ver la información asociada](https://github.com/Carlosma7/MedAuth/issues/96).
 
 * Pólizas:
     * ```/poliza``` con método **POST** y con código de estado **201**. Se corresponde con el método ```crear_poliza``` y la *HU* [Como administrativo quiero administrar la póliza de un asegurado para crear, modificar o dar de baja una póliza](https://github.com/Carlosma7/MedAuth/issues/35).
-    * ```/poliza/modificar/<id_poliza>``` con método **PUT** y con código de estado **201**. Se corresponde con el método ```modificar_poliza``` y la *HU* [Como administrativo quiero administrar la póliza de un asegurado para crear, modificar o dar de baja una póliza](https://github.com/Carlosma7/MedAuth/issues/35).
-    * ```/poliza/desactivar/<dni>```con método **PUT** y con código de estado **201**. Se corresponde con el método ```desactivar_poliza``` y la *HU* [Como administrativo quiero administrar la póliza de un asegurado para crear, modificar o dar de baja una póliza](https://github.com/Carlosma7/MedAuth/issues/35).
+    * ```/poliza/<id_poliza>``` con método **POST** y con código de estado **201**. Se corresponde con el método ```modificar_poliza``` y la *HU* [Como administrativo quiero administrar la póliza de un asegurado para crear, modificar o dar de baja una póliza](https://github.com/Carlosma7/MedAuth/issues/35) y con el método ```desactivar_poliza``` y la *HU* [Como administrativo quiero administrar la póliza de un asegurado para crear, modificar o dar de baja una póliza](https://github.com/Carlosma7/MedAuth/issues/35).
     * ```/poliza/<dni>``` con método **GET** y con código de estado **200**. Se corresponde con el método ```consultar_poliza``` y la *HU* [Como administrativo quiero consultar la póliza de un asegurado para poder ver el tipo de póliza y la información asociada](https://github.com/Carlosma7/MedAuth/issues/34).
 
 * Prescripciones:
@@ -49,13 +49,11 @@ Teniendo en cuenta estas entidades, y las diferentes historias de usuario se han
 
 * Autorizaciones:
     * ```/autorizacion``` con método **POST** y con código de estado **201**. Se corresponde con el método ```crear_autorizacion``` y la *HU* [Como administrativo quiero administrar una autorización médica de un asegurado para crear o modificar una autorización](https://github.com/Carlosma7/MedAuth/issues/39).
-    * ```/autorizacion/solicitar/<id_prescripcion>``` con método **PUT** y con código de estado **201**. Se corresponde con el método ```solicitar_autorizacion``` y la *HU* [Como asegurado quiero solicitar una autorización médica para poder obtener un servicio médico](https://github.com/Carlosma7/MedAuth/issues/37).
-    * ```/autorizacion/modificar/<id_autorizacion>``` con método **PUT** y con código de estado **201**. Se corresponde con el método ```modificar_autorizacion``` y la *HU* [Como administrativo quiero administrar una autorización médica de un asegurado para crear o modificar una autorización](https://github.com/Carlosma7/MedAuth/issues/39).
-    * ```/autorizacion/aprobar-denegar/<id_autorizacion>``` con método **PUT** y con código de estado **201**. Se corresponde con el método ```aprobar_denegar_autorizacion``` y la *HU* [Como administrativo quiero cambiar la aprobación o denegación de una autorización para tratar un caso excepcional](https://github.com/Carlosma7/MedAuth/issues/40).
+    * ```/autorizacion/<id_autorizacion>``` con método **POST** y con código de estado **201**. Se corresponde con el método ```solicitar_autorizacion``` y la *HU* [Como asegurado quiero solicitar una autorización médica para poder obtener un servicio médico](https://github.com/Carlosma7/MedAuth/issues/37), con el método ```modificar_autorizacion``` y la *HU* [Como administrativo quiero administrar una autorización médica de un asegurado para crear o modificar una autorización](https://github.com/Carlosma7/MedAuth/issues/39) y con el método ```aprobar_denegar_autorizacion``` y la *HU* [Como administrativo quiero cambiar la aprobación o denegación de una autorización para tratar un caso excepcional](https://github.com/Carlosma7/MedAuth/issues/40).
     * ```/autorizacion/<id_autorizacion>``` con método **GET** y con código de estado **200**. Se corresponde con el método ```consultar_autorizacion``` y la *HU* [Como asegurado quiero consultar una autorización médica para ver el estado de la autorización](https://github.com/Carlosma7/MedAuth/issues/38).
 * Citas:
     * ```/cita``` con método **POST** y con código de estado **201**. Se corresponde con el método ```crear_cita``` y la *HU* [Como administrativo quiero administrar una cita médica para crear una cita o modificar información asociada a una cita existente](https://github.com/Carlosma7/MedAuth/issues/49).
-    * ```/cita/modificar/<id_autorizacion>``` con método **PUT** y con código de estado **201**. Se corresponde con el método ```modificar_cita``` y la *HU* [Como administrativo quiero administrar una cita médica para crear una cita o modificar información asociada a una cita existente](https://github.com/Carlosma7/MedAuth/issues/49).
+    * ```/cita/<id_autorizacion>``` con método **POST** y con código de estado **201**. Se corresponde con el método ```modificar_cita``` y la *HU* [Como administrativo quiero administrar una cita médica para crear una cita o modificar información asociada a una cita existente](https://github.com/Carlosma7/MedAuth/issues/49).
     * ```cita/<id_autorizacion>``` con método **GET** y con código de estado **200**. Se corresponde con el método ```consultar_cita``` y la *HU* [Como asegurado quiero consultar una cita médica fijada para ver la información asociada](https://github.com/Carlosma7/MedAuth/issues/41).
 
 A continuación se muestra un ejemplo de cada uno de los métodos *HTTP* utilizados:
@@ -96,41 +94,6 @@ async def crear_usuario():
 	logger.info('Usuario creado con éxito')
 	# Estado de éxito
 	return 'Usuario creado con éxito.', 201
-```
-
-* ```/usuario/modificar/<dni>``` con método **PUT**:
-
-```python
-# [HU3] Administrar usuario: Modificar usuario
-@rutas_medauth.route('/usuario/modificar/<dni>', methods=['PUT'])
-async def modificar_usuario(dni):
-	# Obtener la petición
-	data_string = await request.get_data()
-	# Cargar información de la petición en formato JSON
-	data = json.loads(data_string)
-	
-	# Obtener nombre 
-	nombre = data.get('nombre')
-	# Obtener email
-	email = data.get('email')
-	# Obtener cuenta bancaria
-	cuenta_bancaria = data.get('cuenta_bancaria')
-	# Obtener tipo
-	tipo = data.get('tipo')
-	
-	try:
-		# Modificación usuario
-		controlador.modificar_usuario(dni, nombre, email, cuenta_bancaria)
-	except Exception as error:
-		# Se transmite el error mediante el log
-		logger.error(error)
-		# Se produce un error
-		return str(error), 400
-	
-	# Se transmite el estado de éxito mediante el log	
-	logger.info('Usuario modificado con éxito')
-	# Estado de éxito
-	return 'Usuario modificado con éxito.', 201
 ```
 
 * ```/usuario/<dni>``` con método **DELETE**:
