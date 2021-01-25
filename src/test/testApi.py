@@ -15,7 +15,7 @@ def _test_medauth():
 @pytest.mark.asyncio
 async def test_crear_admin_api(test_medauth):
 	# Obtener el servidor de la app
-	client = app.test_client()
+	client = app.app.test_client()
 	# Crear url
 	url = '/usuarios'
 	
@@ -32,7 +32,7 @@ async def test_crear_admin_api(test_medauth):
 @pytest.mark.asyncio
 async def test_crear_cliente_api(test_medauth):
 	# Obtener el servidor de la app
-	client = app.test_client()
+	client = app.app.test_client()
 	# Crear url
 	url = '/usuarios'
 	
@@ -49,7 +49,7 @@ async def test_crear_cliente_api(test_medauth):
 @pytest.mark.asyncio
 async def test_modificar_admin_api(test_medauth):
 	# Obtener el servidor de la app
-	client = app.test_client()
+	client = app.app.test_client()
 	# Crear url
 	url = '/usuarios/35925767-A'
 	
@@ -68,7 +68,7 @@ async def test_modificar_admin_api(test_medauth):
 @pytest.mark.asyncio
 async def test_modificar_cliente_api(test_medauth):
 	# Obtener el servidor de la app
-	client = app.test_client()
+	client = app.app.test_client()
 	# Crear url
 	url = '/usuarios/25123540-F'
 	
@@ -87,7 +87,7 @@ async def test_modificar_cliente_api(test_medauth):
 @pytest.mark.asyncio
 async def test_eliminar_admin_api(test_medauth):
 	# Obtener el servidor de la app
-	client = app.test_client()
+	client = app.app.test_client()
 	# Crear url
 	url = '/usuarios/35925767-A'
 	
@@ -100,7 +100,7 @@ async def test_eliminar_admin_api(test_medauth):
 @pytest.mark.asyncio
 async def test_eliminar_cliente_api(test_medauth):
 	# Obtener el servidor de la app
-	client = app.test_client()
+	client = app.app.test_client()
 	# Crear url
 	url = '/usuarios/25123540-F'
 	
@@ -113,7 +113,7 @@ async def test_eliminar_cliente_api(test_medauth):
 @pytest.mark.asyncio
 async def test_crear_poliza_api(test_medauth):
 	# Obtener el servidor de la app
-	client = app.test_client()
+	client = app.app.test_client()
 	# Crear url
 	url = '/usuarios'
 	
@@ -141,7 +141,7 @@ async def test_crear_poliza_api(test_medauth):
 @pytest.mark.asyncio
 async def test_modificar_poliza_api(test_medauth):
 	# Obtener el servidor de la app
-	client = app.test_client()
+	client = app.app.test_client()
 	# Crear url
 	url = '/polizas/MA-25123540-1'
 
@@ -171,7 +171,7 @@ async def test_modificar_poliza_api(test_medauth):
 @pytest.mark.asyncio
 async def test_consultar_poliza_api(test_medauth):
 	# Obtener el servidor de la app
-	client = app.test_client()
+	client = app.app.test_client()
 	# Crear url
 	url = '/polizas/25123540-F'
 
@@ -184,7 +184,7 @@ async def test_consultar_poliza_api(test_medauth):
 @pytest.mark.asyncio
 async def test_desactivar_poliza_api(test_medauth):
 	# Obtener el servidor de la app
-	client = app.test_client()
+	client = app.app.test_client()
 	# Crear url
 	url = '/polizas/25123540-F'
 	
@@ -200,7 +200,7 @@ async def test_desactivar_poliza_api(test_medauth):
 @pytest.mark.asyncio
 async def test_subir_prescripcion_api(test_medauth):
 	# Obtener el servidor de la app
-	client = app.test_client()
+	client = app.app.test_client()
 	
 	# Crear url
 	url = '/polizas'
@@ -231,7 +231,7 @@ async def test_subir_prescripcion_api(test_medauth):
 @pytest.mark.asyncio
 async def test_solicitar_autorizacion_api(test_medauth):
 	# Obtener el servidor de la app
-	client = app.test_client()
+	client = app.app.test_client()
 	# Crear url
 	url = '/autorizaciones/PR-25123540-1'
 	
@@ -247,7 +247,7 @@ async def test_solicitar_autorizacion_api(test_medauth):
 @pytest.mark.asyncio
 async def test_crear_autorizacion_api(test_medauth):
 	# Obtener el servidor de la app
-	client = app.test_client()
+	client = app.app.test_client()
 	
 	# Crear usuario administrativo
 	usuario = UsuarioCliente('Roberto', 'rober@gmail.com', '25123540-F', 'ES1234111892738495273840')
@@ -268,7 +268,7 @@ async def test_crear_autorizacion_api(test_medauth):
 @pytest.mark.asyncio
 async def test_modificar_autorizacion_api(test_medauth):
 	# Obtener el servidor de la app
-	client = app.test_client()
+	client = app.app.test_client()
 	# Crear url
 	url = '/autorizaciones/AU-25123540-2'
 
@@ -300,7 +300,7 @@ async def test_modificar_autorizacion_api(test_medauth):
 @pytest.mark.asyncio
 async def test_consultar_autorizacion_api(test_medauth):
 	# Obtener el servidor de la app
-	client = app.test_client()
+	client = app.app.test_client()
 	# Crear url
 	url = '/autorizaciones/AU-25123540-2'
 
@@ -313,7 +313,7 @@ async def test_consultar_autorizacion_api(test_medauth):
 @pytest.mark.asyncio
 async def test_aprobar_denegar_autorizacion_api(test_medauth):
 	# Obtener el servidor de la app
-	client = app.test_client()
+	client = app.app.test_client()
 	# Crear url
 	url = '/autorizaciones/AU-25123540-2'
 
@@ -334,7 +334,7 @@ async def test_aprobar_denegar_autorizacion_api(test_medauth):
 @pytest.mark.asyncio
 async def test_crear_cita_api(test_medauth):
 	# Obtener el servidor de la app
-	client = app.test_client()
+	client = app.app.test_client()
 	
 	# Crear url
 	url = '/autorizaciones/AU-25123540-2'
@@ -368,7 +368,7 @@ async def test_crear_cita_api(test_medauth):
 @pytest.mark.asyncio
 async def test_modificar_cita_api(test_medauth):
 	# Obtener el servidor de la app
-	client = app.test_client()
+	client = app.app.test_client()
 	# Crear url
 	url = '/citas/AU-25123540-2'
 
@@ -395,7 +395,7 @@ async def test_modificar_cita_api(test_medauth):
 @pytest.mark.asyncio
 async def test_consultar_cita_api(test_medauth):
 	# Obtener el servidor de la app
-	client = app.test_client()
+	client = app.app.test_client()
 	# Crear url
 	url = '/citas/AU-25123540-2'
 
@@ -408,7 +408,7 @@ async def test_consultar_cita_api(test_medauth):
 @pytest.mark.asyncio
 async def test_consultar_usuario_api(test_medauth):
 	# Obtener el servidor de la app
-	client = app.test_client()
+	client = app.app.test_client()
 	# Crear url
 	url = '/usuarios/25123540-F'
 
