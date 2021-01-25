@@ -12,7 +12,7 @@ rutas_medauth = Blueprint("rutas_medauth", __name__)
 
 # [HU1] Creación usuario administrativo
 # [HU2] Creación usuario asegurado
-@rutas_medauth.route('/usuario', methods=['POST'])
+@rutas_medauth.route('/usuarios', methods=['POST'])
 async def crear_usuario():
 	# Obtener la petición
 	data_string = await request.get_data()
@@ -45,7 +45,7 @@ async def crear_usuario():
 	return 'Usuario creado con éxito.', 201
 
 # [HU3] Administrar usuario: Modificar usuario
-@rutas_medauth.route('/usuario/modificar/<dni>', methods=['PUT'])
+@rutas_medauth.route('/usuarios/modificar/<dni>', methods=['PUT'])
 async def modificar_usuario(dni):
 	# Obtener la petición
 	data_string = await request.get_data()
@@ -76,7 +76,7 @@ async def modificar_usuario(dni):
 	return 'Usuario modificado con éxito.', 201
 
 # [HU3] Administrar usuario: Eliminar usuario
-@rutas_medauth.route('/usuario/<dni>', methods=['DELETE'])
+@rutas_medauth.route('/usuarios/<dni>', methods=['DELETE'])
 async def eliminar_usuario(dni):
 	try:
 		# Eliminación usuario
@@ -93,7 +93,7 @@ async def eliminar_usuario(dni):
 	return 'Usuario eliminado con éxito.', 200
 
 # [HU4] Administrar póliza: Crear una póliza
-@rutas_medauth.route('/poliza', methods=['POST'])
+@rutas_medauth.route('/polizas', methods=['POST'])
 async def crear_poliza():
 	# Obtener la petición
 	data_string = await request.get_data()
@@ -127,7 +127,7 @@ async def crear_poliza():
 	return 'Póliza creada con éxito.', 201
 
 # [HU4] Administrar póliza: Modificar una póliza
-@rutas_medauth.route('/poliza/modificar/<id_poliza>', methods=['PUT'])
+@rutas_medauth.route('/polizas/modificar/<id_poliza>', methods=['PUT'])
 async def modificar_poliza(id_poliza):
 	# Obtener la petición
 	data_string = await request.get_data()
@@ -161,7 +161,7 @@ async def modificar_poliza(id_poliza):
 	return 'Póliza modificada con éxito.', 201
 
 # [HU4] Administrar póliza: Desactivar una póliza
-@rutas_medauth.route('/poliza/desactivar/<dni>', methods=['PUT'])
+@rutas_medauth.route('/polizas/desactivar/<dni>', methods=['PUT'])
 async def desactivar_poliza(dni):
 	try:
 		# Desactivación póliza
@@ -178,7 +178,7 @@ async def desactivar_poliza(dni):
 	return 'Póliza desactivada con éxito.', 201
 
 # [HU5] Consultar póliza
-@rutas_medauth.route('/poliza/<dni>', methods=['GET'])
+@rutas_medauth.route('/polizas/<dni>', methods=['GET'])
 async def consultar_poliza(dni):
 	try:
 		# Consultar póliza
@@ -195,7 +195,7 @@ async def consultar_poliza(dni):
 	return poliza.to_dict(), 200
 
 # [HU6] Subir prescripción médica
-@rutas_medauth.route('/prescripcion', methods=['POST'])
+@rutas_medauth.route('/prescripciones', methods=['POST'])
 async def subir_prescripcion():
 	# Obtener la petición
 	data_string = await request.get_data()
@@ -227,7 +227,7 @@ async def subir_prescripcion():
 	return 'Prescripción subida con éxito.', 201
 
 # [HU7] Solicitar autorización médica
-@rutas_medauth.route('/autorizacion/solicitar/<id_prescripcion>', methods=['PUT'])
+@rutas_medauth.route('/autorizaciones/solicitar/<id_prescripcion>', methods=['PUT'])
 async def solicitar_autorizacion(id_prescripcion):
 	try:
 		# Solicitar autorizacion
@@ -244,7 +244,7 @@ async def solicitar_autorizacion(id_prescripcion):
 	return 'Autorización solicitada con éxito.', 201
 
 # [HU8] Administrar autorización: Crear una autorización
-@rutas_medauth.route('/autorizacion', methods=['POST'])
+@rutas_medauth.route('/autorizaciones', methods=['POST'])
 async def crear_autorizacion():
 	# Obtener la petición
 	data_string = await request.get_data()
@@ -276,7 +276,7 @@ async def crear_autorizacion():
 	return 'Autorización creada con éxito.', 201
 
 # [HU8] Administrar autorización: Modificar una autorización
-@rutas_medauth.route('/autorizacion/modificar/<id_autorizacion>', methods=['PUT'])
+@rutas_medauth.route('/autorizaciones/modificar/<id_autorizacion>', methods=['PUT'])
 async def modificar_autorizacion(id_autorizacion):
 	# Obtener la petición
 	data_string = await request.get_data()
@@ -311,7 +311,7 @@ async def modificar_autorizacion(id_autorizacion):
 	return 'Autorización modificada con éxito.', 201
 
 # [HU9] Consultar autorización médica
-@rutas_medauth.route('/autorizacion/<id_autorizacion>', methods=['GET'])
+@rutas_medauth.route('/autorizaciones/<id_autorizacion>', methods=['GET'])
 async def consultar_autorizacion(id_autorizacion):
 	try:
 		# Consultar autorizacion
@@ -328,7 +328,7 @@ async def consultar_autorizacion(id_autorizacion):
 	return autorizacion.to_dict(), 200
 
 # [HU10] Aprobar/Denegar una autorización médica
-@rutas_medauth.route('/autorizacion/aprobar-denegar/<id_autorizacion>', methods=['PUT'])
+@rutas_medauth.route('/autorizaciones/aprobar-denegar/<id_autorizacion>', methods=['PUT'])
 async def aprobar_denegar_autorizacion(id_autorizacion):
 	# Obtener la petición
 	data_string = await request.get_data()
@@ -355,7 +355,7 @@ async def aprobar_denegar_autorizacion(id_autorizacion):
 	return 'Autorización aprobada/denegada con éxito.', 201
 
 # [HU11] Administrar cita médica: Crear cita médica
-@rutas_medauth.route('/cita', methods=['POST'])
+@rutas_medauth.route('/citas', methods=['POST'])
 async def crear_cita():
 	# Obtener la petición
 	data_string = await request.get_data()
@@ -387,7 +387,7 @@ async def crear_cita():
 	return 'Cita creada con éxito.', 201
 
 # [HU11] Administrar cita médica: Modificar cita médica
-@rutas_medauth.route('/cita/modificar/<id_cita>', methods=['PUT'])
+@rutas_medauth.route('/citas/modificar/<id_cita>', methods=['PUT'])
 async def modificar_cita(id_cita):
 	# Obtener la petición
 	data_string = await request.get_data()
@@ -418,7 +418,7 @@ async def modificar_cita(id_cita):
 	return 'Cita modificada con éxito.', 201
 
 # [HU12] Consultar cita médica
-@rutas_medauth.route('/cita/<id_autorizacion>', methods=['GET'])
+@rutas_medauth.route('/citas/<id_autorizacion>', methods=['GET'])
 async def consultar_cita(id_autorizacion):
 	try:
 		# Consultar cita
@@ -435,7 +435,7 @@ async def consultar_cita(id_autorizacion):
 	return autorizacion.to_dict(), 200
 
 # [HU14] Consultar usuario
-@rutas_medauth.route('/usuario/<dni>', methods=['GET'])
+@rutas_medauth.route('/usuarios/<dni>', methods=['GET'])
 async def consultar_usuario(dni):
 	try:
 		# Consultar usuario

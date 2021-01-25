@@ -17,14 +17,14 @@ async def test_crear_admin_api(test_medauth):
 	# Obtener el servidor de la app
 	client = app.test_client()
 	# Crear url
-	url = '/usuario'
+	url = '/usuarios'
 	
 	# Crear usuario administrativo
 	usuario = UsuarioAdmin('Alfredo', 'alfredo@gmail.com', '35925767-A', '')
 	tipo = 0
 	
 	# Lanzar petición
-	response = await client.post(url, data = json.dumps({'usuario': usuario.to_dict(), 'tipo': tipo}))
+	response = await client.post(url, data = json.dumps({'usuarios': usuario.to_dict(), 'tipo': tipo}))
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(201)
 
@@ -34,14 +34,14 @@ async def test_crear_cliente_api(test_medauth):
 	# Obtener el servidor de la app
 	client = app.test_client()
 	# Crear url
-	url = '/usuario'
+	url = '/usuarios'
 	
 	# Crear usuario administrativo
 	usuario = UsuarioCliente('Roberto', 'rober@gmail.com', '25123540-F', 'ES1234111892738495273840')
 	tipo = 1
 	
 	# Lanzar petición
-	response = await client.post(url, data = json.dumps({'usuario': usuario.to_dict(), 'tipo': tipo}))
+	response = await client.post(url, data = json.dumps({'usuarios': usuario.to_dict(), 'tipo': tipo}))
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(201)
 
@@ -51,7 +51,7 @@ async def test_modificar_admin_api(test_medauth):
 	# Obtener el servidor de la app
 	client = app.test_client()
 	# Crear url
-	url = '/usuario/modificar/35925767-A'
+	url = '/usuarios/modificar/35925767-A'
 	
 	# Crear usuario administrativo
 	tipo = 0
@@ -70,7 +70,7 @@ async def test_modificar_cliente_api(test_medauth):
 	# Obtener el servidor de la app
 	client = app.test_client()
 	# Crear url
-	url = '/usuario/modificar/25123540-F'
+	url = '/usuarios/modificar/25123540-F'
 	
 	# Crear usuario cliente
 	tipo = 1
@@ -89,7 +89,7 @@ async def test_eliminar_admin_api(test_medauth):
 	# Obtener el servidor de la app
 	client = app.test_client()
 	# Crear url
-	url = '/usuario/35925767-A'
+	url = '/usuarios/35925767-A'
 	
 	# Lanzar petición
 	response = await client.delete(url)
@@ -102,7 +102,7 @@ async def test_eliminar_cliente_api(test_medauth):
 	# Obtener el servidor de la app
 	client = app.test_client()
 	# Crear url
-	url = '/usuario/25123540-F'
+	url = '/usuarios/25123540-F'
 	
 	# Lanzar petición
 	response = await client.delete(url)
@@ -115,17 +115,17 @@ async def test_crear_poliza_api(test_medauth):
 	# Obtener el servidor de la app
 	client = app.test_client()
 	# Crear url
-	url = '/usuario'
+	url = '/usuarios'
 	
 	# Crear usuario administrativo
 	usuario = UsuarioCliente('Roberto', 'rober@gmail.com', '25123540-F', 'ES1234111892738495273840')
 	tipo = 1
 	
 	# Lanzar petición
-	response = await client.post(url, data = json.dumps({'usuario': usuario.to_dict(), 'tipo': tipo}))
+	response = await client.post(url, data = json.dumps({'usuarios': usuario.to_dict(), 'tipo': tipo}))
 	
 	# Crear url
-	url = '/poliza'
+	url = '/polizas'
 
 	# Creación fecha
 	fecha = datetime.datetime(2020, 5, 17)
@@ -143,7 +143,7 @@ async def test_modificar_poliza_api(test_medauth):
 	# Obtener el servidor de la app
 	client = app.test_client()
 	# Crear url
-	url = '/poliza/modificar/MA-25123540-1'
+	url = '/polizas/modificar/MA-25123540-1'
 
 	# Creación fecha
 	fecha = datetime.datetime(2020, 5, 17)
@@ -170,7 +170,7 @@ async def test_consultar_poliza_api(test_medauth):
 	# Obtener el servidor de la app
 	client = app.test_client()
 	# Crear url
-	url = '/poliza/25123540-F'
+	url = '/polizas/25123540-F'
 
 	# Lanzar petición
 	response = await client.get(url)
@@ -183,7 +183,7 @@ async def test_desactivar_poliza_api(test_medauth):
 	# Obtener el servidor de la app
 	client = app.test_client()
 	# Crear url
-	url = '/poliza/desactivar/25123540-F'
+	url = '/polizas/desactivar/25123540-F'
 
 	# Lanzar petición
 	response = await client.put(url)
@@ -197,7 +197,7 @@ async def test_subir_prescripcion_api(test_medauth):
 	client = app.test_client()
 	
 	# Crear url
-	url = '/poliza'
+	url = '/polizas'
 	
 	# Crear usuario cliente
 	usuario = UsuarioCliente('Roberto', 'rober@gmail.com', '25123540-F', 'ES1234111892738495273840')
@@ -209,7 +209,7 @@ async def test_subir_prescripcion_api(test_medauth):
 	response = await client.post(url, data = json.dumps(poliza.to_dict()))
 	
 	# Crear url
-	url = '/prescripcion'
+	url = '/prescripciones'
 	
 	# Creación fecha
 	fecha_realizacion = datetime.datetime(2020, 6, 22)
@@ -227,7 +227,7 @@ async def test_solicitar_autorizacion_api(test_medauth):
 	# Obtener el servidor de la app
 	client = app.test_client()
 	# Crear url
-	url = '/autorizacion/solicitar/PR-25123540-1'
+	url = '/autorizaciones/solicitar/PR-25123540-1'
 
 	# Lanzar petición
 	response = await client.put(url)
@@ -243,7 +243,7 @@ async def test_crear_autorizacion_api(test_medauth):
 	# Crear usuario administrativo
 	usuario = UsuarioCliente('Roberto', 'rober@gmail.com', '25123540-F', 'ES1234111892738495273840')
 	# Crear url
-	url = '/autorizacion'
+	url = '/autorizaciones'
 
 	# Creación fecha
 	fecha_realizacion = datetime.datetime(2020, 6, 22)
@@ -261,7 +261,7 @@ async def test_modificar_autorizacion_api(test_medauth):
 	# Obtener el servidor de la app
 	client = app.test_client()
 	# Crear url
-	url = '/autorizacion/modificar/AU-25123540-2'
+	url = '/autorizaciones/modificar/AU-25123540-2'
 
 	# Creación fecha
 	fecha_realizacion = datetime.datetime(2020, 6, 22)
@@ -290,7 +290,7 @@ async def test_consultar_autorizacion_api(test_medauth):
 	# Obtener el servidor de la app
 	client = app.test_client()
 	# Crear url
-	url = '/autorizacion/AU-25123540-2'
+	url = '/autorizaciones/AU-25123540-2'
 
 	# Lanzar petición
 	response = await client.get(url)
@@ -303,7 +303,7 @@ async def test_aprobar_denegar_autorizacion_api(test_medauth):
 	# Obtener el servidor de la app
 	client = app.test_client()
 	# Crear url
-	url = '/autorizacion/aprobar-denegar/AU-25123540-2'
+	url = '/autorizaciones/aprobar-denegar/AU-25123540-2'
 
 	# Creación aceptada
 	aceptada = False
@@ -322,7 +322,7 @@ async def test_crear_cita_api(test_medauth):
 	client = app.test_client()
 	
 	# Crear url
-	url = '/autorizacion/aprobar-denegar/AU-25123540-2'
+	url = '/autorizaciones/aprobar-denegar/AU-25123540-2'
 	# Creación aceptada
 	aceptada = True
 	# Creación motivo rechazo
@@ -331,7 +331,7 @@ async def test_crear_cita_api(test_medauth):
 	response = await client.put(url, data = json.dumps({'aceptada': aceptada, 'motivo_rechazo': motivo_rechazo}))
 	
 	# Crear url
-	url = '/cita'
+	url = '/citas'
 
 	# Crear usuario cliente
 	usuario = UsuarioCliente('Roberto', 'rober@gmail.com', '25123540-F', 'ES1234111892738495273840')
@@ -353,7 +353,7 @@ async def test_modificar_cita_api(test_medauth):
 	# Obtener el servidor de la app
 	client = app.test_client()
 	# Crear url
-	url = '/cita/modificar/AU-25123540-2'
+	url = '/citas/modificar/AU-25123540-2'
 
 	# Creación fecha
 	fecha = datetime.datetime(2020, 6, 22)
@@ -380,7 +380,7 @@ async def test_consultar_cita_api(test_medauth):
 	# Obtener el servidor de la app
 	client = app.test_client()
 	# Crear url
-	url = '/cita/AU-25123540-2'
+	url = '/citas/AU-25123540-2'
 
 	# Lanzar petición
 	response = await client.get(url)
@@ -393,7 +393,7 @@ async def test_consultar_usuario_api(test_medauth):
 	# Obtener el servidor de la app
 	client = app.test_client()
 	# Crear url
-	url = '/usuario/25123540-F'
+	url = '/usuarios/25123540-F'
 
 	# Lanzar petición
 	response = await client.get(url)
