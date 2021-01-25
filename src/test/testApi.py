@@ -233,10 +233,13 @@ async def test_solicitar_autorizacion_api(test_medauth):
 	# Obtener el servidor de la app
 	client = app.test_client()
 	# Crear url
-	url = '/autorizaciones/solicitar/PR-25123540-1'
+	url = '/autorizaciones/PR-25123540-1'
+	
+	# Indicar tipo request
+	peticion = 'solicitar'
 
 	# Lanzar petición
-	response = await client.post(url)
+	response = await client.post(url, data = json.dumps({'peticion': peticion}))
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(201)
 
@@ -267,7 +270,7 @@ async def test_modificar_autorizacion_api(test_medauth):
 	# Obtener el servidor de la app
 	client = app.test_client()
 	# Crear url
-	url = '/autorizaciones/modificar/AU-25123540-2'
+	url = '/autorizaciones/AU-25123540-2'
 
 	# Creación fecha
 	fecha_realizacion = datetime.datetime(2020, 6, 22)
@@ -285,8 +288,11 @@ async def test_modificar_autorizacion_api(test_medauth):
 	# Creación consulta
 	consulta = "Consulta 3"
 	
+	# Indicar tipo request
+	peticion = 'modificar'
+
 	# Lanzar petición
-	response = await client.post(url, data = json.dumps({'motivo_rechazo': motivo_rechazo, 'fecha_realizacion': fecha_realizacion, 'especialidad': json.dumps(especialidad), 'servicios_aceptados': servicios_aceptados, 'facultativo_realizador': facultativo_realizador, 'consulta': consulta}))
+	response = await client.post(url, data = json.dumps({'peticion': peticion, 'motivo_rechazo': motivo_rechazo, 'fecha_realizacion': fecha_realizacion, 'especialidad': json.dumps(especialidad), 'servicios_aceptados': servicios_aceptados, 'facultativo_realizador': facultativo_realizador, 'consulta': consulta}))
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(201)
 
@@ -309,15 +315,18 @@ async def test_aprobar_denegar_autorizacion_api(test_medauth):
 	# Obtener el servidor de la app
 	client = app.test_client()
 	# Crear url
-	url = '/autorizaciones/aprobar-denegar/AU-25123540-2'
+	url = '/autorizaciones/AU-25123540-2'
 
 	# Creación aceptada
 	aceptada = False
 	# Creación motivo rechazo
 	motivo_rechazo = 'Servicio no cubierto en póliza.'
 	
+	# Indicar tipo request
+	peticion = 'aprobar'
+
 	# Lanzar petición
-	response = await client.post(url, data = json.dumps({'aceptada': aceptada, 'motivo_rechazo': motivo_rechazo}))
+	response = await client.post(url, data = json.dumps({'peticion': peticion, 'aceptada': aceptada, 'motivo_rechazo': motivo_rechazo}))
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(201)
 
@@ -328,13 +337,15 @@ async def test_crear_cita_api(test_medauth):
 	client = app.test_client()
 	
 	# Crear url
-	url = '/autorizaciones/aprobar-denegar/AU-25123540-2'
+	url = '/autorizaciones/AU-25123540-2'
 	# Creación aceptada
 	aceptada = True
 	# Creación motivo rechazo
 	motivo_rechazo = ''
+	# Indicar tipo request
+	peticion = 'aprobar'
 	# Lanzar petición
-	response = await client.post(url, data = json.dumps({'aceptada': aceptada, 'motivo_rechazo': motivo_rechazo}))
+	response = await client.post(url, data = json.dumps({'peticion': peticion, 'aceptada': aceptada, 'motivo_rechazo': motivo_rechazo}))
 	
 	# Crear url
 	url = '/citas'
