@@ -51,7 +51,7 @@ async def test_modificar_admin_api(test_medauth):
 	# Obtener el servidor de la app
 	client = app.test_client()
 	# Crear url
-	url = '/usuarios/modificar/35925767-A'
+	url = '/usuarios/35925767-A'
 	
 	# Crear usuario administrativo
 	tipo = 0
@@ -70,7 +70,7 @@ async def test_modificar_cliente_api(test_medauth):
 	# Obtener el servidor de la app
 	client = app.test_client()
 	# Crear url
-	url = '/usuarios/modificar/25123540-F'
+	url = '/usuarios/25123540-F'
 	
 	# Crear usuario cliente
 	tipo = 1
