@@ -60,7 +60,7 @@ async def test_modificar_admin_api(test_medauth):
 	cuenta_bancaria = ''
 	
 	# Lanzar petición
-	response = await client.put(url, data = json.dumps({'tipo': tipo, 'nombre': nombre, 'email': email, 'cuenta_bancaria': cuenta_bancaria}))
+	response = await client.post(url, data = json.dumps({'tipo': tipo, 'nombre': nombre, 'email': email, 'cuenta_bancaria': cuenta_bancaria}))
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(201)
 
@@ -79,7 +79,7 @@ async def test_modificar_cliente_api(test_medauth):
 	cuenta_bancaria = 'ES1234111892738495270000'
 	
 	# Lanzar petición
-	response = await client.put(url, data = json.dumps({'tipo': tipo, 'nombre': nombre, 'email': email, 'cuenta_bancaria': cuenta_bancaria}))
+	response = await client.post(url, data = json.dumps({'tipo': tipo, 'nombre': nombre, 'email': email, 'cuenta_bancaria': cuenta_bancaria}))
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(201)
 	
@@ -160,7 +160,7 @@ async def test_modificar_poliza_api(test_medauth):
 	modulos_extra = [ModuloExtra.Dental]
 	
 	# Lanzar petición
-	response = await client.put(url, data = json.dumps({'periodo_carencia': periodo_carencia, 'tipo': tipo, 'copagos': copagos, 'mensualidad': mensualidad, 'servicios_excluidos': servicios_excluidos, 'modulos_extra': modulos_extra}))
+	response = await client.post(url, data = json.dumps({'periodo_carencia': periodo_carencia, 'tipo': tipo, 'copagos': copagos, 'mensualidad': mensualidad, 'servicios_excluidos': servicios_excluidos, 'modulos_extra': modulos_extra}))
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(201)
 
@@ -186,7 +186,7 @@ async def test_desactivar_poliza_api(test_medauth):
 	url = '/polizas/desactivar/25123540-F'
 
 	# Lanzar petición
-	response = await client.put(url)
+	response = await client.post(url)
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(201)
 
@@ -230,7 +230,7 @@ async def test_solicitar_autorizacion_api(test_medauth):
 	url = '/autorizaciones/solicitar/PR-25123540-1'
 
 	# Lanzar petición
-	response = await client.put(url)
+	response = await client.post(url)
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(201)
 
@@ -280,7 +280,7 @@ async def test_modificar_autorizacion_api(test_medauth):
 	consulta = "Consulta 3"
 	
 	# Lanzar petición
-	response = await client.put(url, data = json.dumps({'motivo_rechazo': motivo_rechazo, 'fecha_realizacion': fecha_realizacion, 'especialidad': json.dumps(especialidad), 'servicios_aceptados': servicios_aceptados, 'facultativo_realizador': facultativo_realizador, 'consulta': consulta}))
+	response = await client.post(url, data = json.dumps({'motivo_rechazo': motivo_rechazo, 'fecha_realizacion': fecha_realizacion, 'especialidad': json.dumps(especialidad), 'servicios_aceptados': servicios_aceptados, 'facultativo_realizador': facultativo_realizador, 'consulta': consulta}))
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(201)
 
@@ -311,7 +311,7 @@ async def test_aprobar_denegar_autorizacion_api(test_medauth):
 	motivo_rechazo = 'Servicio no cubierto en póliza.'
 	
 	# Lanzar petición
-	response = await client.put(url, data = json.dumps({'aceptada': aceptada, 'motivo_rechazo': motivo_rechazo}))
+	response = await client.post(url, data = json.dumps({'aceptada': aceptada, 'motivo_rechazo': motivo_rechazo}))
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(201)
 
@@ -328,7 +328,7 @@ async def test_crear_cita_api(test_medauth):
 	# Creación motivo rechazo
 	motivo_rechazo = ''
 	# Lanzar petición
-	response = await client.put(url, data = json.dumps({'aceptada': aceptada, 'motivo_rechazo': motivo_rechazo}))
+	response = await client.post(url, data = json.dumps({'aceptada': aceptada, 'motivo_rechazo': motivo_rechazo}))
 	
 	# Crear url
 	url = '/citas'
@@ -370,7 +370,7 @@ async def test_modificar_cita_api(test_medauth):
 	consulta = "Consulta 19"
 	
 	# Lanzar petición
-	response = await client.put(url, data = json.dumps({'fecha': fecha, 'hora': hora, 'facultativo_realizador': facultativo_realizador, 'consulta': consulta}))
+	response = await client.post(url, data = json.dumps({'fecha': fecha, 'hora': hora, 'facultativo_realizador': facultativo_realizador, 'consulta': consulta}))
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(201)
 
