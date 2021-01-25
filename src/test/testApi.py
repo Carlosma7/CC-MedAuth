@@ -143,7 +143,7 @@ async def test_modificar_poliza_api(test_medauth):
 	# Obtener el servidor de la app
 	client = app.test_client()
 	# Crear url
-	url = '/polizas/modificar/MA-25123540-1'
+	url = '/polizas/MA-25123540-1'
 
 	# Creación fecha
 	fecha = datetime.datetime(2020, 5, 17)
@@ -159,8 +159,11 @@ async def test_modificar_poliza_api(test_medauth):
 	# Creación módulos extra
 	modulos_extra = [ModuloExtra.Dental]
 	
+	# Indicar tipo peticion
+	peticion = 'modificar'
+	
 	# Lanzar petición
-	response = await client.post(url, data = json.dumps({'periodo_carencia': periodo_carencia, 'tipo': tipo, 'copagos': copagos, 'mensualidad': mensualidad, 'servicios_excluidos': servicios_excluidos, 'modulos_extra': modulos_extra}))
+	response = await client.post(url, data = json.dumps({'peticion': peticion, 'periodo_carencia': periodo_carencia, 'tipo': tipo, 'copagos': copagos, 'mensualidad': mensualidad, 'servicios_excluidos': servicios_excluidos, 'modulos_extra': modulos_extra}))
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(201)
 
@@ -183,10 +186,13 @@ async def test_desactivar_poliza_api(test_medauth):
 	# Obtener el servidor de la app
 	client = app.test_client()
 	# Crear url
-	url = '/polizas/desactivar/25123540-F'
+	url = '/polizas/25123540-F'
+	
+	# Indicar tipo request
+	peticion = 'desactivar'
 
 	# Lanzar petición
-	response = await client.post(url)
+	response = await client.post(url, data = json.dumps({'peticion': peticion}))
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(201)
 
