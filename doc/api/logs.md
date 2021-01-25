@@ -1,4 +1,47 @@
+
 ### Logs
+
+Una de las buenas prácticas consiste en diseñar un sistema de logs, para ello se va a distinguir entre dos partes, un **Middleware** que permita realizar un proceso de logging de la aplicación del servidor, y que muestre una información sobre las peticiones que este recibe, y por otro lado los logs propios de las notificaciones y errores de la aplicación.
+
+#### Definición de un Middleware
+Para la definición de un Middleware, se ha utilizado la [documentación oficial de Quart sobre Middleware](https://pgjones.gitlab.io/quart/how_to_guides/middleware.html). En esta se puede observar como definir un middleware que responda a peticiones sin cabecera, pero en el caso de nuestro proyecto el interés es definir un middleware que haga uso de logs para mostrar las peticiones que recibe nuestra API.
+
+Para ello se define de la siguiente forma el middleware en el fichero [main.py](https://github.com/Carlosma7/MedAuth/blob/main/src/core/main.py):
+
+```python
+class LogMiddleware:
+	def __init__(self, app):
+		self.app = app
+	
+	async def __call__(self, scope, receive, send):
+		# Puedo ver lo que recibo con:
+		# logger.info(receive)
+
+		# Imprimo el ambito en el que se ejecuta el middleware
+		# Con scope puede ver el cliente, la compresion, el cliente y la ruta
+		# logger.info(scope)
+		try:
+			logger.info(scope.get('path') + " " + scope.get('method'))
+		except TypeError as error:
+			logger.info('Middleware was initiated.')
+		return await self.app(scope, receive, send)
+```
+
+Este middleware definido sobre la aplicación se asigna a la misma de la siguiente forma:
+
+```python
+# Definición servidor Quart
+app = Quart(__name__)
+# Registar el blueprint de las rutas
+app.register_blueprint(rutas_medauth)
+# Se activa el middleware
+app = LogMiddleware(app)
+```
+
+Se puede observar que realiza su función correctamente:
+
+
+![Middleware funcionando](../img/middleware_working.png "Middleware funcionando")
 
 #### Elección de herramienta
 Otra de las buenas prácticas a la hora de diseñar nuestro proyecto, es la de tener un *log* o registro en el que poder ver las diferentes acciones que se realizan en nuestro sistema para poder realizar *debugs* posteriores y ver donde se producen errores y por qué se producen.
@@ -51,3 +94,4 @@ return 'Usuario creado con éxito.', 201
 Se puede ver que funcionan correctamente los logs:
 
 ![Logs funcionando](../img/logs_funcionando.png "Logs funcionando")
+
