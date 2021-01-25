@@ -30,5 +30,5 @@ Tras la primera corrección se han realizado las siguientes correcciones:
 
 3. **Nuevo estudio sobre framework** ([estudio](https://carlosma7.github.io/MedAuth/doc/api/estudio_framework)): En este nuevo estudio se consideran implementaciones de un mismo método de la API del proyecto y se evalúan aspectos técnicos. Se consideran menos opciones, pero sí más realistas con la naturaleza y necesidades del proyecto.
 
-4. **Asociación de tests a HU**: Anteriormente se relacionaban con un issue genérico, a partir de ahora se relacionarán con las HU directamente.
+4. **Asociación de tests a HU** ([ejemplo](https://github.com/Carlosma7/MedAuth/commit/60f766b6416d7532c5649a12d6b602441dc1a9c7)): Anteriormente se relacionaban con un issue genérico, a partir de ahora se relacionarán con las HU directamente.
 
