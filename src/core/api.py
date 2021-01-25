@@ -232,21 +232,82 @@ async def subir_prescripcion():
 	return 'Prescripción subida con éxito.', 201
 
 # [HU7] Solicitar autorización médica
-@rutas_medauth.route('/autorizaciones/solicitar/<id_prescripcion>', methods=['POST'])
-async def solicitar_autorizacion(id_prescripcion):
-	try:
-		# Solicitar autorizacion
-		controlador.solicitar_autorizacion(id_prescripcion)
-	except Exception as error:
-		# Se transmite el error mediante el log
-		logger.error(error)
-		# Se produce un error
-		return str(error), 400
+# [HU8] Administrar autorización: Modificar una autorización
+# [HU10] Aprobar/Denegar una autorización médica
+@rutas_medauth.route('/autorizaciones/<id_autorizacion>', methods=['POST'])
+async def solicitar_autorizacion(id_autorizacion):
+
+	# Obtener la petición
+	data_string = await request.get_data()
+	# Cargar información de la petición en formato JSON
+	data = json.loads(data_string)
 	
-	# Se transmite el estado de éxito mediante el log	
-	logger.info('Autorización solicitada con éxito')
-	# Estado de éxito
-	return 'Autorización solicitada con éxito.', 201
+	# Obtener la función deseada
+	peticion = data.get('peticion')
+	
+	# Modificar cita
+	if peticion == 'solicitar':
+		try:
+			# Solicitar autorizacion
+			controlador.solicitar_autorizacion(id_autorizacion)
+		except Exception as error:
+			# Se transmite el error mediante el log
+			logger.error(error)
+			# Se produce un error
+			return str(error), 400
+		
+		# Se transmite el estado de éxito mediante el log	
+		logger.info('Autorización solicitada con éxito')
+		# Estado de éxito
+		return 'Autorización solicitada con éxito.', 201
+		
+	elif peticion == 'modificar':
+		# Obtener motivo rechazo
+		motivo_rechazo = data.get('motivo_rechazo')
+		# Obtener fecha realizacion
+		fecha_realizacion = datetime.datetime.strptime(data.get('fecha_realizacion'), '%m/%d/%Y')
+		# Obtener especialidad
+		especialidad = Especialidad(json.loads(data.get('especialidad')))
+		# Obtener servicios aceptados
+		servicios_aceptados = data.get('servicios_aceptados')
+		# Obtener facultativo realizador
+		facultativo_realizador = data.get('facultativo_realizador')
+		# Obtener consulta
+		consulta = data.get('consulta')
+		
+		try:
+			# Modificación autorización
+			controlador.modificar_autorizacion(id_autorizacion, motivo_rechazo, fecha_realizacion, especialidad, servicios_aceptados, facultativo_realizador, consulta)
+		except Exception as error:
+			# Se transmite el error mediante el log
+			logger.error(error)
+			# Se produce un error
+			return str(error), 400
+		
+		# Se transmite el estado de éxito mediante el log	
+		logger.info('Autorización modificada con éxito')
+		# Estado de éxito
+		return 'Autorización modificada con éxito.', 201
+	
+	else:
+		# Obtener aceptada
+		aceptada = data.get('aceptada')
+		# Obtener motivo rechazo
+		motivo_rechazo = data.get('motivo_rechazo')
+		
+		try:
+			# Aprobar/Denegar autorización
+			controlador.aprobar_denegar_autorizacion(id_autorizacion, aceptada, motivo_rechazo)
+		except Exception as error:
+			# Se transmite el error mediante el log
+			logger.error(error)
+			# Se produce un error
+			return str(error), 400
+		
+		# Se transmite el estado de éxito mediante el log	
+		logger.info('Autorización aprobada/denegada con éxito')
+		# Estado de éxito
+		return 'Autorización aprobada/denegada con éxito.', 201
 
 # [HU8] Administrar autorización: Crear una autorización
 @rutas_medauth.route('/autorizaciones', methods=['POST'])
@@ -280,40 +341,8 @@ async def crear_autorizacion():
 	# Estado de éxito
 	return 'Autorización creada con éxito.', 201
 
-# [HU8] Administrar autorización: Modificar una autorización
-@rutas_medauth.route('/autorizaciones/modificar/<id_autorizacion>', methods=['POST'])
-async def modificar_autorizacion(id_autorizacion):
-	# Obtener la petición
-	data_string = await request.get_data()
-	# Cargar información de la petición en formato JSON
-	data = json.loads(data_string)
-	
-	# Obtener motivo rechazo
-	motivo_rechazo = data.get('motivo_rechazo')
-	# Obtener fecha realizacion
-	fecha_realizacion = datetime.datetime.strptime(data.get('fecha_realizacion'), '%m/%d/%Y')
-	# Obtener especialidad
-	especialidad = Especialidad(json.loads(data.get('especialidad')))
-	# Obtener servicios aceptados
-	servicios_aceptados = data.get('servicios_aceptados')
-	# Obtener facultativo realizador
-	facultativo_realizador = data.get('facultativo_realizador')
-	# Obtener consulta
-	consulta = data.get('consulta')
-	
-	try:
-		# Modificación autorización
-		controlador.modificar_autorizacion(id_autorizacion, motivo_rechazo, fecha_realizacion, especialidad, servicios_aceptados, facultativo_realizador, consulta)
-	except Exception as error:
-		# Se transmite el error mediante el log
-		logger.error(error)
-		# Se produce un error
-		return str(error), 400
-	
-	# Se transmite el estado de éxito mediante el log	
-	logger.info('Autorización modificada con éxito')
-	# Estado de éxito
-	return 'Autorización modificada con éxito.', 201
+
+
 
 # [HU9] Consultar autorización médica
 @rutas_medauth.route('/autorizaciones/<id_autorizacion>', methods=['GET'])
@@ -331,33 +360,6 @@ async def consultar_autorizacion(id_autorizacion):
 	logger.info('Autorización obtenida con éxito')
 	# Estado de éxito
 	return autorizacion.to_dict(), 200
-
-# [HU10] Aprobar/Denegar una autorización médica
-@rutas_medauth.route('/autorizaciones/aprobar-denegar/<id_autorizacion>', methods=['POST'])
-async def aprobar_denegar_autorizacion(id_autorizacion):
-	# Obtener la petición
-	data_string = await request.get_data()
-	# Cargar información de la petición en formato JSON
-	data = json.loads(data_string)
-		
-	# Obtener aceptada
-	aceptada = data.get('aceptada')
-	# Obtener motivo rechazo
-	motivo_rechazo = data.get('motivo_rechazo')
-	
-	try:
-		# Aprobar/Denegar autorización
-		controlador.aprobar_denegar_autorizacion(id_autorizacion, aceptada, motivo_rechazo)
-	except Exception as error:
-		# Se transmite el error mediante el log
-		logger.error(error)
-		# Se produce un error
-		return str(error), 400
-	
-	# Se transmite el estado de éxito mediante el log	
-	logger.info('Autorización aprobada/denegada con éxito')
-	# Estado de éxito
-	return 'Autorización aprobada/denegada con éxito.', 201
 
 # [HU11] Administrar cita médica: Crear cita médica
 @rutas_medauth.route('/citas', methods=['POST'])
