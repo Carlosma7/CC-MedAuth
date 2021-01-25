@@ -20,3 +20,15 @@ Durante las correcciones de compañeros, y consideraciones propias, se han reali
 3. **Nuevas HUs**: Tras revisar el estado actual del proyecto, se han encontrado dos funcionalidades no contempladas previamente, las cuales se añaden, y se ha implementado una de ellas. Dichas *HU* se pueden ver [[HU14] Consultar usuario](https://github.com/Carlosma7/MedAuth/issues/96) y [# [HU15] Solicitar una cita](https://github.com/Carlosma7/MedAuth/issues/97).
 4. **Se ha desarrollado un contenedor de despliegue**: Si bien es uno de los puntos que corresponden a esta rúbrica, se ha detallado más detenidamente [aquí](https://carlosma7.github.io/MedAuth/doc/api/despliegue).
 
+### Mejoras tras correcciones
+
+Tras la primera corrección se han realizado las siguientes correcciones:
+
+1. **Correcciones sobre la API** ([issue](https://github.com/Carlosma7/MedAuth/issues/99)): Se han eliminado los verbos en las órdenes HTTP. Se usan los métodos correctos para modificar partes de recursos.
+
+2. **Correcciones sobre el log** ([issue](https://github.com/Carlosma7/MedAuth/issues/100)): Se ha implementado un middleware encargado de realizar funciones de logging.
+
+3. **Nuevo estudio sobre framework** ([estudio](https://carlosma7.github.io/MedAuth/doc/api/estudio_framework)): En este nuevo estudio se consideran implementaciones de un mismo método de la API del proyecto y se evalúan aspectos técnicos. Se consideran menos opciones, pero sí más realistas con la naturaleza y necesidades del proyecto.
+
+4. **Asociación de tests a HU**: Anteriormente se relacionaban con un issue genérico, a partir de ahora se relacionarán con las HU directamente.
+

@@ -1,1 +1,0 @@
-Tal y como se ha comentado en clase, para cerrar los *issues*, se ha de hacer mediante un commit.
