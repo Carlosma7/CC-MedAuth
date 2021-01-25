@@ -127,56 +127,61 @@ async def crear_poliza():
 	return 'Póliza creada con éxito.', 201
 
 # [HU4] Administrar póliza: Modificar una póliza
-@rutas_medauth.route('/polizas/modificar/<id_poliza>', methods=['POST'])
+# [HU4] Administrar póliza: Desactivar una póliza
+@rutas_medauth.route('/polizas/<id_poliza>', methods=['POST'])
 async def modificar_poliza(id_poliza):
 	# Obtener la petición
 	data_string = await request.get_data()
 	# Cargar información de la petición en formato JSON
 	data = json.loads(data_string)
 	
-	# Obtener periodo carencia
-	periodo_carencia = datetime.datetime.strptime(data.get('periodo_carencia'), '%m/%d/%Y')
-	# Obtener tipo de póliza
-	tipo = data.get('tipo')
-	# Obtener copagos
-	copagos = data.get('copagos')
-	# Obtener mensualidad
-	mensualidad = data.get('mensualidad')
-	# Obtener servicios excluidos
-	servicios_excluidos = data.get('servicios_excluidos')
-	# Obtener modulos extra
-	modulos_extra = [ModuloExtra(mod) for mod in data.get('modulos_extra')]
-	try:
-		# Modificación póliza
-		controlador.modificar_poliza(id_poliza, periodo_carencia, tipo, copagos, mensualidad, servicios_excluidos, modulos_extra)
-	except Exception as error:
-		# Se transmite el error mediante el log
-		logger.error(error)
-		# Se produce un error
-		return str(error), 400
+	# Obtener la función deseada
+	peticion = data.get('peticion')
 	
-	# Se transmite el estado de éxito mediante el log	
-	logger.info('Póliza modificada con éxito')
-	# Estado de éxito
-	return 'Póliza modificada con éxito.', 201
-
-# [HU4] Administrar póliza: Desactivar una póliza
-@rutas_medauth.route('/polizas/desactivar/<dni>', methods=['POST'])
-async def desactivar_poliza(dni):
-	try:
-		# Desactivación póliza
-		controlador.desactivar_poliza(dni)
-	except Exception as error:
-		# Se transmite el error mediante el log
-		logger.error(error)
-		# Se produce un error
-		return str(error), 400
+	# Modificar cita
+	if peticion == 'modificar':
+		# Obtener periodo carencia
+		periodo_carencia = datetime.datetime.strptime(data.get('periodo_carencia'), '%m/%d/%Y')
+		# Obtener tipo de póliza
+		tipo = data.get('tipo')
+		# Obtener copagos
+		copagos = data.get('copagos')
+		# Obtener mensualidad
+		mensualidad = data.get('mensualidad')
+		# Obtener servicios excluidos
+		servicios_excluidos = data.get('servicios_excluidos')
+		# Obtener modulos extra
+		modulos_extra = [ModuloExtra(mod) for mod in data.get('modulos_extra')]
+		try:
+			# Modificación póliza
+			controlador.modificar_poliza(id_poliza, periodo_carencia, tipo, copagos, mensualidad, servicios_excluidos, modulos_extra)
+		except Exception as error:
+			# Se transmite el error mediante el log
+			logger.error(error)
+			# Se produce un error
+			return str(error), 400
+		
+		# Se transmite el estado de éxito mediante el log	
+		logger.info('Póliza modificada con éxito')
+		# Estado de éxito
+		return 'Póliza modificada con éxito.', 201
 	
-	# Se transmite el estado de éxito mediante el log	
-	logger.info('Póliza desactivada con éxito')
-	# Estado de éxito
-	return 'Póliza desactivada con éxito.', 201
-
+	# Desactivar cita
+	else:
+		try:
+			# Desactivación póliza
+			controlador.desactivar_poliza(id_poliza)
+		except Exception as error:
+			# Se transmite el error mediante el log
+			logger.error(error)
+			# Se produce un error
+			return str(error), 400
+		
+		# Se transmite el estado de éxito mediante el log	
+		logger.info('Póliza desactivada con éxito')
+		# Estado de éxito
+		return 'Póliza desactivada con éxito.', 201
+		
 # [HU5] Consultar póliza
 @rutas_medauth.route('/polizas/<dni>', methods=['GET'])
 async def consultar_poliza(dni):
