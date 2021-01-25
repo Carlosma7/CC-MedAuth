@@ -5,13 +5,33 @@ import json
 import etcd3
 from dotenv import load_dotenv
 import os
+from loguru import logger
 
 from quart import Quart, Blueprint, jsonify, request, current_app
+
+class LogMiddleware:
+	def __init__(self, app):
+		self.app = app
+	
+	async def __call__(self, scope, receive, send):
+		# Puedo ver lo que recibo con:
+		# logger.info(receive)
+
+		# Imprimo el ambito en el que se ejecuta el middleware
+		# Con scope puede ver el cliente, la compresion, el cliente y la ruta
+		# logger.info(scope)
+		try:
+			logger.info(scope.get('path') + " " + scope.get('method'))
+		except TypeError as error:
+			logger.info('Middleware was initiated.')
+		return await self.app(scope, receive, send)
 
 # Definición servidor Quart
 app = Quart(__name__)
 # Registar el blueprint de las rutas
 app.register_blueprint(rutas_medauth)
+# Se activa el middleware
+app = LogMiddleware(app)
 
 if __name__ == '__main__':
 	try:
@@ -34,6 +54,8 @@ if __name__ == '__main__':
 		server_port = os.getenv('PORT')
 		server_host = os.getenv('HOST')
 		
-		
+	
+	# Se activa el middleware
+	app = LogMiddleware(app)
 	# Se lanza la aplicación
 	app.run(port=server_port, host=server_host)
