@@ -24,7 +24,7 @@ async def test_crear_admin_api(test_medauth):
 	tipo = 0
 	
 	# Lanzar petición
-	response = await client.post(url, data = json.dumps({'usuarios': usuario.to_dict(), 'tipo': tipo}))
+	response = await client.post(url, data = json.dumps({'usuario': usuario.to_dict(), 'tipo': tipo}))
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(201)
 
@@ -41,7 +41,7 @@ async def test_crear_cliente_api(test_medauth):
 	tipo = 1
 	
 	# Lanzar petición
-	response = await client.post(url, data = json.dumps({'usuarios': usuario.to_dict(), 'tipo': tipo}))
+	response = await client.post(url, data = json.dumps({'usuario': usuario.to_dict(), 'tipo': tipo}))
 	# Comprobar que el estado es correcto
 	assert_that(response.status_code).is_equal_to(201)
 
@@ -122,7 +122,7 @@ async def test_crear_poliza_api(test_medauth):
 	tipo = 1
 	
 	# Lanzar petición
-	response = await client.post(url, data = json.dumps({'usuarios': usuario.to_dict(), 'tipo': tipo}))
+	response = await client.post(url, data = json.dumps({'usuario': usuario.to_dict(), 'tipo': tipo}))
 	
 	# Crear url
 	url = '/polizas'
