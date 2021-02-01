@@ -13,6 +13,20 @@ from especialidad import Especialidad
 from typing import List
 import datetime
 import re
+import os
+from pymongo import MongoClient
+
+try:
+	# Try to get the MongoDB URI by environment variables
+	mongo_uri = 'mongodb://' + os.environ['MONGODB_HOSTNAME'] + ':' + os.environ['MONGODB_PORT'] + '/' + os.environ['MONGODB_DATABASE']
+except:
+	# Default URI
+	mongo_uri = 'mongodb://localhost:27017/medauthdb'
+
+try:
+	conexion = MongoCliente(mongo_uri)
+except:
+	conexion = ""
 
 # Clase controladora de lógica de negocio
 class Controller:
