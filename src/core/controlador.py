@@ -489,10 +489,20 @@ class Controller:
 	# [HU9] Consultar autorización médica
 	def consultar_autorizacion(self, id_autorizacion: str):
 		# Se obtiene la autorizacion
-		autorizacion = [a for a in self.autorizaciones if a.get_id_autorizacion() == id_autorizacion]
+		try:
+			autorizacion = self.mongo.db.autorizaciones.find_one({'id_autorizacion': id_autorizacion})
+			encontrada = (autorizacion != None)
+		except:
+			autorizacion = [a for a in self.autorizaciones if a.get_id_autorizacion() == id_autorizacion]
+			encontrada = (len(autorizacion) > 0)
 		
-		if len(autorizacion) > 0:
-			return autorizacion[0]
+		if encontrada:
+			try:
+				autorizacion = Autorizacion.from_dict(autorizacion)
+			except:
+				autorizacion = autorizacion[0]
+			
+			return autorizacion
 		else:
 			raise NonExistingAuthorizationError('Authorization doesn´t exist.')
 			
