@@ -7,3 +7,4 @@ etcd3
 python-dotenv
 loguru
 hypercorn
+pymongo
