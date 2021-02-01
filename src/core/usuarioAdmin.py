@@ -5,6 +5,11 @@ class UsuarioAdmin(Usuario):
 	def __init__(self, nombre: str, email: str, dni: str, email_empresarial: str):
 		self.__email_empresarial = email_empresarial
 		super().__init__(nombre, email, dni, 0)
+
+	@classmethod
+	def from_dict(cls, data: dict):
+		u = cls(data.get('nombre'), data.get('email'), data.get('dni'), data.get('email_empresarial'))
+		return u
 	
 	# Métodos get/set
 	def get_email_empresarial(self):
