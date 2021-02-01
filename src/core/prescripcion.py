@@ -17,6 +17,18 @@ class Prescripcion:
 		self.__servicios_solicitados = servicios_solicitados[:]
 		self.__consulta = consulta
 
+	@classmethod
+	def from_dict(cls, data: dict):
+		# Obtener usuario
+		asegurado = UsuarioCliente.from_dict(data.get('asegurado'))
+		# Obtener fecha de realización
+		fecha_realizacion = datetime.datetime.strptime(data.get('fecha_realizacion'), '%m/%d/%Y')
+		# Obtener especialidad
+		especialidad = Especialidad(json.loads(data.get('especialidad')))
+
+		p = cls(data.get('id_prescripcion'), asegurado, data.get('id_poliza'), fecha_realizacion, especialidad, data.get('facultativo_prescriptor'), data.get('facultativo_realizador'), data.get('servicios_solicitados'), data.get('consulta'))
+		return p
+
 	# Métodos get/set
 	def get_id_prescripcion(self):
 		return self.__id_prescripcion
