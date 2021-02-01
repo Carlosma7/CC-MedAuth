@@ -1,0 +1,29 @@
+# Dont copy project's docs
+docs
+
+# Dont copy CIs
+.circleci
+shippable.yml
+.travis.yml
+
+# Dont copy Git files
+.git
+.github
+.gitignore
+
+# Dont copy config files
+cc.yaml
+_config.yml
+Gemfile
+LICENSE
+README.md
+
+# Dont copy dockerfiles
+docker-compose.yml
+Dockerfile*
+
+# Dont copy tests
+src/tests
+
+# Dont copy client
+src/client.py
