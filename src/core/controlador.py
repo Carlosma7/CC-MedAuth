@@ -335,26 +335,50 @@ class Controller:
 	
 	# [HU7] Solicitar autorización médica
 	def solicitar_autorizacion(self, id_prescripcion: str):
-		prescripcion = [p for p in self.prescripciones if p.get_id_prescripcion() == id_prescripcion]
+		try:
+			prescripcion = self.mongo.db.prescripciones.find_one({'id_prescripcion': id_prescripcion})
+			encontrada = (prescripcion != None)
+		except:
+			prescripcion = [p for p in self.prescripciones if p.get_id_prescripcion() == id_prescripcion]
+			encontrada = (len(prescripcion) > 0)
 		
 		# Se comprueba que la prescripción exista en el sistema
-		if len(prescripcion) > 0:
-			prescripcion = prescripcion[0]
+		if encontrada:
 			# Se obtiene la póliza activa del asegurado
-			poliza_activa = [p for p in self.polizas if p.get_titular().get_dni() == prescripcion.get_asegurado().get_dni() and p.get_activa()]
-			
-			if len(poliza_activa) > 0:
-				poliza_activa = poliza_activa[0]
+			try:
+				prescripcion = Prescripcion.from_dict(prescripcion)
+				poliza_activa = self.mongo.db.polizas.find_one({'titular.dni': prescripcion.get_asegurado().get_dni(), 'activa': True})
+				poliza_encontrada = (poliza_activa != None)
 				
+			except:
+				prescripcion = prescripcion[0]
+				poliza_activa = [p for p in self.polizas if p.get_titular().get_dni() == prescripcion.get_asegurado().get_dni() and p.get_activa()]
+				poliza_encontrada = (len(poliza_activa) > 0)
+				
+			if poliza_encontrada:
+				try:
+					poliza_activa = Poliza.from_dict(poliza_activa)
+				except:
+					poliza_activa = poliza_activa[0]
+					
 				dni = prescripcion.get_asegurado().get_dni()
 				# Se compone el identificador de la póliza con el formato AU-DNI-ID_ULTIMA_AUTORIZACION+1
 				id_autorizacion = "AU-" + dni[0:9]
 				# Se obtienen las autorizaciones previas del cliente/asegurado
-				autorizaciones_previas = [a for a in self.autorizaciones if a.get_asegurado().get_dni() == dni]
+				try:
+					autorizaciones_previas = self.mongo.db.autorizaciones.find({'asegurado.dni': dni})
+					autorizaciones_previas = list(autorizaciones_previas)
+				except:
+					autorizaciones_previas = [a for a in self.autorizaciones if a.get_asegurado().get_dni() == dni]
 				
 				if len(autorizaciones_previas) > 0:
+					autorizacion_previa = autorizaciones_previas[-1]
+					try:
+						autorizacion_previa = Autorizacion.from_dict(autorizacion_previa)
+					except:
+						pass
 					# Si se han realizado autorizaciones previas se obtiene el último identificador y se aumenta en uno
-					id_autorizacion = id_autorizacion + str(int(autorizaciones_previas[-1].get_id_autorizacion()[-1]) + 1)
+					id_autorizacion = id_autorizacion + str(int(autorizacion_previa.get_id_autorizacion()[-1]) + 1)
 				else:
 					# Si no se han realizado autorizaciones previas se marca como la primera
 					id_autorizacion = id_autorizacion + "1"
@@ -372,7 +396,10 @@ class Controller:
 					autorizacion = Autorizacion(id_autorizacion, prescripcion.get_asegurado(), id_prescripcion, poliza_activa.get_id_poliza(), True, "", prescripcion.get_fecha_realizacion(), prescripcion.get_especialidad(), prescripcion.get_servicios_solicitados(), prescripcion.get_facultativo_realizador(), prescripcion.get_consulta())
 					
 				# Se almacena la autorización
-				self.autorizaciones.append(autorizacion)
+				try:
+					self.mongo.db.autorizaciones.insert_one(autorizacion.to_dict())
+				except:
+					self.autorizaciones.append(autorizacion)
 			else:
 				raise NonActivePolicyError('User has not an active policy.')
 		else:
