@@ -136,11 +136,19 @@ class Controller:
 
 	# [HU3] Administrar usuario: Eliminar usuario
 	def eliminar_usuario(self, dni: str):
-		usuario_buscado = [u for u in self.usuarios if u.get_dni() == dni]
-		
-		if len(usuario_buscado) > 0:
+		try:
+			usuario_buscado = self.mongo.db.usuarios.find_one({'dni': dni})
+			encontrado = (usuario_buscado != None)
+		except:
+			usuario_buscado = [u for u in self.usuarios if u.get_dni() == dni]
+			encontrado = (len(usuario_buscado) > 0)
+			
+		if encontrado:
 			# Se elimina el usuario
-			self.usuarios.remove(usuario_buscado[0])
+			try:
+				self.mongo.db.usuarios.delete_one({'dni': dni})
+			except:
+				self.usuarios.remove(usuario_buscado[0])
 		else:
 			raise NonExistingUserError('User doesn´t exist.')
 
