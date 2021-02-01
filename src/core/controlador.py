@@ -92,10 +92,23 @@ class Controller:
 	# [HU3] Administrar usuario: Modificar usuario
 	def modificar_usuario(self, dni: str, nombre: str, email: str, cuenta_bancaria: str):
 		# Se obtiene el usuario por su dni
-		usr = [u for u in self.usuarios if u.get_dni() == dni]
 		
-		if len(usr) > 0:
-			usr = usr[0]
+		try:
+			usr = self.mongo.db.usuarios.find_one({'dni': dni})
+			encontrado = (usr != None)
+		except:
+			usr = [u for u in self.usuarios if u.get_dni() == dni]
+			encontrado = (len(usr) > 0)
+		
+		# Comprobar si el DNI existe en los usuarios existentes
+		if encontrado:
+			try:
+				if usr.get('cuenta_bancaria') == None:
+					usr = UsuarioAdmin.from_dict(usr)
+				else:
+					usr = UsuarioCliente.from_dict(usr)
+			except:
+				usr = usr[0]
 			# Comprobar correo
 			if bool(re.match("([a-zA-Z0-9]+@[a-zA-Z]+\.)(com|es)", usr.get_email())):
 				# Se modifica la información
@@ -110,6 +123,12 @@ class Controller:
 						usr.set_cuenta_bancaria(cuenta_bancaria)
 					else:
 						raise IBANFormatError('IBAN not valid.')
+						
+				# Actualizar en BD
+				try:
+					self.mongo.db.usuarios.update({'dni': usr.get_dni()}, {'$set': usr.to_dict()})
+				except:
+					pass
 			else:
 				raise EmailFormatError('Email not valid.')
 		else:
