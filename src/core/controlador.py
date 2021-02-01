@@ -238,10 +238,25 @@ class Controller:
 
 	# [HU4] Administrar póliza: Desactivar una póliza
 	def desactivar_poliza(self, dni: str):
-		poliza_activa = [p for p in self.polizas if (p.get_titular().get_dni() == dni) and p.get_activa() == True]
+		try:
+			poliza_activa = self.mongo.db.polizas.find_one({'titular.dni': dni, 'activa': True})
+			encontrado = (poliza_activa != None)
+		except:
+			poliza_activa = [p for p in self.polizas if (p.get_titular().get_dni() == dni) and p.get_activa() == True]
+			encontrado = (len(poliza_activa) > 0)
 		
-		if len(poliza_activa) > 0:
-			poliza_activa[0].set_activa(False)
+		if encontrado:
+			try:
+				poliza_activa = Poliza.from_dict(poliza_activa)
+			except:
+				poliza_activa = poliza_activa[0]
+				
+			poliza_activa.set_activa(False)
+			
+			try:
+				self.mongo.db.polizas.update({'id_poliza': poliza_activa.get_id_poliza()}, {'$set': poliza_activa.to_dict()})
+			except:
+				pass
 		else:
 			raise NonExistingPolicyError('Policy doesn´t exist.')
 
