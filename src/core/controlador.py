@@ -15,6 +15,7 @@ import datetime
 import re
 import os
 from pymongo import MongoClient
+from loguru import logger
 
 try:
 	# Try to get the MongoDB URI by environment variables
@@ -24,8 +25,8 @@ except:
 	mongo_uri = 'mongodb://localhost:27017/medauthdb'
 
 try:
-	conexion = MongoCliente(mongo_uri)
-except:
+	conexion = MongoClient(mongo_uri)
+except Exception as error:
 	conexion = ""
 
 # Clase controladora de lógica de negocio
