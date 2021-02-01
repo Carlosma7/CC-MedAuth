@@ -459,10 +459,18 @@ class Controller:
 	# [HU8] Administrar autorización: Modificar una autorización		
 	def modificar_autorizacion(self, id_autorizacion: str, motivo_rechazo: str, fecha_realizacion: datetime, especialidad: Especialidad, servicios_aceptados: List[str], facultativo_realizador: str, consulta: str):
 		# Se obtiene la autorización asociada al identificador
-		aut = [a for a in self.autorizaciones if a.get_id_autorizacion() == id_autorizacion]
+		try:
+			aut = self.mongo.db.autorizaciones.find_one({'id_autorizacion': id_autorizacion})
+			encontrada = (aut != None)
+		except:
+			aut = [a for a in self.autorizaciones if a.get_id_autorizacion() == id_autorizacion]
+			encontrada = (len(aut) > 0)
 
-		if len(aut) > 0:
-			aut = aut[0]
+		if encontrada:
+			try:
+				aut = Autorizacion.from_dict(aut)
+			except:
+				aut = aut[0]
 			# Modificación de la autorización médica
 			aut.set_motivo_rechazo(motivo_rechazo)
 			aut.set_fecha_realizacion(fecha_realizacion)
@@ -470,6 +478,11 @@ class Controller:
 			aut.set_servicios_aceptados(servicios_aceptados)
 			aut.set_facultativo_realizador(facultativo_realizador)
 			aut.set_consulta(consulta)
+			
+			try:
+				self.mongo.db.autorizaciones.update({'id_autorizacion': id_autorizacion}, {'$set': aut.to_dict()})
+			except:
+				pass
 		else:
 			raise NonExistingAuthorizationError('Authorization doesn´t exist.')
 			
