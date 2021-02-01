@@ -207,10 +207,19 @@ class Controller:
 	# [HU4] Administrar póliza: Modificar una póliza
 	def modificar_poliza(self, id_poliza: str, periodo_carencia: datetime, tipo: TipoPoliza, copagos: float, mensualidad: float, servicios_excluidos: List[str], modulos_extra: List[ModuloExtra]):
 		# Se obtiene la póliza asociada al identificador
-		pol = [p for p in self.polizas if p.get_id_poliza() == id_poliza]
+		try:
+			pol = self.mongo.db.polizas.find_one({'id_poliza': id_poliza})
+			encontrado = (pol != None)
+		except:
+			pol = [p for p in self.polizas if p.get_id_poliza() == id_poliza]
+			encontrado = (len(pol) > 0)
+		
 
-		if len(pol) > 0:
-			pol = pol[0]
+		if encontrado:
+			try:
+				pol = Poliza.from_dict(pol)
+			except:
+				pol = pol[0]
 			# Modificación de la póliza
 			pol.set_periodo_carencia(periodo_carencia)
 			pol.set_tipo(tipo)
@@ -218,6 +227,12 @@ class Controller:
 			pol.set_mensualidad(mensualidad)
 			pol.set_servicios_excluidos(servicios_excluidos)
 			pol.set_modulos_extra(modulos_extra)
+			
+			# Actualizar en BD
+			try:
+				self.mongo.db.polizas.update({'id_poliza': id_poliza}, {'$set': pol.to_dict()})
+			except:
+				pass
 		else:
 			raise NonExistingPolicyError('Policy doesn´t exist.')
 
