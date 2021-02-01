@@ -553,15 +553,28 @@ class Controller:
 	# [HU11] Administrar cita médica: Modificar cita médica
 	def modificar_cita(self, id_cita: str, fecha: datetime, hora: datetime, facultativo_realizador: str, consulta: str):
 		# Se obtiene la cita médica
-		ci = [c for c in self.citas if c.get_id_autorizacion() == id_cita]
+		try:
+			ci = self.mongo.db.citas.find_one({'id_autorizacion': id_cita})
+			encontrada = (ci != None)
+		except:
+			ci = [c for c in self.citas if c.get_id_autorizacion() == id_cita]
+			encontrada = (len(ci) > 0)
 		
-		if len(ci) > 0:
-			ci = ci[0]
+		if encontrada:
+			try:
+				ci = Cita.from_dict(ci)
+			except:
+				ci = ci[0]
 			# Modificación de la cita médica
 			ci.set_fecha(fecha)
 			ci.set_hora(hora)
 			ci.set_facultativo_realizador(facultativo_realizador)
 			ci.set_consulta(consulta)
+			
+			try:
+				self.mongo.db.citas.update({'id_autorizacion': ci.get_id_autorizacion()}, {'$set': ci.to_dict()})
+			except:
+				pass
 		else:
 			raise NonExistingAppointmentError('Appointment doesn´t exist.')
 	
