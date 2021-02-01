@@ -101,7 +101,6 @@ class ClienteAPI:
             
             usuario = r.text
 
-            prescripcion = Prescripcion(dni, usuario, id_poliza, fecha, especialidad, facultativo_prescriptor, facultativo_realizador, servicios_solicitados, consulta)
             r = requests.post(self.route + "/prescripciones", data=json.dumps({'asegurado': json.loads(usuario), 'id_poliza': id_poliza, 'fecha_realizacion': fecha, 'especialidad': json.dumps(especialidad), 'facultativo_prescriptor': facultativo_prescriptor, 'facultativo_realizador': facultativo_realizador, 'servicios_solicitados': servicios_solicitados, 'consulta': consulta}), headers=self.headers)
 
             print(str(r.status_code) + ": " + r.text)
