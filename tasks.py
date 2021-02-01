@@ -19,7 +19,7 @@ def test(c):
 def testBD(c):
 	print("Ejecución de test.\n")
 	run("pytest -v --disable-pytest-warnings src/test/*")
-	run("pytest -v --disable-pytest-warnings src/test/testControlador/testBD/*")
+	run("pytest -v --disable-pytest-warnings src/test/testBD/*")
 
 # Tarea de ejecución del modelo
 @task
