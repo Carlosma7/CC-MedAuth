@@ -20,6 +20,18 @@ class Poliza:
         self.__servicios_excluidos = servicios_excluidos[:]
         self.__modulos_extra = modulos_extra[:]
         self.__activa = activa
+    
+    @classmethod
+    def from_dict(cls, data: dict):
+        # Obtener usuario
+        usuario = UsuarioCliente.from_dict(data.get('titular'))
+        # Obtener periodo carencia
+        periodo_carencia = datetime.datetime.strptime(data.get('periodo_carencia'), '%m/%d/%Y')
+        # Obtener tipo de póliza
+        tipo = TipoPoliza(json.loads(data.get('tipo')))
+
+        p = cls(usuario, data.get('id_poliza'), periodo_carencia, tipo, data.get('copagos'), data.get('mensualidad'), data.get('servicios_excluidos'), data.get('modulos_extra'), data.get('activa'))
+        return p
 
     # Métodos get/set
     def get_titular(self):
