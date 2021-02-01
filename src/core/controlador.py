@@ -155,22 +155,39 @@ class Controller:
 	# [HU4] Administrar póliza: Crear una póliza
 	def crear_poliza(self, poliza: Poliza):
 		# Se obtiene el usuario cliente/asegurado por su dni
-		cliente = [c for c in self.usuarios if c.get_dni() == poliza.get_titular().get_dni()]
+		try:
+			cliente = self.mongo.db.usuarios.find_one({'dni': poliza.get_titular().get_dni()})
+			encontrado = (cliente != None)
+		except:
+			cliente = [c for c in self.usuarios if c.get_dni() == poliza.get_titular().get_dni()]
+			encontrado = (len(cliente) > 0)
 		
-		if len(cliente) > 0:
-			cliente = cliente[0]
-
+		if encontrado:
+			try:
+				cliente = UsuarioCliente.from_dict(cliente)
+			except:
+				cliente = cliente[0]
 			# Se compone el identificador de la póliza con el formato MA-DNI-ID_ULTIMA_POLIZA+1
 			dni = cliente.get_dni()
 			id_poliza = "MA-" + dni[:9]
 			# Se obtienen las polizas previas
-			polizas_previas = [p for p in self.polizas if p.get_id_poliza()[:12] == id_poliza]
-
+			try:
+				polizas_previas = self.mongo.db.polizas.find({'id_poliza': {'$regex': '.*' + id_poliza + '.*'}})
+				polizas_previas = list(polizas_previas)
+			except:
+				polizas_previas = [p for p in self.polizas if p.get_id_poliza()[:12] == id_poliza]
+			
 			if len(polizas_previas) > 0:
+				poliza_previa = polizas_previas[-1]
+				try:
+					poliza_previa = Poliza.from_dict(poliza_previa)
+				except:
+					pass
+				
 				# Si posee polizas previas canceladas, se obtiene el ID de la última que tuvo
-				if not polizas_previas[-1].get_activa():
+				if not poliza_previa.get_activa():
 					# Si la última póliza no está activa
-					id_poliza = id_poliza + str(int(polizas_previas[-1].get_id_poliza()[-1]) + 1)
+					id_poliza = id_poliza + str(int(poliza_previa.get_id_poliza()[-1]) + 1)
 				else:
 					raise ActivePolicyError('User already has an active policy.')
 			else:
@@ -179,7 +196,11 @@ class Controller:
 
 			poliza.set_id_poliza(id_poliza)
 
-			self.polizas.append(poliza)
+			try:
+				self.mongo.db.polizas.insert_one(poliza.to_dict())
+			except:
+				self.polizas.append(poliza)
+			
 		else:
 			raise NonExistingUserError('User doesn´t exist.')
 
