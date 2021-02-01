@@ -19,6 +19,18 @@ class Autorizacion:
 		self.__facultativo_realizador = facultativo_realizador
 		self.__consulta = consulta
 
+	@classmethod
+	def from_dict(cls, data: dict):
+		# Obtener usuario
+		asegurado = UsuarioCliente.from_dict(data.get('asegurado'))
+		# Obtener fecha de realización
+		fecha_realizacion = datetime.datetime.strptime(data.get('fecha_realizacion'), '%m/%d/%Y')
+		# Obtener especialidad
+		especialidad = Especialidad(json.loads(data.get('especialidad')))
+
+		a = cls(data.get('id_autorizacion'), asegurado, data.get('id_prescripcion'), data.get('id_poliza'), data.get('aceptada'), data.get('motivo_rechazo'), fecha_realizacion, especialidad, data.get('servicios_aceptados'), data.get('facultativo_realizador'), data.get('consulta'))
+		return a
+
 	# Métodos get/set
 	def get_id_autorizacion(self):
 		return self.__id_autorizacion
