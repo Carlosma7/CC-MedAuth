@@ -408,10 +408,18 @@ class Controller:
 		
 	# [HU8] Administrar autorización: Crear una autorización
 	def crear_autorizacion(self, autorizacion: Autorizacion):
-		poliza_activa = [p for p in self.polizas if p.get_titular().get_dni() == autorizacion.get_asegurado().get_dni() and p.get_activa()]
+		try:
+			poliza_activa = self.mongo.db.polizas.find_one({'titular.dni': autorizacion.get_asegurado().get_dni(), 'activa': True})
+			encontrada = (poliza_activa != None)
+		except:
+			poliza_activa = [p for p in self.polizas if p.get_titular().get_dni() == autorizacion.get_asegurado().get_dni() and p.get_activa()]
+			encontrada = (len(poliza_activa) > 0)
 		
-		if len(poliza_activa) > 0:
-			poliza_activa = poliza_activa[0]
+		if encontrada:
+			try:
+				poliza_activa = Poliza.from_dict(poliza_activa)
+			except:
+				poliza_activa = poliza_activa[0]
 			# Se comprueba que la autorización esté asignada a la póliza activa del asegurado
 			if autorizacion.get_id_poliza() == poliza_activa.get_id_poliza():
 				dni = autorizacion.get_asegurado().get_dni()
@@ -419,18 +427,30 @@ class Controller:
 				# Se compone el identificador de la póliza con el formato AU-DNI-ID_ULTIMA_AUTORIZACION+1
 				id_autorizacion = "AU-" + dni[:9]
 				# Se obtienen las autorizaciones previas del cliente/asegurado
-				autorizaciones_previas = [a for a in self.autorizaciones if a.get_asegurado().get_dni() == dni]
+				try:
+					autorizaciones_previas = self.mongo.db.autorizaciones.find({'asegurado.dni': dni})
+					autorizaciones_previas = list(autorizaciones_previas)
+				except:
+					autorizaciones_previas = [a for a in self.autorizaciones if a.get_asegurado().get_dni() == dni]
 				
 				if len(autorizaciones_previas) > 0:
+					autorizacion_previa = autorizaciones_previas[-1]
+					try:
+						autorizacion_previa = Autorizacion.from_dict(autorizacion_previa)
+					except:
+						pass
 					# Si se han realizado autorizaciones previas se obtiene el último identificador y se aumenta en uno
-					id_autorizacion = id_autorizacion + str(int(autorizaciones_previas[-1].get_id_autorizacion()[-1]) + 1)
+					id_autorizacion = id_autorizacion + str(int(autorizacion_previa.get_id_autorizacion()[-1]) + 1)
 				else:
 					# Si no se han realizado autorizaciones previas se marca como la primera
 					id_autorizacion = id_autorizacion + "1"
 				
 				autorizacion.set_id_autorizacion(id_autorizacion)
 
-				self.autorizaciones.append(autorizacion)
+				try:
+					self.mongo.db.autorizaciones.insert_one(autorizacion.to_dict())
+				except:
+					self.autorizaciones.append(autorizacion)
 			else:
 				raise TimedOutAuthorizationError('The authorization is not associated with the active policy.')
 		else:
