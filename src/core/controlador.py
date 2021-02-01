@@ -282,10 +282,18 @@ class Controller:
 	
 	# [HU6] Subir prescripción médica
 	def subir_prescripcion(self, prescripcion: Prescripcion):
-		poliza_activa = [p for p in self.polizas if p.get_titular().get_dni() == prescripcion.get_asegurado().get_dni() and p.get_activa()]
+		try:
+			poliza_activa = self.mongo.db.polizas.find_one({'titular.dni': prescripcion.get_asegurado().get_dni(), 'activa': True})
+			encontrada = (poliza_activa != None)
+		except:
+			poliza_activa = [p for p in self.polizas if p.get_titular().get_dni() == prescripcion.get_asegurado().get_dni() and p.get_activa()]
+			encontrada = (len(poliza_activa) > 0)
 		
-		if len(poliza_activa) > 0:
-			poliza_activa = poliza_activa[0]
+		if encontrada:
+			try:
+				poliza_activa = Poliza.from_dict(poliza_activa)
+			except:
+				poliza_activa = poliza_activa[0]
 			# Se comprueba que la prescripción esté asignada a la póliza activa del asegurado
 			if prescripcion.get_id_poliza() == poliza_activa.get_id_poliza():
 				dni = prescripcion.get_asegurado().get_dni()
@@ -293,11 +301,20 @@ class Controller:
 				# Se compone el identificador de la póliza con el formato PR-DNI-ID_ULTIMA_PRESCRIPCION+1
 				id_prescripcion = "PR-" + dni[:9]
 				# Se obtienen las prescripciones previas del cliente/asegurado
-				prescripciones_previas = [p for p in self.prescripciones if p.get_asegurado().get_dni() == dni]
+				try:
+					prescripciones_previas = self.mongo.db.prescripciones.find({'asegurado.dni': dni})
+					prescripciones_previas = list(prescripciones_previas)
+				except:
+					prescripciones_previas = [p for p in self.prescripciones if p.get_asegurado().get_dni() == dni]
 				
 				if len(prescripciones_previas) > 0:
+					prescripcion_previa = prescripciones_previas[-1]
+					try:
+						prescripcion_previa = Prescripcion.from_dict(prescripcion_previa)
+					except:
+						pass
 					# Si existen prescripciones previas se obtiene el último identificador y se aumenta en uno
-					id_prescripcion = id_prescripcion + str(int(prescripciones_previas[-1].get_id_prescripcion()[-1]) + 1)
+					id_prescripcion = id_prescripcion + str(int(prescripcion_previa.get_id_prescripcion()[-1]) + 1)
 				else:
 					# Si no existen prescripciones previas se marca como la primera
 					id_prescripcion = id_prescripcion + "1"
@@ -305,7 +322,10 @@ class Controller:
 				if isinstance(prescripcion.get_especialidad(), Especialidad):
 					prescripcion.set_id_prescripcion(id_prescripcion)
 				
-					self.prescripciones.append(prescripcion)
+					try:
+						self.mongo.db.prescripciones.insert_one(prescripcion.to_dict())
+					except:
+						self.prescripciones.append(prescripcion)
 				else:
 					raise SpecialityError('The medical speciality is not valid.')
 			else:
