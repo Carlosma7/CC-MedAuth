@@ -25,6 +25,12 @@ jobs:
       # Checks-out repository under $GITHUB_WORKSPACE, so workflow can access it
       - uses: actions/checkout@v2
 
+      # Runs MongoDB
+      - name: Run mongoDB
+        uses: wbari/start-mongoDB@v0.2
+        with:
+          mongoDBVersion: 4.4.2
+
       # Build the image in local space
       - name: Build image
         run: docker build -t medauth .
