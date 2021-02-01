@@ -12,6 +12,14 @@ def clean(c):
 def test(c):
 	print("Ejecución de test.\n")
 	run("pytest -v --disable-pytest-warnings src/test/*")
+	run("pytest -v --disable-pytest-warnings src/test/testControlador/*")
+
+# Tarea de ejecución de tests con BD
+@task
+def testBD(c):
+	print("Ejecución de test.\n")
+	run("pytest -v --disable-pytest-warnings src/test/*")
+	run("pytest -v --disable-pytest-warnings src/test/testControlador/testBD/*")
 
 # Tarea de ejecución del modelo
 @task
