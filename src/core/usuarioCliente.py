@@ -6,6 +6,11 @@ class UsuarioCliente(Usuario):
 		self.__cuenta_bancaria = cuenta_bancaria
 		super().__init__(nombre, email, dni, 1)
 	
+	@classmethod
+	def from_dict(cls, data: dict):
+		u = cls(data.get('nombre'), data.get('email'), data.get('dni'), data.get('cuenta_bancaria'))
+		return u
+	
 	# Métodos get/set
 	def get_cuenta_bancaria(self):
 		return self.__cuenta_bancaria
