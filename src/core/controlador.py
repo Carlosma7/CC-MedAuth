@@ -509,13 +509,26 @@ class Controller:
 	# [HU10] Aprobar/Denegar una autorización médica
 	def aprobar_denegar_autorizacion(self, id_autorizacion: str, aceptada: bool, motivo_rechazo: str):
 		# Se obtiene la póliza asociada al identificador
-		aut = [a for a in self.autorizaciones if a.get_id_autorizacion() == id_autorizacion]
+		try:
+			aut = self.mongo.db.autorizaciones.find_one({'id_autorizacion': id_autorizacion})
+			encontrada = (aut != None)
+		except:
+			aut = [a for a in self.autorizaciones if a.get_id_autorizacion() == id_autorizacion]
+			encontrada = (len(aut) > 0)
 
-		if len(aut) > 0:
-			aut = aut[0]
+		if encontrada:
+			try:
+				aut = Autorizacion.from_dict(aut)
+			except:
+				aut = aut[0]
 			# Modificación de la autorización médica
 			aut.set_aceptada(aceptada)
 			aut.set_motivo_rechazo(motivo_rechazo)
+			
+			try:
+				self.mongo.db.autorizaciones.update({'id_autorizacion': aut.get_id_autorizacion()}, {'$set': aut.to_dict()})
+			except:
+				pass
 		else:
 			raise NonExistingAuthorizationError('Authorization doesn´t exist.')
 	
