@@ -601,9 +601,22 @@ class Controller:
 	# [HU14] Consultar usuario
 	def consultar_usuario(self, dni: str):
 		# Se obtiene el usuario
-		usuario = [u for u in self.usuarios if u.get_dni() == dni]
+		try:
+			usuario = self.mongo.db.usuarios.find_one({'dni': dni})
+			encontrada = (usuario != None)
+		except:
+			usuario = [u for u in self.usuarios if u.get_dni() == dni]
+			encontrada = (len(usuario) > 0)
 		
-		if len(usuario) > 0:
-			return usuario[0]
+		if encontrada:
+			try:
+				if usuario.get('cuenta_bancaria') == None:
+					usuario = UsuarioAdmin.from_dict(usuario)
+				else:
+					usuario = UsuarioCliente.from_dict(usuario)
+			except:
+				usuario = usuario[0]
+				
+			return usuario
 		else:
 			raise NonExistingUserError('User doesn´t exist.')
