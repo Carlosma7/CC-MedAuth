@@ -59,14 +59,6 @@ El plan de desarrollo del proyecto va a seguir una serie de etapas que irán añ
     Relacionado con la [administración de pólizas](https://github.com/Carlosma7/MedAuth/milestone/10), se añade la consulta de un usuario, no contemplada hasta el momento:
     * [Como administrativo quiero consultar un usuario para poder ver la información asociada](https://github.com/Carlosma7/MedAuth/issues/96)
 
-6. **Sexta fase**: En esta fase, se añaden las últimas funcionalidades asociadas a la gestión de citas por parte del asegurado, dotándole de capacidad para gestionar las citas y ser notificado.
-
-    Para realizar el proceso completo de [gestión de citas médicas](https://github.com/Carlosma7/MedAuth/milestone/8), se añade el procedimiento de solicitud:
-    * [Como asegurado quiero solicitar una cita para poder registrar una consulta o intervención](https://github.com/Carlosma7/MedAuth/issues/97)
-
-    Por último, además de haber conectado toda la funcionalidad anterior del sistema, se añade un extra de [gestión de citas médicas](https://github.com/Carlosma7/MedAuth/milestone/8) como es la notificación previa a una cita por correo:
-    * [Como asegurado quiero ser notificado para saber cuando debo asistir a una cita médica.](https://github.com/Carlosma7/MedAuth/issues/42)
-
 
 ### Avances
 
@@ -74,4 +66,3 @@ El plan de desarrollo del proyecto va a seguir una serie de etapas que irán añ
 2. [Segundo avance](https://carlosma7.github.io/MedAuth/doc/avance_codigo_2) que corresponde con la entrega de la tercera fase.
 3. [Tercer avance](https://carlosma7.github.io/MedAuth/doc/avance_codigo_3) que corresponde con la entrega de la cuarta fase.
 4. [Cuarto avance](https://carlosma7.github.io/MedAuth/doc/avance_codigo_4) que corresponde con la entrega de la quinta fase.
-
