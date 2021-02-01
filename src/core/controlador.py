@@ -581,10 +581,20 @@ class Controller:
 	# [HU12] Consultar cita médica
 	def consultar_cita(self, id_autorizacion: str):
 		# Se obtiene la cita médica
-		cita = [c for c in self.citas if c.get_id_autorizacion() == id_autorizacion]
+		try:
+			cita = self.mongo.db.citas.find_one({'id_autorizacion': id_autorizacion})
+			encontrada = (cita != None)
+		except:
+			cita = [c for c in self.citas if c.get_id_autorizacion() == id_autorizacion]
+			encontrada = (len(cita) > 0)
 		
-		if len(cita) > 0:
-			return cita[0]
+		if encontrada:
+			try:
+				cita = Cita.from_dict(cita)
+			except:
+				cita = cita[0]
+				
+			return cita
 		else:
 			raise NonExistingAppointmentError('Appointment doesn´t exist.')
 	
