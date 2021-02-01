@@ -143,7 +143,7 @@ async def modificar_poliza(id_poliza):
 		# Obtener periodo carencia
 		periodo_carencia = datetime.datetime.strptime(data.get('periodo_carencia'), '%m/%d/%Y')
 		# Obtener tipo de póliza
-		tipo = data.get('tipo')
+		tipo = TipoPoliza(json.loads(data.get('tipo')))
 		# Obtener copagos
 		copagos = data.get('copagos')
 		# Obtener mensualidad
