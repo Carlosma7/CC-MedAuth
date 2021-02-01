@@ -263,10 +263,20 @@ class Controller:
 	# [HU5] Consultar póliza
 	def consultar_poliza(self, dni: str):
 		# Se obtiene la póliza
-		poliza = [p for p in self.polizas if p.get_titular().get_dni() == dni and p.get_activa() == True]
+		try:
+			poliza = self.mongo.db.polizas.find_one({'titular.dni': dni, 'activa': True})
+			encontrada = (poliza != None)
+		except:
+			poliza = [p for p in self.polizas if p.get_titular().get_dni() == dni and p.get_activa() == True]
+			encontrada = (len(poliza) > 0)
 		
-		if len(poliza) > 0:
-			return poliza[0]
+		if encontrada:
+			try:
+				poliza = Poliza.from_dict(poliza)
+			except:
+				poliza = poliza[0]
+			
+			return poliza
 		else:
 			raise NonExistingPolicyError('Policy doesn´t exist.')
 	
