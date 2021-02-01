@@ -31,6 +31,7 @@ except:
 # Clase controladora de lógica de negocio
 class Controller:
 
+	mongo = conexion
 	# Lista de entidades
 	usuarios: List[Usuario] = []
 	polizas: List[Poliza] = []
@@ -41,10 +42,15 @@ class Controller:
 	# [HU1] Creación usuario administrativo
 	# [HU2] Creación usuario asegurado
 	def crear_usuario(self, usuario: Usuario, tipo_usuario: int):
-		usr = [u for u in self.usuarios if u.get_dni() == usuario.get_dni()]
+		try:
+			usr = self.mongo.db.usuarios.find({'dni':usuario.get_dni()})
+			no_encontrado = (usr.count() == 0)
+		except:
+			usr = [u for u in self.usuarios if u.get_dni() == usuario.get_dni()]
+			no_encontrado = (len(usr) == 0)
 		
 		# Comprobar si el DNI existe en los usuarios existentes
-		if len(usr) == 0:
+		if no_encontrado:
 			# Comropobar DNI
 			if bool(re.match("[0-9]{8}-[A-Z]", usuario.get_dni())):
 				# Comprobar correo
@@ -68,7 +74,11 @@ class Controller:
 						raise WrongUserTypeError('Wrong user type.')
 						
 					# Se almacena
-					self.usuarios.append(usr_creado)
+					try:
+						self.mongo.db.usuarios.insert_one(usr_creado.to_dict())
+					except:
+						self.usuarios.append(usr_creado)
+					
 				
 				else:
 					raise EmailFormatError('Email not valid.')
