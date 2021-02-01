@@ -17,7 +17,7 @@ Durante las correcciones de compañeros, y consideraciones propias, se han reali
 
 1. **Creación de clases específicas de excepciones**: Se pueden observar en [excepciones.py](https://github.com/Carlosma7/MedAuth/blob/main/src/core/excepciones.py) realizando una seria de clases de excepciones sencillas, que indican que tipo de excepción se produce.
 2. **Modificación de métodos que realizaban modificaciones sobre objetos existentes**: Anteriormente se utilizaba un objeto para obtener su *ID* y modificar el correspondiente almacenado en la práctica, lo cual, lejos de ser una buena práctica, aumenta el coste computacional y dificultaba el diseño de la API, por lo que se ha modificado para trabajar únicamente con los identificadores.
-3. **Nuevas HUs**: Tras revisar el estado actual del proyecto, se han encontrado dos funcionalidades no contempladas previamente, las cuales se añaden, y se ha implementado una de ellas. Dichas *HU* se pueden ver [[HU14] Consultar usuario](https://github.com/Carlosma7/MedAuth/issues/96) y [# [HU15] Solicitar una cita](https://github.com/Carlosma7/MedAuth/issues/97).
+3. **Nueva HU**: Tras revisar el estado actual del proyecto, se han encontrado una funcionalidade no contemplada previamente, las cuales se añaden, y se han implementado. Dicha *HU* se puede ver [[HU14] Consultar usuario](https://github.com/Carlosma7/MedAuth/issues/96).
 4. **Se ha desarrollado un contenedor de despliegue**: Si bien es uno de los puntos que corresponden a esta rúbrica, se ha detallado más detenidamente [aquí](https://carlosma7.github.io/MedAuth/doc/api/despliegue).
 
 ### Mejoras tras correcciones
