@@ -1,0 +1,47 @@
+version: '3'
+
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+  mongodb:
+    image: mongo:4.4.2
+    container_name: mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_DATABASE: medauthdb
+      MONGODB_DATA_DIR: /data/db
+      MONDODB_LOG_DIR: /dev/null
+    ports:
+      - 27017:27017
+    networks:
+      - app-tier
+  
+  medauth:
+    build:
+      context: .
+      dockerfile: Dockerfile.despliegue
+    ports:
+      - 2020:2020
+    environment:
+      MONGODB_DATABASE: medauthdb
+      MONGODB_HOSTNAME: mongodb
+      MONGODB_PORT: 27017
+    depends_on:
+      - mongodb
+    networks:
+      - app-tier
+
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile.cliente
+    environment:
+      MEDAUTH_HOSTNAME: medauth
+      MEDAUTH_PORT: 2020
+    stdin_open: true
+    depends_on:
+      - medauth
+    networks:
+      - app-tier
