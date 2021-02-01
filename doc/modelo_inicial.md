@@ -1,3 +1,4 @@
+
 ## Modelos
 
 ---
@@ -5,35 +6,36 @@
 El proyecto sigue la siguiente estructura:
 
 ```
-src
- ├── core
- │   ├── api.py
- │   ├── autorizacion.py
- │   ├── cita.py
- │   ├── controlador.py
- │   ├── especialidad.py
- │   ├── excepciones.py
- │   ├── main.py
- │   ├── moduloExtra.py
- │   ├── poliza.py
- │   ├── prescripcion.py
- │   ├── tipoPoliza.py
- │   ├── usuario.py
- │   ├── usuarioAdmin.py
- │   └── usuarioCliente.py
- └── test
-     ├── testApi.py
-     ├── testAutorizacion.py
-     ├── testCita.py
-     ├── testControlador.py
-     ├── testPoliza.py
-     ├── testPrescripcion.py
-     ├── testUsuario.py
-     ├── testUsuarioAdmin.py
-     └── testUsuarioCliente.py
-
-
-
+src/
+├── client.py
+├── core
+│   ├── api.py
+│   ├── autorizacion.py
+│   ├── cita.py
+│   ├── controlador.py
+│   ├── especialidad.py
+│   ├── excepciones.py
+│   ├── main.py
+│   ├── moduloExtra.py
+│   ├── poliza.py
+│   ├── prescripcion.py
+│   ├── server.py
+│   ├── tipoPoliza.py
+│   ├── usuarioAdmin.py
+│   ├── usuarioCliente.py
+│   └── usuario.py
+└── test
+    ├── testApi.py
+    ├── testAutorizacion.py
+    ├── testBD
+    │   └── testBD.py
+    ├── testCita.py
+    ├── testControlador.py
+    ├── testPoliza.py
+    ├── testPrescripcion.py
+    ├── testUsuarioAdmin.py
+    ├── testUsuarioCliente.py
+    └── testUsuario.py
 ```
 
 Se han creado los modelos y el controlador asociado a la lógica de negocio de las siguientes entidades:
@@ -41,9 +43,11 @@ Se han creado los modelos y el controlador asociado a la lógica de negocio de l
 * **Core**
 
     * [Controlador](https://github.com/Carlosma7/MedAuth/blob/main/src/core/controlador.py)
+    * [API](https://github.com/Carlosma7/MedAuth/blob/main/src/core/api.py) 
+    * [Server](https://github.com/Carlosma7/MedAuth/blob/main/src/core/server.py)
 
     * *Modelos*
-    
+ 
         * [TipoPoliza](https://github.com/Carlosma7/MedAuth/blob/main/src/core/tipoPoliza.py)
         * [ModuloExtra](https://github.com/Carlosma7/MedAuth/blob/main/src/core/moduloExtra.py)
         * [Especialidad](https://github.com/Carlosma7/MedAuth/blob/main/src/core/especialidad.py)
@@ -66,6 +70,8 @@ Se han creado los modelos y el controlador asociado a la lógica de negocio de l
 		* [testPrescripcion](https://github.com/Carlosma7/MedAuth/blob/main/src/test/testPrescripcion.py)
 		* [testAutorizacion](https://github.com/Carlosma7/MedAuth/blob/main/src/test/testAutorizacion.py)
 		* [testCita](https://github.com/Carlosma7/MedAuth/blob/main/src/test/testCita.py)
+	* [testBD](https://github.com/Carlosma7/MedAuth/blob/main/src/test/testBD/testBD.py)
+* [Cliente](https://github.com/Carlosma7/MedAuth/blob/main/src/client.py)
 
 Se puede comprobar que son sintácticamente correctas ejecutando:
 
@@ -84,3 +90,4 @@ Y se puede comprobar la correcta integración de los modelos, y por tanto, asegu
 ```bash
 python3 src/main.py
 ```
+
