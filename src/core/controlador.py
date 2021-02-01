@@ -535,10 +535,18 @@ class Controller:
 	# [HU11] Administrar cita médica: Crear cita médica
 	def crear_cita(self, cita: Cita):
 		# Se obtiene la autorización asociada para comprobar que está aceptada
-		autorizacion = [a for a in self.autorizaciones if a.get_id_autorizacion() == cita.get_id_autorizacion() and a.get_aceptada() == True]
+		try:
+			autorizacion = self.mongo.db.autorizaciones.find_one({'id_autorizacion': cita.get_id_autorizacion(), 'aceptada': True})
+			encontrada = (autorizacion != None)
+		except:
+			autorizacion = [a for a in self.autorizaciones if a.get_id_autorizacion() == cita.get_id_autorizacion() and a.get_aceptada() == True]
+			encontrada = (len(autorizacion) > 0)
 		
-		if len(autorizacion) > 0:
-			self.citas.append(cita)
+		if encontrada:
+			try:
+				self.mongo.db.citas.insert_one(cita.to_dict())
+			except:
+				self.citas.append(cita)
 		else:
 			raise NonExistingAuthorizationError('Authorization doesn´t exist.')
 	
