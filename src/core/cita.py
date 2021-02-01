@@ -14,6 +14,18 @@ class Cita:
 		self.__facultativo_realizador = facultativo_realizador
 		self.__consulta = consulta
 
+	@classmethod
+	def from_dict(cls, data: dict):
+		# Obtener usuario
+		asegurado = UsuarioCliente.from_dict(data.get('asegurado'))
+		# Obtener fecha
+		fecha = datetime.datetime.strptime(data.get('fecha'), '%m/%d/%Y')
+		# Obtener hora
+		hora = datetime.datetime.strptime(data.get('hora'), '%H:%M')
+
+		c = cls(data.get('id_autorizacion'), asegurado, data.get('id_prescripcion'), fecha, hora, data.get('facultativo_realizador'), data.get('consulta'))
+		return c
+
 	# Métodos get/set
 	def get_id_autorizacion(self):
 		return self.__id_autorizacion
