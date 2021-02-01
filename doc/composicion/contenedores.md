@@ -1,4 +1,4 @@
-### Clúster
+### Contenedores
 
 #### Contenedores propuestos
 
