@@ -21,4 +21,4 @@ branches:
 
 # Launch tests using the task manager
 script:
-  - invoke test
+  - invoke testBD

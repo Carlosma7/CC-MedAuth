@@ -150,7 +150,7 @@ async def test_modificar_poliza_api(test_medauth):
 	# Creación periodo carencia
 	periodo_carencia = fecha.strftime('%m/%d/%Y')
 	# Creación tipo póliza
-	tipo = TipoPoliza.Basica
+	tipo = json.dumps(TipoPoliza.Basica)
 	# Creación copagos y mensualidad, cambiando los copagos como modificación
 	copagos = 10.99
 	mensualidad = 50.99
