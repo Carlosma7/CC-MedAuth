@@ -48,7 +48,7 @@ Primero se evalúa la latencia de la API:
 
 Y posteriormente se observa el número de peticiones procesadas por segundo:
 
-![Req/Sec vs Threads 60s](../img/reqseq_threads_60s.png "Req/Sec vs Threads 60s")
+![Req/Sec vs Threads 60s](../img/reqsec_threads_60s.png "Req/Sec vs Threads 60s")
 
 ##### Crecimiento del periodo de duración (100 hebras simultáneas)
 
