@@ -20,7 +20,7 @@ wrk -t10 -c10 -d30s http://0.0.0.0:2020/usuarios/76837495-F
 
 Y se vería de la siguiente forma:
 
-![wrk execution](../img/wrl_exec.png "wrk execution")
+![wrk execution](../img/wrk_exec.png "wrk execution")
 
 #### Resultados obtenidos
 
