@@ -100,3 +100,14 @@ invoke test
 
 :small_blue_diamond: [Avance del proyecto](https://carlosma7.github.io/MedAuth/doc/avance_codigo_4) y documentación sobre la [imagen Docker de despliegue](https://carlosma7.github.io/MedAuth/doc/api/despliegue).
 
+## Composición de servicios
+
+:small_blue_diamond: Documentación sobre el [cluster](https://carlosma7.github.io/MedAuth/doc/composicion/cluster).
+
+:small_blue_diamond: Documentación sobre los [contenedores](https://carlosma7.github.io/MedAuth/doc/composicion/contenedores).
+
+:small_blue_diamond: Documentación sobre el [fichero de composición](https://carlosma7.github.io/MedAuth/doc/composicion/composicion).
+
+:small_blue_diamond: [Tests](https://carlosma7.github.io/MedAuth/doc/composicion/tests) y pruebas reales sobre el proyecto.
+
+:small_blue_diamond: [Benchmarks](https://carlosma7.github.io/MedAuth/doc/composicion/benchmarks) y [despliegue](https://carlosma7.github.io/MedAuth/doc/composicion/despliegue) del proyecto.

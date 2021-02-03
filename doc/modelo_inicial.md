@@ -9,28 +9,29 @@ El proyecto sigue la siguiente estructura:
 src/
 ├── client.py
 ├── core
-│   ├── api.py
-│   ├── autorizacion.py
-│   ├── cita.py
-│   ├── controlador.py
-│   ├── especialidad.py
-│   ├── excepciones.py
-│   ├── main.py
-│   ├── moduloExtra.py
-│   ├── poliza.py
-│   ├── prescripcion.py
-│   ├── server.py
-│   ├── tipoPoliza.py
-│   ├── usuarioAdmin.py
-│   ├── usuarioCliente.py
-│   └── usuario.py
+│   ├── api.py
+│   ├── autorizacion.py
+│   ├── cita.py
+│   ├── controlador.py
+│   ├── especialidad.py
+│   ├── excepciones.py
+│   ├── main.py
+│   ├── moduloExtra.py
+│   ├── poliza.py
+│   ├── prescripcion.py
+│   ├── server.py
+│   ├── tipoPoliza.py
+│   ├── usuarioAdmin.py
+│   ├── usuarioCliente.py
+│   └── usuario.py
 └── test
     ├── testApi.py
     ├── testAutorizacion.py
     ├── testBD
-    │   └── testBD.py
+    │   └── testBD.py
     ├── testCita.py
-    ├── testControlador.py
+    ├── testControlador
+    │   └── testControlador.py
     ├── testPoliza.py
     ├── testPrescripcion.py
     ├── testUsuarioAdmin.py
