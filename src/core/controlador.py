@@ -25,7 +25,7 @@ except:
 	mongo_uri = 'mongodb://localhost:27017/medauthdb'
 
 try:
-	conexion = MongoClient(mongo_uri)
+	conexion = MongoClient(mongo_uri, serverSelectionTimeoutMS = 2000)
 except Exception as error:
 	conexion = ""
 
