@@ -23,5 +23,5 @@ test:
   - src/test/testPrescripcion.py
   - src/test/testAutorizacion.py
   - src/test/testCita.py
-  - src/test/testControlador.py
+  - src/test/testControlador/testControlador.py
   - src/test/testApi.py
