@@ -27,26 +27,7 @@
 
 :package: [Modelo actual](https://carlosma7.github.io/MedAuth/doc/modelo_inicial) del proyecto.
 
-## Dependencias
-
-
-```shell
-pip3 install assertpy
-pip3 install pytest==6.1.2
-pip3 install invoke==1.4.1
-pip3 install quart
-pip3 install pytest-asyncio
-pip3 install etcd3
-pip3 install python-dotenv
-pip3 install loguru
-pip3 install hypercorn
-```
-
-Para mayor comodidad, otra opción es descargar el proyecto y ejecutar:
-
-```shell
-pip3 install -r requirements.txt
-```
+:computer: [Slides](https://slides.com/carlosma7/deck) de presentación del proyecto.
 
 ## Descarga del proyecto
 
@@ -66,6 +47,13 @@ gh repo clone Carlosma7/MedAuth
 
 ```shell
 wget https://github.com/carlosma7/medauth/archive/main.zip
+```
+
+## Dependencias
+
+
+```shell
+pip3 install -r requirements.txt
 ```
 
 ## Ejecución
@@ -88,26 +76,3 @@ Para comprobar el estado, se pueden ejecutar los tests con:
 invoke test
 ```
 
-## Diseño y test de un microservicio
-
-:small_blue_diamond: Documentación sobre elección del [framework para microservicio](https://carlosma7.github.io/MedAuth/doc/api/estudio_framework).
-
-:small_blue_diamond: Documentación sobre la [API y tests](https://carlosma7.github.io/MedAuth/doc/api/doc_api).
-
-:small_blue_diamond: Documentación sobre [Configuración distribuida](https://carlosma7.github.io/MedAuth/doc/api/config_distribuida) y [Logs](https://carlosma7.github.io/MedAuth/doc/api/logs).
-
-:small_blue_diamond: La documentación sobre los nuevos tests se encuentra en [API y tests](https://carlosma7.github.io/MedAuth/doc/api/doc_api).
-
-:small_blue_diamond: [Avance del proyecto](https://carlosma7.github.io/MedAuth/doc/avance_codigo_4) y documentación sobre la [imagen Docker de despliegue](https://carlosma7.github.io/MedAuth/doc/api/despliegue).
-
-## Composición de servicios
-
-:small_blue_diamond: Documentación sobre el [cluster](https://carlosma7.github.io/MedAuth/doc/composicion/cluster).
-
-:small_blue_diamond: Documentación sobre los [contenedores](https://carlosma7.github.io/MedAuth/doc/composicion/contenedores).
-
-:small_blue_diamond: Documentación sobre el [fichero de composición](https://carlosma7.github.io/MedAuth/doc/composicion/composicion).
-
-:small_blue_diamond: [Tests](https://carlosma7.github.io/MedAuth/doc/composicion/tests) y pruebas reales sobre el proyecto.
-
-:small_blue_diamond: [Benchmarks](https://carlosma7.github.io/MedAuth/doc/composicion/benchmarks) y [despliegue](https://carlosma7.github.io/MedAuth/doc/composicion/despliegue) del proyecto.
